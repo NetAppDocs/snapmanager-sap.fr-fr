@@ -1,0 +1,29 @@
+---
+permalink: windows/task-mounting-backups.html 
+sidebar: sidebar 
+keywords: snapmanager, automatic, handle, mount, backup, host, available, scenario, tools, oracle, recovery, manager, rman, file 
+summary: 'SnapManager gère automatiquement le montage d"une sauvegarde pour la rendre disponible à l"hôte. Vous pouvez également monter des sauvegardes dans les situations où vous utilisez un outil externe, comme Oracle Recovery Manager \(RMAN\), pour accéder aux fichiers de la sauvegarde.' 
+---
+= Montage des supports
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager gère automatiquement le montage d'une sauvegarde pour la rendre disponible à l'hôte. Vous pouvez également monter des sauvegardes dans les situations où vous utilisez un outil externe, comme Oracle Recovery Manager (RMAN), pour accéder aux fichiers de la sauvegarde.
+
+La commande smsap backup mount affiche une liste des chemins d'accès où les copies Snapshot composées de la sauvegarde ont été montées.
+
+
+NOTE: Vous pouvez éventuellement collecter les fichiers de vidage après une opération de montage de sauvegarde réussie ou ayant échoué.
+
+. Pour monter une sauvegarde, entrez la commande suivante :
++
+`smsap backup mount -profile profile_name label [data | -archivelogs] | -id id} [-host-host] [-dump] [-quiet | -verbose]`
+
+
+
+*Informations connexes*
+
+xref:reference-the-smosmsapbackup-mount-command.adoc[La commande smsap backup mount]

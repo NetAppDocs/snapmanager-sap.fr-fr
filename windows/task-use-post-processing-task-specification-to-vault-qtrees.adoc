@@ -1,0 +1,56 @@
+---
+permalink: windows/task-use-post-processing-task-specification-to-vault-qtrees.html 
+sidebar: sidebar 
+keywords: snapmanager, sap, enable, script, vault, qtrees, backup, operation, windows, environment, post-process, task, specification 
+summary: 'SnapManager pour SAP vous permet d"utiliser le script pour archiver les qtrees une fois la sauvegarde effectuée dans un environnement Windows.' 
+---
+= Utiliser la spécification de tâche de post-traitement pour archiver les qtrees de coffre-fort
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager pour SAP vous permet d'utiliser le script pour archiver les qtrees une fois la sauvegarde effectuée dans un environnement Windows.
+
+.Étapes
+. Créez un fichier XML de spécification de tâche.
+. Dans le fichier XML, entrez le nom du script comme paramètre d'entrée.
+. Enregistrez le fichier XML de spécification de tâche.
+. Créez une sauvegarde protégée de la base de données sur le stockage secondaire à l'aide de la commande suivante.
++
+Lors de la création de la sauvegarde protégée, vous devez fournir le chemin complet du fichier XML de spécification de tâche enregistré après le -`taskspec` option.
+
++
+Exemple : `smsapbackup create -profile test_profile -full -online -taskspec "C:\\mirror\\snapvault.xml"`
+
+
+
+L'exemple suivant montre la structure de spécification de la tâche de post-traitement si vous utilisez Data ONTAP en 7-mode :
+
+[listing]
+----
+# <post-tasks>
+#                <task>
+#                  <name>Vault the backup</name>
+#                   <description>Vault the backup</description>
+#              </task>
+#         <post-tasks>
+----
+L'exemple suivant présente la structure de spécification de tâche post-traitement si vous utilisez clustered Data ONTAP :
+
+[listing]
+----
+# <task-specification>
+#                <post-tasks>
+#                  <task>
+#                   <name>"Vault the backup for cDOT"</name>
+#                 <parameter>
+#                    <name>SNAPSHOT_LABEL</name>
+#                    <value>TST</value>
+#                    </parameter>
+#                  </task>
+#                </post-tasks>
+#              </task-specification>
+#            </preposttask-specification>
+----

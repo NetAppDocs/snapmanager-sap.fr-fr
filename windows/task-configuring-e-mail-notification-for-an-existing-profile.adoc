@@ -1,0 +1,35 @@
+---
+permalink: windows/task-configuring-e-mail-notification-for-an-existing-profile.html 
+sidebar: sidebar 
+keywords: updating, update, profile, configure, receive, email, notification, completion, database, operation, configuring, exist 
+summary: 'Lorsque vous mettez à jour un profil, vous pouvez configurer pour recevoir une notification par e-mail à la fin de l"opération de base de données.' 
+---
+= Configuration de la notification par e-mail pour un profil existant
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lorsque vous mettez à jour un profil, vous pouvez configurer pour recevoir une notification par e-mail à la fin de l'opération de base de données.
+
+* Vous devez configurer l'adresse e-mail à partir de laquelle les alertes sont envoyées.
+* Vous devez entrer une ou plusieurs adresses e-mail auxquelles les alertes seront envoyées.
++
+Vous pouvez utiliser une liste séparée par des virgules pour plusieurs adresses. Vous devez vous assurer qu'il n'y a pas d'espace entre la virgule et l'adresse e-mail suivante. Vous pouvez également ajouter un objet à l'e-mail.
+
++
+
+NOTE: Vous devez vous assurer que vous entrez l'ensemble de plusieurs adresses e-mail entre guillemets.
+
+
+
+.Étape
+. Saisissez la commande suivante :
++
+`smsap profile update -profileprofile [-profile-passwordprofile_password][-database-dbnamedb_dbname-host db_host [-siddb_sid] [-login -usernamedb_username-password db_password-port db_port]] [{-rman{-controlfile | {-login  -usernamerman_username-password  rman_password-tnsname  rman_tnsname}}} | -remove-rman] [-retain [-hourly [-countn] [-durationm]] [-daily [-countn] [-durationm]] [-weekly [-countn] [-durationm]] [-monthly [-countn] [-durationm]]] [-commentcomment][-snapname-patternpattern][[ [ ]]| [[]] [-notification [-success-emailemail_address1,email_address2-subjectsubject_pattern] [-failure-emailemail_address1,email_address2-subjectsubject_pattern]]`
+
++
+Vous pouvez utiliser l'option succès pour recevoir une notification uniquement pour les opérations de base de données réussies et l'option échec pour recevoir une notification uniquement pour les opérations de base de données ayant échoué.
+
+

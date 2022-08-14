@@ -1,0 +1,109 @@
+---
+permalink: unix-administration/reference-the-smosmsap-notification-updatesummarynotification-command.html 
+sidebar: sidebar 
+keywords: run, notification, update-summary-notification, command, enable, summary, repository, database, smsap 
+summary: Vous pouvez exécuter la commande notification de mise à jour-résumé-notification pour activer la notification de synthèse pour une base de données de référentiel. 
+---
+= La commande smsap notification update-summary-notification
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez exécuter la commande notification de mise à jour-résumé-notification pour activer la notification de synthèse pour une base de données de référentiel.
+
+
+
+== Syntaxe
+
+[listing, subs="+macros"]
+----
+pass:quotes[smsap notification update-summary-notification
+-repository
+-port _repo_port_
+-dbname  _repo_service_name_
+-host _repo_host_
+-login -username _repo_username_
+-email _email-address1,email-address2_
+-subject _subject-pattern_
+-frequency
+[-daily –time _daily_time_ |
+-hourly –time _hourly_time_ |
+-monthly –time _monthly_time_ -date [_1_|_2_|_3_|...|_31_\] |
+-weekly  –time _weekly_time_ -day [_1_|_2_|_3_|_4_|_5_|_6_|_7_\]\]
+-profiles _profile1,profile2_ -notification-host _notification-host_
+[-quiet | -verbose]]
+
+----
+
+
+== Paramètres
+
+* `*-repository*`
++
+Spécifie les détails de la base de données du référentiel.
+
+* `*-port _repo_port_*`
++
+Spécifie le numéro de port TCP utilisé pour accéder à la base de données du référentiel.
+
+* `*-dbname _repo_service_name_*`
++
+Indique le nom de la base de données du référentiel. Vous pouvez utiliser le nom global ou l'identifiant système.
+
+* `*-host _repo_host_*`
++
+Indique le nom ou l'adresse IP de l'hôte sur lequel réside la base de données du référentiel.
+
+* `*-login*`
++
+Spécifie les détails de connexion au référentiel. Cette option est facultative. Si ce n'est pas le cas, SnapManager utilise par défaut le mode de connexion à l'authentification OS.
+
+* `*-username _repo_username_*`
++
+Indique le nom d'utilisateur requis pour accéder à la base de données du référentiel.
+
+* `*-email _email-address1,e-mail-address2_*`
++
+Spécifie les adresses e-mail des destinataires.
+
+* `*-subject _subject-pattern_*`
++
+Spécifie le modèle d'objet de l'e-mail.
+
+* `*-frequency { -daily --time _daily_time_  | -hourly --time _hourly_time_  | -monthly --time _monthly_time_ -date  {_1_|_2_|_3_...|_31_ } | -weekly --time _weekly_time_ -day {_1_|_2_|_3_|_4_|_5_|_6_|_7_ } }*`
++
+Spécifie le type d'horaire et l'heure de planification lorsque vous souhaitez que la notification par e-mail soit envoyée.
+
+* `*-profiles _profile1, profile2_*`
++
+Spécifie les noms de profil qui nécessitent une notification par e-mail.
+
+* `*-notification-host _notification-host_*`
++
+Spécifie l'hôte du serveur SnapManager à partir duquel l'e-mail de notification de synthèse est envoyé aux destinataires. Vous pouvez fournir un nom d'hôte ou une adresse IP pour l'hôte de notification. Vous pouvez également mettre à jour l'adresse IP de l'hôte ou le nom d'hôte.
+
+* `*-quiet*`
++
+Affiche uniquement les messages d'erreur dans la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* `*-verbose*`
++
+Affiche les messages d'erreur, d'avertissement et d'information dans la console.
+
+
+
+'''
+
+
+== Exemple
+
+L'exemple suivant active la notification récapitulative pour une base de données de référentiel :
+
+[listing]
+----
+
+smsap notification update-summary-notification –repository –port 1521 –dbname repo2 –host 10.72.197.133 –login –username oba5 –email admin@org.com –subject success –frequency -daily -time 19:30:45 –profiles sales1
+----
+'''

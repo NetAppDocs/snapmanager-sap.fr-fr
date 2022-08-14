@@ -1,0 +1,47 @@
+---
+settings:
+  name: SnapManager for SAP
+  internal:
+    pdf_enabled: true
+  prod:
+    pdf_enabled: true
+    harmony_enabled: false
+  langs: fr-fr,us-en,ja-jp,zh-cn,zh-tw,ko-kr,de-de
+sidebar:
+  entries:
+  - title: Documentation SnapManager pour SAP
+    url: "/index.html"
+  - title: Notes de mise à jour
+    url: "/reference-releasenotes.html"
+  - section: unix-installation-cmode
+  - section: unix-installation-7mode
+  - section: unix-administration
+  - section: windows
+  - title: Mentions légales
+    url: "/legal-notices.html"
+homepage:
+  tiles:
+  - title: Commencez
+    links:
+    - title: Présentation du produit
+      url: "/unix-installation-cmode/reference-smsap-isg-product-overview.html"
+    - title: Notes de mise à jour
+      url: reference-releasenotes.html
+  - title: L'administration
+    links:
+    - title: Configuration de SnapManager pour UNIX
+      url: "/unix-administration/concept-configuring-snapmanager-for-oraclesap.html"
+    - title: Configuration d'SnapManager pour Windows
+      url: "/windows/concept-configuring-snapmanager-for-oraclesap.html"
+  - title: Installation et configuration
+    links:
+    - title: Flux de production de déploiement (7-mode)
+      url: "/unix-installation-7mode/reference-smsap-isg-deployment-workflow.html"
+    - title: Workflow de déploiement (Cluster mode)
+      url: "/unix-installation-cmode/reference-smsap-isg-deployment-workflow.html"
+  - title: Ressources supplémentaires
+    links:
+    - title: Support NetApp
+      url: https://mysupport.netapp.com/site/global/dashboard
+    - title: Communautés NetApp
+      url: https://community.netapp.com/

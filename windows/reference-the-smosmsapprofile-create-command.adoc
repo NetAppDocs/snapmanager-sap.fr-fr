@@ -1,0 +1,211 @@
+---
+permalink: windows/reference-the-smosmsapprofile-create-command.html 
+sidebar: sidebar 
+keywords: run, profile, create, command, database, repository, smsap 
+summary: 'Vous pouvez exécuter la commande création de profil pour créer un profil d"une base de données dans un référentiel. Vous devez monter la base de données avant d"exécuter cette commande.' 
+---
+= La commande smsap profile create
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez exécuter le `profile create` commande pour créer un profil d'une base de données dans un référentiel. Vous devez monter la base de données avant d'exécuter cette commande.
+
+
+
+== Syntaxe
+
+[listing]
+----
+
+smsap profile create
+-profile profile
+[-profile-password profile_password]
+-repository
+-dbname repo_service_name
+-host repo_host
+-port repo_port
+-login -username repo_username
+-database
+-dbname db_dbname
+-host db_host
+[-sid  db_sid]
+[-login
+[-username db_username -password db_password -port db_port]
+]
+[-rman {-controlfile | {-login
+-username  rman_username -password  rman_password}
+-tnsname  rman_tnsname}}]
+
+
+[-retain
+[-hourly [-count n] [-duration m]]
+[-daily [-count n] [-duration m]]
+[-weekly [-count n] [-duration m]]
+[-monthly [-count n] [-duration m]]]]
+-comment comment
+-snapname-pattern pattern
+[]
+[-summary-notification]
+[-notification
+[-success
+-email email_address1,email_address2
+-subject subject_pattern]
+[-failure
+-email email_address1,email_address2
+-subject subject_pattern]
+[-separate-archivelog-backups
+-retain-archivelog-backups
+-hours hours |
+-days days |
+-weeks weeks |
+-months months
+[]
+[-include-with-online-backups | -no-include-with-online-backups]]
+[-dump]
+[-quiet | -verbose]
+----
+
+
+== Paramètres
+
+* *`-profile _profile_`*
++
+Spécifie le nom du profil. Ce nom peut comporter jusqu'à 30 caractères et doit être unique au sein de l'hôte.
+
+* *`-profile-password _profile_password_`*
++
+Spécifiez le mot de passe du profil.
+
+* *`-repository`*
++
+Les options suivantes `-repository` spécifiez les détails de la base de données qui stocke le profil.
+
+* *`-dbname _repo_service_name_`*
++
+Indique le nom de la base de données qui stocke le profil. Utilisez le nom global ou le SID.
+
+* *`-host _repo_host_`*
++
+Indique le nom ou l'adresse IP de l'ordinateur hôte sur lequel s'exécute la base de données de référentiel.
+
+* *`-sid _db_sid_`*
++
+Indique l'identifiant système de la base de données décrit par le profil. Par défaut, SnapManager utilise le nom de la base de données comme identificateur système. Si l'identifiant système est différent du nom de la base de données, vous devez le spécifier avec le `-sid` option.
+
+* *`-login`*
++
+Spécifie les détails de connexion au référentiel.
+
+* *`-username _repo_username_`*
++
+Spécifie le nom d'utilisateur nécessaire pour accéder à la base de données du référentiel.
+
+* *`-port _repo_port_`*
++
+Spécifie le numéro de port TCP utilisé pour accéder à la base de données du référentiel.
+
+* *`-database`*
++
+Indique les détails de la base de données que le profil décrit. Il s'agit de la base de données qui sera sauvegardée, restaurée ou clonée.
+
+* *`-dbname _db_dbname_`*
++
+Indique le nom de la base de données décrit par le profil. Vous pouvez utiliser le nom global ou l'identifiant système.
+
+* *`-host _db_host db_host_`*
++
+Indique le nom ou l'adresse IP de l'ordinateur hôte sur lequel la base de données s'exécute.
+
+* *`-login`*
++
+Spécifie les détails de connexion à la base de données.
+
+* *`-username _db_username_`*
++
+Indique le nom d'utilisateur requis pour accéder à la base de données décrit par le profil.
+
+* *`-password _db_password_`*
++
+Spécifie le mot de passe requis pour accéder à la base de données décrit par le profil.
+
+* *`-port _db_port_`*
++
+Spécifie le numéro de port TCP utilisé pour accéder à la base de données que le profil décrit.
+
+* *`-retain [-hourly [-count n] [-duration m]] [-daily [-count n] [-duration m]] [-weekly [-count n] [-duration m]] [-monthly [-count n] [-duration m]]`*
++
+Spécifie la stratégie de conservation pour une sauvegarde où ou les deux d'un compte de rétention et une durée de conservation pour une classe de rétention (horaire, quotidien, hebdomadaire, mensuel).
+
++
+Pour chaque classe de rétention, ou les deux d'un nombre de rétention ou d'une durée de conservation peuvent être spécifiés. La durée est exprimée en unités de la classe (par exemple, heures pour l'heure, jours pour la journée). Par exemple, si l'utilisateur indique uniquement une durée de conservation de 7 pour les sauvegardes quotidiennes, SnapManager ne limite pas le nombre de sauvegardes quotidiennes du profil (car le nombre de rétention est 0), mais SnapManager supprimera automatiquement les sauvegardes quotidiennes créées il y a plus de 7 jours.
+
+* *`-comment _comment_`*
++
+Spécifie le commentaire d'un profil décrivant le domaine de profil.
+
+* *`-snapname-pattern _pattern_`*
++
+Spécifie le modèle de nom pour les copies Snapshot. Vous pouvez également inclure du texte personnalisé, par exemple HAOPS pour les opérations hautement disponibles, dans tous les noms de copie Snapshot. Vous pouvez modifier le schéma de nommage des copies Snapshot lorsque vous créez un profil ou après sa création. La mise à jour s'applique uniquement aux copies Snapshot qui n'ont pas encore été créées. Les copies Snapshot qui existent conservent le modèle Snapname précédent. Vous pouvez utiliser plusieurs variables dans le texte du motif.
+
+* *`-summary-notification`*
++
+Indique que la notification par e-mail sommaire est activée pour le nouveau profil.
+
+* *`-notification  -success-email  _e-mail_address1,e-mail address2_  -subject  _subject_pattern_`*
++
+Spécifie que la notification par e-mail est activée pour le nouveau profil afin que les e-mails soient reçus par les destinataires lorsque l'opération SnapManager réussit. Vous devez entrer une ou plusieurs adresses e-mail auxquelles les alertes e-mail seront envoyées et un modèle d'objet d'e-mail pour le nouveau profil.
+
++
+Vous pouvez également inclure du texte d'objet personnalisé pour le nouveau profil. Vous pouvez modifier le texte de l'objet lorsque vous créez un profil ou après sa création. L'objet mis à jour s'applique uniquement aux e-mails non envoyés. Vous pouvez utiliser plusieurs variables pour l'objet de l'e-mail.
+
+* *`-notification  -failure  -email  _e-mail_address1,e-mail address2_  -subject  _subject_pattern_`*
++
+Spécifie que l'activation de la notification par e-mail est activée pour le nouveau profil afin que les e-mails soient reçus par les destinataires en cas d'échec de l'opération SnapManager. Vous devez entrer une ou plusieurs adresses e-mail auxquelles les alertes e-mail seront envoyées et un modèle d'objet d'e-mail pour le nouveau profil.
+
++
+Vous pouvez également inclure du texte d'objet personnalisé pour le nouveau profil. Vous pouvez modifier le texte de l'objet lorsque vous créez un profil ou après sa création. L'objet mis à jour s'applique uniquement aux e-mails non envoyés. Vous pouvez utiliser plusieurs variables pour l'objet de l'e-mail.
+
+* *`-separate-archivelog-backups`*
++
+Spécifie que la sauvegarde du journal d'archivage est séparée de la sauvegarde du fichier de données. Il s'agit d'un paramètre facultatif que vous pouvez fournir lors de la création du profil. Après avoir séparé la sauvegarde à l'aide de cette option, vous pouvez effectuer une sauvegarde de fichiers de données uniquement ou des journaux d'archivage uniquement.
+
+* *`-retain-archivelog-backups -hours _hours_ | -days _days_ | -weeks _weeks_| -months _months_`*
++
+Indique que les sauvegardes du journal d'archivage sont conservées en fonction de la durée de conservation du journal d'archivage (horaire, quotidien, hebdomadaire, mensuel).
+
+* *`-quiet`*
++
+Affiche uniquement les messages d'erreur dans la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* *`-verbose`*
++
+Affiche les messages d'erreur, d'avertissement et d'information dans la console.
+
+* *`-include-with-online-backups`*
++
+Indique que la sauvegarde du journal d'archivage est incluse avec la sauvegarde de base de données en ligne.
+
+* *`-no-include-with-online-backups`*
++
+Indique que les sauvegardes du journal d'archivage ne sont pas incluses avec la sauvegarde de base de données en ligne.
+
+* *`-dump`*
++
+Indique que les fichiers de vidage sont collectés après l'opération de création de profil réussie.
+
+
+
+
+
+== Exemple
+
+L'exemple suivant montre la création d'un profil avec une stratégie de conservation horaire et une notification par e-mail :
+
+[listing]
+----
+smsap profile create -profile test_rbac -profile-password netapp -repository -dbname SMSAPREP -host hostname.org.com -port 1521 -login -username smsaprep -database -dbname RACB -host saal -sid racb1 -login -username sys -password netapp -port 1521 -rman -controlfile -retain -hourly -count 30 -verbose
+Operation Id [8abc01ec0e78ebda010e78ebe6a40005] succeeded.
+----

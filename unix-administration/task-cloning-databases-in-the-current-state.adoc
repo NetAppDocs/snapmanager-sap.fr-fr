@@ -1,0 +1,34 @@
+---
+permalink: unix-administration/task-clone-databases-in-the-current-state.html 
+sidebar: sidebar 
+keywords: create, backup, clone, database, current, state, single, command, cloning 
+summary: 'Vous pouvez créer une sauvegarde et un clone de la base de données à partir de l"état actuel de la base de données à l"aide d"une seule commande.' 
+---
+= Cloner les bases de données dans l'état actuel
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez créer une sauvegarde et un clone de la base de données à partir de l'état actuel de la base de données à l'aide d'une seule commande.
+
+*À propos de cette tâche*
+
+Lorsque vous spécifiez le profil avec le `-current` SnapManager crée d'abord une sauvegarde, puis un clone à partir de l'état actuel de la base de données.
+
+Dans le paramètre de profil, si vous avez activé la sauvegarde des fichiers de données et des journaux d'archive ensemble pour le clonage, les journaux d'archive sont également sauvegardés à chaque sauvegarde des fichiers de données en ligne. Lors du clonage de la base de données, SnapManager crée la sauvegarde des fichiers de données avec la sauvegarde du journal d'archivage et crée le clone de base de données. Si la sauvegarde du journal d'archivage n'est pas incluse, SnapManager ne crée pas la sauvegarde du journal d'archivage et ne peut donc pas créer le clone de la base de données.
+
+.Étape
+. Pour cloner la base de données à son état actuel, entrez la commande suivante :
++
+`*smsap clone create -profile _profile_name_ -current -label _clone_name_ -clonespec _./clonespec_filename.xml_*`
+
++
+Cette commande effectue immédiatement une sauvegarde automatique complète (générant l'étiquette de sauvegarde) et clone à partir de cette sauvegarde, en utilisant la spécification de clone existante que vous souhaitez utiliser.
+
++
+
+NOTE: Vous pouvez spécifier le `-dump` option en tant que paramètre facultatif pour collecter les fichiers de vidage après les opérations réussies ou ayant échoué. Le dump est collecté pour les opérations de sauvegarde et de clonage.
+
+

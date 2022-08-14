@@ -1,0 +1,36 @@
+---
+permalink: unix-administration/concept-introduction-to-data-protection-in-snapmanager.html 
+sidebar: sidebar 
+keywords: snapmanager, data, protection, backup, secondary, tertiary, storage, system, snapmirror, snapvault, relationship, destination, volume 
+summary: SnapManager prend en charge la protection des données pour protéger les sauvegardes sur les systèmes de stockage secondaire ou tertiaire. Vous devez configurer les relations SnapMirror et SnapVault entre les volumes source et de destination. 
+---
+= Introduction à la protection des données dans SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager prend en charge la protection des données pour protéger les sauvegardes sur les systèmes de stockage secondaire ou tertiaire. Vous devez configurer les relations SnapMirror et SnapVault entre les volumes source et de destination.
+
+Si vous utilisez Data ONTAP sous 7-mode, SnapManager fournit une protection des données pilotée par les règles avec protection Manager (OnCommand Unified Manager). Cela automatise la réplication des sauvegardes SnapManager sur un système de stockage primaire vers un système de stockage secondaire, voire vers un système de stockage tertiaire, à l'aide des règles SnapVault ou SnapMirror créées par l'administrateur du stockage ou de la sauvegarde dans protection Manager. La conservation sur stockage primaire est contrôlée par SnapManager en fonction de la conservation définie lors de la création du profil et de la classe de conservation balisée lors de la création de la sauvegarde. La conservation des sauvegardes de stockage secondaire est contrôlée par la règle définie dans protection Manager.
+
+Si vous utilisez clustered Data ONTAP, SnapManager 3.4 propose des règles _SnapManager_cdot_Mirror_ et _SnapManager_cdot_Vault_ pour la protection des données. Lors de la création d'un profil, vous pouvez sélectionner ces règles selon la relation SnapMirror ou SnapVault établie à l'aide de l'interface de ligne de commande de clustered Data ONTAP ou de System Manager. Lorsque vous créez une sauvegarde en sélectionnant le profil pour lequel vous avez activé la protection, les sauvegardes sont protégées sur un système de stockage secondaire.
+
+
+NOTE: Les sauvegardes créées à l'aide de BR*Tools ne peuvent pas être protégées à l'aide de SnapManager pour SAP.
+
+Si vous utilisiez SnapManager 3.3.1 avec clustered Data ONTAP, les sauvegardes étaient protégées à l'aide de scripts post sélectionnés lors de la création de profils. Si vous souhaitez utiliser ces profils, après la mise à niveau vers SnapManager 3.4, vous devez effectuer les opérations suivantes.
+
+* Vous devez mettre à jour les profils pour sélectionner la stratégie _SnapManager_cdot_Mirror_ ou _SnapManager_cdot_Vault_ et supprimer le post-script utilisé pour la protection des données.
+* Après la mise à jour du profil pour utiliser la stratégie _SnapManager_cdot_Vault_ policy, vous devez supprimer les planifications de sauvegarde existantes et créer de nouvelles planifications afin de spécifier l'étiquette SnapVault pour les sauvegardes.
+* Si les profils ont été créés dans SnapManager 3.3.1 sans sélectionner les post-scripts, vous devez mettre à jour les profils pour sélectionner la règle _SnapManager_cdot_Mirror_ ou la règle _SnapManager_cdot_Vault_ afin d'activer la protection des données.
+
+
+
+NOTE: Si vous avez des sauvegardes dans le système de stockage secondaire qui ont été mises en miroir ou archivées à l'aide de scripts post-SnapManager 3.3.1, vous ne pouvez pas utiliser ces sauvegardes pour la restauration ou le clonage à l'aide de SnapManager 3.4.
+
+Si vous utilisez clustered Data ONTAP, SnapManager 3.4.2 prend en charge plusieurs relations de protection (SnapMirror et SnapVault) sur les volumes source. Une seule relation SnapMirror et une seule relation SnapVault par volume sont prises en charge. Vous devez créer des profils distincts, chacun avec le `_SnapManager_cDOT_Mirror_` et le `_SnapManager_cDOT_Vault_` règle sélectionnée.
+
+
+NOTE: SnapDrive pour Unix 5.3.2 et versions ultérieures est nécessaire pour utiliser plusieurs règles de protection.

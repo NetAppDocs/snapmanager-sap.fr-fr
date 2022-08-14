@@ -1,0 +1,21 @@
+---
+permalink: unix-administration/task-delete-profiles.html 
+sidebar: sidebar 
+keywords: delete, profile, successful, incomplete, deleting, backup 
+summary: 'Vous pouvez supprimer un profil à tout moment, tant qu"il ne contient pas de sauvegardes réussies ou incomplètes. Vous pouvez supprimer des profils qui contiennent des sauvegardes libérées ou supprimées.' 
+---
+= Supprimer des profils
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez supprimer un profil à tout moment, tant qu'il ne contient pas de sauvegardes réussies ou incomplètes. Vous pouvez supprimer des profils qui contiennent des sauvegardes libérées ou supprimées.
+
+.Étape
+. Pour supprimer un profil, entrez la commande suivante :
++
+`*smsap profile delete -profile _profile_name_*`
+
+

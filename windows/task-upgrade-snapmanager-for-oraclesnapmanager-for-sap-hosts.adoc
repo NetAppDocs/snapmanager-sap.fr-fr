@@ -1,0 +1,71 @@
+---
+permalink: windows/task-upgrade-snapmanager-for-oraclesnapmanager-for-sap-hosts.html 
+sidebar: sidebar 
+keywords: upgrade, exist, snapmanager, host, version, simultaneous, result, downtime, schedule, operation, time 
+summary: 'Vous pouvez mettre à niveau tous les hôtes SnapManager existants pour utiliser la dernière version de SnapManager. Tous les hôtes sont mis à niveau simultanément. Toutefois, cela peut entraîner des temps d"indisponibilité de tous les hôtes SnapManager et des opérations planifiées pendant cette période.' 
+---
+= Mettre à niveau les hôtes SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez mettre à niveau tous les hôtes SnapManager existants pour utiliser la dernière version de SnapManager. Tous les hôtes sont mis à niveau simultanément. Toutefois, cela peut entraîner des temps d'indisponibilité de tous les hôtes SnapManager et des opérations planifiées pendant cette période.
+
+.Étapes
+. Arrêtez le serveur SnapManager en procédant comme suit :
++
+.. Dans la fenêtre *Windows Services*, sélectionnez *NetApp SnapManager pour SAP*.
+.. Dans le panneau de gauche, cliquez sur *Stop*.
+
+
+. Double-cliquez sur le fichier d'installation de SnapManager.
++
+|===
+| Si le système d'exploitation est... | Puis utilisez... 
+
+
+ a| 
+Windows x86
+ a| 
+`netapp.smsap.windows-x86-version_number.exe`
+
+
+
+ a| 
+Windows x64
+ a| 
+`netapp.smsap.windows-x64-version_number.exe`
+
+|===
++
+Le message suivant s'affiche : `The publisher could not be verified. Are you sure you want to run this software?`
+
+. Cliquez sur *OK*.
++
+La fenêtre Introduction s'affiche.
+
+. Cliquez sur *Suivant*.
++
+La fenêtre choisir un dossier d'installation s'affiche.
+
+. Cliquez sur *Suivant* pour accepter l'emplacement d'installation par défaut ou sélectionnez un nouvel emplacement.
++
+L'emplacement par défaut est : `C:\Program Files\NetApp\SnapManager for SAP`.
+
+. Dans la fenêtre *disponibilité du menu*, cliquez sur *Suivant*.
+. Dans la fenêtre *Specify Service Properties*, entrez les informations de compte et de mot de passe pour le service Windows.
++
+Le compte spécifié doit être membre des groupes suivants :
+
++
+** Le groupe d'administration locale du système de stockage
+** Groupe de l'administrateur local
+** Le groupe ORA_DBA vous pouvez spécifier si le service doit démarrer automatiquement après redémarrage ou si le service doit être démarré manuellement.
+
+
+. Dans la fenêtre *Pre-installation Summary*, cliquez sur *Install*.
+. Dans la fenêtre *Install Complete* (installation terminée*), cliquez sur *Next* (Suivant*).
+. Dans la fenêtre *informations importantes*, cliquez sur *Done* pour quitter le programme d'installation.
+

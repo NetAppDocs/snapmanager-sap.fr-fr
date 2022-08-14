@@ -1,0 +1,21 @@
+---
+permalink: unix-administration/task-retain-backups-forever.html 
+sidebar: sidebar 
+keywords: specify, backup, ineligible, deletion, retention, policy, indefinitely, retain, forever 
+summary: 'Vous pouvez indiquer qu"une sauvegarde ne peut pas être supprimée par la stratégie de rétention pour conserver indéfiniment la sauvegarde.' 
+---
+= Conservation des sauvegardes indéfiniment
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez indiquer qu'une sauvegarde ne peut pas être supprimée par la stratégie de rétention pour conserver indéfiniment la sauvegarde.
+
+.Étape
+. Pour spécifier qu'une sauvegarde est conservée sans limite, entrez la commande suivante :
++
+`*smsap backup update -profile _profile_name_ {-label _label_ [data | -archivelogs] | -id _id_} -retain -unlimited*`
+
+

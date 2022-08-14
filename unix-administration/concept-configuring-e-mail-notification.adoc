@@ -1,0 +1,69 @@
+---
+permalink: unix-administration/concept-configuring-e-mail-notification.html 
+sidebar: sidebar 
+keywords: snapmanager, enable, email, notification, completion, status, profile-executed, database, operation, configuring, configure 
+summary: 'SnapManager vous permet de recevoir une notification par e-mail concernant l"état d"achèvement des opérations de base de données exécutées par le profil. SnapManager génère l"e-mail et vous aide à prendre les mesures appropriées en fonction de l"état de fin de l"opération de la base de données. La configuration de la notification par e-mail est un paramètre facultatif.' 
+---
+= Configuration d'une notification par e-mail
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager vous permet de recevoir une notification par e-mail concernant l'état d'achèvement des opérations de base de données exécutées par le profil. SnapManager génère l'e-mail et vous aide à prendre les mesures appropriées en fonction de l'état de fin de l'opération de la base de données. La configuration de la notification par e-mail est un paramètre facultatif.
+
+Vous pouvez configurer une notification par e-mail pour un profil individuel en tant que notification de profil et pour plusieurs profils d'une base de données de référentiel en tant que notification récapitulative.
+
+*Notification de profil*
+
+Pour un profil individuel, vous pouvez recevoir un e-mail pour les opérations de base de données réussies ou échoués.
+
+
+NOTE: Par défaut, la notification par e-mail est activée pour les opérations de base de données ayant échoué.
+
+*Notification sommaire*
+
+La notification récapitulative vous permet de recevoir un e-mail récapitulatif sur les opérations de base de données effectuées à l'aide de plusieurs profils. Vous avez la possibilité d'activer les notifications toutes les heures, tous les jours, toutes les semaines ou tous les mois.
+
+
+NOTE: À partir de SnapManager 3.3, les notifications récapitulatives ne sont envoyées que si vous spécifiez le serveur hôte qui doit envoyer la notification. Si vous mettez à niveau SnapManager à partir d'une version antérieure à la version 3.3, il est possible que les notifications récapitulatives ne soient pas envoyées si vous n'aviez pas spécifié le serveur hôte dans la configuration des notifications récapitulatives.
+
+
+NOTE: Si vous créez un référentiel dans un nœud d'une base de données qui se trouve dans un environnement RAC (Real application clusters) et que vous activez la notification récapitulative, par la suite lorsque vous ajoutez le même référentiel à un autre nœud de la base de données, l'e-mail de notification de synthèse est envoyé deux fois.
+
+Vous pouvez utiliser une notification au niveau du profil ou une notification récapitulative à la fois.
+
+SnapManager permet de recevoir des notifications par e-mail pour les opérations de base de données exécutées par un profil suivantes :
+
+* Créer une sauvegarde sur un système de stockage primaire
+* Restaurer des sauvegardes
+* Créer des clones
+* Séparer les clones
+* Vérifier les sauvegardes
+
+
+Après avoir créé ou mis à jour des profils avec la notification par e-mail activée, vous pouvez le désactiver. Si vous désactivez la notification par e-mail, vous ne recevez plus d'alertes par e-mail pour les opérations de base de données exécutées par un profil.
+
+L'e-mail que vous recevez contient les informations suivantes :
+
+* Nom de l'opération de base de données, par exemple sauvegarde, restauration ou clonage
+* Nom de profil utilisé pour l'opération de base de données
+* Nom du serveur hôte
+* Identificateur système de la base de données
+* Heure de début et de fin de l'opération de base de données
+* État de l'opération de la base de données
+* Message d'erreur, le cas échéant
+* Le cas échéant, des messages d'avertissement
+
+
+Vous pouvez configurer les éléments suivants :
+
+* Serveur de messagerie pour un référentiel
+* Notification par e-mail pour un nouveau profil
+* Notification par e-mail d'un profil existant
+* Notification de synthèse par e-mail pour plusieurs profils sous un référentiel
+
+
+
+NOTE: Vous pouvez configurer les notifications par e-mail à partir de l'interface de ligne de commande et de l'interface graphique.

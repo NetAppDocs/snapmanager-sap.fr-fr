@@ -1,0 +1,27 @@
+---
+permalink: unix-administration/task-authorize-user-access-to-the-repository.html 
+sidebar: sidebar 
+keywords: addition, role-based, access, control, rbac, snapmanager, enable, set, credential, database, repository, restrict, prevent, host, profile, database, authorizing, authorize 
+summary: 'Outre le contrôle d"accès basé sur des rôles (RBAC), SnapManager vous permet de définir les identifiants pour les utilisateurs de base de données afin d"accéder au référentiel. À l"aide des informations d"identification, vous pouvez restreindre ou empêcher l"accès aux hôtes, référentiels, profils et bases de données SnapManager.' 
+---
+= Autoriser l'accès au référentiel
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Outre le contrôle d'accès basé sur des rôles (RBAC), SnapManager vous permet de définir les identifiants pour les utilisateurs de base de données afin d'accéder au référentiel. À l'aide des informations d'identification, vous pouvez restreindre ou empêcher l'accès aux hôtes, référentiels, profils et bases de données SnapManager.
+
+*À propos de cette tâche*
+
+Si vous définissez les informations d'identification à l'aide de la commande dataset, SnapManager ne vous invite pas à entrer un mot de passe.
+
+Vous pouvez définir les informations d'identification de l'utilisateur lors de l'installation de SnapManager ou d'une version ultérieure.
+
+.Étape
+. Saisissez la commande suivante :
++
+`*smsap credential set -repository -dbname _repo_service_name_ -host _repo_host_ -login -username _repo_username_ [-password _repo_password_] -port _repo_port_*`
+
+

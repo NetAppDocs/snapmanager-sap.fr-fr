@@ -1,0 +1,36 @@
+---
+permalink: unix-installation-cmode/task-create-the-repository-database-instance.html 
+sidebar: sidebar 
+keywords: repository, database, instance, oracle, snapmanager, stand-alone, target, create 
+summary: 'L"instance de base de données de référentiel est une base de données Oracle dans laquelle vous créez le référentiel SnapManager. L"instance de base de données de référentiel doit être une base de données autonome et ne peut pas être la base de données cible.' 
+---
+= Créez l'instance de base de données du référentiel
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+L'instance de base de données de référentiel est une base de données Oracle dans laquelle vous créez le référentiel SnapManager. L'instance de base de données de référentiel doit être une base de données autonome et ne peut pas être la base de données cible.
+
+
+
+== Ce dont vous aurez besoin
+
+Vous devez disposer d'une base de données Oracle et d'un compte utilisateur pour accéder à la base de données.
+
+.Étapes
+. Connectez-vous à SQL *plus : `sqlplus '/ as sysdba'`
+. Créez un espace table pour le référentiel SnapManager : `*create tablespacetablespace_name datafile ′/u01/app/oracle/oradata/datafile/tablespace_name.dbf′ size 100M autoextend on;*`
++
+`tablespace_name` est le nom de l'espace de table.
+
+. Vérifiez la taille du bloc de l'espace de stockage : `*select tablespace_name, block_size from dba_tablespaces;*`
++
+SnapManager nécessite une taille de bloc minimale de 4 K pour l'espace de table.
+
+
+
+*Informations connexes*
+
+http://www.netapp.com/us/media/tr-3761.pdf["Rapport technique de NetApp 3761 : SnapManager pour Oracle : meilleures pratiques"^]

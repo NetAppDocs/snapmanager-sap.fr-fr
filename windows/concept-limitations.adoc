@@ -1,0 +1,163 @@
+---
+permalink: windows/concept-limitations.html 
+sidebar: sidebar 
+keywords: aware, scenario, limitation, environment, work, snapmanager 
+summary: 'Vous devez connaître les scénarios et les limites susceptibles d"affecter votre environnement.' 
+---
+= Restrictions lors de l'utilisation de SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez connaître les scénarios et les limites susceptibles d'affecter votre environnement.
+
+*Limitations relatives aux dispositions et plates-formes de bases de données*
+
+* SnapManager prend en charge les fichiers de contrôle sur un système de fichiers et ne prend pas en charge les fichiers de contrôle sur les périphériques bruts.
+* SnapManager fonctionne dans un environnement MSCS (Microsoft Clustering), mais il reconnaît l'état de la configuration MSCS (active ou passive) et ne transfère pas la gestion active d'un référentiel vers un serveur de secours d'un cluster MSCS.
+* La base de données de référentiel peut exister sur un hôte auquel il est possible d'accéder en utilisant plusieurs adresses IP.
++
+Si vous accédez au référentiel en utilisant plusieurs adresses IP, le fichier de planification est créé pour chacune des adresses IP. Si la sauvegarde de planification est créée pour un profil (par exemple, le profil A) sous l'une des adresses IP (par exemple, IP1), le fichier de planification pour cette adresse IP est mis à jour. Si le profil A est accessible à partir d'une autre adresse IP (par exemple, IP2), la sauvegarde planifiée n'est pas répertoriée car le fichier de planification IP2 ne contient pas d'entrée pour la planification créée sous IP1.
+
++
+Vous pouvez attendre que la planification soit déclenchée à partir de cette adresse IP et du fichier de planification à mettre à jour, ou vous pouvez redémarrer le serveur.
+
+
+
+*Limitations relatives à la configuration SnapManager*
+
+* SnapManager prend en charge les bases de données sur des systèmes de stockage MultiStore dans les configurations suivantes :
++
+** Vous devez configurer SnapDrive de manière à définir des mots de passe pour les systèmes de stockage MultiStore.
+** SnapDrive ne peut pas créer de copie Snapshot d'une LUN ou d'un fichier résidant dans un qtree du système de stockage MultiStore si le volume sous-jacent ne se trouve pas dans le même système de stockage MultiStore.
+
+
+* SnapManager ne prend pas en charge l'accès à deux serveurs SnapManager s'exécutant sur différents ports à partir d'un seul client (à partir de l'interface de ligne de commande ou de l'interface utilisateur graphique).
++
+Les numéros de port doivent être identiques sur les hôtes cible et distant.
+
+* Les opérations SnapManager échouent et vous ne pouvez pas accéder à l'interface graphique lorsque la base de données du référentiel est en panne.
++
+Vous devez vérifier que la base de données du référentiel est en cours d'exécution lorsque vous effectuez des opérations SnapManager.
+
+* SnapManager ne prend pas en charge la mobilité des partitions en direct (LPM) et la mobilité des applications en direct (LAM).
+* SnapManager ne prend pas en charge Oracle Wallet Manager et le chiffrement transparent des données (TDE).
+* SnapManager ne prend pas en charge les configurations MetroCluster dans les environnements RDM (Raw Device Mapping), car les configurations MetroCluster ne sont pas encore prises en charge par VSC (Virtual Storage Console).
+
+
+*Limitations relatives à la gestion des profils*
+
+* Si vous mettez à jour le profil pour séparer les sauvegardes du journal d'archivage, vous ne pouvez pas effectuer une opération de restauration sur l'hôte.
+* Si vous activez un profil à partir de l'interface utilisateur graphique pour créer des sauvegardes du journal d'archivage, puis essayez de mettre à jour le profil à l'aide de la fenêtre mise à jour multi-profil ou mise à jour du profil, vous ne pouvez pas modifier ce profil pour créer une sauvegarde complète.
+* Si vous mettez à jour plusieurs profils dans la fenêtre mise à jour multi-profil et que certains profils ont l'option *Backup Archiveils séparément* activée et que d'autres profils ont l'option désactivée, l'option *Backup Archivelugs séparément* est désactivée.
+* Si vous mettez à jour plusieurs profils et que certains profils ont l'option *Backup Archivelugs séparément* activée et que d'autres profils ont l'option désactivée, l'option *Backup Archivelugs séparément* de la fenêtre mise à jour multi-profil est désactivée.
+* Si vous renommez le profil, vous ne pouvez pas restaurer l'hôte.
+
+
+*Limitations relatives aux opérations de mise à niveau ou de restauration à roulement*
+
+* Si vous essayez d'installer une version antérieure de SnapManager pour un hôte sans effectuer l'opération de restauration sur l'hôte dans le référentiel, il se peut que vous ne puissiez pas :
++
+** Affichez les profils créés dans les versions antérieures ou ultérieures de SnapManager pour l'hôte.
+** Accéder aux sauvegardes ou clones créés dans des versions antérieures ou ultérieures de SnapManager.
+** Effectuez des opérations de restauration ou de mise à niveau propagées sur l'hôte.
+
+
+* Une fois les profils séparés pour créer des sauvegardes de journaux d'archives, vous ne pouvez pas effectuer une opération de restauration sur le référentiel hôte associé.
+
+
+*Limitations relatives aux opérations de sauvegarde*
+
+* Pendant la restauration, si la sauvegarde est déjà montée, SnapManager ne monte pas de nouveau la sauvegarde et utilise la sauvegarde déjà montée.
++
+Si la sauvegarde est montée par un autre utilisateur et que vous n'avez pas accès à la sauvegarde précédemment montée, l'autre utilisateur doit vous fournir l'autorisation.
+
++
+Tous les fichiers journaux d'archive disposent d'une autorisation de lecture pour les utilisateurs affectés à un groupe. Il se peut que vous ne disposez pas de l'autorisation d'accès au fichier journal d'archives, si la sauvegarde est montée par un autre groupe d'utilisateurs. Les utilisateurs peuvent autoriser manuellement les fichiers journaux d'archives montés, puis relancer l'opération de restauration ou de récupération.
+
+* SnapManager définit l'état de sauvegarde comme « PROTÉGÉ », même lorsque l'une des copies Snapshot de la sauvegarde de la base de données est transférée vers le système de stockage secondaire.
+* Vous pouvez utiliser le fichier de spécification de tâche pour la sauvegarde planifiée uniquement à partir de SnapManager 3.2 ou version ultérieure.
+* Si la base de données du référentiel pointe vers plusieurs adresses IP et que chaque adresse IP a un nom d'hôte différent, l'opération de planification des sauvegardes a réussi pour une adresse IP mais échoue pour l'autre adresse IP.
+* Dans les environnements ONTAP, SnapManager ne prend pas en charge plusieurs destinations secondaires pour un volume source.
+
+
+*Limitations relatives aux opérations de restauration*
+
+* SnapManager ne prend pas en charge la restauration des sauvegardes de bases de données grâce aux opérations de restauration rapide ou de restauration basée sur les volumes dans Windows.
++
+SnapManager 3.3 affiche un message d'erreur lorsque vous tentez d'effectuer une restauration rapide à partir de l'interface de ligne de commande de SnapManager.
+
+
+
+*Limitations relatives aux opérations de clonage*
+
+* SnapManager 3.3 ou version ultérieure ne prend pas en charge l'utilisation du fichier XML de spécification clone créé dans les versions antérieures à SnapManager 3.2.
+* Si les espaces de stockage temporaires se trouvent dans un emplacement différent de celui des fichiers de données, une opération de clonage crée les espaces de stockage à l'emplacement des fichiers de données.
++
+Toutefois, si les espaces de stockage temporaires sont des fichiers gérés Oracle (OMF) situés à un emplacement différent de celui des fichiers de données, l'opération de clonage ne crée pas les espaces de stockage à l'emplacement des fichiers de données. Les OMF ne sont pas gérés par SnapManager.
+
+* SnapManager ne parvient pas à cloner une base de données RAC si vous sélectionnez le système `-resetlogs` option.
+
+
+*Limitations relatives aux fichiers journaux d'archives et aux sauvegardes*
+
+* SnapManager ne prend pas en charge l'élagage des fichiers journaux d'archives à partir de la zone de restauration Flash.
+* SnapManager ne prend pas en charge l'élagage des fichiers journaux d'archives à partir de la destination de secours.
+* Les sauvegardes du journal d'archivage sont conservées en fonction de la durée de conservation et de la classe de rétention horaire par défaut.
++
+Lorsque la classe de conservation des sauvegardes du journal d'archivage est modifiée à l'aide de l'interface de ligne de commande ou de l'interface utilisateur graphique SnapManager, la classe de rétention modifiée n'est pas prise en compte pour la sauvegarde car les sauvegardes du journal d'archivage sont conservées en fonction de la durée de conservation.
+
+* Si vous supprimez les fichiers journaux d'archives des destinations du journal d'archivage, la sauvegarde du journal d'archivage n'inclut pas les fichiers journaux d'archives antérieurs au fichier journal d'archives manquant.
++
+Si le dernier fichier journal d'archives est manquant, l'opération de sauvegarde du journal d'archivage échoue.
+
+* Si vous supprimez les fichiers journaux d'archives des destinations du journal d'archives, l'élagage des fichiers journaux d'archives échoue.
+* SnapManager consolide les sauvegardes du journal d'archivage même lorsque vous supprimez les fichiers journaux d'archivage des destinations du journal d'archivage ou lorsque les fichiers journaux d'archivage sont corrompus.
+
+
+*Limitations liées à la modification du nom d'hôte de la base de données cible*
+
+Les opérations SnapManager suivantes ne sont pas prises en charge lorsque vous modifiez le nom d'hôte de la base de données cible :
+
+* Modification du nom d'hôte de la base de données cible à partir de l'interface graphique SnapManager.
+* Reprise de la base de données du référentiel après la mise à jour du nom d'hôte de la base de données cible du profil.
+* Mise à jour simultanée de plusieurs profils pour un nouveau nom d'hôte de base de données cible.
+* Modification du nom d'hôte de la base de données cible lors de l'exécution d'une opération SnapManager.
+
+
+*Limitations relatives à l'interface de ligne de commande ou à l'interface utilisateur graphique SnapManager*
+
+* Commandes de l'interface de ligne de commandes SnapManager pour `profile create` Les opérations générées à partir de l'interface graphique SnapManager ne disposent pas d'options de configuration de l'historique.
++
+Vous ne pouvez pas utiliser `profile create` Commande permettant de configurer les paramètres de conservation de l'historique à partir de l'interface de ligne de commande SnapManager.
+
+* SnapManager n'affiche pas l'interface graphique de Mozilla Firefox lorsqu'il n'y a pas d'environnement d'exécution Java (JRE) disponible sur le client Windows.
+* SnapManager 3.3 n'affiche pas l'interface graphique SnapManager dans Microsoft Internet Explorer 6 sous Windows Server 2008 et Windows 7.
+* Lors de la mise à jour du nom d'hôte de la base de données cible à l'aide de l'interface de ligne de commande SnapManager, si une ou plusieurs sessions de l'interface utilisateur SnapManager sont ouvertes, toutes les sessions de l'interface graphique SnapManager ouvertes ne répondent pas.
+* Lorsque vous installez SnapManager sous Windows et que vous démarrez l'interface de ligne de commande sous UNIX, les fonctionnalités qui ne sont pas prises en charge sous Windows s'affichent.
+
+
+*Limitations relatives à SnapMirror et SnapVault*
+
+* Dans certains cas, vous ne pouvez pas supprimer la dernière sauvegarde associée à la première copie Snapshot lorsque le volume a une relation SnapVault établie.
++
+Vous ne pouvez supprimer la sauvegarde que lorsque vous rompez la relation. Ce problème est dû à une restriction de ONTAP relative aux copies Snapshot de base. Dans une relation SnapMirror, la copie Snapshot de base est créée par le moteur SnapMirror et, dans une relation SnapVault, la copie Snapshot de base est la sauvegarde créée à l'aide de SnapManager. Pour chaque mise à jour, la copie Snapshot de base pointe vers la dernière sauvegarde créée à l'aide de SnapManager.
+
+
+
+*Limitations relatives aux bases de données de secours de Data Guard*
+
+* SnapManager ne prend pas en charge les bases de données de secours Logical Data Guard.
+* SnapManager ne prend pas en charge les bases de données de secours Active Data Guard.
+* SnapManager n'autorise pas les sauvegardes en ligne des bases de données de secours Data Guard.
+* SnapManager n'autorise pas les sauvegardes partielles des bases de données de secours Data Guard.
+* SnapManager ne permet pas la restauration de bases de données de secours Data Guard.
+* SnapManager ne permet pas d'élaguer des fichiers journaux d'archives pour les bases de données de secours Data Guard.
+* SnapManager ne prend pas en charge Data Guard Broker.
+
+
+*Informations connexes*
+
+http://mysupport.netapp.com/["Documentation sur le site de support NetApp"^]

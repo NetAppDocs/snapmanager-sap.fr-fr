@@ -1,0 +1,37 @@
+---
+permalink: unix-administration/reference-the-smosmsap-schedule-suspend-command.html 
+sidebar: sidebar 
+keywords: command, suspend, backup, schedule, resume, smsap 
+summary: 'Cette commande suspend un programme de sauvegarde jusqu"à ce que le planning de sauvegarde reprend.' 
+---
+= La commande smsap schedule suspend
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Cette commande suspend un programme de sauvegarde jusqu'à ce que le planning de sauvegarde reprend.
+
+
+
+== Syntaxe
+
+[listing, subs="+macros"]
+----
+pass:quotes[smsap schedule suspend -profile _profile_name_
+-schedule-name _schedule_name_ [-quiet | -verbose\]]
+----
+
+
+== Paramètres
+
+* `*-profile _profile_name_*`
++
+Indique le nom du profil associé à la base de données pour laquelle vous souhaitez suspendre un programme de sauvegarde. Le profil contient l'identifiant de la base de données et d'autres informations sur la base de données.
+
+* `*-schedule-name _schedule_name_*`
++
+Spécifie le nom du programme que vous avez fourni lors de la création d'un programme de sauvegarde.
+
+

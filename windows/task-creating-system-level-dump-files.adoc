@@ -1,0 +1,25 @@
+---
+permalink: windows/task-creating-system-level-dump-files.html 
+sidebar: sidebar 
+keywords: smsap, system, dump, command, log, information, snapmanager, environment, log, operation, profile, host, system-level, creating, create 
+summary: 'Vous pouvez utiliser la commande smsap system dump pour obtenir des informations de journalisation sur l"hôte et l"environnement SnapManager. Vous pouvez spécifier différents niveaux de journalisation pour collecter des informations sur une opération, un profil ou un hôte et un environnement spécifiques.' 
+---
+= Création de fichiers de vidage au niveau du système
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez utiliser la commande smsap system dump pour obtenir des informations de journalisation sur l'hôte et l'environnement SnapManager. Vous pouvez spécifier différents niveaux de journalisation pour collecter des informations sur une opération, un profil ou un hôte et un environnement spécifiques.
+
+. Saisissez la commande suivante : `smsap system dump`
++
+Vidage résultant
+
++
+[listing]
+----
+Path:\<user-home>\Application Data\NetApp\smsap\3.3.0\smsap_dump_server_host.jar
+----
+

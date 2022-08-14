@@ -1,0 +1,191 @@
+---
+permalink: windows/reference-troubleshooting-known-issues.html 
+sidebar: sidebar 
+keywords: aware, issue, snapmanager, troubleshoot 
+summary: Vous devez connaître certains problèmes connus qui peuvent survenir lorsque vous utilisez SnapManager et savoir comment les contourner. 
+---
+= Dépannage des problèmes connus
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez connaître certains problèmes connus qui peuvent survenir lorsque vous utilisez SnapManager et savoir comment les contourner.
+
+
+
+== SnapManager for SAP ne parvient pas à identifier le profil en tant que profil Cluster-mode
+
+Si le nom du profil Cluster-mode n'est pas présent dans le `cmode_profiles.config` Fichier dans le répertoire d'installation de SnapManager pour SAP, le message d'erreur suivant peut se déclencher :
+
+`Please configure DFM server using snapdrive config set -dfm user_name appliance_name`.
+
+De même, lors de la mise à niveau de SnapManager pour SAP, si vous supprimez le `/opt/NetApp/smsap/`* dossier, puis `cmode_profiles.config` Les fichiers dont les noms de profil Cluster-mode sont également supprimés. Ce problème déclenche également le même message d'erreur.
+
+*Solution de contournement*
+
+Mettre à jour le profil : `smsap profile update-profile <profile_name\>`
+
+
+NOTE: Si SnapManager pour SAP est installé dans le `/opt/NetApp/smsap/` chemin d'accès, l'emplacement du fichier sera `/opt/NetApp/smsap/cmode_profile/cmode_profiles.config`.
+
+
+
+== Le serveur ne démarre pas
+
+Lors du démarrage du serveur, un message d'erreur semblable à ce qui suit peut s'afficher :
+
+`SMSAP-01104: Error invoking command: SMSAP-17107: SnapManager Server failed to start on port 8074 because of the following errors: java.net.BindException: Address already in use`
+
+Cela peut être dû au fait que les ports d'écoute SnapManager (27314 et 27315 par défaut) sont actuellement utilisés par une autre application.
+
+Cette erreur peut également se produire si l' `smsap_server` La commande est déjà en cours d'exécution, mais SnapManager ne détecte pas le processus existant.
+
+*Solution de contournement*
+
+Vous pouvez reconfigurer le SnapManager ou l'autre application pour utiliser différents ports.
+
+Pour reconfigurer SnapManager, modifiez le fichier suivant : `C:\Program Files\NetApp\SnapManager for SAP\properties\smsap.config`
+
+Vous affectez les valeurs suivantes :
+
+* SMSAP Server.port=27314
+* SMSAP Server.rmiregistry.port=27315
+* remote.registry.ocijdbc.port= 27315
++
+Le port remote.registry.ocijdbc.port doit être identique à Server.rmiregistry.port.
+
+
+
+Pour démarrer le serveur SnapManager, effectuez les opérations suivantes :
+
+.Étapes
+. Cliquez sur *Démarrer* > *panneau de configuration* > *Outils d'administration* > *Services*.
+. Dans la fenêtre Services, sélectionnez NetApp SnapManager 3.3 pour SAP.
+. Vous pouvez démarrer le serveur de l'une des trois façons suivantes :
++
+** Dans le panneau de gauche, cliquez sur *Démarrer*.
+** Cliquez avec le bouton droit de la souris sur NetApp SnapManager 3.3 pour SAP et sélectionnez *Démarrer* dans le menu déroulant.
+** Double-cliquez sur NetApp SnapManager 3.3 pour SAP et dans la fenêtre Propriétés qui s'affiche, cliquez sur *Démarrer*.
+
+
+
+
+
+
+== Impossible de gérer les noms de destination du fichier journal d'archives si les noms de destination font partie d'autres noms de destination
+
+Lors de la création d'une sauvegarde du journal d'archivage, si l'utilisateur exclut une destination faisant partie d'autres noms de destination, les autres noms de destination sont également exclus.
+
+Par exemple, supposons que trois destinations sont disponibles pour être exclues : `E:\\arch`, `G:\\arch`, et `H:\\arch`. Lors de la création de la sauvegarde du fichier journal d'archives, si vous l'excluez `E:\\arch` à l'aide de la commande
+
+[listing]
+----
+smsap backup create -profile almsamp1 -data -online -archivelogs  -exclude-dest E:\\arch
+----
+, SnapManager pour SAP exclut toutes les destinations commençant par `E:\\arch`.
+
+*Solution de contournement*
+
+* Ajoutez un séparateur de chemin après la configuration des destinations dans `v$archive_dest`. Par exemple, modifiez le `E:\\arch` à `E:\\arch\`.
+* Lors de la création d'une sauvegarde, incluez les destinations au lieu d'exclure toute destination.
+
+
+
+
+== La taille des bases de données de référentiel augmente avec le temps et non avec le nombre de sauvegardes
+
+La taille de la base de données de référentiel augmente avec le temps car les opérations SnapManager insèrent ou suppriment des données dans le schéma dans les tables de bases de données de référentiel, ce qui entraîne une utilisation élevée de l'espace d'indexation.
+
+*Solution de contournement*
+
+Vous devez surveiller et reconstruire les index conformément aux directives Oracle pour contrôler l'espace utilisé par le schéma du référentiel.
+
+
+
+== L'interface graphique de SnapManager est inaccessible et les opérations de SnapManager échouent lorsque la base de données du référentiel est en panne
+
+Les opérations SnapManager échouent et vous ne pouvez pas accéder à l'interface graphique lorsque la base de données du référentiel est en panne.
+
+Le tableau suivant répertorie les différentes actions que vous pouvez effectuer et leurs exceptions :
+
+|===
+| Exploitation | Exceptions 
+
+
+ a| 
+Ouverture d'un référentiel fermé
+ a| 
+Le message d'erreur suivant est connecté `sm_gui.log: [WARN ]: SMSAP-01106: Error occurred while querying the repository: Closed Connection java.sql.SQLException: Closed Connection`.
+
+
+
+ a| 
+Actualisation d'un référentiel ouvert en appuyant sur F5
+ a| 
+Une exception de référentiel s'affiche dans l'interface utilisateur graphique et consigne également une exception NullPointerException dans le `sm_gui.log` fichier.
+
+
+
+ a| 
+Actualisation du serveur hôte
+ a| 
+Une exception NullPointerException est consignée dans le `sumo_gui.log` fichier.
+
+
+
+ a| 
+Création d'un nouveau profil
+ a| 
+Une exception NullPointerException s'affiche dans la fenêtre Configuration du profil.
+
+
+
+ a| 
+Actualisation d'un profil
+ a| 
+L'exception SQL suivante est connectée `sm_gui.log: [WARN ]: SMSAP-01106: Error occurred while querying the repository: Closed Connection`.
+
+
+
+ a| 
+Accès à une sauvegarde
+ a| 
+Le message d'erreur suivant est connecté `sm_gui.log: Failed to lazily initialize a collection`.
+
+
+
+ a| 
+Affichage des propriétés de clone
+ a| 
+Le message d'erreur suivant est connecté `sm_gui.log` et `sumo_gui.log: Failed to lazily initialize a collection`.
+
+|===
+*Solution de contournement*
+
+Vous devez vous assurer que la base de données du référentiel est en cours d'exécution lorsque vous souhaitez accéder à l'interface graphique ou exécuter des opérations SnapManager.
+
+
+
+== Impossible de créer des fichiers temporaires pour la base de données clonée
+
+Lorsque des fichiers d'espaces de table temporaires de la base de données cible sont placés dans des points de montage différents du point de montage des fichiers de données, l'opération de création de clone a réussi mais SnapManager ne parvient pas à créer de fichiers temporaires pour la base de données clonée.
+
+*Solution de contournement*
+
+Vous devez effectuer l'une des opérations suivantes :
+
+* Assurez-vous que la base de données cible est définie de manière à ce que les fichiers temporaires soient placés au même point de montage que les fichiers de données.
+* Créez ou ajoutez manuellement des fichiers temporaires dans la base de données clonée.
+
+
+
+
+== Échec de la sauvegarde de la base de données de secours Data Guard
+
+Si un emplacement de journal d'archivage est configuré avec le nom de service de la base de données primaire, la sauvegarde de la base de données de secours Data Guard échoue.
+
+*Solution de contournement*
+
+Dans l'interface utilisateur graphique, vous devez effacer *spécifier l'emplacement du journal d'archives externes* correspondant au nom de service de la base de données principale.

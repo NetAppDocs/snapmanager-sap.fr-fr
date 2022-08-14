@@ -1,0 +1,64 @@
+---
+permalink: unix-administration/concept-error-handling-in-custom-scripts.html 
+sidebar: sidebar 
+keywords: snapmanager, process, custom, script, specific, return, code, value, execution, error, handling, handle 
+summary: SnapManager traite le script personnalisé en fonction des codes de retour spécifiques. Par exemple, si votre script personnalisé renvoie une valeur de 0, 1, 2 ou 3, SnapManager continue le processus de clonage. Le code retour influence également la manière dont SnapManager traite et renvoie le résultat standard de votre exécution de script. 
+---
+= Erreur de gestion dans les scripts personnalisés
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager traite le script personnalisé en fonction des codes de retour spécifiques. Par exemple, si votre script personnalisé renvoie une valeur de 0, 1, 2 ou 3, SnapManager continue le processus de clonage. Le code retour influence également la manière dont SnapManager traite et renvoie le résultat standard de votre exécution de script.
+
+[cols="1a,3a,2a"]
+|===
+| Code retour | Description | Poursuivre le traitement de l'opération 
+
+
+ a| 
+0
+ a| 
+Le script s'est terminé avec succès.
+ a| 
+Oui.
+
+
+
+ a| 
+1
+ a| 
+Le script s'est terminé avec succès, accompagné de messages d'information.
+ a| 
+Oui.
+
+
+
+ a| 
+2
+ a| 
+Le script est terminé, mais contient des avertissements
+ a| 
+Oui.
+
+
+
+ a| 
+3
+ a| 
+Le script échoue, mais l'opération continue.
+ a| 
+Oui.
+
+
+
+ a| 
+4 ou 4
+ a| 
+Le script échoue et l'opération s'arrête.
+ a| 
+Non
+
+|===

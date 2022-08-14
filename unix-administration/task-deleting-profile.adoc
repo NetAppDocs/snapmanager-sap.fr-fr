@@ -1,0 +1,25 @@
+---
+permalink: unix-administration/task-delete-profile.html 
+sidebar: sidebar 
+keywords: delete, profile, successful, backup, current, operation, free, backup, deleting 
+summary: 'Vous pouvez supprimer un profil tant qu"il ne contient pas de sauvegardes réussies actuellement utilisées dans d"autres opérations. Vous pouvez supprimer des profils qui contiennent des sauvegardes libérées ou supprimées.' 
+---
+= Supprimer un profil
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez supprimer un profil tant qu'il ne contient pas de sauvegardes réussies actuellement utilisées dans d'autres opérations. Vous pouvez supprimer des profils qui contiennent des sauvegardes libérées ou supprimées.
+
+. Saisissez la commande suivante : `smsap profile delete -profileprofile [-quiet | -verbose]`
++
+Vous pouvez supprimer un nouveau profil créé pour le groupe de clones. Lors de la suppression de, le message d'avertissement si vous supprimez le profil, vous ne pouvez pas le détruire ultérieurement s'affiche dans l'interface de ligne de commandes SnapManager.
+
+
+
+[listing]
+----
+smsap profile delete -profile AUTO-REVEN
+----

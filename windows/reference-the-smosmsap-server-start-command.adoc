@@ -1,0 +1,50 @@
+---
+permalink: windows/reference-the-smosmsap-server-start-command.html 
+sidebar: sidebar 
+keywords: command, start, host, server, run, snapmanager, sap, software, smsap_server, smsap 
+summary: Cette commande démarre le serveur hôte exécutant le logiciel SnapManager pour SAP. 
+---
+= La commande smsap_Server start
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Cette commande démarre le serveur hôte exécutant le logiciel SnapManager pour SAP.
+
+
+
+== Syntaxe
+
+[listing]
+----
+
+smsap_server start
+[-quiet | -verbose]
+----
+
+
+== Paramètres
+
+* *`-quiet`*
++
+Spécifie que seuls les messages d'erreur s'affichent sur la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* *`-verbose`*
++
+Spécifie que les messages d'erreur, d'avertissement et d'information s'affichent sur la console.
+
+
+
+
+
+== Exemple de commande
+
+L'exemple suivant démarre le serveur hôte.
+
+[listing]
+----
+smsap_server start
+SMSAP-17100: SnapManager Server started on secure port 25204 with PID 11250
+----

@@ -1,0 +1,67 @@
+---
+permalink: unix-installation-7mode/task-smsap-isg-back-up-your-database.html 
+sidebar: sidebar 
+keywords: create, creating, profile, back, up, database, schedule, recur, backup, initial, verification 
+summary: Après avoir créé un profil, vous devez sauvegarder votre base de données. Vous pouvez planifier des sauvegardes récurrentes après la sauvegarde et la vérification initiales. 
+---
+= Sauvegardez votre base de données
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après avoir créé un profil, vous devez sauvegarder votre base de données. Vous pouvez planifier des sauvegardes récurrentes après la sauvegarde et la vérification initiales.
+
+*À propos de cette tâche*
+
+Ces étapes montrent comment créer une sauvegarde de votre base de données à l'aide de l'interface utilisateur de SnapManager. Si vous préférez, vous pouvez également utiliser l'interface de ligne de commandes.
+
+Pour plus d'informations sur la création de sauvegardes à l'aide de l'interface de ligne de commande ou des outils BR* de SAP, reportez-vous au Guide d'administration _SnapManager for SAP pour UNIX_.
+
+.Étapes
+. Dans l'arborescence des référentiels, cliquez avec le bouton droit de la souris sur le profil contenant la base de données à sauvegarder, puis sélectionnez *Backup*.
+. Dans *Label*, entrez un nom personnalisé pour la sauvegarde.
++
+Vous ne devez pas inclure d'espaces ou de caractères spéciaux dans le nom. Si vous ne spécifiez pas de nom, SnapManager crée automatiquement une étiquette de sauvegarde.
+
++
+À partir de SnapManager 3.4, vous pouvez modifier l'étiquette de sauvegarde créée automatiquement par SnapManager. Vous pouvez modifier le `override.default.backup.pattern` et `new.default.backup.pattern` variables de configuration pour créer votre propre modèle de libellé de sauvegarde par défaut.
+
+. Sélectionnez *Autoriser le démarrage ou l'arrêt de la base de données, si nécessaire*, pour modifier l'état de la base de données, si nécessaire.
++
+Cette option garantit que si la base de données n'est pas à l'état requis pour créer une sauvegarde, SnapManager place automatiquement la base de données à l'état souhaité pour terminer l'opération.
+
+. Sur la page *base de données, tablespaces ou fichiers de données à sauvegarder*, effectuez les opérations suivantes :
++
+.. Sélectionnez *Sauvegarder les fichiers de données* pour sauvegarder la base de données complète, les fichiers de données sélectionnés ou les espaces de stockage sélectionnés.
+.. Sélectionnez *Backup Archivelugs* pour sauvegarder les fichiers journaux d'archive séparément.
+.. Sélectionnez *Prune Archivelugs* si vous souhaitez supprimer les fichiers journaux d'archives du système de fichiers actif qui est déjà sauvegardé.
++
+
+NOTE: Si la zone de récupération Flash (FRA) est activée pour les fichiers journaux d'archive, SnapManager ne parvient pas à nettoyer les fichiers journaux d'archive.
+
+.. Sélectionnez *protéger la sauvegarde* si vous souhaitez activer la protection de sauvegarde.
++
+Cette option n'est activée que si la stratégie de protection a été sélectionnée lors de la création du profil.
+
+.. Sélectionnez *Protect Now* si vous souhaitez protéger immédiatement la sauvegarde sur le stockage secondaire en remplaçant le planning de protection de protection Manager.
+.. Dans la liste déroulante *Type*, sélectionnez le type de sauvegarde (hors ligne ou en ligne) que vous souhaitez créer.
++
+Si vous sélectionnez _Auto_, SnapManager crée une sauvegarde basée sur l'état actuel de la base de données.
+
+.. Dans la liste déroulante *classe de rétention*, sélectionnez la classe de rétention.
+.. Cochez la case *vérifier la sauvegarde à l'aide de l'utilitaire Oracle DBVERIFY* si vous souhaitez vous assurer que les fichiers sauvegardés ne sont pas corrompus.
+
+
+. Sur la page *activation tâche*, indiquez si vous souhaitez effectuer des tâches avant et après la fin des opérations de sauvegarde.
+. Sur la page *Perform Backup Operation*, vérifiez les informations et cliquez sur *Backup*.
+. Cliquez sur *Terminer* pour fermer l'assistant.
++
+Si l'opération échoue, cliquez sur *Détails de l'opération* pour voir ce qui a provoqué l'échec de l'opération.
+
+
+
+*Informations connexes*
+
+https://library.netapp.com/ecm/ecm_download_file/ECMP12481453["Guide d'administration SnapManager 3.4.1 pour SAP pour UNIX"^]

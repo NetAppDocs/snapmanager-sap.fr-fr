@@ -1,0 +1,89 @@
+---
+permalink: unix-administration/task-update-storage-system-name-associated-with-a-profile.html 
+sidebar: sidebar 
+keywords: snapmanager, provide, ability, update, host, name, ip, address, storage, system, associate, profile, updating 
+summary: 'SnapManager 3.3 ou version ultérieure permet de mettre à jour le nom d"hôte ou l"adresse IP d"un système de stockage associé à un profil.' 
+---
+= Mettez à jour le nom du système de stockage associé à un profil
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager 3.3 ou version ultérieure permet de mettre à jour le nom d'hôte ou l'adresse IP d'un système de stockage associé à un profil.
+
+*Ce dont vous aurez besoin*
+
+Vous devez vous assurer que :
+
+* Le profil possède au moins une sauvegarde.
++
+Si le profil n'a pas de sauvegarde, il n'est pas nécessaire de mettre à jour le nom du système de stockage pour ce profil.
+
+
+
+*À propos de cette tâche*
+
+* Aucune opération n'est en cours pour le profil.
+
+
+Vous pouvez mettre à jour le nom du système de stockage ou l'adresse IP à l'aide de l'interface de ligne de commandes SnapManager. Lors de la mise à jour du nom du système de stockage, les métadonnées stockées dans la seule base de données du référentiel sont mises à jour. Après avoir renommé le nom du système de stockage, vous pouvez effectuer toutes les opérations SnapManager précédemment.
+
+
+NOTE: Vous ne pouvez pas modifier le nom du système de stockage à l'aide de l'interface graphique de SnapManager.
+
+Vous devez vous assurer que les copies Snapshot sont disponibles dans le nouveau système de stockage. SnapManager ne vérifie pas l'existence des copies Snapshot dans le système de stockage.
+
+Toutefois, vous devez vous souvenir de ce qui suit lors de la mise à niveau et de la restauration de l'hôte après avoir renommé le nom du système de stockage :
+
+* Si vous effectuez une mise à niveau propagée de l'hôte après avoir renommé le nom du système de stockage, vous devez mettre à jour le profil avec le nouveau nom du système de stockage.
++
+Pour plus d'informations sur l'utilisation des commandes SnapDrive pour modifier le nom du système de stockage, reportez-vous à la section _Dépannage des problèmes de nom du système de stockage_.
+
+* Si vous revenez à l'hôte après avoir renommé le système de stockage, vous devez vous assurer que vous modifiez le nom du système de stockage avec le nom précédent afin de pouvoir utiliser les profils, les sauvegardes et les clones du système de stockage précédent pour effectuer des opérations SnapManager.
+
+
+
+NOTE: Si SnapDrive n'a pas pu identifier le système de stockage et afficher des messages d'erreur, vous pouvez entrer la commande ipmigrate avec les noms d'hôte antérieurs et ultérieurs du système de stockage. Pour plus d'informations sur les problèmes de nom du système de stockage, reportez-vous à la section _Dépannage des problèmes de nom du système de stockage_.
+
+.Étape
+. Saisissez la commande suivante :
++
+`*smsap storage rename -profile _profile_ -oldname _old_storage_name_ -newname _new_storage_name_ [quiet | -verbose]`*
+
++
+[cols="1a,2a"]
+|===
+| Les fonctions que vous recherchez... | Alors... 
+
+
+ a| 
+Mettez à jour le nom du système de stockage associé à un profil
+ a| 
+Spécifiez le `-profile` option.
+
+
+
+ a| 
+Mettez à jour le nom du système de stockage ou l'adresse IP associée à un profil
+ a| 
+Spécifiez les options et variables suivantes :
+
+** `-oldname _old_storage_name_` Est le nom d'hôte ou l'adresse IP du système de stockage.
+** `-newname _new_storage_name_` Est le nom d'hôte ou l'adresse IP du système de stockage.
+
+
+|===
++
+'''
++
+L'exemple suivant montre le nom du système de stockage en cours de mise à jour :
+
+
+
+[listing]
+----
+smsap storage rename -profile mjullian -oldname lech -newname hudson -verbose
+----
+'''

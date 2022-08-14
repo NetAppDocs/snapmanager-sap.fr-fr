@@ -1,0 +1,77 @@
+---
+permalink: unix-installation-7mode/task-perform-a-rollback-on-a-single-host-or-multiple-hosts.html 
+sidebar: sidebar 
+keywords: perform, rollback, single, multiple, snapmanager, server, host, command-line, cli 
+summary: 'Vous pouvez effectuer une restauration sur un ou plusieurs hôtes de serveur SnapManager à l"aide de l"interface de ligne de commande.' 
+---
+= Effectuez une restauration sur un ou plusieurs hôtes
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez effectuer une restauration sur un ou plusieurs hôtes de serveur SnapManager à l'aide de l'interface de ligne de commande.
+
+*Ce dont vous aurez besoin*
+
+Vous devez vous assurer que toutes les conditions préalables à l'exécution d'une restauration sont terminées.
+
+.Étapes
+. Pour effectuer une restauration sur un seul hôte, entrez la commande suivante :
++
+`*smsaprepository rollback-repository-dbname _repo_service_name_ -host _repo_host_ -login -username _repo_username_ -port _repo_port_ -rollbackhost _host_with_target_database_*`
+
++
+*Exemple*
+
++
+L'exemple suivant montre la commande permettant de restaurer toutes les bases de données cibles montées sur hostA et une base de données de référentiel nommée REPOA située sur l'hôte de référentiel, repo_host :
+
++
+[listing]
+----
+
+smsap repository rollback
+    -repository
+      -dbname repoA
+      -host repo_host
+      -login
+       -username repouser
+       -port 1521
+     -rollbackhost hostA
+----
+. Pour effectuer une restauration sur plusieurs hôtes, entrez la commande suivante :
++
+`*smsaprepository rollback-repository-dbname _repo_service_name_ -host _repo_host_ -login-username _repo_username_ -port _repo_port_ -rollback _hosthost_with_target_database1,host_with_target_database2_*`
+
++
+
+NOTE: Pour plusieurs hôtes, entrez les noms d'hôte séparés par une virgule et assurez-vous qu'il n'y a pas d'espace entre la virgule et le nom d'hôte suivant.
+
++
+Si vous utilisez la configuration RAC (Real application clusters), vous devez annuler manuellement tous les hôtes associés au RAC. Vous pouvez utiliser -allhosts pour effectuer une restauration de tous les hôtes.
+
++
+*Exemple*
+
++
+L'exemple suivant montre la commande permettant de restaurer toutes les bases de données cibles montées sur les hôtes, hostA, hostB, et une base de données de référentiel nommée REPOA située sur l'hôte de référentiel, repo_host :
+
++
+[listing]
+----
+
+smsap repository rollback
+    -repository
+      -dbname repoA
+      -host repo_host
+      -login
+       -username repouser
+       -port 1521
+     -rollbackhost hostA,hostB
+----
++
+Les hôtes, les profils, les planifications, les sauvegardes et les clones associés aux profils des bases de données cibles de l'hôte sont restaurés dans le référentiel précédent.
+
+

@@ -1,0 +1,74 @@
+---
+permalink: unix-administration/concept-when-can-you-use-fast-restore.html 
+sidebar: sidebar 
+keywords: rule, apply, fast, restore, achieve, optimal, performance, guidelines 
+summary: 'Des règles spécifiques s"appliquent pour l"utilisation de la restauration rapide afin d"optimiser les performances de restauration. Dans certains cas, vous ne pouvez pas utiliser la restauration rapide.' 
+---
+= Instructions pour les procédures de restauration rapide
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Des règles spécifiques s'appliquent pour l'utilisation de la restauration rapide afin d'optimiser les performances de restauration. Dans certains cas, vous ne pouvez pas utiliser la restauration rapide.
+
+Pour optimiser les performances de restauration (restauration de volumes ou restauration complète de groupes de disques), vous devez respecter les règles suivantes :
+
+* Seules les restaurations complètes de sauvegardes complètes sont éligibles pour une restauration rapide.
+* Seuls les fichiers de données sont admissibles à la restauration rapide.
+* Les fichiers de données doivent être les seuls fichiers d'un volume à pouvoir être restaurés rapidement.
++
+Bien que les fichiers de données temporaires puissent résider dans le volume, les fichiers de contrôle, les journaux, les fichiers pfiles ou d'autres fichiers doivent résider sur un volume distinct des fichiers de données. Vous devez configurer une base de données Oracle avec des fichiers de données sur un volume distinct des fichiers de contrôle, des journaux archivés et des fichiers journaux en ligne.
+
+* Les fichiers de données d'une seule base de données doivent être présents dans le volume.
+* Plusieurs systèmes de fichiers peuvent être utilisés, mais les fichiers de ces systèmes de fichiers doivent être des fichiers de données pour une seule base de données.
+* SAP requiert une disposition de fichier légèrement différente.
++
+La section « disposition générale et configuration » contient des détails.
+
+* Si `BRRESTORE` est utilisé pour restaurer la base de données, la restauration rapide est utilisée avec le paramètre fast dans le fichier des paramètres de l'utilitaire de sauvegarde.
+
+
+
+NOTE: Pour vérifier si une sauvegarde créée précédemment peut être restaurée à l'aide de la restauration rapide, vous pouvez utiliser le `-preview` de la `smsap backup restore` commande.
+
+Le processus de restauration rapide ne peut pas être utilisé dans les cas suivants :
+
+* Sur sauvegardes partielles
+* Sur les sauvegardes à partir du système de stockage secondaire, si la sauvegarde existe également sur le système de stockage primaire
++
+Vous ne pouvez pas les restaurer à l'aide de la restauration basée sur des fichiers ou des volumes.
+
+* De sauvegardes protégées par SnapVault
++
+Le processus de restauration rapide ne peut pas être utilisé pour les sauvegardes créées précédemment que la dernière sauvegarde protégée. Toutefois, vous pouvez utiliser le processus de restauration rapide pour les sauvegardes créées après la dernière sauvegarde protégée. Prenons, par exemple, les sauvegardes A, B et C. B est la dernière sauvegarde à transférer vers un stockage secondaire à l'aide de SnapVault. Vous pouvez restaurer rapidement B et C, mais vous ne pouvez pas restaurer rapidement Un car il a été créé plus tôt que la dernière sauvegarde protégée. SnapVault a besoin d'un SnapVault de base pour calculer la différence de temps et l'envoyer vers un système de stockage secondaire lors de son prochain transfert vers le système de stockage secondaire. La dernière sauvegarde protégée agit comme la copie Snapshot de base. Par conséquent, l'utilisation du processus de restauration rapide empêche SnapVault de reconnaître la base.
+
+* Les clones de volumes FlexClone ou de LUN qui utilisent des copies Snapshot créées après la copie Snapshot vers laquelle le volume est restauré
++
+Par exemple, les clones peuvent être résultant d'une sauvegarde plus récente montée ou clonée par SnapManager.
+
+* LUN qui ne font pas partie de la copie Snapshot SnapDrive active
+
+
+Vous ne pouvez pas effectuer de restauration rapide ni d'autres types de restauration pour la même sauvegarde. Par exemple, si un volume de données peut être restauré à l'aide du processus de restauration rapide, mais qu'un autre volume de données ne le peut pas, aucun des deux n'est restauré à l'aide du processus de restauration rapide. Dans ce cas, vous pouvez choisir une restauration basée sur des fichiers.
+
+Par ailleurs, vous devez tenir compte des points suivants concernant la restauration de bases de données :
+
+* SnapManager ne restaure jamais les journaux d'archivage ou les journaux de reprise, mais monte la sauvegarde des fichiers journaux d'archivage et les utilise pour la restauration.
+* SnapManager ne restaure jamais les fichiers de contrôle à l'aide de la restauration du volume.
+* Pour restaurer les fichiers de contrôle et les fichiers de données, SnapManager effectue la restauration en deux étapes.
++
+SnapManager restaure d'abord les fichiers de contrôle, puis les fichiers de données.
+
+* Si SnapManager trouve des fichiers temporaires dans le même volume que les fichiers d'espace de table standard, il n'est pas nécessaire d'exécuter un remplacement pour effectuer une restauration au niveau du volume.
++
+Après une restauration de volume, l'espace de stockage TEMP est remis en ligne.
+
+
+
+SnapManager pour SAP et l’interface BACKINT utilisent la même logique pour déterminer quel mécanisme de restauration peut être utilisé. Toutes les méthodes de restauration peuvent être utilisées si la sauvegarde a été effectuée avec SnapManager pour SAP ou l'interface BACKINT, et si la restauration est effectuée via SnapManager pour SAP ou l'interface BACKINT.
+
+*Informations connexes*
+
+http://mysupport.netapp.com/["Documentation sur le site de support NetApp : mysupport.netapp.com"]

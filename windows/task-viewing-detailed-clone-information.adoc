@@ -1,0 +1,40 @@
+---
+permalink: windows/task-viewing-detailed-clone-information.html 
+sidebar: sidebar 
+keywords: view, detail, information, specific, clone, show, command 
+summary: 'Vous pouvez afficher des informations détaillées sur un clone spécifique à l"aide de la commande clone show.' 
+---
+= Affichage des informations détaillées sur les clones
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez afficher des informations détaillées sur un clone spécifique à l'aide de la commande clone show.
+
+La commande clone show affiche les informations suivantes :
+
+* Cloner l'identifiant système et l'ID de clone
+* État de l'opération de clonage
+* Créer une date ou une heure de début et de fin par le clone
+* Cloner l'étiquette
+* Commentaire sur le clone
+* Etiquette et ID de sauvegarde
+* Base de données source
+* Sauvegarder les heures de début et de fin
+* Nom de la base de données, espaces de stockage et fichiers de données
+* Nom d'hôte et systèmes de fichiers contenant des fichiers de données
+* Volumes du système de stockage et copies Snapshot qui sauvegardent le clone
+
+
+.Étape
+. Saisissez la commande suivante :
++
+`smsap clone show -profile profile_name [-label label | -idguid]`
+
+
+
+*Informations connexes*
+
+xref:reference-the-smosmsapclone-show-command.adoc[La commande smsap clone show]

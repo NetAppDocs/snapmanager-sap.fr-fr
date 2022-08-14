@@ -1,0 +1,21 @@
+---
+permalink: windows/task-customize-the-email-subject-for-an-existing-profile.html 
+sidebar: sidebar 
+keywords: snapmanager, enable, customize, email, subject, pattern, exist, profile, applicable, update 
+summary: 'SnapManager vous permet de personnaliser le modèle d"objet d"un e-mail pour un profil existant en mettant à jour ce profil. Ce modèle d"objet personnalisé est applicable uniquement au profil mis à jour.' 
+---
+= Personnalisez l'objet de l'e-mail pour un profil existant
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager vous permet de personnaliser le modèle d'objet d'un e-mail pour un profil existant en mettant à jour ce profil. Ce modèle d'objet personnalisé est applicable uniquement au profil mis à jour.
+
+.Étape
+. Saisissez la commande suivante :
++
+`*smsap profile update -profile _profile_ [-profile -password _profile_password_][-database -dbname _db_dbname_ -host _db_host_ [-sid _db_sid_] [-login -username _db_username_ -password _db_password_ -port _db_port_]] [{-rman{-controlfile | {-login  -username _rman_username_ -password  _rman_password_ -tnsname  _rman_tnsname_}}} | -remove-rman] [-retain [-hourly [-count _n_] [-duration _m_]] [-daily [-count _n_] [-duration _m_]] [-weekly [-count _n_] [-duration _m_]] [-monthly [-count _n_] [-duration _m_]]] [-comment _comment_][-snapname -pattern _pattern_][[-protect [-protection-policy _policy_name_]]| [[-noprotect]] [-notification [-success -email _email_address1_, _email_address2_ -subject _subject_pattern_] [-failure -email _email_address1_, _email_address2_ -subject _subject_pattern_]]*`
+
+

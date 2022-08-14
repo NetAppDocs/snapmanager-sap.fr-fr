@@ -1,0 +1,16 @@
+---
+permalink: windows/concept-performing-management-operations.html 
+sidebar: sidebar 
+keywords: perform, management, task, set, up, configure, snapmanager, manage, normal, operation, restore, clone 
+summary: Vous pouvez effectuer des tâches de gestion après avoir configuré et configuré SnapManager. Ces tâches vous permettent de gérer les opérations normales qui vont au-delà des sauvegardes, des restaurations et du clonage. 
+---
+= Exécution des opérations de gestion
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez effectuer des tâches de gestion après avoir configuré et configuré SnapManager. Ces tâches vous permettent de gérer les opérations normales qui vont au-delà des sauvegardes, des restaurations et du clonage.
+
+Les administrateurs peuvent effectuer des opérations via l'interface utilisateur graphique ou l'interface de ligne de commande.

@@ -1,0 +1,92 @@
+---
+permalink: windows/reference-the-smosmsapbackup-unmount-command.html 
+sidebar: sidebar 
+keywords: run, backup, unmount, command, smsap 
+summary: Vous pouvez exécuter la commande backup unmount pour démonter une sauvegarde. 
+---
+= La commande smsap backup unshunshunt
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez exécuter le `backup unmount` commande permettant de démonter une sauvegarde.
+
+
+
+== Syntaxe
+
+[listing]
+----
+
+smsap backup unmount
+-profile profile_name
+[-label label [-data | -archivelogs] | [-id id]
+[-force]
+[-dump]
+[-quiet | -verbose]
+----
+
+
+== Paramètres
+
+* *`-profile _profile_name_`*
++
+Indique le profil pour lequel vous souhaitez démonter une sauvegarde. Le profil contient l'identifiant de la base de données et d'autres informations sur la base de données.
+
+* *`-id _id_`*
++
+Démonte la sauvegarde avec le GUID spécifié. Le GUID est généré par SnapManager lors de la création d'une sauvegarde. Vous pouvez utiliser le `smsap backup list` Commande pour afficher le GUID de chaque sauvegarde.
+
+* *`-label _label_`*
++
+Démonte la sauvegarde avec l'étiquette spécifiée.
+
+* *`-data`*
++
+Spécifie les fichiers de données.
+
+* *`-archivelogs`*
++
+Spécifie les fichiers journaux d'archive.
+
+* *`-dump`*
++
+Collecte les fichiers de vidage après une opération de démontage réussie ou ayant échoué.
+
+* *`-force`*
++
+Démonte la sauvegarde, même s'il y a des problèmes lors de la libération des ressources associées à la sauvegarde. SnapManager tente de démonter la sauvegarde et de nettoyer les ressources associées. Le journal indique que l'opération de démontage a réussi, mais vous devrez peut-être nettoyer manuellement les ressources en cas d'erreurs dans le journal.
+
+* *`-quiet`*
++
+Affiche uniquement les messages d'erreur dans la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* *`-verbose`*
++
+Affiche les messages d'erreur, d'avertissement et d'information dans la console.
+
+
+
+
+
+== Exemple
+
+Voici un exemple d'opération de démontage :
+
+[listing]
+----
+# smsap backup unmount -label test -profile SALES1 -verbose
+----
+[listing]
+----
+[INFO ]: SMSAP-13051: Process PID=9788
+[INFO ]: SMSAP-13036: Starting operation Backup Unmount on host hadley.domain.private
+[INFO ]: SMSAP-13036: Starting operation Backup Unmount on host hadley.domain.private
+[INFO ]: SMSAP-13046: Operation GUID 8abc015738849a3d0138849a43900001 starting on Profile FAS_P1
+[INFO ]: SD-00031: Beginning to disconnect filesystem(s) [C:\SnapManager_auto_mounts\H-2012071400592312_0, C:\SnapManager_auto_mounts\I-2012071400592328_0].
+[INFO ]: SD-00032: Finished disconnecting filesystem(s) [C:\SnapManager_auto_mounts\H-2012071400592312_0, C:\SnapManager_auto_mounts\I-2012071400592328_0].
+[INFO ]: SMSAP-13048: Backup Unmount Operation Status: SUCCESS
+[INFO ]: SMSAP-13049: Elapsed Time: 0:07:26.754
+----

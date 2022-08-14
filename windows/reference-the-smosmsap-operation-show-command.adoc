@@ -1,0 +1,63 @@
+---
+permalink: windows/reference-the-smosmsap-operation-show-command.html 
+sidebar: sidebar 
+keywords: run, operation, show, command, list, summary, information, profile, client, user, pc, smsap 
+summary: 'Vous pouvez exécuter la commande opération show pour lister les informations récapitulatives de toutes les opérations effectuées sur le profil spécifié. La sortie répertorie l"utilisateur client (l"utilisateur pour l"ordinateur client) et l"utilisateur effectif (l"utilisateur dans SnapManager qui est valide sur l"hôte sélectionné).' 
+---
+= Commande smsap opération show
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez exécuter le `operation show` commande pour lister les informations récapitulatives de toutes les opérations effectuées sur le profil spécifié. La sortie répertorie l'utilisateur client (l'utilisateur pour l'ordinateur client) et l'utilisateur effectif (l'utilisateur dans SnapManager qui est valide sur l'hôte sélectionné).
+
+
+
+== Syntaxe
+
+[listing]
+----
+
+smsap operation show
+-profile profile_name
+[-label label | -id id]
+[-quiet | -verbose]
+----
+
+
+== Paramètres
+
+* *`-profile _profile_name_`*
++
+Spécifie le nom du profil. Ce nom peut comporter jusqu'à 30 caractères et doit être unique au sein de l'hôte.
+
+* *`-label _label_`*
++
+Spécifie le libellé de l'opération.
+
+* *`-id _id_`*
++
+Spécifie l'identifiant de l'opération.
+
+* *`-quiet`*
++
+Facultatif : affiche uniquement les messages d'erreur dans la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* *`-verbose`*
++
+Facultatif : affiche les messages d'erreur, d'avertissement et d'information dans la console.
+
+
+
+
+
+== Exemple
+
+La ligne de commande suivante affiche des informations détaillées sur une opération :
+
+[listing]
+----
+smsap operation show -id 8ac861781d0ac992011d0ac999680001  -profile CER
+----

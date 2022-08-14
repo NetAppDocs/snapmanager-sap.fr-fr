@@ -1,0 +1,198 @@
+---
+permalink: unix-administration/task-restore-backups-on-primary-storage.html 
+sidebar: sidebar 
+keywords: backup, restore, command, database, primary, storage, restoring 
+summary: Vous pouvez utiliser la commande backup restore pour restaurer une sauvegarde de base de données sur le stockage primaire. 
+---
+= Restaurez les sauvegardes sur le stockage primaire
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez utiliser le `backup restore` commande permettant de restaurer une sauvegarde de base de données sur le stockage primaire.
+
+*À propos de cette tâche*
+
+SnapManager tente d'effectuer une restauration rapide basée sur les volumes par défaut et fournit les informations de vérification d'éligibilité. Vous pouvez remplacer certaines vérifications d'admissibilité, si nécessaire. Si vous êtes certain qu'une sauvegarde ne peut pas être effectuée à l'aide d'une restauration rapide, vous pouvez désactiver la vérification d'éligibilité à la restauration rapide et effectuer une restauration basée sur un fichier.
+
+Vous pouvez utiliser le `backup restore` Options de commande pour indiquer si SnapManager doit restaurer tout ou partie de la sauvegarde. SnapManager vous permet également de restaurer les fichiers de contrôle ainsi que les fichiers de données ou les espaces de stockage à partir des sauvegardes, lors d'une seule opération utilisateur. Vous pouvez inclure `-controlfiles` avec `-complete` pour restaurer les fichiers de contrôle ainsi que les espaces de stockage et les fichiers de données.
+
+Vous pouvez sélectionner l'une des options suivantes pour restaurer la sauvegarde :
+
+[cols="1a,1a"]
+|===
+| Si vous voulez restaurer... | Utiliser... 
+
+
+ a| 
+Sauvegarde complète avec tous les espaces de stockage et fichiers de données
+ a| 
+`-complete`
+
+
+
+ a| 
+La liste des tablespaces spécifiques
+ a| 
+`-tablespaces`
+
+
+
+ a| 
+Fichiers de données spécifiques
+ a| 
+`-files`
+
+
+
+ a| 
+Les fichiers de contrôle uniquement
+ a| 
+`-controlfiles`
+
+
+
+ a| 
+Espaces de stockage, fichiers de données et fichiers de contrôle
+ a| 
+`-complete -controlfiles`
+
+|===
+Vous pouvez également restaurer la sauvegarde à partir d'un autre emplacement en spécifiant `-restorespec`.
+
+Si vous incluez `-recover`, vous pouvez restaurer la base de données à :
+
+* La dernière transaction effectuée dans la base de données (tous les journaux)
+* Une date et une heure précises
+* Un numéro SCN (Oracle System change Number) spécifique
+* L'heure de la sauvegarde (pas de journaux)
+* Restauration uniquement
+
+
+
+NOTE: La récupération de la date et de l'heure et la récupération SCN sont des restaurations ponctuelles.
+
+SnapManager (3.2 ou version ultérieure) permet de restaurer automatiquement les sauvegardes de bases de données restaurées à l'aide des fichiers journaux d'archivage. Même si les fichiers journaux d'archives sont disponibles à l'emplacement externe, si vous spécifiez le `-recover-from-location option`, SnapManager utilise les fichiers journaux d'archives de l'emplacement externe pour restaurer les sauvegardes de la base de données restaurée.
+
+SnapManager fournit l'emplacement externe à Oracle. Cependant, Oracle n'identifie pas les fichiers de la destination externe. Ce comportement est remarqué dans la destination de la zone de récupération flash. Ce sont des problèmes avec Oracle et la solution consiste à toujours sauvegarder les fichiers journaux d'archive dans ces dispositions de base de données.
+
+Si un SCN ou une date non cohérent est fourni, la récupération s'arrête au dernier point cohérent récupéré avec le message d'erreur `Recovery succeeded, but insufficient`. Vous devez effectuer manuellement une restauration à un état cohérent.
+
+Pour la restauration lorsqu'aucun journal n'est appliqué, SnapManager récupère jusqu'au dernier SCN du dernier fichier journal d'archivage créé pendant la sauvegarde. Si la base de données est cohérente jusqu'à ce SCN, la base de données sera ouverte avec succès. Si la base de données n'est pas cohérente à ce stade, SnapManager tente toujours d'ouvrir la base de données, qui sera ouverte avec succès, si la base de données est déjà cohérente.
+
+
+NOTE: SnapManager ne prend pas en charge la récupération des sauvegardes de journaux d'archive uniquement.
+
+Si le processus de transfert du journal d'archivage sur un point de montage NFS n'est pas compatible avec un système de stockage compatible Snapshot, SnapManager vous permet de restaurer les sauvegardes de base de données restaurées à l'aide du profil. Avant d'effectuer des opérations SnapManager sur un stockage non compatible avec les snapshots, vous devez ajouter les destinations pour `archivedLogs.exclude` dans `smsap.config`.
+
+Vous devez vous assurer que vous définissez le paramètre exclure avant de créer un profil. La création du profil a réussi uniquement après avoir défini le paramètre exclude dans le fichier de configuration SnapManager.
+
+Si la sauvegarde est déjà montée, SnapManager ne monte pas à nouveau la sauvegarde et utilise la sauvegarde déjà montée. Si la sauvegarde est montée par un autre utilisateur et si l'utilisateur actuel n'a pas accès à la sauvegarde précédemment montée, les autres utilisateurs doivent fournir les autorisations. Tous les fichiers journaux d'archives ont des autorisations de lecture pour les propriétaires de groupes ; l'utilisateur actuel peut ne pas obtenir les autorisations, si la sauvegarde est montée par un autre groupe d'utilisateurs. Les utilisateurs peuvent donner des autorisations aux fichiers journaux d'archives montés manuellement, puis réessayer la restauration ou la récupération.
+
+Récupération des sauvegardes de bases de données dans un environnement RAC (Real application clusters)
+
+Lors de la restauration des sauvegardes de bases de données dans un environnement RAC, lorsque le fichier journal d'archives requis est introuvable, les requêtes Oracle pour les fichiers journaux d'archives et les commutations entre un thread différent et un numéro de changement dans la base de données RAC. SnapManager pour SAP tente de restaurer la base de données au meilleur effort. La restauration réussie des sauvegardes de bases de données dans l'environnement RAC dépend de la disponibilité des fichiers journaux d'archive dans les sauvegardes.
+
+Le mécanisme de récupération recommandé pour la base de données RAC est le suivant :
+
+* Assurez-vous que tous les fichiers journaux d'archives sont disponibles dans les sauvegardes ou que tous les fichiers journaux d'archives sont disponibles dans la seule destination du journal d'archivage externe.
+* Si plusieurs destinations de journaux d'archives externes sont fournies, vous pouvez fournir le chevauchement des fichiers journaux d'archive tout en spécifiant les destinations de journal d'archivage externe pour tous les threads.
++
+Par exemple, l'emplacement du journal d'archivage externe - je peux avoir 1 à 100 fichiers journaux d'archive, l'emplacement du journal d'archivage externe - II peut avoir 98 à 200 fichiers journaux d'archive, et l'emplacement du journal d'archivage externe - III peut avoir 198 à 300 fichiers journaux d'archive.
+
+* Lors de l'élagage des fichiers journaux d'archive, au lieu de supprimer tous les fichiers journaux d'archive, vous pouvez supprimer les fichiers journaux d'archive jusqu'à SCN ou date afin que les sauvegardes puissent avoir les mêmes fichiers journaux d'archive.
+
+
+Vous pouvez spécifier l'option -dump comme paramètre facultatif pour collecter les fichiers de vidage après l'opération de restauration réussie ou ayant échoué.
+
+.Étapes
+. Saisissez la commande suivante :
++
+`*smsap backup restore -profile _profile_name_ -label _label_ -complete-recover -alllogs [-recover-from-location _path_ [_,path2_]]-dump-verbose*`
+
++
+*Exemple*
+
++
+`*smsap backup restore -profile targetdb1_prof1 -label full_bkup_sales_nov_08 - complete -recover -alllogs -verbose*`
+
+. Pour restaurer des données pour différents scénarios, effectuez l'une des opérations suivantes :
++
+[cols="2a,4a"]
+|===
+| Si vous voulez restaurer... | Exemple de commande 
+
+
+ a| 
+*Base de données complète sans fichiers de contrôle et récupération à un numéro SCN particulier (3794392). Dans ce cas, les fichiers de contrôle actuels existent, mais tous les fichiers de données sont endommagés ou perdus. Restaurez et récupérez la base de données d'une sauvegarde en ligne complète existante à un point immédiatement avant ce SCN.*
+ a| 
+`*smsap backup restore -profile targetdb1_prof1 -label full_bkup_sales_nov_08 -complete -recover -until 3794392 -verbose*`
+
+
+
+ a| 
+*Base de données complète sans fichiers de contrôle et récupérer jusqu'à une date et une heure.*
+ a| 
+`*smsap backup restore -profile targetdb1_prof1 -label full_bkup_sales_nov_08 -complete -recover -until 2008-09-15:15:29:23 -verbose*`
+
+
+
+ a| 
+*Base de données complète sans fichiers de contrôle et récupérer jusqu'à une donnée et un temps. Dans ce cas, les fichiers de contrôle actuels existent, mais tous les fichiers de données sont endommagés ou perdus ou une erreur logique s'est produite après un moment donné. Restaurez et récupérez la base de données d'une sauvegarde en ligne complète existante à une date et une heure immédiatement avant le point d'échec.*
+ a| 
+`*smsap backup restore -profile targetdb1_prof1 -label full_bkup_sales_nov_08 -complete -recover -until "2008-09-15:15:29:23" -verbose*`
+
+
+
+ a| 
+*Base de données partielle (un ou plusieurs fichiers de données) sans fichiers de contrôle et récupération à l'aide de tous les journaux disponibles. Dans ce cas, les fichiers de contrôle actuels existent, mais un ou plusieurs fichiers de données sont endommagés ou perdus. Restaurez ces fichiers de données et récupérez la base de données à partir d'une sauvegarde en ligne complète existante en utilisant tous les journaux disponibles.*
+ a| 
+`*smsap backup restore -profile targetdb1_prof1 -label full_bkup_sales_nov_08 -files /oracle/FLA/sapdata1/sr3_1/sr3.data1 /oracle/FLA/sapdata1/sr3_2/sr3.data2 /oracle/FLA/sapdata1/sr3_3/sr3.data3 -recover -alllogs -verbose (where "FLA" is the <SID>*`
+
+
+
+ a| 
+*Base de données partielle (un ou plusieurs espaces de stockage) sans fichiers de contrôle et récupération à l'aide de tous les journaux disponibles. Dans ce cas, les fichiers de contrôle actuels existent, mais un ou plusieurs espaces de stockage sont supprimés ou l'un des autres fichiers de données appartenant à l'espace table est endommagé ou perdu. Restaurez ces espaces de stockage et récupérez la base de données à partir d'une sauvegarde en ligne complète existante en utilisant tous les journaux disponibles.*
+ a| 
+`*smsap backup restore -profile targetdb1_prof1 -label full_bkup_sales_nov_08 -tablespaces users -recover -alllogs -verbose*`
+
+
+
+ a| 
+*Uniquement les fichiers de contrôle et de récupération à l'aide de tous les journaux disponibles. Dans ce cas, les fichiers de données existent, mais tous les fichiers de contrôle sont endommagés ou perdus. Restaurez uniquement les fichiers de contrôle et récupérez la base de données à partir d'une sauvegarde en ligne complète existante en utilisant tous les journaux disponibles.*
+ a| 
+`*smsap backup restore -profile targetdb1_prof1 -label full_bkup_sales_nov_08 -controlfiles -recover -alllogs -verbose*`
+
+
+
+ a| 
+*Base de données complète sans fichiers de contrôle et récupération à l'aide des fichiers de contrôle de sauvegarde et de tous les journaux disponibles. Dans ce cas, tous les fichiers de données sont endommagés ou perdus. Restaurez uniquement les fichiers de contrôle et récupérez la base de données à partir d'une sauvegarde en ligne complète existante en utilisant tous les journaux disponibles.*
+ a| 
+`*smsap backup restore -profile targetdb1_prof1 -label full_bkup_sales_nov_08 -complete -using-backup-controlfile -recover -alllogs -verbose*`
+
+
+
+ a| 
+*Récupérez la base de données restaurée à l'aide des fichiers journaux d'archive à partir de l'emplacement du journal d'archives externe.*
+ a| 
+`*smsap backup restore -profile targetdb1_prof1 -label full_bkup_sales_nov_08 -complete -using-backup-controlfile -recover -alllogs -recover-from-location /user1/archive -verbose*`
+
+|===
+. Vérifiez les vérifications d'éligibilité de restauration rapide.
++
+*Exemple*
+
++
+Saisissez la commande suivante :
+
++
+`*smsap backup restore -profile targetdb1_prof1 -label full_bkup_sales_nov_08 -complete -recover -alllogs -recover-from-location /user1/archive -verbose*`
+
+. Si la vérification d'éligibilité indique qu'aucune vérification obligatoire n'a échoué et si certaines conditions peuvent être remplacées, et si vous souhaitez poursuivre le processus de restauration, entrez les informations suivantes :
++
+`*backup restore -fast override*`
+
+. Spécifiez les emplacements des journaux d'archives externes à l'aide de l' `-recover-from-location` option.
+

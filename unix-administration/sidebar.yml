@@ -1,0 +1,706 @@
+---
+section: unix-administration
+title: Administration pour UNIX
+entries:
+- title: Présentation du produit
+  url: "/unix-administration/reference-smsap-isg-product-overview.html"
+  entries:
+  - title: Créer des sauvegardes à l'aide de copies Snapshot
+    url: "/unix-administration/concept-create-backups-using-snapshot-copies.html"
+  - title: Pourquoi ne pas nettoyer les fichiers journaux d'archive
+    url: "/unix-administration/concept-why-you-should-prune-archive-log-files.html"
+  - title: Consolidation des journaux d'archivage
+    url: "/unix-administration/concept-archive-log-consolidation.html"
+  - title: Restauration complète ou partielle des bases de données
+    url: "/unix-administration/concept-full-or-partial-restoration-of-the-database.html"
+  - title: Vérifiez l'état de la sauvegarde
+    url: "/unix-administration/concept-verify-backup-status.html"
+  - title: Clones de sauvegarde de la base de données
+    url: "/unix-administration/concept-clone-database-backups.html"
+  - title: Effectuer le suivi des détails et générer des rapports
+    url: "/unix-administration/concept-track-details-and-produce-reports.html"
+  - title: En est-il des référentiels
+    url: "/unix-administration/concept-what-repositories-are.html"
+  - title: Quels sont les profils
+    url: "/unix-administration/concept-what-profiles-are.html"
+  - title: Quels sont les États des opérations SnapManager
+    url: "/unix-administration/concept-what-snapmanager-operation-states-are.html"
+  - title: Comment SnapManager assure la sécurité
+    url: "/unix-administration/concept-snapmanager-security.html"
+  - title: Accédez à l'aide en ligne et imprimez-la
+    url: "/unix-administration/task-access-and-print-online-help.html"
+  - title: Configurations générales recommandées pour les bases de données et les
+      configurations de stockage
+    url: "/unix-administration/concept-general-layout-and-configuration.html"
+    entries:
+    - title: Définissez le domicile de la base de données à l'aide du fichier oratab
+      url: "/unix-administration/task-define-the-database-home-with-the-oratab-file.html"
+    - title: Conditions requises pour utiliser des bases de données RAC avec SnapManager
+      url: "/unix-administration/concept-requirements-for-using-rac-databases-with-snapmanager.html"
+    - title: Périphériques de partition pris en charge
+      url: "/unix-administration/reference-supported-partition-devices.html"
+    - title: Conditions requises pour l'utilisation de bases de données avec NFS et
+        SnapManager
+      url: "/unix-administration/concept-requirements-for-using-databases-with-nfs-and-snapmanager.html"
+    - title: Exemples de disposition de volumes de base de données
+      url: "/unix-administration/reference-sample-database-volume-layouts.html"
+  - title: Restrictions lors de l'utilisation de SnapManager
+    url: "/unix-administration/concept-limitations.html"
+    entries:
+    - title: Limitations de SnapManager pour clustered Data ONTAP
+      url: "/unix-administration/concept-snapmanger-limitations-for-clustered-data-ontap.html"
+    - title: Limites relatives à la base de données Oracle
+      url: "/unix-administration/concept-limitations-related-to-oracle-database.html"
+      entries:
+      - title: Versions obsolètes de la base de données Oracle
+        url: "/unix-administration/concept-deprecated-versions-of-oracle-database.html"
+    - title: Restrictions de gestion des volumes
+      url: "/unix-administration/concept-volume-management-restrictions.html"
+- title: Configuration d'SnapManager en cours
+  url: "/unix-administration/concept-configuring-snapmanager-for-oraclesap.html"
+  entries:
+  - title: Paramètres de configuration SnapManager
+    url: "/unix-administration/reference-snapmanager-configuration-parameters.html"
+    entries:
+    - title: Modifiez les paramètres de configuration
+      url: "/unix-administration/task-edit-the-configuration-parameters.html"
+  - title: Configurer SnapDrive pour UNIX pour un environnement Veritas SFRAC actif/actif
+    url: "/unix-administration/task-configure-snapdrive-in-an-active-active-unix-environment.html"
+  - title: Configurer SnapManager pour prendre en charge l'environnement Veritas SFRAC
+    url: "/unix-administration/task-configure-snapmanager-for-oracle-with-veritas-file-system.html"
+- title: Sécurité et gestion des identifiants
+  url: "/unix-administration/concept-managing-security-and-credentials.html"
+  entries:
+  - title: Qu'est-ce que l'authentification utilisateur
+    url: "/unix-administration/concept-what-user-authentication-is.html"
+  - title: À propos du contrôle d'accès basé sur des rôles
+    url: "/unix-administration/concept-about-role-based-access-control.html"
+    entries:
+    - title: Activation du contrôle d'accès basé sur des rôles
+      url: "/unix-administration/task-enable-role-based-access-control.html"
+    - title: Définissez des fonctions et des rôles de contrôle d'accès basé sur des
+        rôles
+      url: "/unix-administration/task-set-role-based-access-control-capabilities-and-roles.html"
+  - title: Stocker des mots de passe cryptés pour les scripts personnalisés
+    url: "/unix-administration/task-store-encrypted-passwords-for-custom-scripts.html"
+  - title: Autoriser l'accès au référentiel
+    url: "/unix-administration/task-authorize-user-access-to-the-repository.html"
+  - title: Autoriser l'accès aux profils
+    url: "/unix-administration/task-authorize-user-access-to-profiles.html"
+  - title: Afficher les informations d'identification de l'utilisateur
+    url: "/unix-administration/task-view-user-credentials.html"
+  - title: Effacer les informations d'identification utilisateur pour tous les hôtes,
+      référentiels et profils
+    url: "/unix-administration/task-clear-user-credentials-for-all-hosts-repositories-and-profiles.html"
+    entries:
+    - title: Définissez les informations d'identification après avoir effacé le cache
+        des informations d'identification
+      url: "/unix-administration/task-set-credentials-after-clearing-credential-cache.html"
+  - title: Supprimer les informations d'identification des ressources individuelles
+    url: "/unix-administration/task-delete-credentials-for-individual-resources.html"
+    entries:
+    - title: Supprimer les informations d'identification des utilisateurs pour les
+        référentiels
+      url: "/unix-administration/task-delete-user-credentials-for-repositories.html"
+    - title: Supprimer les informations d'identification utilisateur pour les hôtes
+      url: "/unix-administration/task-delete-user-credentials-for-hosts.html"
+    - title: Supprimer les informations d'identification des profils
+      url: "/unix-administration/task-delete-user-credentials-for-profiles.html"
+- title: Gestion des profils pour des sauvegardes efficaces
+  url: "/unix-administration/concept-managing-profiles-for-efficient-backups.html"
+  entries:
+  - title: Créer des profils
+    url: "/unix-administration/task-create-profiles.html"
+  - title: Dénomination de la copie Snapshot
+    url: "/unix-administration/concept-snapshot-copy-naming.html"
+  - title: Renommer les profils
+    url: "/unix-administration/task-rename-profiles.html"
+  - title: Modifier les mots de passe du profil
+    url: "/unix-administration/task-change-profile-passwords.html"
+  - title: Réinitialisez le mot de passe du profil
+    url: "/unix-administration/task-reset-profile-password.html"
+  - title: Autoriser l'accès aux profils
+    url: "/unix-administration/task-authorize-user-access-to-profiles.html"
+  - title: Vérifiez les profils
+    url: "/unix-administration/task-verify-profiles.html"
+  - title: Mettre à jour les profils
+    url: "/unix-administration/task-update-profiles.html"
+  - title: Supprimer des profils
+    url: "/unix-administration/task-delete-profiles.html"
+- title: Sauvegarde des bases de données
+  url: "/unix-administration/concept-database-backup-management.html"
+  entries:
+  - title: Qu'est-ce que les sauvegardes de bases de données SnapManager
+    url: "/unix-administration/concept-what-snapmanager-database-backups-are.html"
+  - title: Quelles sont les sauvegardes complètes et partielles
+    url: "/unix-administration/concept-what-full-and-partial-backups-are.html"
+    entries:
+    - title: Types de sauvegarde et nombre de copies Snapshot
+      url: "/unix-administration/concept-backup-types-and-the-number-of-snapshot-copies.html"
+    - title: Sauvegardes complètes en ligne
+      url: "/unix-administration/concept-full-online-backups.html"
+    - title: Sauvegardes partielles en ligne
+      url: "/unix-administration/concept-partial-online-backups.html"
+    - title: Exemples d'opérations de sauvegarde, de restauration et de récupération
+      url: "/unix-administration/reference-examples-of-backup-restore-and-recover-operations.html"
+  - title: À propos du traitement des fichiers de contrôle et des fichiers journaux
+      d'archives
+    url: "/unix-administration/concept-about-control-file-and-archive-log-file-handling.html"
+  - title: La planification des sauvegardes de la base de données
+    url: "/unix-administration/concept-what-database-backup-scheduling-is.html"
+  - title: Créer des sauvegardes de bases de données
+    url: "/unix-administration/task-create-database-backups.html"
+    entries:
+    - title: Prune des fichiers journaux d'archive
+      url: "/unix-administration/task-prune-archive-log-files.html"
+    - title: Consolider les sauvegardes des journaux d'archivage
+      url: "/unix-administration/task-consolidate-archive-log-backups.html"
+    - title: Planification de l'élagage du fichier journal d'archive
+      url: "/unix-administration/task-schedule-archive-log-file-pruning.html"
+    - title: Protéger les sauvegardes des journaux d'archivage
+      url: "/unix-administration/task-protect-archive-log-backups.html"
+  - title: Qu'est-ce que AutoSupport
+    url: "/unix-administration/concept-what-autosupport-is.html"
+    entries:
+    - title: Ajoutez des systèmes de stockage de clustered Data ONTAP à l'hôte du
+        serveur SnapManager
+      url: "/unix-administration/task-add-storage-systems-to-the-snapmanager-server-host.html"
+    - title: Activez AutoSupport dans SnapManager
+      url: "/unix-administration/task-enable-autosupport-in-snapmanager.html"
+    - title: Désactivez AutoSupport dans SnapManager
+      url: "/unix-administration/task-disable-autosupport-in-snapmanager.html"
+  - title: Vérifier les sauvegardes de base de données
+    url: "/unix-administration/task-verify-database-backups.html"
+  - title: Modifier la stratégie de conservation des sauvegardes
+    url: "/unix-administration/task-change-the-backup-retention-policy.html"
+    entries:
+    - title: Conservation des sauvegardes indéfiniment
+      url: "/unix-administration/task-retain-backups-forever.html"
+    - title: Attribuez des sauvegardes avec une classe de rétention spécifique
+      url: "/unix-administration/task-assign-backups-with-a-specific-retention-class.html"
+    - title: Modifiez le comportement par défaut de la stratégie de rétention des
+        médias
+      url: "/unix-administration/task-change-the-retention-policy-default-behavior.html"
+    - title: Libérer ou supprimer des sauvegardes exonérées de règles de conservation
+      url: "/unix-administration/task-free-or-delete-retention-policy-exempt-backups.html"
+  - title: Afficher la liste des sauvegardes
+    url: "/unix-administration/task-view-a-list-of-backups.html"
+  - title: Afficher les détails de la sauvegarde
+    url: "/unix-administration/task-view-backup-details.html"
+  - title: Montez les sauvegardes
+    url: "/unix-administration/task-mount-backups.html"
+  - title: Démonter les sauvegardes
+    url: "/unix-administration/task-unmount-backups.html"
+  - title: Des sauvegardes gratuites
+    url: "/unix-administration/task-free-backups.html"
+  - title: Supprimer les sauvegardes
+    url: "/unix-administration/task-delete-backups.html"
+- title: Planification des sauvegardes de base de données
+  url: "/unix-administration/concept-scheduling-database-backups.html"
+  entries:
+  - title: Créer des planifications de sauvegarde
+    url: "/unix-administration/task-create-backup-schedules.html"
+  - title: Mettre à jour un programme de sauvegarde
+    url: "/unix-administration/task-update-a-backup-schedule.html"
+  - title: Afficher la liste des opérations planifiées
+    url: "/unix-administration/task-view-a-list-of-scheduled-operations.html"
+  - title: Suspendre les planifications de sauvegarde
+    url: "/unix-administration/task-suspend-backup-schedules.html"
+  - title: Reprendre les planifications de sauvegarde
+    url: "/unix-administration/task-resume-backup-schedules.html"
+  - title: Supprimer les planifications de sauvegarde
+    url: "/unix-administration/task-delete-backup-schedules.html"
+- title: Restauration des sauvegardes de bases de données
+  url: "/unix-administration/concept-restoring-database-backup.html"
+  entries:
+  - title: Quelle est la restauration de la base de données
+    url: "/unix-administration/concept-what-database-restore-is.html"
+    entries:
+    - title: Instructions pour les procédures de restauration rapide
+      url: "/unix-administration/concept-when-can-you-use-fast-restore.html"
+      entries:
+      - title: Avantages et inconvénients de la restauration rapide
+        url: "/unix-administration/concept-advantages-and-disadvantages-of-using-fast-restore.html"
+    - title: Vérifications rapides de l'éligibilité à la restauration
+      url: "/unix-administration/concept-fast-restore-eligibility-checks.html"
+    - title: Restauration des sauvegardes
+      url: "/unix-administration/concept-backup-recovery.html"
+    - title: État de la base de données nécessaire au processus de restauration
+      url: "/unix-administration/concept-database-state-needed-for-restore-process.html"
+    - title: Quels sont les plans d'aperçu de restauration
+      url: "/unix-administration/concept-restore-preview-plans.html"
+  - title: Aperçu des informations de restauration de sauvegarde
+    url: "/unix-administration/task-preview-backup-restore-information.html"
+  - title: Restaurez vos sauvegardes à l'aide de la fonction de restauration rapide
+    url: "/unix-administration/task-restore-backups-using-fast-restore.html"
+  - title: Restaurez les sauvegardes à l'aide de Single File SnapRestore
+    url: "/unix-administration/task-restore-backup-using-single-file-snaprestore.html"
+  - title: Restaurez les sauvegardes sur le stockage primaire
+    url: "/unix-administration/task-restore-backups-on-primary-storage.html"
+  - title: Restaurez les fichiers à partir d'un autre emplacement
+    url: "/unix-administration/concept-restore-files-from-an-alternate-location.html"
+    entries:
+    - title: Vue d'ensemble de la restauration des sauvegardes à partir d'un autre
+        emplacement
+      url: "/unix-administration/concept-restore-backups-from-an-alternate-location-overview.html"
+      entries:
+      - title: Restauration des données à partir des fichiers
+        url: "/unix-administration/concept-restoration-of-the-data-from-files.html"
+      - title: Restauration des données à partir du système de fichiers
+        url: "/unix-administration/concept-restoration-of-the-data-from-file-systems.html"
+      - title: Restauration des données à partir des périphériques bruts
+        url: "/unix-administration/concept-restoration-of-the-data-from-raw-devices.html"
+    - title: Créer des spécifications de restauration
+      url: "/unix-administration/task-create-restore-specifications.html"
+    - title: Restaurez les sauvegardes à partir d'un autre emplacement
+      url: "/unix-administration/task-restore-backups-from-an-alternate-location.html"
+- title: Clonage des sauvegardes de base de données
+  url: "/unix-administration/concept-cloning-database-backup.html"
+  entries:
+  - title: Qu'est-ce que le clonage
+    url: "/unix-administration/concept-what-cloning-is.html"
+  - title: Méthodes de clonage
+    url: "/unix-administration/concept-cloning-methods.html"
+  - title: Création de spécifications de clonage
+    url: "/unix-administration/task-create-clone-specifications.html"
+    entries:
+    - title: Clonez des bases de données et utilisez des scripts de plug-ins personnalisés
+      url: "/unix-administration/task-clone-databases-and-using-custom-plugin-scripts.html"
+  - title: Clonage des bases de données à partir des sauvegardes
+    url: "/unix-administration/task-clone-databases-from-backups.html"
+  - title: Cloner les bases de données dans l'état actuel
+    url: "/unix-administration/task-clone-databases-in-the-current-state.html"
+  - title: Cloner les sauvegardes de bases de données sans réinstaller les logs
+    url: "/unix-administration/task-clone-database-backups-without-resetlogs.html"
+  - title: Considérations relatives au clonage d'une base de données vers un autre
+      hôte
+    url: "/unix-administration/concept-considerations-for-cloning-a-database-to-an-alternate-host.html"
+    entries:
+    - title: Cloner une base de données sur un autre hôte
+      url: "/unix-administration/task-clone-a-database-to-an-alternate-host.html"
+  - title: Afficher la liste des clones
+    url: "/unix-administration/task-view-a-list-of-clones.html"
+  - title: Affiche des informations détaillées sur les clones
+    url: "/unix-administration/task-view-detailed-clone-information.html"
+  - title: Supprimer les clones
+    url: "/unix-administration/task-delete-clones.html"
+  - title: Séparation d'un clone
+    url: "/unix-administration/concept-splitting-a-clone.html"
+    entries:
+    - title: Afficher une estimation de séparation de clones
+      url: "/unix-administration/task-view-clone-split-estimate.html"
+    - title: Séparer un clone sur un système de stockage primaire ou secondaire
+      url: "/unix-administration/task-split-a-clone-on-a-primary-or-secondary-storage.html"
+    - title: Afficher l'état du processus de fractionnement du clone
+      url: "/unix-administration/task-view-status-of-clone-split-process.html"
+    - title: Afficher le résultat du processus de fractionnement du clone
+      url: "/unix-administration/task-view-the-result-of-the-clone-split-process.html"
+    - title: Arrêter le processus de fractionnement du clone
+      url: "/unix-administration/task-stop-the-clone-split-process.html"
+    - title: Supprimer un profil
+      url: "/unix-administration/task-delete-profile.html"
+    - title: Détruire un profil
+      url: "/unix-administration/task-destroy-split-clone-and-associated-profile.html"
+    - title: Supprimer un cycle d'opération de fractionnement de clone d'une base
+        de données de référentiel
+      url: "/unix-administration/task-delete-a-clone-split-operation-cycle-from-a-repository-database.html"
+- title: Introduction à la protection des données dans SnapManager
+  url: "/unix-administration/concept-introduction-to-data-protection-in-snapmanager.html"
+  entries:
+  - title: Quelles sont les règles de protection
+    url: "/unix-administration/concept-what-protection-policies-are.html"
+  - title: Quels sont les États de protection
+    url: "/unix-administration/concept-what-protection-states-are.html"
+  - title: En quoi sont les pools de ressources
+    url: "/unix-administration/concept-what-resource-pools-are.html"
+  - title: Environ les différentes règles de protection
+    url: "/unix-administration/concept-about-different-protection-policies.html"
+  - title: Configuration et activation de la protection des données pilotée par des
+      règles
+    url: "/unix-administration/concept-configuring-and-enabling-policy-driven-data-protection.html"
+    entries:
+    - title: Configurez le serveur et SnapDrive de DataFabric Manager lorsque le RBAC
+        est activé
+      url: "/unix-administration/task-configure-snapdrive-when-rbac-is-enabled.html"
+    - title: Configurer SnapDrive lorsque le RBAC n'est pas activé
+      url: "/unix-administration/task-configure-snapdrive-when-rbac-is-not-enabled.html"
+    - title: Présentation de l'activation ou de la désactivation de la protection
+        des données dans le profil
+      url: "/unix-administration/concept-understanding-enabling-or-disabling-of-data-protection-in-profile.html"
+  - title: SnapManager conserve les sauvegardes sur le système de stockage local
+    url: "/unix-administration/concept-how-snapmanager-retains-backups-on-the-local-storage.html"
+  - title: Points à prendre en compte pour la protection des données
+    url: "/unix-administration/concept-prerequisites-for-data-protection.html"
+    entries:
+    - title: Licences requises pour la protection des données dans SnapManager
+      url: "/unix-administration/concept-licenses-required-for-data-protection.html"
+  - title: Protection des sauvegardes de bases de données sur des systèmes de stockage
+      secondaires ou tertiaires
+    url: "/unix-administration/task-protect-database-backups-on-secondary-storage.html"
+  - title: Restauration de sauvegardes protégées du système de stockage secondaire
+    url: "/unix-administration/concept-restoring-protected-backups-from-secondary-storage.html"
+    entries:
+    - title: Présentation des restaurations des sauvegardes protégées
+      url: "/unix-administration/concept-restores-of-protected-backups-overview.html"
+    - title: Restaurer les sauvegardes à partir du système de stockage secondaire
+      url: "/unix-administration/task-restore-backups-from-secondary-storage.html"
+  - title: Sauvegardes protégées par des clones
+    url: "/unix-administration/task-clone-protected-backups.html"
+- title: SnapManager for SAP utilise protection Manager pour protéger la sauvegarde
+    des bases de données
+  url: "/unix-administration/concept-snapmanager-for-oraclesnapmanager-for-sap-uses-protection-manager-to-protect-a-database-backup.html"
+  entries:
+  - title: Détails de la base de données cible
+    url: "/unix-administration/concept-details-of-the-target-database.html"
+  - title: Configuration et topologie du stockage primaire et secondaire
+    url: "/unix-administration/concept-primary-and-secondary-storage-configuration-and-topology.html"
+  - title: Programme de sauvegarde et stratégie de conservation
+    url: "/unix-administration/concept-backup-schedule-and-retention-strategy.html"
+  - title: Récapitulatif des workflows de sauvegarde des bases de données locales
+      et secondaires
+    url: "/unix-administration/concept-workflow-summary-for-local-and-secondary-database-backup.html"
+  - title: Configuration et exécution de la sauvegarde protégées
+    url: "/unix-administration/task-protected-backup-configuration-and-execution.html"
+    entries:
+    - title: Utilisez SnapManager pour SAP pour créer le profil de base de données
+        pour une sauvegarde locale
+      url: "/unix-administration/task-use-snapmanager-for-oraclesnapmanager-for-sap-to-create-the-database-profile-for-a-local-backup.html"
+    - title: Utilisez protection Manager pour configurer un pool de ressources secondaire
+      url: "/unix-administration/task-use-protection-manager-to-configure-a-secondary-resource-pool.html"
+    - title: Utilisez protection Manager pour configurer les planifications de sauvegarde
+        secondaires
+      url: "/unix-administration/task-use-protection-manager-to-configure-secondary-backup-schedules.html"
+    - title: Utilisez protection Manager pour configurer une stratégie de protection
+        de sauvegarde secondaire
+      url: "/unix-administration/task-use-protection-manager-to-configure-a-secondary-backup-protection-policy.html"
+    - title: Utilisez SnapManager pour SAP pour créer le profil de base de données
+        et affecter une règle de protection
+      url: "/unix-administration/task-use-snapmanager-for-oraclesnapmanager-for-sap-to-create-the-database-profile-and-assign-a-protection-policy.html"
+    - title: Protection Manager permet de provisionner le nouveau jeu de données
+      url: "/unix-administration/task-use-protection-manager-to-provision-the-new-dataset.html"
+    - title: Utilisez SnapManager pour SAP pour créer une sauvegarde protégée
+      url: "/unix-administration/task-use-snapmanager-for-oraclesnapmanager-for-sap-to-create-a-protected-backup.html"
+    - title: Utilisez SnapManager pour SAP pour confirmer la protection des sauvegardes
+      url: "/unix-administration/task-use-snapmanager-for-oraclesnapmanager-for-sapto-confirm-backup-protection.html"
+  - title: Restauration de base de données à partir de la sauvegarde
+    url: "/unix-administration/task-database-restore-from-backup.html"
+    entries:
+    - title: SnapManager for SAP permet de restaurer une sauvegarde locale sur le
+        stockage primaire
+      url: "/unix-administration/task-use-snapmanager-for-oraclesnapmanager-for-sapto-restore-a-local-backup-on-primary-storage.html"
+    - title: Utilisez SnapManager pour SAP pour restaurer les sauvegardes à partir
+        de systèmes de stockage secondaire
+      url: "/unix-administration/task-use-snapmanager-for-oraclesnapmanager-for-sap-to-restore-backups-from-secondary-storage.html"
+- title: Exécution des opérations de gestion
+  url: "/unix-administration/concept-performing-management-operations.html"
+  entries:
+  - title: Afficher une liste d'opérations
+    url: "/unix-administration/task-view-a-list-of-operations.html"
+  - title: Afficher les détails de l'opération
+    url: "/unix-administration/task-view-operation-details.html"
+  - title: Exécutez des commandes à partir d'un autre hôte
+    url: "/unix-administration/task-issue-commands-from-an-alternate-host.html"
+  - title: Vérifiez la version du logiciel SnapManager
+    url: "/unix-administration/task-check-the-snapmanager-software-version.html"
+  - title: Arrêtez le serveur hôte SnapManager
+    url: "/unix-administration/task-stop-the-snapmanager-host-server.html"
+  - title: Redémarrez le serveur hôte UNIX SnapManager
+    url: "/unix-administration/task-restart-the-snapmanager-unix-host-server.html"
+  - title: Désinstallez le logiciel d'un hôte UNIX
+    url: "/unix-administration/task-uninstall-the-software-from-a-unix-host.html"
+- title: Configuration d'une notification par e-mail
+  url: "/unix-administration/concept-configuring-e-mail-notification.html"
+  entries:
+  - title: Configurer un serveur de messagerie pour un référentiel
+    url: "/unix-administration/task-configure-mail-server-for-a-repository.html"
+  - title: Configurez la notification par e-mail pour un nouveau profil
+    url: "/unix-administration/task-configure-e-mail-notification-for-a-new-profile.html"
+    entries:
+    - title: Personnalisez l'objet de l'e-mail pour un nouveau profil
+      url: "/unix-administration/task-customize-e-mail-subject-for-a-new-profile.html"
+  - title: Configurez la notification par e-mail pour un profil existant
+    url: "/unix-administration/task-configure-e-mail-notification-for-an-existing-profile.html"
+    entries:
+    - title: Personnalisez l'objet de l'e-mail pour un profil existant
+      url: "/unix-administration/task-customize-the-email-subject-for-an-existing-profile.html"
+  - title: Configurez la notification par e-mail de synthèse pour plusieurs profils
+    url: "/unix-administration/task-configure-summary-e-mail-notification-for-multiple-profiles.html"
+  - title: Ajoutez un nouveau profil aux notifications par e-mail récapitulatives
+    url: "/unix-administration/task-add-new-profile-to-summary-notification.html"
+  - title: Ajoutez un profil existant aux notifications par e-mail récapitulatives
+    url: "/unix-administration/task-add-existing-profile-to-summary-notification.html"
+  - title: Désactiver la notification par e-mail pour plusieurs profils
+    url: "/unix-administration/task-disable-email-notification-for-multiple-profiles.html"
+- title: Création d'un fichier de spécification de tâche et de scripts pour les opérations
+    SnapManager
+  url: "/unix-administration/concept-creating-task-specification-file-and-scripts-for-snapmanager-operations.html"
+  entries:
+  - title: Créez des scripts de stratégie, de post-tâche et de prétâche
+    url: "/unix-administration/task-create-pretask-post-task-and-policy-scripts.html"
+    entries:
+    - title: Opérations dans les scripts de tâches
+      url: "/unix-administration/concept-operations-in-task-scripts.html"
+    - title: Variables disponibles dans les scripts de tâches pour l'opération de
+        sauvegarde
+      url: "/unix-administration/concept-variables-available-in-the-task-scripts-for-backup-operation.html"
+    - title: Variables disponibles dans les scripts de tâches pour l'opération de
+        restauration
+      url: "/unix-administration/concept-variables-available-in-custom-script-for-restore-operation.html"
+    - title: Les variables disponibles dans les scripts de tâches pour l'opération
+        de clonage
+      url: "/unix-administration/concept-variables-available-in-the-task-scripts-for-clone-operation.html"
+    - title: Erreur de gestion dans les scripts personnalisés
+      url: "/unix-administration/concept-error-handling-in-custom-scripts.html"
+  - title: Afficher des exemples de scripts de plug-ins
+    url: "/unix-administration/task-view-sample-plugin-scripts.html"
+  - title: Créer des scripts de tâches
+    url: "/unix-administration/task-create-task-scripts.html"
+  - title: Stocker les scripts de tâche
+    url: "/unix-administration/task-store-the-task-scripts.html"
+  - title: Vérifiez l'installation des scripts du plug-in
+    url: "/unix-administration/task-verify-installation-of-plugin-scripts.html"
+  - title: Créer un fichier de spécification de tâche
+    url: "/unix-administration/task-create-a-task-specification-file.html"
+  - title: Effectuez les opérations de sauvegarde, de restauration et de clonage à
+      l'aide des scripts prescripteurs et post-scripts
+    url: "/unix-administration/task-perform-backup-restore-and-clone-operations-using-prescript-and-post-scripts.html"
+- title: Mise à jour du nom du système de stockage et du nom d'hôte de la base de
+    données cible associés à un profil
+  url: "/unix-administration/concept-updating-storage-controller-name-and-database-hostname-associated-with-a-profile.html"
+  entries:
+  - title: Mettez à jour le nom du système de stockage associé à un profil
+    url: "/unix-administration/task-update-storage-system-name-associated-with-a-profile.html"
+  - title: Afficher la liste des systèmes de stockage associés à un profil
+    url: "/unix-administration/task-view-a-list-of-storage-controllers-associated-with-a-profile.html"
+  - title: Mettez à jour le nom d'hôte de la base de données cible associé à un profil
+    url: "/unix-administration/task-update-target-database-hostname-associated-with-a-profile.html"
+- title: Conservation de l'historique des opérations SnapManager
+  url: "/unix-administration/concept-maintaining-history-of-snapmanager-operations.html"
+  entries:
+  - title: Configurer l'historique des opérations SnapManager
+    url: "/unix-administration/task-configure-history-for-backup-operation.html"
+  - title: Afficher la liste de l'historique des opérations SnapManager
+    url: "/unix-administration/task-view-a-list-of-snapmanager-history-operation-as-a-report.html"
+  - title: Afficher l'historique détaillé d'une opération spécifique associée à un
+      profil
+    url: "/unix-administration/task-view-the-detailed-history-of-a-specific-operation-associated-with-a-profile.html"
+  - title: Supprimer l'historique des opérations SnapManager
+    url: "/unix-administration/task-purge-history-of-snapmanager-operation.html"
+  - title: Supprimer les paramètres d'historique associés à un ou plusieurs profils
+    url: "/unix-administration/task-remove-history-configuration-associated-with-a-single-profile-or-multiple-profiles.html"
+  - title: Afficher les détails de la configuration de l'historique SnapManager
+    url: "/unix-administration/task-view-snapmanger-history-operation-details.html"
+- title: Utilisation de BR*Tools avec SnapManager pour SAP
+  url: "/unix-administration/concept-using-br-tools-with-snapmanager-for-sap.html"
+  entries:
+  - title: Que sont BR*Tools
+    url: "/unix-administration/concept-what-br-tools-are.html"
+  - title: Désactivation de l'accès client aux copies Snapshot
+    url: "/unix-administration/concept-disabling-client-access-to-snapshot-copies.html"
+  - title: Utilisation du profil pour les sauvegardes BR*Tools
+    url: "/unix-administration/concept-profile-usage-for-br-tools-backups.html"
+  - title: Sauvegardes de base de données créées à l'aide de BRBACKUP et BRARCHIVE
+    url: "/unix-administration/concept-database-backups-created-using-brbackup-and-brarchive.html"
+  - title: Planifier des sauvegardes avec la transaction SAP DB13
+    url: "/unix-administration/task-schedule-backups-with-sap-transaction-db13.html"
+  - title: Restauration de la base de données à l'aide de BRRESTORE et BRRECOVER
+    url: "/unix-administration/concept-database-restore-by-using-brrestore-and-brrecover.html"
+  - title: Sauvegarde et restauration de fichiers à l'aide de BR*Tools
+    url: "/unix-administration/concept-backing-up-and-restoring-files-using-br-tools.html"
+  - title: Restauration d'une sauvegarde sur un hôte différent
+    url: "/unix-administration/concept-restoring-a-backup-to-a-different-host.html"
+  - title: Restauration d'une sauvegarde depuis un système de stockage secondaire
+      vers un emplacement différent
+    url: "/unix-administration/concept-restoring-a-backup-from-secondary-storage-to-a-different-location.html"
+- title: Référence de commande SnapManager pour SAP
+  url: "/unix-administration/concept-snapmanager-for-oraclefor-sap-command-reference.html"
+  entries:
+  - title: La commande backint register-SLD
+    url: "/unix-administration/reference-the-backint-register-sld-command.html"
+  - title: La commande smsap_Server restart
+    url: "/unix-administration/reference-the-smosmsap-server-restart-command.html"
+  - title: La commande smsap_Server start
+    url: "/unix-administration/reference-the-smosmsap-server-start-command.html"
+  - title: La commande smsap_Server status
+    url: "/unix-administration/reference-the-smosmsap-server-status-command.html"
+  - title: La commande smsap_Server stop
+    url: "/unix-administration/reference-the-smosmsap-server-stop-command.html"
+  - title: La commande smsap backup create
+    url: "/unix-administration/reference-the-smosmsapbackup-create-command.html"
+  - title: La commande smsap backup delete
+    url: "/unix-administration/reference-the-smosmsapbackup-delete-command.html"
+  - title: La commande smsap sauvegarde libre
+    url: "/unix-administration/reference-the-smosmsapbackup-free-command.html"
+  - title: La commande smsap backup list
+    url: "/unix-administration/reference-the-smosmsapbackup-list-command.html"
+  - title: La commande smsap backup mount
+    url: "/unix-administration/reference-the-smosmsapbackup-mount-command.html"
+  - title: La commande smsap backup restore
+    url: "/unix-administration/reference-the-smosmsapbackup-restore-command.html"
+  - title: La commande smsap backup show
+    url: "/unix-administration/reference-the-smosmsapbackup-show-command.html"
+  - title: La commande smsap backup unshunshunt
+    url: "/unix-administration/reference-the-smosmsapbackup-unmount-command.html"
+  - title: La commande smsap backup update
+    url: "/unix-administration/reference-the-smosmsapbackup-update-command.html"
+  - title: La commande smsap backup verify
+    url: "/unix-administration/reference-the-smosmsapbackup-verify-command.html"
+  - title: La commande smsap clone create
+    url: "/unix-administration/reference-the-smosmsapclone-create-command.html"
+  - title: La commande smsap clone delete
+    url: "/unix-administration/reference-the-smosmsapclone-delete-command.html"
+  - title: La commande smsap clone list
+    url: "/unix-administration/reference-the-smosmsapclone-list-command.html"
+  - title: La commande smsap clone show
+    url: "/unix-administration/reference-the-smosmsapclone-show-command.html"
+  - title: La commande smsap clone template
+    url: "/unix-administration/reference-the-smosmsapclone-template-command.html"
+  - title: La commande smsap clone update
+    url: "/unix-administration/reference-the-smosmsap-clone-update-command.html"
+  - title: La commande smsap clone split-delete
+    url: "/unix-administration/reference-the-smosmsap-clone-split-delete-command.html"
+  - title: La commande smsap clone split-Estimate
+    url: "/unix-administration/reference-the-smosmsap-clone-splitestimate-command.html"
+  - title: La commande smsap clone split
+    url: "/unix-administration/reference-the-smosmsap-clone-split-command.html"
+  - title: La commande smsap clone split-result
+    url: "/unix-administration/reference-the-smosmsap-clone-split-result-command.html"
+  - title: La commande smsap clone split-stop
+    url: "/unix-administration/reference-the-smosmsap-clone-stopsplit-command.html"
+  - title: La commande smsap clone split-status
+    url: "/unix-administration/reference-the-smosmsap-clone-splitstatus-command.html"
+  - title: La commande smsap clone dedétachement
+    url: "/unix-administration/reference-the-smosmsap-clone-detach-command.html"
+  - title: Commande smsap cmdfile
+    url: "/unix-administration/reference-the-smosmsapcmdfile-command.html"
+  - title: La commande smsap Credential clear
+    url: "/unix-administration/reference-the-smosmsapcredential-clear-command.html"
+  - title: La commande smsap Credential delete
+    url: "/unix-administration/reference-the-smosmsapcredential-delete-command.html"
+  - title: La commande smsap Credential list
+    url: "/unix-administration/reference-the-smosmsapcredential-list-command.html"
+  - title: La commande smsap Credential set
+    url: "/unix-administration/reference-the-smosmsapcredential-set-command.html"
+  - title: La commande smsap History list
+    url: "/unix-administration/reference-the-smosmsap-history-list-command.html"
+  - title: La commande smsap history operation-show
+    url: "/unix-administration/reference-the-smosmsap-history-operation-show-command.html"
+  - title: La commande smsap History purge
+    url: "/unix-administration/reference-the-smosmsap-history-purge-command.html"
+  - title: La commande smsap history remove
+    url: "/unix-administration/reference-the-smosmsap-history-remove-command.html"
+  - title: La commande smsap history set
+    url: "/unix-administration/reference-the-smosmsap-history-set-command.html"
+  - title: La commande smsap history show
+    url: "/unix-administration/reference-the-smo-smsap-history-show-command.html"
+  - title: La commande smsap Help
+    url: "/unix-administration/reference-the-smosmsaphelp-command.html"
+  - title: La commande smsap notification remove-summary-notification
+    url: "/unix-administration/reference-the-smo-notification-removesummarynotification-command.html"
+  - title: La commande smsap notification update-summary-notification
+    url: "/unix-administration/reference-the-smosmsap-notification-updatesummarynotification-command.html"
+  - title: La commande smsap notification set
+    url: "/unix-administration/reference-the-smosmsap-notification-set-command.html"
+  - title: La commande smsap operation dump
+    url: "/unix-administration/reference-the-smosmsapoperation-dump-command.html"
+  - title: La commande smsap operation list
+    url: "/unix-administration/reference-the-smosmsapoperation-list-command.html"
+  - title: Commande smsap opération show
+    url: "/unix-administration/reference-the-smosmsap-operation-show-command.html"
+  - title: La commande smsap password reset
+    url: "/unix-administration/reference-the-smosmsap-password-reset-command.html"
+  - title: La commande smsap plugin check
+    url: "/unix-administration/reference-the-smosmsap-plugin-check-command.html"
+  - title: La commande smsap profile create
+    url: "/unix-administration/reference-the-smosmsapprofile-create-command.html"
+  - title: La commande smsap profile delete
+    url: "/unix-administration/reference-the-smosmsapprofile-delete-command.html"
+  - title: La commande smsap profile détruire
+    url: "/unix-administration/reference-the-smosmsap-profile-destroy-command.html"
+  - title: La commande smsap profile dump
+    url: "/unix-administration/reference-the-smosmsapprofile-dump-command.html"
+  - title: La commande smsap profile list
+    url: "/unix-administration/reference-the-smosmsapprofile-list-command.html"
+  - title: La commande smsap profile show
+    url: "/unix-administration/reference-the-smosmsapprofile-show-command.html"
+  - title: La commande smsap profile sync
+    url: "/unix-administration/reference-the-smosmsapprofile-sync-command.html"
+  - title: La commande smsap profile update
+    url: "/unix-administration/reference-the-smosmsapprofile-update-command.html"
+  - title: La commande smsap profile verify
+    url: "/unix-administration/reference-the-smosmsapprofile-verify-command.html"
+  - title: La commande smsap protection-policy
+    url: "/unix-administration/reference-the-smosmsapprotection-policy-command.html"
+  - title: Commande smsap repository create
+    url: "/unix-administration/reference-the-smosmsaprepository-create-command.html"
+  - title: Commande smsap repository delete
+    url: "/unix-administration/reference-the-smosmsaprepository-delete-command.html"
+  - title: La commande smsap repository rollback
+    url: "/unix-administration/reference-the-smosmsap-repository-rollingback-command.html"
+  - title: La commande smsap repository rollingupgrade
+    url: "/unix-administration/reference-the-smosmsap-repository-rollingupgrade.html"
+  - title: La commande smsap repository show
+    url: "/unix-administration/reference-the-smosmsaprepository-show-command.html"
+  - title: La commande smsap repository update
+    url: "/unix-administration/reference-the-smosmsaprepository-update-command.html"
+  - title: La commande smsap schedule create
+    url: "/unix-administration/reference-the-smosmsap-schedule-create-command.html"
+  - title: La commande smsap schedule delete
+    url: "/unix-administration/reference-the-smosmsap-schedule-delete-command.html"
+  - title: La commande smsap schedule list
+    url: "/unix-administration/reference-the-smosmsap-schedule-list-command.html"
+  - title: La commande smsap schedule RESUME
+    url: "/unix-administration/reference-the-smosmsap-schedule-resume-command.html"
+  - title: La commande smsap schedule suspend
+    url: "/unix-administration/reference-the-smosmsap-schedule-suspend-command.html"
+  - title: La commande smsap schedule update
+    url: "/unix-administration/reference-the-smosmsap-schedule-update-command.html"
+  - title: La commande smsap Storage list
+    url: "/unix-administration/reference-the-smosmsap-storage-list-command.html"
+  - title: La commande smsap Storage rename
+    url: "/unix-administration/reference-the-smosmsap-storage-rename-command.html"
+  - title: La commande smsap system dump
+    url: "/unix-administration/reference-the-smosmsapsystem-dump-command.html"
+  - title: La commande smsap system reverify
+    url: "/unix-administration/reference-the-smosmsapsystem-verify-command.html"
+  - title: La commande smsap version
+    url: "/unix-administration/reference-the-smosmsapversion-command.html"
+- title: Dépannage de SnapManager
+  url: "/unix-administration/reference-troubleshooting-snapmanager.html"
+  entries:
+  - title: Vider les fichiers
+    url: "/unix-administration/concept-dump-files.html"
+    entries:
+    - title: Créer des fichiers de vidage au niveau des opérations
+      url: "/unix-administration/task-create-operation-level-dump-files.html"
+    - title: Créer des fichiers de vidage au niveau du profil
+      url: "/unix-administration/task-create-profile-level-dump-files.html"
+    - title: Créer des fichiers de vidage au niveau du système
+      url: "/unix-administration/task-create-system-level-dump-files.html"
+    - title: Comment localiser les fichiers de vidage
+      url: "/unix-administration/reference-how-to-locate-dump-files.html"
+    - title: Comment recueillir des fichiers de vidage
+      url: "/unix-administration/concept-how-to-collect-dump-files.html"
+    - title: Collecte d'informations de journal supplémentaires pour faciliter le
+        débogage
+      url: "/unix-administration/concept-collecting-additional-log-information-for-easier-debugging.html"
+  - title: Résolution des problèmes liés au clonage
+    url: "/unix-administration/reference-troubleshooting-clone-issues.html"
+  - title: Dépannage des problèmes liés à l'interface utilisateur graphique
+    url: "/unix-administration/reference-troubleshooting-graphical-user-interface-issues.html"
+  - title: Résolution des problèmes de SnapDrive
+    url: "/unix-administration/reference-troubleshooting-snapdrive-issues.html"
+  - title: Dépannage du problème de changement de nom du système de stockage
+    url: "/unix-administration/reference-troubleshooting-storage-system-renaming-issue.html"
+  - title: Dépannage des problèmes connus
+    url: "/unix-administration/reference-troubleshooting-known-issues.html"
+  - title: Le montage d'un volume FlexClone échoue dans un environnement NFS
+    url: "/unix-administration/reference-mounting-a-flexclone-fails-in-nfs-environment.html"
+  - title: L'exécution de plusieurs opérations parallèles échoue dans SnapManager
+    url: "/unix-administration/reference-running-multiple-parallel-operations-fail-in-snapmanager.html"
+  - title: Où obtenir des informations complémentaires
+    url: "/unix-administration/reference-where-to-go-for-more-information.html"
+- title: Classification des messages d'erreur
+  url: "/unix-administration/reference-error-message-classifications.html"
+- title: Messages d'erreur
+  url: "/unix-administration/reference-error-messages.html"

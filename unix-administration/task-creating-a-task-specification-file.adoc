@@ -1,0 +1,94 @@
+---
+permalink: unix-administration/task-create-a-task-specification-file.html 
+sidebar: sidebar 
+keywords: create, task, specification, file, graphical, user, interface, gui, command-line, interface, cli, text, editor, preprocessing, post-processing, activity, backup, resotre, clone, operation, creating 
+summary: 'Vous pouvez créer les fichiers de spécification de tâche à l"aide de l"interface utilisateur graphique (GUI), de l"interface de ligne de commande (CLI) ou d"un éditeur de texte. Ces fichiers sont utilisés pour effectuer des opérations de prétraitement ou de post-traitement des opérations de sauvegarde, de restauration ou de clonage.' 
+---
+= Créer un fichier de spécification de tâche
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez créer les fichiers de spécification de tâche à l'aide de l'interface utilisateur graphique (GUI), de l'interface de ligne de commande (CLI) ou d'un éditeur de texte. Ces fichiers sont utilisés pour effectuer des opérations de prétraitement ou de post-traitement des opérations de sauvegarde, de restauration ou de clonage.
+
+.Étapes
+. Créez un fichier de spécification de tâche à l'aide de l'interface utilisateur graphique, de l'interface de ligne de commande ou d'un éditeur de texte.
++
+*Exemple*
+
++
+Vous pouvez créer le fichier de spécifications en fonction de la structure du fichier de spécifications de tâche d'exemple suivant :
+
++
+[listing]
+----
+
+<task-specification>
+  <pre-tasks>
+				<task>
+      <name>name</name>
+      <parameter>
+          <name>name</name>
+          <value>value</value>
+       </parameter>
+    </task>
+  </pre-tasks>
+  <post-tasks>
+    <task>
+      <name>name</name>
+      <parameter>
+          <name>name</name>
+          <value>value</value>
+       </parameter>
+    </task>
+  </post-tasks>
+</task-specification>
+----
+. Entrez le nom du script.
+. Entrez le nom du paramètre et la valeur attribuée au paramètre.
+. Enregistrez le fichier XML dans le répertoire d'installation approprié.
+
+
+'''
+
+
+== Exemple de spécification de tâche
+
+[listing]
+----
+
+  <task-specification>
+    <pre-tasks>
+      <task>
+        <name>clone cleanup</name>
+        <description>pre tasks for cleaning up the target system</description>
+        </task>
+    </pre-tasks>
+    <post-tasks>
+      <task>
+        <name>SystemCopy follow-up activities</name>
+        <description>SystemCopy follow-up activities</description>
+        <parameter>
+          <name>SCHEMAOWNER</name>
+          <value>SAMSR3</value>
+        </parameter>
+      </task>
+      <task>
+        <name>Oracle Users for OS based DB authentication</name>
+        <description>Oracle Users for OS based DB authentication</description>
+        <parameter>
+          <name>SCHEMAOWNER</name>
+          <value>SAMSR3</value>
+        </parameter>
+        <parameter>
+          <name>ORADBUSR_FILE</name>
+          <value\>/mnt/sam/oradbusr.sql</value\>
+
+        </parameter>
+      </task>
+      </post-tasks>
+  </task-specification>
+----
+'''

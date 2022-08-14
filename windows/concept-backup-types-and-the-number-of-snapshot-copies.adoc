@@ -1,0 +1,61 @@
+---
+permalink: windows/concept-backup-types-and-the-number-of-snapshot-copies.html 
+sidebar: sidebar 
+keywords: backup, full, partial, snapshot, copy, copies, snapmanager, create, volume, tablespace, file 
+summary: 'Le type de sauvegarde (complet ou partiel) affecte le nombre de copies Snapshot créées par SnapManager. Pour une sauvegarde complète, SnapManager crée une copie Snapshot de chaque volume, tandis que pour une sauvegarde partielle, SnapManager crée une copie Snapshot de chaque fichier d"espace de table.' 
+---
+= Types de sauvegarde et nombre de copies Snapshot
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le type de sauvegarde (complet ou partiel) affecte le nombre de copies Snapshot créées par SnapManager. Pour une sauvegarde complète, SnapManager crée une copie Snapshot de chaque volume, tandis que pour une sauvegarde partielle, SnapManager crée une copie Snapshot de chaque fichier d'espace de table.
+
+
+NOTE: La Data ONTAP limite le nombre maximal de copies Snapshot à 1 255 par volume. Vous pouvez atteindre ce maximum uniquement si vous configurez SnapManager de manière à conserver un grand nombre de sauvegardes où chaque sauvegarde est constituée de plusieurs copies Snapshot.
+
+Pour conserver un pool de sauvegardes adéquat tout en veillant à ce que la limite maximale des copies Snapshot par volume ne soit pas atteinte, vous devez supprimer les sauvegardes lorsqu'elles ne sont plus nécessaires. Vous pouvez configurer la stratégie de rétention des médias SnapManager pour supprimer les sauvegardes réussies après avoir atteint un seuil spécifique pour une fréquence de sauvegarde spécifique. Par exemple, une fois que SnapManager a créé quatre sauvegardes quotidiennes avec succès, SnapManager supprime les sauvegardes quotidiennes créées le jour précédent.
+
+Les tableaux suivants montrent comment SnapManager crée des copies Snapshot en fonction du type de sauvegarde. L'exemple dans les tables suppose que la base de données Z comprend deux volumes, chaque volume comprend deux espaces de table (TS1 et TS2) et chaque espace de table comprend deux fichiers de base de données (`ts1.data1, ts1.data2, ts2.data1`, et `ts2.data2`).
+
+Ces tableaux montrent comment les deux types de sauvegarde génèrent un nombre différent de copies Snapshot.
+
+SnapManager crée des copies Snapshot au niveau du volume au lieu de l'espace de table, ce qui réduit généralement le nombre de copies Snapshot qu'il doit créer.
+
+
+NOTE: Les deux sauvegardes créent également des copies Snapshot des fichiers journaux.
+
+|===
+| Les volumes de la base de données | Tablespace TS1 (comprend 2 fichiers de base de données) | Tablespace TS2 (comprend 2 fichiers de base de données) | Copies Snapshot créées | Nombre total de copies Snapshot 
+
+
+ a| 
+E:\data
+ a| 
+TS1.data1
+ a| 
+TS2.data1
+ a| 
+1 par volume
+ a| 
+2
+
+|===
+|===
+| Les volumes de la base de données | Tablespace TS1 (comprend 2 fichiers de base de données) | Tablespace TS2 (comprend 2 fichiers de base de données) | Copies Snapshot créées | Nombre total de copies Snapshot 
+
+
+ a| 
+E:\data
+ a| 
+TS1.data1
+ a| 
+TS2.data1
+ a| 
+2 par fichier
+ a| 
+4
+
+|===

@@ -1,0 +1,30 @@
+---
+permalink: unix-administration/reference-running-multiple-parallel-operations-fail-in-snapmanager.html 
+sidebar: sidebar 
+keywords: parallel, operation, seperate, database, storage, system, igroup, lun, delete, igroup, snapmanager, error, message, run, multiple, fail 
+summary: 'Lorsque vous exécutez plusieurs opérations parallèles sur des bases de données distinctes résidant sur le même système de stockage, le groupe initiateur pour les LUN associées aux deux bases de données peut être supprimé en raison de l"une de ces opérations. Plus tard, si l"autre opération tente d"utiliser le groupe initiateur supprimé, SnapManager affiche un message d"erreur.' 
+---
+= L'exécution de plusieurs opérations parallèles échoue dans SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lorsque vous exécutez plusieurs opérations parallèles sur des bases de données distinctes résidant sur le même système de stockage, le groupe initiateur pour les LUN associées aux deux bases de données peut être supprimé en raison de l'une de ces opérations. Plus tard, si l'autre opération tente d'utiliser le groupe initiateur supprimé, SnapManager affiche un message d'erreur.
+
+Par exemple, si vous exécutez les opérations de suppression et de création de sauvegarde sur différentes bases de données presque en même temps, l'opération de création de sauvegarde échoue. Les étapes séquentielles suivantes montrent ce qui se produit lorsque vous exécutez des sauvegardes, supprimer et créer des opérations sur différentes bases de données presque en même temps.
+
+. Exécutez le `backup delete` commande.
+. Exécutez le `backup create` commande.
+. Le `backup create` Commande identifie le groupe initiateur déjà existant et utilise le même groupe initiateur pour le mappage de la LUN.
+. Le `backup delete` La commande supprime la LUN de sauvegarde, qui a été mappée sur le même groupe initiateur.
+. Le `backup delete` La commande supprime ensuite le groupe initiateur, car aucune LUN n'est associée au groupe initiateur.
+. Le `backup create` la commande crée la sauvegarde et tente de la mapper sur le groupe initiateur qui n'existe pas, et l'opération échoue.
+
+
+*Que faire*
+
+Vous devez créer un groupe initiateur pour chaque système de stockage utilisé par la base de données et utiliser la commande suivante pour mettre à jour SDU avec les informations relatives à ce groupe initiateur :
+
+`*snapdrive igroup add*`

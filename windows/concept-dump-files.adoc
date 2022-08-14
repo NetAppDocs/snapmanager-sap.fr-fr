@@ -1,0 +1,72 @@
+---
+permalink: windows/concept-dump-files.html 
+sidebar: sidebar 
+keywords: dump, file, compress, log, contain, information, snapmanager, environment, operation, profile, system 
+summary: Les fichiers de vidage sont des fichiers journaux compressés contenant des informations sur SnapManager et son environnement. Les différents types de fichiers journaux créés sont opération, profil et fichier de vidage système. 
+---
+= Vider les fichiers
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les fichiers de vidage sont des fichiers journaux compressés contenant des informations sur SnapManager et son environnement. Les différents types de fichiers journaux créés sont opération, profil et fichier de vidage système.
+
+Vous pouvez utiliser la commande dump ou l'onglet *Create Diagnostics* de l'interface utilisateur graphique (GUI) pour recueillir des informations sur une opération, un profil ou l'environnement. Un vidage système ne nécessite pas de profil ; cependant, les vidages de profil et d'opération nécessitent des profils.
+
+SnapManager inclut les informations de diagnostic suivantes dans le fichier de vidage :
+
+* Les étapes effectuées
+* Durée de chaque étape
+* Résultat de chaque étape
+* Une erreur s'est produite lors de l'opération, le cas échéant
+
+
+
+NOTE: Les fichiers journaux ou les fichiers de vidage SnapManager n'activent les autorisations en lecture et écriture que pour les utilisateurs root et les autres utilisateurs appartenant au groupe d'utilisateurs root.
+
+SnapManager inclut également les informations suivantes dans le fichier :
+
+* Version et architecture du système d'exploitation
+* Variables d'environnement
+* Version Java
+* Version et architecture de SnapManager
+* Préférences SnapManager
+* Messages SnapManager
+* propriétés log4j
+* Version et architecture de SnapDrive
+* Fichiers journaux de SnapDrive
+* Version Oracle
+* Oracle OPatch local Inventory Details
+* Version Oracle de la base de données du référentiel
+* Type de base de données cible (autonome)
+* Rôle de base de données cible (primaire, de secours physique ou de veille logique)
+* Configuration d'Oracle Recovery Manager (RMAN) de la base de données cible (pas d'intégration RMAN, RMAN avec des fichiers de contrôle ou RMAN avec un fichier de catalogue)
+* Version Oracle de la base de données cible
+* Identificateur système (SID) de la base de données cible
+* Nom du service de base de données du référentiel
+* Instances de base de données installées sur l'hôte
+* Descripteur de profil
+* Mémoire partagée maximale
+* Permuter les informations sur l'espace
+* Informations sur la mémoire
+* Environnement multivoie
+* Version des utilitaires hôtes
+* Microsoft Internet Small Computer System interface (iSCSI), version d'initiateur de logiciel pour Windows
+* Versions de l'interface BACKINT
+* Version outil BR
+* Niveau de patch
+* Sortie du `system verify` commande
+
+
+Le fichier dump répertorie également les limitations de SnapManager sur Windows.
+
+Les fichiers de vidage SnapManager contiennent également le fichier collecteur de données SnapDrive et le fichier journal des alertes Oracle. Vous pouvez collecter le fichier journal des alertes Oracle à l'aide de `smsap operation dump` et `smsap profile dump` commandes.
+
+
+NOTE: System dump ne contient pas les journaux d'alertes Oracle ; cependant, les profils et les « core dumps » contiennent les journaux d'alertes.
+
+Même si le serveur hôte SnapManager n'est pas en cours d'exécution, vous pouvez accéder aux informations de dump à l'aide de l'interface de ligne de commande ou de l'interface graphique.
+
+Si vous rencontrez un problème que vous ne pouvez pas résoudre, vous pouvez envoyer ces fichiers à NetApp Global Services.

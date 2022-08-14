@@ -1,0 +1,33 @@
+---
+permalink: unix-administration/reference-the-smosmsap-schedule-list-command.html 
+sidebar: sidebar 
+keywords: command, list, schedule, operation, associate, profile, smsap 
+summary: Cette commande répertorie les opérations planifiées associées à un profil. 
+---
+= La commande smsap schedule list
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Cette commande répertorie les opérations planifiées associées à un profil.
+
+
+
+== Syntaxe
+
+[listing, subs="+macros"]
+----
+pass:quotes[smsap schedule list -profile _profile_name_
+[-quiet | -verbose\]]
+----
+
+
+== Paramètres
+
+* `*-profile _profile_name_*`
++
+Indique le nom du profil associé à la base de données, à l'aide duquel vous pouvez afficher une liste d'opérations planifiées. Le profil contient l'identifiant de la base de données et d'autres informations sur la base de données.
+
+

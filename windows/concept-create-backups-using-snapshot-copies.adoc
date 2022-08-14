@@ -1,0 +1,30 @@
+---
+permalink: windows/concept-create-backups-using-snapshot-copies.html 
+sidebar: sidebar 
+keywords: snapmanager, enable, create, backup, primary, local, storage, secondary, remote, postprocess, script, copies, copy, snapshot 
+summary: 'SnapManager vous permet de créer des sauvegardes sur le stockage primaire (local), ainsi que sur le stockage secondaire (distant) par le biais de scripts de post-traitement.' 
+---
+= Créer des sauvegardes à l'aide de copies Snapshot
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager vous permet de créer des sauvegardes sur le stockage primaire (local), ainsi que sur le stockage secondaire (distant) par le biais de scripts de post-traitement.
+
+Les sauvegardes créées sous forme de copies Snapshot sont des copies virtuelles de la base de données et sont stockées sur le même support physique que la base de données. Par conséquent, l'opération de sauvegarde prend moins de temps et requiert beaucoup moins d'espace que les sauvegardes disque à disque complètes. SnapManager permet de sauvegarder les données suivantes :
+
+* Tous les fichiers de données, les fichiers journaux d'archive et les fichiers de contrôle
+* Fichiers de données ou espaces de stockage sélectionnés, tous les fichiers journaux d'archivage et les fichiers de contrôle
+
+
+SnapManager 3.2 ou version ultérieure vous permet éventuellement de sauvegarder les données suivantes :
+
+* Tous les fichiers de données et les fichiers de contrôle
+* Fichiers de données ou espaces de stockage sélectionnés avec les fichiers de contrôle
+* Archiver les fichiers journaux
+
+
+
+NOTE: Les fichiers de données, les fichiers journaux d'archivage et les fichiers de contrôle peuvent être situés sur différents systèmes de stockage, volumes de système de stockage ou numéros d'unité logique (LUN). Vous pouvez également utiliser SnapManager pour sauvegarder une base de données si plusieurs bases de données se trouvent sur le même volume ou sur le même LUN.

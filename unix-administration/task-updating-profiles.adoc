@@ -1,0 +1,157 @@
+---
+permalink: unix-administration/task-update-profiles.html 
+sidebar: sidebar 
+keywords: update, profile, modify, password, database, operating, system, os, authentication, updating, information, host, database, oracle, updating 
+summary: 'Vous pouvez mettre à jour les profils pour modifier le mot de passe du profil, le nombre de sauvegardes à conserver, l"accès à la base de données, l"authentification du système d"exploitation à l"authentification de la base de données et vice versa, ainsi que les informations sur l"hôte. Si les informations relatives au mot de passe de la base de données Oracle changent, vous devez également modifier ces informations dans le profil.' 
+---
+= Mettre à jour les profils
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez mettre à jour les profils pour modifier le mot de passe du profil, le nombre de sauvegardes à conserver, l'accès à la base de données, l'authentification du système d'exploitation à l'authentification de la base de données et vice versa, ainsi que les informations sur l'hôte. Si les informations relatives au mot de passe de la base de données Oracle changent, vous devez également modifier ces informations dans le profil.
+
+*À propos de cette tâche*
+
+Si la stratégie de protection est activée sur le profil, vous ne pouvez pas la modifier en utilisant SnapManager. L'administrateur du stockage doit modifier la règle à l'aide de la console protection Manager.
+
+SnapManager (3.2 ou version ultérieure) vous permet de mettre à jour le profil afin de séparer les sauvegardes du journal d'archivage des sauvegardes de fichiers de données à l'aide de l' `-separate-archivelog-backups` option. Vous pouvez spécifier des règles de rétention et de protection distinctes pour la sauvegarde du journal d'archivage. SnapManager vous permet d'inclure la sauvegarde des journaux d'archivage et la sauvegarde des bases de données en ligne. Vous pouvez également créer une sauvegarde en ligne des fichiers de données et archiver les journaux à des fins de clonage. Lorsque vous créez une sauvegarde de fichiers de données en ligne, les sauvegardes des journaux d'archive sont immédiatement créées avec les fichiers de données.
+
+.Étapes
+. Saisissez la commande suivante :
++
+`*smsap profile update -profile _profile_ [-new-profile _new_profile_name_] [-profile-password _profile_password_][-database-dbname _db_dbname_ -host _db_host_ [-sid _db_sid_] [-login -username _db_username_ -password _db_password_ -port _db_port_][-asminstance -asmusername _asminstance_username_ -asmpassword _asminstance_password_]] [{-rman{-controlfile | {-login  -username _rman_username_ -password _rman_password_ -tnsname _rman_tnsname_}}} | -remove-rman]-osaccount _osaccount_ -osgroup _osgroup_ [-retain [-hourly [-count _n_] [-duration _m_]] [-daily [-count _n_] [-duration _m_]] [-weekly [-count _n_] [-duration _m_]] [-monthly [-count _n_] [-duration _m_]]] [-comment _comment_][-snapname -pattern _pattern_][[-protect [-protection-policy _policy_name_]]| [[-noprotect]] [-summary-notification] [-notification [-success-email _email_address1, email_address2_ -subject _subject_pattern_] [-failure-email _email_address1, email_address2_ -subject _subject_pattern_]] [-separate-archivelog-backups-retain-archivelog-backups-hours _hours_ | -days _days_ | -weeks _weeks_| -months _months_ [-protect [-protection-policy _policy_name_] | -noprotect] [-include-with-online-backups | -no-include-with-online-backups]] [-dump]*`
+
++
+Les autres options de cette commande sont les suivantes :
+
++
+``[-force] [-noprompt]``
+
++
+``[-quiet | verbose]``
+
++
+[cols="2a,4a"]
+|===
+| Les fonctions que vous recherchez... | Alors... 
+
+
+ a| 
+*Modifiez le profil pour utiliser l'authentification du système d'exploitation*
+ a| 
+Au lieu d'ajouter le nom d'utilisateur, le mot de passe et le port, spécifiez ce qui suit :
+
+** `-osaccount _account_name_` en tant que nom du compte du système d'exploitation
+** `-osgroup _osgroup_` En tant que groupe associé au compte du système d'exploitation, généralement le compte utilisé pour installer Oracle
+
+
+
+
+ a| 
+*Utilisez l'authentification d'instance ASM (Automatic Storage Management) pour créer le profil*
+ a| 
+Spécifiez les informations d'identification pour l'authentification de l'instance ASM.
+
+** `-asmusername _asminstance_username_` Est le nom d'utilisateur utilisé pour se connecter à l'instance ASM.
+** `-asmpassword _asminstance_password_` Est le mot de passe utilisé pour se connecter à l'instance ASM.
+
+
+
+
+ a| 
+*Utilisez un catalogue comme référentiel Oracle Recovery Manager (RMAN) ou supprimez RMAN*
+ a| 
+Spécifiez les options et variables suivantes :
+
+** `-tnsname _tnsname_` comme le nom de la ttnsname défini dans la `tnsnames.ora` fichier.
+** `-login -username _username_` Comme nom d'utilisateur requis pour la connexion au catalogue RMAN.
++
+S'il n'est pas spécifié, SnapManager utilise les informations d'authentification du système d'exploitation. Vous ne pouvez pas utiliser l'authentification du système d'exploitation avec les bases de données RAC (Real application clusters).
+
+** `-password _password_` Comme mot de passe RMAN requis pour se connecter au catalogue RMAN.
+** `-controlfile` Si vous utilisez le fichier de contrôle comme référentiel RMAN.
+** `-remove-rman` Pour supprimer RMAN.
+
+
+
+
+ a| 
+*Modification de la stratégie de conservation des sauvegardes de la base de données dans le profil*
+ a| 
+Spécifiez soit le nombre de rétention, soit la durée de rétention pour une classe de rétention, soit les deux pour modifier la stratégie de rétention. La durée est exprimée en unités de la classe (par exemple, heures pour l'heure, jours pour la journée).
+
+** `-hourly` est la classe de rétention horaire, pour laquelle `[-count _n_] [-duration _m_]]` sont respectivement le nombre de rétention et la durée de conservation.
+** `-daily` est la classe de rétention quotidienne, pour laquelle `[-count _n_] [-duration _m_]]` sont respectivement le nombre de rétention et la durée de conservation.
+** `-weekly` est la classe de conservation hebdomadaire, pour laquelle `[-count _n_] [-duration _m_]]` sont respectivement le nombre de rétention et la durée de conservation.
+** `-monthly` est la classe de rétention mensuelle, pour laquelle `[-count _n_] [-duration _m_]]` sont respectivement le nombre de rétention et la durée de conservation.
+
+
+
+
+ a| 
+*Désactiver la protection de sauvegarde pour le profil*
+ a| 
+Spécifiez `-noprotect` pour ne pas protéger les sauvegardes de base de données créées à l'aide du profil. Pour un profil qui avait `-protect` activé, si vous souhaitez désactiver protect, un message d'avertissement s'affiche indiquant que cette action supprimera le jeu de données et que vous ne pourrez pas restaurer ou cloner les sauvegardes de ce profil.
+
+
+
+ a| 
+*Activer les notifications par e-mail pour l'état d'achèvement des opérations de la base de données*
+ a| 
+Spécifiez les options et variables suivantes :
+
+** `-summary-notification` permet de configurer une notification par e-mail de synthèse pour plusieurs profils sous une base de données de référentiel.
+** `-notification` vous permet de recevoir une notification par e-mail sur l'état d'achèvement de l'opération de base de données pour un profil.
+** `-success -email _email_address2_` vous permet de recevoir une notification par e-mail suite à la réussite d'une opération de base de données effectuée à l'aide d'un nouveau profil ou d'un profil existant.
+** `-failure -email _email_address2_` vous permet de recevoir une notification par e-mail sur une opération de base de données ayant échoué effectuée à l'aide d'un nouveau profil ou d'un profil existant.
+** `-subject _subject_text_` spécifie le texte de l'objet de la notification par e-mail lors de la création d'un nouveau profil ou d'un profil existant. Si les paramètres de notification ne sont pas configurés pour le référentiel et que vous essayez de configurer des notifications de profil ou de résumé à l'aide de l'interface de ligne de commande (CLI), le message suivant est consigné dans le journal de la console : `SMSAP-14577: Notification Settings not configured`.
++
+Si vous avez configuré les paramètres de notification et que vous tentez de configurer la notification récapitulative à l'aide de l'interface de ligne de commande sans activer la notification récapitulative pour le référentiel, le message suivant est consigné dans le journal de la console : `SMSAP-14575: Summary notification configuration not available for this repository`
+
+
+
+
+
+ a| 
+*Mettre à jour le profil pour créer une sauvegarde des fichiers journaux d'archive séparément*
+ a| 
+Spécifiez les options et variables suivantes :
+
+** `-separate-archivelog-backups` permet de créer une sauvegarde des fichiers journaux d'archive séparément des fichiers de base de données.
++
+Après avoir spécifié cette option, vous pouvez créer une sauvegarde de fichiers de données uniquement ou une sauvegarde archiveils uniquement. Vous ne pouvez pas créer une sauvegarde complète. Vous ne pouvez pas non plus rétablir les paramètres du profil en séparant la sauvegarde. SnapManager conserve les sauvegardes en fonction de la politique de conservation des sauvegardes créées avant la sauvegarde archiveils uniquement.
+
+** `-retain-archivelog-backups` définit la durée de conservation des sauvegardes des journaux d'archives.
++
+
+NOTE: Si vous mettez à jour le profil pour la première fois, vous pouvez séparer les sauvegardes du journal d'archivage de la sauvegarde des fichiers de données à l'aide de l' `-separate-archivelog-backups` option ; vous devez indiquer la durée de conservation des sauvegardes du journal d'archivage à l'aide de `-retain-archivelog-backups` option. La définition de la durée de conservation est facultative lorsque vous mettez à jour le profil ultérieurement.
+
+** `-protect` Crée un dataset d'application sur le serveur Data Fabric Manager (DFM) et ajoute des membres en rapport avec la base de données, le fichier de données, les fichiers de contrôle et les journaux d'archivage.
++
+Si le jeu de données existe, il est réutilisé lors de la création d'un profil.
+
+** `-protection-policy` définit la stratégie de protection sur les sauvegardes du journal d'archivage.
+** `-include-with-online-backups` indique que la sauvegarde du journal d'archivage est incluse avec la sauvegarde de la base de données.
+** `-no-include-with-online-backups` spécifie que la sauvegarde du fichier journal d'archives n'est pas incluse avec la sauvegarde de la base de données.
+
+
+
+
+ a| 
+*Changer le nom d'hôte de la base de données cible*
+ a| 
+Spécifiez `-host _new_db_host_` pour modifier le nom d'hôte du profil.
+
+
+
+ a| 
+*Collectez les fichiers de vidage après l'opération de mise à jour du profil*
+ a| 
+Spécifiez le `-dump` option.
+
+|===
+. Pour afficher le profil mis à jour, entrez la commande suivante : `smsap profile show`
+

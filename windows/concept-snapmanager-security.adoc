@@ -1,0 +1,64 @@
+---
+permalink: windows/concept-snapmanager-security.html 
+sidebar: sidebar 
+keywords: perform, snapmanager, operation, credential, govern, authentication, maintain, security 
+summary: 'Vous ne pouvez effectuer des opérations SnapManager que si vous disposez des informations d"identification appropriées. La sécurité dans SnapManager est régie par l"authentification utilisateur.' 
+---
+= Comment SnapManager assure la sécurité
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous ne pouvez effectuer des opérations SnapManager que si vous disposez des informations d'identification appropriées. La sécurité dans SnapManager est régie par l'authentification utilisateur.
+
+SnapManager assure la sécurité en demandant l'authentification utilisateur par le biais d'invites de mot de passe ou en paramétrant des identifiants utilisateur. Un utilisateur efficace est authentifié et autorisé avec le serveur SnapManager.
+
+Les informations d'identification SnapManager et l'authentification utilisateur diffèrent considérablement de SnapManager 3.0 :
+
+* Dans les versions SnapManager antérieures à 3.0, vous devez définir un mot de passe de serveur arbitraire lors de l'installation de SnapManager. Toute personne souhaitant utiliser le serveur SnapManager aurait besoin du mot de passe du serveur SnapManager. Le mot de passe du serveur SnapManager doit être ajouté aux informations d'identification de l'utilisateur à l'aide du `smsap credential set -host` commande.
+* Dans SnapManager (3.0 et versions ultérieures), le mot de passe du serveur SnapManager a été remplacé par l'authentification du système d'exploitation utilisateur individuel (OS). Si vous n'exécutez pas le client à partir du même serveur que l'hôte, le serveur SnapManager effectue l'authentification en utilisant vos noms d'utilisateur et mots de passe OS. Si vous ne souhaitez pas être invité à saisir vos mots de passe de système d'exploitation, vous pouvez enregistrer les données dans le cache des informations d'identification des utilisateurs SnapManager à l'aide du `smsap credential set -host` commande.
++
+
+NOTE: Le `smsap credential set -host` la commande mémorise vos informations d'identification lorsque l' `host.credentials.persist` propriété dans le `smsap.config` le fichier est défini sur *true*.
+
+
+
+*Exemple*
+
+User1 et User2 partagent un profil appelé Profes2. User2 ne peut pas effectuer de sauvegarde de Databas1 dans Host1 sans autorisation d'accès à Host1. User1 ne peut pas cloner une base de données sur Host3 sans l'autorisation d'accéder à Host3.
+
+Le tableau suivant décrit les différentes autorisations attribuées aux utilisateurs :
+
+|===
+| Type d'autorisation | Utilisateur1 | Utilisateur2 
+
+
+ a| 
+Mot de passe de l'hôte
+ a| 
+Host1, Host2
+ a| 
+Host2, Host3
+
+
+
+ a| 
+Mot de passe du référentiel
+ a| 
+Référentiel 1
+ a| 
+Référentiel 1
+
+
+
+ a| 
+Mot de passe du profil
+ a| 
+Profes1, Profi
+ a| 
+Profil 2
+
+|===
+Dans le cas où User1 et User2 ne disposent d'aucun profil partagé, supposez User1 dispose des autorisations pour les hôtes nommés Host1 et Host2, et User2 dispose des autorisations pour l'hôte nommé Host2. User2 ne peut pas exécuter même les commandes non profile telles que `dump` et `system verify` Sur Host1.

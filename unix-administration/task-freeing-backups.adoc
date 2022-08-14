@@ -1,0 +1,116 @@
+---
+permalink: unix-administration/task-free-backups.html 
+sidebar: sidebar 
+keywords: free, backup, delete, snapshot, copies, copy, deleting, metadata, function, smsap, command 
+summary: 'Vous pouvez libérer des sauvegardes, qui suppriment les copies Snapshot sans supprimer les métadonnées de sauvegarde. Cette fonction libère l"espace occupé par la sauvegarde. Vous pouvez utiliser la commande smsap backup free pour libérer les sauvegardes.' 
+---
+= Des sauvegardes gratuites
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez libérer des sauvegardes, qui suppriment les copies Snapshot sans supprimer les métadonnées de sauvegarde. Cette fonction libère l'espace occupé par la sauvegarde. Vous pouvez utiliser la commande smsap backup free pour libérer les sauvegardes.
+
+*Ce dont vous aurez besoin*
+
+Pour qu'une sauvegarde puisse être déautorisée, vous devez vous assurer que :
+
+* La sauvegarde a réussi
+* La sauvegarde ne doit pas être montée
+* La sauvegarde ne contient pas de clones
+* La sauvegarde ne doit pas être conservée au moyen d'une stratégie de conservation illimitée
+* La sauvegarde n'est pas déjà libérée
+
+
+*À propos de cette tâche*
+
+Si la protection est activée sur le profil et que la règle de protection contient des connexions du nœud principal qui utilisent une relation de miroir, les copies Snapshot sont supprimées sur le nœud principal lorsqu'une sauvegarde est libérée. Ces copies Snapshot sont également supprimées des nœuds miroir lorsque le prochain transfert vers le stockage secondaire se produit.
+
+Lorsque vous libérez une sauvegarde protégée, SnapManager demande à protection Manager de supprimer les copies Snapshot locales pour la sauvegarde. Si l'opération sans sauvegarde réussit pour les sauvegardes protégées, les copies Snapshot sont supprimées par protection Manager de manière asynchrone.
+
+[cols="2a,1a,3a,3a,4a"]
+|===
+| État de protection | Statut local | Action sur le stockage primaire | Action sur le stockage secondaire | Explication 
+
+
+ a| 
+Non demandé (à protéger)
+ a| 
+Existe
+ a| 
+Libère la sauvegarde
+ a| 
+Aucune action requise
+ a| 
+SnapManager libère la sauvegarde locale.
+
+
+
+ a| 
+Libérée
+ a| 
+Aucune action requise
+ a| 
+Aucune action requise
+ a| 
+La sauvegarde locale est déjà libérée.
+
+
+
+ a| 
+Non protégé
+ a| 
+Existe
+ a| 
+Libère la sauvegarde
+ a| 
+Aucune action requise
+ a| 
+SnapManager libère la sauvegarde locale, même si aucune copie n'existe sur le système de stockage secondaire.
+
+
+
+ a| 
+Libérée
+ a| 
+Aucune action requise
+ a| 
+Aucune action requise
+ a| 
+La sauvegarde locale est déjà libérée.
+
+
+
+ a| 
+Protection
+ a| 
+Existe
+ a| 
+Libère la sauvegarde
+ a| 
+Aucune action requise ; la sauvegarde sur secondaire reste
+ a| 
+SnapManager libère la sauvegarde locale. Les copies restent sur le système de stockage secondaire.
+
+
+
+ a| 
+Libérée
+ a| 
+Aucune action requise
+ a| 
+Aucune action requise
+ a| 
+La sauvegarde locale est déjà libérée.
+
+|===
+Vous pouvez spécifier l'option -dump en tant que paramètre facultatif pour collecter les fichiers de vidage après l'opération de sauvegarde libre réussie ou échoué.
+
+.Étape
+. Saisissez la commande suivante :
++
+`*smsap backup free -profile _profile_name_ {-label _label_ [data | -archivelogs] | -id _id_ | -all} -force[-dump] [-quiet] [-force]*`
+
+

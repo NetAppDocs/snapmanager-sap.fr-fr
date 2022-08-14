@@ -1,0 +1,20 @@
+---
+permalink: unix-administration/concept-full-or-partial-restoration-of-the-database.html 
+sidebar: sidebar 
+keywords: snapmanager, provide, flexibility, restore, full, database, specific, tablespace, control, file, combination, full, partial 
+summary: 'SnapManager offre la possibilité de restaurer des bases de données complètes, des espaces de stockage spécifiques, des fichiers, des fichiers de contrôle ou une combinaison de ces entités. SnapManager vous permet de restaurer les données à l"aide d"un processus de restauration basé sur des fichiers ou d"un processus plus rapide de restauration basé sur des volumes. Les administrateurs de bases de données peuvent sélectionner le processus qu"ils souhaitent utiliser ou laisser SnapManager choisir le processus approprié.' 
+---
+= Restauration complète ou partielle des bases de données
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager offre la possibilité de restaurer des bases de données complètes, des espaces de stockage spécifiques, des fichiers, des fichiers de contrôle ou une combinaison de ces entités. SnapManager vous permet de restaurer vos données à l'aide d'un processeur de restauration basé sur les fichiers, un processus plus rapide de restauration basé sur les volumes. Les administrateurs de bases de données peuvent sélectionner le processus qu'ils souhaitent utiliser ou laisser SnapManager choisir le processus approprié.
+
+SnapManager permet aux administrateurs de bases de données (DBA) de prévisualiser les opérations de restauration. La fonction d'aperçu permet aux administrateurs de bases de données d'afficher chaque opération de restauration fichier par fichier.
+
+Les administrateurs de bases de données peuvent spécifier le niveau auquel SnapManager restaure les informations lors des opérations de restauration. Par exemple, les administrateurs de bases de données peuvent restaurer et récupérer des données à des points spécifiques dans le temps. Le point de restauration peut être une date et une heure ou un numéro SCN (Oracle System change Number).
+
+SnapManager (3.2 ou version ultérieure) vous permet de restaurer et de récupérer automatiquement les sauvegardes de vos bases de données sans l'intervention de votre administrateur de bases de données. Vous pouvez utiliser SnapManager pour créer des sauvegardes de journaux d'archivage, puis les utiliser pour restaurer et restaurer les sauvegardes de base de données. Même si les fichiers journaux d'archive de la sauvegarde sont gérés dans un emplacement de journal d'archivage externe, vous pouvez spécifier cet emplacement externe afin que ces journaux d'archive puissent aider à récupérer la base de données restaurée.

@@ -1,0 +1,78 @@
+---
+permalink: windows/task-upgrading-snapmanager-for-oraclesnapmanager-for-sap-hosts.html 
+sidebar: sidebar 
+keywords: upgrade, exist, snapmanager, host, version, simultaneous, result, downtime, schedule, operation, time, upgrading 
+summary: 'Vous pouvez mettre à niveau tous les hôtes SnapManager existants pour utiliser la dernière version de SnapManager. Tous les hôtes sont mis à niveau simultanément. Toutefois, cela peut entraîner des temps d"indisponibilité de tous les hôtes SnapManager et des opérations planifiées pendant cette période.' 
+---
+= Mise à niveau des hôtes SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez mettre à niveau tous les hôtes SnapManager existants pour utiliser la dernière version de SnapManager. Tous les hôtes sont mis à niveau simultanément. Toutefois, cela peut entraîner des temps d'indisponibilité de tous les hôtes SnapManager et des opérations planifiées pendant cette période.
+
+. Arrêtez le serveur SnapManager en procédant comme suit :
++
+.. Dans la fenêtre Services Windows, sélectionnez *NetApp SnapManager pour SAP*.
+.. Dans le panneau de gauche, cliquez sur *Stop*.
+
+
+. Double-cliquez sur le fichier d'installation de SnapManager.
++
+|===
+| Si le système d'exploitation est... | Puis utilisez... 
+
+
+ a| 
+Windows x86
+ a| 
+netapp.smsap.windows-x86-version_number.exe
+
+
+
+ a| 
+Windows x64
+ a| 
+netapp.smsap.windows-x64-version_number.exe
+
+|===
++
+Le message suivant s'affiche : l'éditeur n'a pas pu être vérifié. Voulez-vous vraiment exécuter ce logiciel ?
+
+. Cliquez sur *OK*.
++
+La fenêtre Introduction s'affiche.
+
+. Cliquez sur *Suivant*.
++
+La fenêtre choisir un dossier d'installation s'affiche.
+
+. Cliquez sur *Suivant* pour accepter l'emplacement d'installation par défaut ou sélectionnez un nouvel emplacement.
++
+L'emplacement par défaut est : C:\Program Files\NetApp\SnapManager pour SAP.
+
+. Dans la fenêtre disponibilité du menu, cliquez sur *Suivant*.
+. Dans la fenêtre Specify Service Properties (spécifier les propriétés du service), entrez les informations relatives au compte et au mot de passe du service Windows.
++
+Le compte spécifié doit être membre des groupes suivants :
+
++
+** Le groupe d'administration locale du système de stockage
+** Groupe de l'administrateur local
+** Le groupe ORA_DBA vous pouvez spécifier si le service doit démarrer automatiquement après redémarrage ou si le service doit être démarré manuellement.
+
+
+. Dans la fenêtre Récapitulatif de pré-installation, cliquez sur *installer*.
+. Dans la fenêtre installation terminée, cliquez sur *Suivant*.
+. Dans la fenêtre informations importantes, cliquez sur *Done* pour quitter le programme d'installation.
+
+
+*Informations connexes*
+
+xref:concept-preparing-to-install-snapmanager-for-oraclesnapmanager-for-sap.adoc[Préparation de l'installation de SnapManager pour SAP]
+
+xref:concept-preinstallation-tasks.adoc[Tâches de préinstallation]
+
+xref:task-downloading-snapmanager-for-oraclesnapmanager-for-sap-installation-package.adoc[Téléchargement du package d'installation de SnapManager pour SAP]

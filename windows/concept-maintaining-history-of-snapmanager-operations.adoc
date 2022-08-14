@@ -1,0 +1,37 @@
+---
+permalink: windows/concept-maintaining-history-of-snapmanager-operations.html 
+sidebar: sidebar 
+keywords: snapmanager, sap, enable, maintain, history, operation, associate, single, multiple, profile, command-line, interface, cli, graphical, user, interface, gui, report, audit, compliance, purpose 
+summary: 'SnapManager pour SAP vous permet de conserver l"historique des opérations SnapManager associées à un ou plusieurs profils. Vous pouvez conserver l"historique depuis l"interface de ligne de commandes SnapManager ou l"interface utilisateur graphique. Vous pouvez afficher l"historique des opérations sous forme de rapport et utiliser le rapport à des fins de conformité d"audit.' 
+---
+= Conservation de l'historique des opérations SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager pour SAP vous permet de conserver l'historique des opérations SnapManager associées à un ou plusieurs profils. Vous pouvez conserver l'historique depuis l'interface de ligne de commandes SnapManager ou l'interface utilisateur graphique. Vous pouvez afficher l'historique des opérations sous forme de rapport et utiliser le rapport à des fins de conformité d'audit.
+
+Vous pouvez conserver l'historique des opérations SnapManager suivantes :
+
+* Créer une sauvegarde
+* Vérification de la sauvegarde
+* La restauration des sauvegardes
+* Création de clones
+
+
+Les informations d'historique des opérations SnapManager sont conservées en fonction de la conservation. Vous pouvez configurer des classes de rétention différentes pour chacune des opérations SnapManager prises en charge.
+
+Voici quelques classes de rétention que vous pouvez affecter :
+
+* Nombre de jours
+* Nombre de semaines
+* Nombre de mois
+* Nombre d'opérations
+
+
+En fonction de la conservation, SnapManager purge automatiquement l'historique. Vous pouvez également purger manuellement l'historique des opérations SnapManager. Si vous supprimez ou détruisez le profil, toutes les informations d'historique associées au profil sont supprimées.
+
+
+NOTE: Après la restauration de l'hôte, vous ne pouvez pas afficher les détails de l'historique ni effectuer d'opérations associées au profil configuré pour la maintenance de l'historique.

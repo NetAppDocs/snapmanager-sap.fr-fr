@@ -1,0 +1,104 @@
+---
+permalink: unix-administration/task-prune-archive-log-files.html 
+sidebar: sidebar 
+keywords: prune, archive, log, file, backup, pruning 
+summary: 'Vous pouvez élaguer les fichiers journaux d"archive à partir des emplacements du journal d"archivage lors de la création d"une sauvegarde.' 
+---
+= Prune des fichiers journaux d'archive
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez élaguer les fichiers journaux d'archive à partir des emplacements du journal d'archivage lors de la création d'une sauvegarde.
+
+*Ce dont vous aurez besoin*
+
+* Les fichiers journaux d'archivage doivent être sauvegardés par l'opération de sauvegarde en cours.
++
+Si l'élagage est spécifié avec d'autres sauvegardes qui ne contiennent pas de fichiers journaux d'archives, les fichiers journaux d'archives ne sont pas élagués.
+
+* La base de données doit être à l'état monté.
++
+Si la base de données n'est pas à l'état monté, entrez l'option -force avec la commande backup.
+
+
+
+*À propos de cette tâche*
+
+Lors de l'exécution d'une opération de sauvegarde, vous pouvez spécifier les éléments suivants :
+
+* Champ d'application de l'élagage :
++
+** Supprimez tous les fichiers journaux d'archives.
+** Supprimez les fichiers journaux d'archive jusqu'au numéro de modification du système (SCN) spécifié.
+** Supprimez les fichiers journaux d'archive jusqu'à l'heure spécifiée.
+** Supprimez les fichiers journaux d'archive avant la période spécifiée.
+
+
+* Destination à partir de laquelle les fichiers journaux d'archives doivent être élagués.
++
+
+NOTE: Même lorsque l'élagage du fichier journal des archives échoue dans une destination, SnapManager continue à nettoyer les fichiers journaux des archives des autres destinations.
+
+
+
+Avant de supprimer les fichiers journaux d'archive, SnapManager vérifie ce qui suit :
+
+* Les fichiers journaux d'archivage sont sauvegardés au moins une fois.
+* Le cas échéant, les fichiers journaux d'archivage sont envoyés à la base de données de secours Oracle DataGuard.
+* Le cas échéant, les fichiers journaux d'archive sont capturés par le processus de capture des flux Oracle.
+
+
+Si les fichiers journaux d'archive sont sauvegardés, envoyés en mode veille et capturés par le processus de capture, SnapManager supprime tous les fichiers journaux d'archive en une seule exécution. Cependant, si des fichiers journaux d'archives ne sont pas sauvegardés, ne sont pas envoyés en attente ou ne sont pas capturés par le processus de capture, SnapManager supprime les fichiers journaux d'archive un par un. La suppression des fichiers journaux d'archive en une seule exécution est plus rapide que la suppression des journaux d'archive un par un.
+
+SnapManager peut également regrouper les fichiers journaux d'archives et les supprimer par lot. Chaque lot a un maximum de 998 fichiers. Cette valeur peut être configurée en dessous de 998 en utilisant le paramètre de configuration `maximum.archivelog.files.toprune.atATime` dans le `smsap.config` fichier.
+
+SnapManager utilise les commandes Oracle Recovery Manager (RMAN) pour supprimer les fichiers journaux d'archive. Cependant, SnapManager ne s'intègre pas aux politiques de conservation et aux règles de suppression de RMAN.
+
+
+NOTE: Si vous supprimez les fichiers journaux d'archives des destinations du journal d'archives, l'élagage des fichiers journaux d'archives échoue.
+
+SnapManager ne prend pas en charge l'élagage des fichiers journaux d'archives dans les scénarios suivants :
+
+* Les fichiers journaux d'archive se trouvent dans la zone de récupération flash.
+* Les fichiers journaux d'archive se trouvent dans la base de données de secours.
+* Les fichiers journaux d'archivage sont gérés par SnapManager et RMAN.
+
+
+.Étape
+. Saisissez la commande suivante :
++
+`*smsap backup create -profile _profile_name_ {[-full {-online | -offline | -auto} [-retain {-hourly | [-daily | -weekly | -monthly | -unlimited}] [-verify] | [-data [[-files _files_ [_files_]] | [-tablespaces _-tablespaces_ [_-tablespaces_]] [-datalabel _label_] {-online | -offline | -auto} [-retain {-hourly | [-daily | -weekly | -monthly | -unlimited]} [-verify] | [-archivelogs [-label _label_] [-comment _comment_] [-protect | -noprotect | -protectnow] [-backup-dest _path1_ [,[_path2_]]] [-exclude-dest _path1_ [_,path2_]]] [-prunelogs {-all | -untilSCN _untilSCN_ | -until -date _yyyy-MM-dd:HH:mm:ss_ | -before {-months | -days | -weeks | -hours}} -prune-dest _prune_dest1_,[_prune_dest2_]] [-taskspec _taskspec_]} -dump [-force] [-quiet | -verbose]*`
+
++
+[cols="1a,3a"]
+|===
+| Les fonctions que vous recherchez... | Alors... 
+
+
+ a| 
+*Fichiers journaux d'archive Prune*
+ a| 
+Spécifiez les options suivantes :
+
+** `-prunelogs` spécifie la suppression des fichiers journaux d'archive lors de la création d'une sauvegarde.
++
+*** `-all` spécifie la suppression de tous les fichiers journaux d'archive.
+*** `-untilSCN` Spécifie la suppression des fichiers journaux d'archive jusqu'au SCN spécifié.
+*** `-until-date` spécifie la suppression des journaux d'archives, y compris la date et l'heure spécifiées.
+*** `-before` `{-months |-days | -weeks | -hours}` spécifie la suppression des fichiers journaux d'archive avant la période spécifiée.
+
+
+
+
+
+
+ a| 
+*Incluez la destination à partir de laquelle les fichiers journaux d'archives doivent être élagués*
+ a| 
+Spécifiez le `-prune-dest` option.
+
+|===
+

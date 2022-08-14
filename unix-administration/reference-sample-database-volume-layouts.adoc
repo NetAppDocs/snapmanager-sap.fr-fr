@@ -1,0 +1,182 @@
+---
+permalink: unix-administration/reference-sample-database-volume-layouts.html 
+sidebar: sidebar 
+keywords: sample, database, volume, layout, configuring, configure 
+summary: 'Vous pouvez vous reporter à des exemples de disposition de volume de base de données pour obtenir de l"aide sur la configuration de votre base de données.' 
+---
+= Exemples de disposition de volumes de base de données
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez vous reporter à des exemples de disposition de volume de base de données pour obtenir de l'aide sur la configuration de votre base de données.
+
+
+
+== Bases de données à instance unique
+
+[cols="1a,3a,1a,1a"]
+|===
+| Types de fichiers | Noms des volumes | Volume dédié pour les types de fichiers | Copies Snapshot automatiques 
+
+
+ a| 
+Binaires Oracle
+ a| 
+orabin_ `_host name_`
+ a| 
+Oui.
+ a| 
+Marche
+
+
+
+ a| 
+Fichiers de données
+ a| 
+oradata_ `_sid_`
+ a| 
+Oui.
+ a| 
+Éteint
+
+
+
+ a| 
+Fichiers de données temporaires
+ a| 
+oratemp_ `_sid_`
+ a| 
+Oui.
+ a| 
+Éteint
+
+
+
+ a| 
+Fichiers de contrôle
+ a| 
+oracntrl01_ `_sid_` (Multiplexée)
+
+oracntrl02_ `_sid_` (Multiplexée)
+ a| 
+Oui.
+ a| 
+Éteint
+
+
+
+ a| 
+Journaux de reprise
+ a| 
+oralog01_ `_sid_` (Multiplexée)
+
+oralog02_ `_sid_` (Multiplexée)
+ a| 
+Oui.
+ a| 
+Éteint
+
+
+
+ a| 
+Journaux d'archivage
+ a| 
+oraarch_ `_sid_`
+ a| 
+Oui.
+ a| 
+Éteint
+
+|===
+
+
+== Bases de données RAC (Real application clusters)
+
+[cols="1a,3a,1a,1a"]
+|===
+| Types de fichiers | Noms des volumes | Volume dédié pour les types de fichiers | Copies Snapshot automatiques 
+
+
+ a| 
+Binaires Oracle
+ a| 
+orabin_ `_host name_`
+ a| 
+Oui.
+ a| 
+Marche
+
+
+
+ a| 
+Fichiers de données
+ a| 
+oradata_ `_dbname_`
+ a| 
+Oui.
+ a| 
+Éteint
+
+
+
+ a| 
+Fichiers de données temporaires
+ a| 
+oratemp_ `_dbname_`
+ a| 
+Oui.
+ a| 
+Éteint
+
+
+
+ a| 
+Fichiers de contrôle
+ a| 
+oracntrl01_ `_dbname_` (Multiplexée)
+
+oracntrl02_ `_dbname_` (Multiplexée)
+ a| 
+Oui.
+ a| 
+Éteint
+
+
+
+ a| 
+Journaux de reprise
+ a| 
+oralog01_ `_dbname_` (Multiplexée)
+
+oralog02_ `_dbname_` (Multiplexée)
+ a| 
+Oui.
+ a| 
+Éteint
+
+
+
+ a| 
+Journaux d'archivage
+ a| 
+oraarch_ `_dbname_`
+ a| 
+Oui.
+ a| 
+Éteint
+
+
+
+ a| 
+Fichiers de cluster
+ a| 
+oracrs_ `_clustername_`
+ a| 
+Oui.
+ a| 
+Marche
+
+|===

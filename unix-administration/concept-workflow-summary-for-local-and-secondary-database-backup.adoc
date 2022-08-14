@@ -1,0 +1,57 @@
+---
+permalink: unix-administration/concept-workflow-summary-for-local-and-secondary-database-backup.html 
+sidebar: sidebar 
+keywords: dba, snapmanager, storage, administrator, netapp, management, console, data, protection, capability, local, backup, protect, database, target, workflow, summary, local, secondary, backup 
+summary: 'Dans cet exemple, l"administrateur de bases de données (via SnapManager) et l"administrateur du stockage (via la fonctionnalité de protection des données de la console de gestion NetApp) coordonnent les actions afin de configurer la sauvegarde locale et la sauvegarde secondaire (également appelée sauvegarde protégée) de la base de données cible.' 
+---
+= Récapitulatif des workflows de sauvegarde des bases de données locales et secondaires
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dans cet exemple, l'administrateur de bases de données (via SnapManager) et l'administrateur du stockage (via la fonctionnalité de protection des données de la console de gestion NetApp) coordonnent les actions afin de configurer la sauvegarde locale et la sauvegarde secondaire (également appelée sauvegarde protégée) de la base de données cible.
+
+La séquence des actions réalisées est résumée comme suit :
+
+* *Configuration de pool de ressources secondaire*
++
+L'administrateur du stockage utilise la fonctionnalité de protection des données de la console de gestion NetApp pour configurer un pool de ressources des systèmes de stockage sur le site secondaire et qui peut servir à stocker la sauvegarde de la base de données des salaires.
+
+* *Planification de sauvegarde secondaire*
++
+L'administrateur du stockage utilise la fonctionnalité de protection des données de la console de gestion NetApp pour configurer les planifications de sauvegardes secondaires.
+
+* *Configuration de la stratégie de protection*
++
+L'administrateur du stockage utilise la fonctionnalité de protection des données de NetApp Management Console pour configurer une stratégie de protection de sauvegarde secondaire pour la base de données cible. La règle de protection inclut les calendriers, les spécifie le type de protection de base pour implémenter la protection de sauvegarde (sauvegarde, mise en miroir ou une combinaison des deux). Elle définit également les règles de conservation pour les nœuds de stockage primaire, secondaire et parfois tertiaire.
+
+* *Affectation de la stratégie de configuration et de protection des profils de base de données*
++
+L'administrateur de base de données utilise SnapManager pour créer ou modifier un profil de la base de données cible prenant en charge la sauvegarde secondaire. Lors de la configuration du profil, l'administrateur de base de données :
+
++
+** Permet la protection des sauvegardes sur un système de stockage secondaire.
+** Attribue à ce profil la nouvelle règle de protection, créée dans et récupérée à partir de la fonctionnalité de protection des données NetApp Management Console.
++
+L'assignation de la règle de protection comprend automatiquement la base de données cible dans un jeu de données partiellement provisionné, mais qui ne respecte pas la capacité de protection des données de NetApp Management Console. Lorsqu'il est entièrement provisionné, la configuration des jeux de données permet de sauvegarder la base de données cible sur un stockage secondaire.
+
++
+Le nom du dataset utilise la syntaxe suivante : `_smsap_hostname_databasename_`, qui correspond à "smsap_prod01.sample.com_p01".
+
+
+
+* *Provisionnement de stockage secondaire et tertiaire*
++
+L'administrateur du stockage utilise la fonctionnalité de protection des données de NetApp Management Console pour attribuer des pools de ressources afin de provisionner les nœuds de stockage secondaires ou tertiaires (si la règle de protection spécifie les nœuds de stockage tertiaires).
+
+* *Sauvegarde sur stockage local*
++
+L'administrateur de bases de données ouvre le profil avec la protection activée dans SnapManager et crée une sauvegarde complète sur le stockage local. La nouvelle sauvegarde apparaît dans SnapManager selon la planification de la protection, mais elle n'est pas encore protégée.
+
+* *Confirmation de sauvegarde secondaire*
++
+La sauvegarde étant basée sur un profil de protection activé, la sauvegarde est transférée vers un environnement secondaire selon le planning de la règle de protection. L'administrateur de base de données utilise SnapManager pour confirmer le transfert de la sauvegarde vers le stockage secondaire. Une fois la sauvegarde copiée sur le stockage secondaire, SnapManager modifie l'état de protection des sauvegardes de « non protégé » à « protégé ».
+
+

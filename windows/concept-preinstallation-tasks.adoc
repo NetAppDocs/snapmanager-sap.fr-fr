@@ -1,0 +1,35 @@
+---
+permalink: windows/concept-preinstallation-tasks.html 
+sidebar: sidebar 
+keywords: install, snapmanager, sap, additional, task, environment, perform, operate, system, database, version, preinstallation 
+summary: 'Avant d"installer SnapManager pour SAP, vous devez effectuer quelques tâches supplémentaires pour configurer votre environnement. Les tâches que vous devez effectuer dépendent du système d"exploitation et de la version de la base de données que vous souhaitez utiliser.' 
+---
+= Tâches de préinstallation
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant d'installer SnapManager pour SAP, vous devez effectuer quelques tâches supplémentaires pour configurer votre environnement. Les tâches que vous devez effectuer dépendent du système d'exploitation et de la version de la base de données que vous souhaitez utiliser.
+
+* Installez le système d'exploitation sous licence avec les correctifs appropriés.
+* Définissez les langues du système d'exploitation et de la base de données Oracle sur Anglais.
++
+Par exemple, pour définir la langue de la base de données Oracle sur affectation en anglais `NLS_LANG = AMERICAN_AMERICA.WE8MSWIN1252`. Pour plus d'informations sur la définition de la langue, reportez-vous à la section _Troubleshooting SnapManager for SAP_.
+
+* Installez Data ONTAP avec les licences activées pour SnapRestore et les protocoles pris en charge tels que Fibre Channel (FC) et Internet Small Computer System interface (iSCSI) sur tous les systèmes de stockage.
+* Installez les correctifs Oracle suivants si vous utilisez des bases de données Oracle 11.2.0.2 et 11.2.0.3 :
++
+** 13413167 pour Windows 32 bits
+** 13555974 pour Windows 64 bits
+
+
+* Installez SAP BR* Tools.
+
+
+*Informations connexes*
+
+http://support.netapp.com/NOW/products/interoperability/["Matrice d'interopérabilité NetApp"^]
+
+http://media.netapp.com/documents/tr-3823.pdf["SnapManager pour les meilleures pratiques SAP"^]

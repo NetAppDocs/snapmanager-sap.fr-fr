@@ -1,0 +1,29 @@
+---
+permalink: unix-administration/task-restore-backups-from-an-alternate-location.html 
+sidebar: sidebar 
+keywords: restore, backup, alternate, location, data, file, intermediate, system, block, raw, device, restoring 
+summary: 'Vous pouvez restaurer des sauvegardes à partir d"un autre emplacement pour restaurer les fichiers de données d"un système de fichiers intermédiaire vers un système de fichiers actif, ou restaurer les blocs de données d"un périphérique brut intermédiaire vers un périphérique brut actif.' 
+---
+= Restaurez les sauvegardes à partir d'un autre emplacement
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez restaurer des sauvegardes à partir d'un autre emplacement pour restaurer les fichiers de données d'un système de fichiers intermédiaire vers un système de fichiers actif, ou restaurer les blocs de données d'un périphérique brut intermédiaire vers un périphérique brut actif.
+
+*Ce dont vous aurez besoin*
+
+* Créez un fichier XML de spécification de restauration et spécifiez le type de méthode de restauration que vous souhaitez utiliser.
+
+
+*À propos de cette tâche*
+
+Vous pouvez utiliser smsap `backup restore` Et spécifiez le fichier XML de spécification de restauration que vous avez créé pour restaurer la sauvegarde à partir d'un autre emplacement.
+
+. Saisissez la commande suivante :
++
+`*smsap backup restore -profile _profile_ -label _label_ -complete -alllogs -restorespec _restorespec_*`
+
+

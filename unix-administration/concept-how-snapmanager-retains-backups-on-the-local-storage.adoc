@@ -1,0 +1,176 @@
+---
+permalink: unix-administration/concept-how-snapmanager-retains-backups-on-the-local-storage.html 
+sidebar: sidebar 
+keywords: 'snapmanager, enable, create, backup, retention, policies, policy, successful, storage, retain, local, database summary: SnapManager enables you to create backups that meet retention policies, which specify how many successful backups on local storage should be retained. You can specify the number of successful backups that should be retained in the profile for a given database.' 
+---
+= SnapManager conserve les sauvegardes sur le système de stockage local
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager vous permet de créer des sauvegardes conformes aux politiques de conservation, ce qui précise le nombre de sauvegardes réussies sur le stockage local. Vous pouvez spécifier le nombre de sauvegardes réussies qui doivent être conservées dans le profil d'une base de données donnée.
+
+Vous pouvez créer des sauvegardes pour les éléments suivants :
+
+* 10 jours de sauvegardes quotidiennes sur le stockage primaire
+* 2 mois de sauvegardes mensuelles sur le système de stockage primaire
+* 7 jours de sauvegardes quotidiennes sur le système de stockage secondaire
+* 4 semaines de sauvegardes hebdomadaires sur le système de stockage secondaire
+* 6 mois de sauvegardes mensuelles sur système de stockage secondaire
+
+
+Pour chaque profil dans SnapManager, vous pouvez modifier les valeurs des classes de rétention non limitées suivantes :
+
+* Horaire
+* Tous les jours
+* Hebdomadaire
+* Tous les mois
+
+
+SnapManager détermine si une sauvegarde doit être conservée en tenant compte à la fois du nombre de rétention (par exemple, 15 sauvegardes) et de la durée de conservation (par exemple, 10 jours de sauvegardes quotidiennes). Une sauvegarde expire lorsque son âge dépasse la durée de rétention définie pour sa classe de rétention ou que le nombre de sauvegardes dépasse le nombre de rétention. Par exemple, si le nombre de sauvegardes est de 15 (SnapManager a effectué 15 sauvegardes réussies) et que le délai requis est fixé à 10 jours de sauvegardes quotidiennes, les cinq sauvegardes éligibles les plus anciennes expirent.
+
+Après expiration d'une sauvegarde, SnapManager libère ou supprime la sauvegarde expirée. SnapManager conserve toujours la dernière sauvegarde effectuée.
+
+SnapManager compte uniquement le nombre de sauvegardes réussies pour le nombre de rétention et ne prend pas en compte les éléments suivants :
+
+[cols="1a,1a"]
+|===
+| Sauvegardes non incluses dans le nombre de rétention | Informations supplémentaires 
+
+
+ a| 
+Sauvegardes ayant échoué
+ a| 
+SnapManager conserve les informations sur les sauvegardes réussies ou non. Bien que les sauvegardes qui échouent ne nécessitent que peu d'espace dans le référentiel, il est possible que vous souhaitiez les supprimer. Les sauvegardes qui ont échoué restent dans le référentiel jusqu'à ce que vous les supprimiez.
+
+
+
+ a| 
+Les sauvegardes désignées pour être conservées de façon illimitée ou pour une autre classe de conservation
+ a| 
+SnapManager ne supprime pas les sauvegardes désignées pour le conserver sans limites. En outre, SnapManager prend uniquement en compte les sauvegardes correspondant à la même classe de conservation (par exemple, SnapManager prend uniquement en compte les sauvegardes horaires pour le nombre de conservation horaire).
+
+
+
+ a| 
+Sauvegardes montées à partir d'un système de stockage local
+ a| 
+Lorsque les copies Snapshot sont montées, elles sont également clonées et ne sont donc pas considérées comme éligibles pour la conservation. La SnapManager ne peut pas supprimer les copies Snapshot s'ils sont clonés.
+
+
+
+ a| 
+Sauvegardes utilisées pour créer un clone sur un système de stockage local
+ a| 
+SnapManager conserve toutes les sauvegardes utilisées pour créer des clones, mais ne les prend pas en compte pour le nombre de conservation des sauvegardes.
+
+
+
+ a| 
+Sauvegardes clonées ou montées sur un système de stockage secondaire et qui utilisent la règle de protection en miroir
+ a| 
+Si SnapManager supprime les copies Snapshot de la sauvegarde sur la ressource de stockage principale et les copies Snapshot sont mises en miroir, la sauvegarde suivante sur le stockage secondaire échoue.
+
+|===
+Lorsque vous libérez une sauvegarde de ses ressources de stockage primaires, les ressources primaires (copies Snapshot) utilisées par la sauvegarde sont détruites, mais les métadonnées de sauvegarde sont toujours disponibles. SnapManager ne considère pas les sauvegardes libérées dans le nombre de rétention des sauvegardes.
+
+SnapManager fournit un nombre et une durée de conservation par défaut pour chaque classe de conservation. Par exemple, pour le nombre horaire de classes de conservation, SnapManager conserve par défaut quatre sauvegardes toutes les heures. Vous pouvez remplacer ces valeurs par défaut et définir les valeurs lors de la création ou de la mise à jour du profil ou modifier les valeurs par défaut pour le nombre de rétention et la durée dans `smsap.config` fichier.
+
+Les sauvegardes du système de stockage primaire sont protégées par la sauvegarde sur le système de stockage secondaire. Alors que SnapManager gère la conservation et la planification des sauvegardes sur un système de stockage primaire, protection Manager gère la conservation et la planification des sauvegardes sur un système de stockage secondaire.
+
+Lorsque les sauvegardes locales expirent en fonction de leur stratégie de conservation, elles sont supprimées ou libérées, selon qu'elles sont protégées ou non.
+
+* Les sauvegardes locales sont libérées si elles sont protégées. Leurs ressources de stockage ou leurs copies Snapshot sont supprimées, mais les sauvegardes restent dans le référentiel SnapManager et sont disponibles pour la restauration à partir du stockage secondaire. Vous n'avez pas besoin de libérer des sauvegardes (par exemple avec la commande backup free). Les sauvegardes sont libérées jusqu'à ce que la sauvegarde n'existe plus sur le système de stockage secondaire. À ce stade, la sauvegarde est supprimée.
+* S'ils ne sont pas protégés, les sauvegardes locales sont supprimées.
+
+
+Dans une opération de sauvegarde archivelog uniquement, SnapManager n'archive pas les fichiers journaux de reprise, contrairement au processus de sauvegarde de la base de données en ligne. Vous devez ajouter un script de prétâche pour archiver les fichiers journaux de reprise avant d'effectuer l'opération de sauvegarde archivelog uniquement. Le script de prétâche doit exécuter le `alter system switch logfile` commande.
+
+L'exemple suivant montre les actions que SnapManager effectue sur différents types de sauvegardes, selon une stratégie de conservation des sauvegardes quotidiennes (avec le nombre défini à conserver 3) :
+
+[cols="1a,1a,1a,1a"]
+|===
+| Date de sauvegarde | État | Action de politique de conservation entreprise | Explication 
+
+
+ a| 
+5/10
+ a| 
+Réussi
+ a| 
+Gardez
+ a| 
+Il s'agit de la sauvegarde la plus récente qui a réussi, elle sera donc conservée.
+
+
+
+ a| 
+5/9
+ a| 
+Réussi, cloné
+ a| 
+Ignorer
+ a| 
+SnapManager ne prend pas en compte les sauvegardes utilisées pour le clonage dans le nombre de règles de conservation. Cette sauvegarde est omise du nombre de sauvegardes réussies.
+
+
+
+ a| 
+5/8
+ a| 
+Réussite, monté
+ a| 
+Ignorer
+ a| 
+SnapManager ne considère pas les sauvegardes montées sur le nombre de stratégies de conservation. Cette sauvegarde est omise du nombre de sauvegardes réussies.
+
+
+
+ a| 
+5/7
+ a| 
+Échec
+ a| 
+Ignorer
+ a| 
+Les sauvegardes ayant échoué ne sont pas comptées.
+
+
+
+ a| 
+5/5
+ a| 
+Réussi
+ a| 
+Gardez
+ a| 
+SnapManager conserve cette seconde sauvegarde quotidienne réussie.
+
+
+
+ a| 
+5/3
+ a| 
+Réussi
+ a| 
+Gardez
+ a| 
+Cette troisième sauvegarde quotidienne avec succès est réalisée par SnapManager.
+
+
+
+ a| 
+5/2
+ a| 
+Réussi
+ a| 
+Supprimer
+ a| 
+SnapManager compte cette sauvegarde réussie, mais cette sauvegarde est supprimée après que SnapManager ait atteint trois succès chaque jour.
+
+|===
+*Informations connexes*
+
+http://mysupport.netapp.com/["Documentation sur le site de support NetApp"^]

@@ -1,0 +1,65 @@
+---
+permalink: unix-administration/concept-about-role-based-access-control.html 
+sidebar: sidebar 
+keywords: role-based, access, control, rbac, control, access, snapmanager, operation, administrator, environment, role 
+summary: 'Le contrôle d"accès basé sur des rôles (RBAC) vous permet de contrôler qui a accès aux opérations SnapManager. Le RBAC permet aux administrateurs de gérer des groupes d"utilisateurs en définissant des rôles et en y affectant des utilisateurs. Vous pouvez utiliser le RBAC SnapManager dans les environnements où le RBAC est déjà en place.' 
+---
+= À propos du contrôle d'accès basé sur des rôles
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le contrôle d'accès basé sur des rôles (RBAC) vous permet de contrôler qui a accès aux opérations SnapManager. Le RBAC permet aux administrateurs de gérer des groupes d'utilisateurs en définissant des rôles et en y affectant des utilisateurs. Vous pouvez utiliser le RBAC SnapManager dans les environnements où le RBAC est déjà en place.
+
+Le RBAC inclut les composants suivants :
+
+* Ressources : volumes et LUN qui détiennent les fichiers de données qui constituent la base de données.
+* Capacités : types d'opérations pouvant être exécutées sur une ressource.
+* Utilisateurs : personnes auxquelles vous accordez des droits.
+* Rôles : ensemble de ressources et de fonctionnalités autorisées sur les ressources. Vous attribuez un rôle spécifique à un utilisateur qui doit effectuer ces fonctions.
+
+
+Vous activez le RBAC dans SnapDrive. Vous pouvez ensuite configurer des fonctionnalités spécifiques par rôle dans l'interface utilisateur graphique Web d'Operations Manager ou l'interface de ligne de commandes. Des vérifications RBAC ont lieu sur le serveur DataFabric Manager.
+
+Le tableau suivant répertorie certains rôles et leurs tâches types, tels qu'ils sont définis dans Operations Manager.
+
+[cols="1a,3a"]
+|===
+| Rôle | Tâches types 
+
+
+ a| 
+Administrateur SAP Basis
+ a| 
+* Création, maintenance et surveillance d'une base de données Oracle résidant sur un hôte
+* Planification et création de sauvegardes de bases de données
+* Garantie que les sauvegardes sont valides et peuvent être restaurées
+* Clonage des bases de données
+
+
+
+
+ a| 
+Administrateur des serveurs
+ a| 
+* Configuration des systèmes et des agrégats de stockage
+* Surveillance des volumes pour libérer de l'espace
+* Provisionnement du stockage sur les demandes des utilisateurs
+* Configuration et surveillance de la mise en miroir de la reprise après incident
+
+
+
+
+ a| 
+Architecte du stockage
+ a| 
+* Prendre des décisions architecturales en matière de stockage
+* Planification de la croissance de la capacité de stockage
+* Planifier des stratégies de reprise après incident
+* Déléguer des capacités aux membres de l'équipe
+
+
+|===
+Si le contrôle d'accès basé sur des rôles est utilisé (ce qui signifie qu'Operations Manager est installé et que le contrôle d'accès basé sur des rôles est activé dans SnapDrive), l'administrateur du stockage doit attribuer des autorisations RBAC à tous les volumes et systèmes de stockage pour les fichiers de base de données.

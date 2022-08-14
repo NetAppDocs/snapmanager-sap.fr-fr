@@ -1,0 +1,73 @@
+---
+permalink: unix-administration/concept-what-snapmanager-operation-states-are.html 
+sidebar: sidebar 
+keywords: snapmanager, operation, backup, restore, clone, state 
+summary: 'Les opérations SnapManager (sauvegarde, restauration et clonage) peuvent se trouver dans différents États, chaque état indiquant la progression de l"opération.' 
+---
+= Quels sont les États des opérations SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les opérations SnapManager (sauvegarde, restauration et clonage) peuvent se trouver dans différents États, chaque état indiquant la progression de l'opération.
+
+[cols="1a,4a"]
+|===
+| État de fonctionnement | Description 
+
+
+ a| 
+Réussi
+ a| 
+L'opération a réussi.
+
+
+
+ a| 
+Exécution
+ a| 
+L'opération a démarré, mais n'est pas terminée. Par exemple, une sauvegarde, qui prend deux minutes, est planifiée à 11:00. Lorsque vous affichez l'onglet *Schedule* à 11 h 01, l'opération s'affiche comme étant en cours d'exécution.
+
+
+
+ a| 
+Aucune opération trouvée
+ a| 
+La planification n'a pas été exécutée ou la dernière sauvegarde a été supprimée.
+
+
+
+ a| 
+Échec
+ a| 
+Échec de l'opération. SnapManager a automatiquement exécuté le processus d'abandon et nettoyé l'opération.
+
+
+NOTE: Vous pouvez séparer le clone créé. Lorsque vous arrêtez l'opération de fractionnement du clone, que vous avez démarré et que l'opération est arrêtée correctement, l'état de l'opération de fractionnement du clone s'affiche comme échec.
+
+|===
+
+
+== Événements récupérables et récupérables
+
+Un événement SnapManager récupérable présente les problèmes suivants :
+
+* La base de données n'est pas stockée sur un système de stockage qui exécute Data ONTAP.
+* SnapDrive for UNIX n'est pas installé ou ne peut pas accéder au système de stockage.
+* SnapManager ne parvient pas à créer une copie Snapshot ou à provisionner le stockage si l'espace du volume est insuffisant, le nombre maximal de copies Snapshot a été atteint ou une exception imprévue se produit.
+
+
+Lorsqu'un événement récupérable se produit, SnapManager effectue un processus d'abandon et tente de rétablir l'état de démarrage de l'hôte, de la base de données et du système de stockage. Si le processus d'abandon échoue, SnapManager traite l'incident comme un événement irrécupérable.
+
+Un événement irrécupérable (hors bande) se produit lorsque l'un des événements suivants se produit :
+
+* Un problème système se produit, par exemple lorsqu'un hôte tombe en panne.
+* Le processus SnapManager est arrêté.
+* Une opération d'abandon intrabande échoue lorsque le système de stockage tombe en panne, que le numéro d'unité logique (LUN) ou le volume de stockage est hors ligne ou que le réseau tombe en panne.
+
+
+Lorsqu'un événement irrécupérable se produit, SnapManager effectue immédiatement un processus d'abandon. L'hôte, la base de données et le système de stockage n'ont peut-être pas été renvoyés à l'état initial. Si c'est le cas, vous devez effectuer un nettoyage après l'échec de l'opération SnapManager en supprimant la copie Snapshot orpheline et en supprimant le fichier de verrouillage SnapManager.
+
+Si vous souhaitez supprimer le fichier de verrouillage SnapManager, accédez à `$ORACLE_HOME` sur l'ordinateur cible et supprimez le `sm_lock_ _TargetDBName_` fichier. Après avoir supprimé le fichier, vous devez redémarrer le serveur SnapManager pour SAP.

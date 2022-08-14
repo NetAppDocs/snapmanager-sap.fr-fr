@@ -1,0 +1,24 @@
+---
+permalink: unix-installation-cmode/task-smsap-isg-uninstall-the-software-from-a-unix-host.html 
+sidebar: sidebar 
+keywords: snapmanager, software, uninstall, host, server, unix 
+summary: 'Si vous n"avez plus besoin du logiciel SnapManager, vous pouvez le désinstaller du serveur hôte.' 
+---
+= Désinstallez le logiciel d'un hôte UNIX
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous n'avez plus besoin du logiciel SnapManager, vous pouvez le désinstaller du serveur hôte.
+
+.Étapes
+. Connectez-vous en tant que root.
+. Pour arrêter le serveur, entrez la commande suivante : `smsap_server stop`
+. Pour supprimer le logiciel SnapManager, entrez la commande suivante : `*UninstallSmsap*`
+. Après le texte d'introduction, appuyez sur *entrée* pour continuer.
++
+La désinstallation est terminée.
+
+

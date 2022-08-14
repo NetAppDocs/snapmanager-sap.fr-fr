@@ -1,0 +1,38 @@
+---
+permalink: windows/concept-advantages-of-using-snapmanager.html 
+sidebar: sidebar 
+keywords: snapmanager, sap, task, database, manage, data, advantage, use 
+summary: Vous pouvez utiliser SnapManager pour SAP pour effectuer différentes tâches sur les bases de données et gérer les données de manière efficace. 
+---
+= Avantages de l'utilisation de SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez utiliser SnapManager pour SAP pour effectuer différentes tâches sur les bases de données et gérer les données de manière efficace.
+
+SnapManager for SAP fonctionne avec les systèmes de stockage et vous permet d'effectuer les tâches suivantes :
+
+* Créer des sauvegardes peu gourmandes en espace sur le stockage primaire ou secondaire et planifier les sauvegardes.
++
+Vous pouvez créer des sauvegardes de bases de données complètes et partielles et appliquer des règles de durée de conservation.SnapManager (3.2 ou version ultérieure) vous permet de créer des sauvegardes des fichiers de données et des journaux d'archivage uniquement.
+
++
+** SnapManager (3.2 ou version ultérieure) vous permet d'effectuer le prétraitement ou le post-traitement avant ou après les opérations de sauvegarde et de restauration.
+** SnapManager (3.2 ou version ultérieure) vous permet de protéger les sauvegardes avec les scripts de post-traitement.
+
+
+* Restaurez des bases de données complètes ou partielles à l'aide de l'opération de restauration basée sur des fichiers.
+* Restaurez et récupérez automatiquement les sauvegardes de bases de données.
++
+SnapManager (3.2 ou version ultérieure) permet la restauration et la récupération automatiques des sauvegardes de bases de données. SnapManager restaure automatiquement la base de données restaurée en découvrant, installant et appliquant les fichiers journaux d'archivage des sauvegardes.
+
+* Créez des sauvegardes pour les journaux d'archive uniquement à partir des destinations du journal d'archivage.
+* Conservez automatiquement le nombre minimal de sauvegardes des journaux d'archivage en conservant uniquement les sauvegardes avec des fichiers de journal d'archivage uniques.
+* Assurez le suivi des opérations et créez des rapports par hôte, profil, sauvegarde ou clonage.
+* Vérifiez l'état de la sauvegarde.
+* Conserver l'historique des opérations SnapManager associées à un profil.
+* Créer des clones compacts de sauvegardes sur le système de stockage primaire
+

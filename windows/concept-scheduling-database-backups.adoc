@@ -1,0 +1,30 @@
+---
+permalink: windows/concept-scheduling-database-backups.html 
+sidebar: sidebar 
+keywords: snapmanager, sap, enable, schedule, database, backup, basis, off-peak, performance, profile, information, retention, policy 
+summary: 'SnapManager (3.2 ou version ultérieure) pour SAP vous permet de planifier l"exécution régulière des sauvegardes de base de données pendant les heures creuses, afin de maintenir ainsi des performances élevées. Pour planifier une sauvegarde, vous pouvez créer un profil, qui inclut les informations de la base de données et la stratégie de rétention, puis définir des plannings pour la sauvegarde.' 
+---
+= Planification des sauvegardes de base de données
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager (3.2 ou version ultérieure) pour SAP vous permet de planifier l'exécution régulière des sauvegardes de base de données pendant les heures creuses, afin de maintenir ainsi des performances élevées. Pour planifier une sauvegarde, vous pouvez créer un profil, qui inclut les informations de la base de données et la stratégie de rétention, puis définir des plannings pour la sauvegarde.
+
+
+NOTE: Vous devez planifier les sauvegardes en tant qu'administrateur. Si vous essayez de planifier les sauvegardes en tant qu'utilisateur non existant, SnapManager affiche un message d'erreur : utilisateur non valide : nom d'utilisateur : impossible de créer une sauvegarde de planification pour un utilisateur donné
+
+Voici quelques-unes des tâches liées à la planification :
+
+* Planifiez une sauvegarde de base de données toutes les heures, tous les jours, toutes les semaines, tous les mois ou toutes les heures.
+* Afficher la liste des sauvegardes planifiées associées à un profil.
+* Mettre à jour une sauvegarde planifiée.
+* Suspendre temporairement une programmation.
+* Reprendre le planning suspendu.
+* Supprimer un planning.
+
+
+
+NOTE: La case à cocher *Exécuter maintenant Menu opération* est désactivée lorsqu'une sauvegarde planifiée est en cours d'exécution pour ce programme.

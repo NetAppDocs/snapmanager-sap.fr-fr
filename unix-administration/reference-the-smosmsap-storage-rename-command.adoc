@@ -1,0 +1,63 @@
+---
+permalink: unix-administration/reference-the-smosmsap-storage-rename-command.html 
+sidebar: sidebar 
+keywords: command, update, name, ip, address, storage, system, smsap 
+summary: 'Cette commande met à jour le nom ou l"adresse IP du système de stockage.' 
+---
+= La commande smsap Storage rename
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Cette commande met à jour le nom ou l'adresse IP du système de stockage.
+
+
+
+== Syntaxe
+
+[listing, subs="+macros"]
+----
+pass:quotes[smsap storage rename
+-profile _profile_ -oldname _old_storage_name_ -newname _new_storage_name_
+[-quiet | -verbose\]]
+----
+
+
+== Paramètres
+
+* `*-profile _profile_*`
++
+Spécifie le nom du profil. Ce nom peut comporter jusqu'à 30 caractères et doit être unique au sein de l'hôte.
+
+* `*-oldname _old_storage_name_*`
++
+Spécifie l'adresse IP ou le nom du système de stockage avant de renommer le système de stockage. Vous devez saisir l'adresse IP ou le nom du système de stockage qui s'affiche lorsque vous exécutez le `smsap storage list` commande.
+
+* `*-newname _new_storage_name_*`
++
+Spécifie l'adresse IP ou le nom du système de stockage après le changement de nom du système de stockage.
+
+* `*-quiet*`
++
+Affiche uniquement les messages d'erreur dans la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* `*-verbose*`
++
+Affiche les messages d'erreur, d'avertissement et d'information dans la console.
+
+
+
+'''
+
+
+== Exemple
+
+L'exemple suivant utilise le `smsap storage rename` commande pour renommer le système de stockage :
+
+[listing]
+----
+smsap storage rename -profile mjullian -oldname lech -newname hudson -verbose
+----
+'''

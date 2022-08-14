@@ -1,0 +1,25 @@
+---
+permalink: unix-administration/task-issue-commands-from-an-alternate-host.html 
+sidebar: sidebar 
+keywords: issue, cli, command, host, database, snapmanager, route, issuing, alternate 
+summary: 'Vous pouvez lancer des commandes CLI à partir d"un hôte autre que l"hôte de base de données et SnapManager achemine les commandes que vous entrez vers l"hôte approprié.' 
+---
+= Exécutez des commandes à partir d'un autre hôte
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez lancer des commandes CLI à partir d'un hôte autre que l'hôte de base de données et SnapManager achemine les commandes que vous entrez vers l'hôte approprié.
+
+*À propos de cette tâche*
+
+Pour que le système envoie une opération à l'hôte approprié, il doit d'abord savoir où trouver le profil pour l'opération. Dans cette procédure, le système conserve les informations de mappage du profil pour le référentiel d'un fichier dans le répertoire personnel de l'utilisateur sur l'hôte local.
+
+.Étape
+. Pour que le répertoire de base de l'utilisateur local soit conscient des mappages profil-référentiel afin qu'il puisse acheminer la demande d'opération, entrez la commande suivante :
++
+`*smsap profile sync -repository-dbname _repo_dbname_ -host _repo_host_ -port _repo_port_ -login-username _repo_username_ [-quiet | -verbose]*`
+
+

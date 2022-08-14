@@ -1,0 +1,39 @@
+---
+permalink: windows/task-post-rollback-tasks.html 
+sidebar: sidebar 
+keywords: perform, additional, step, rollback, repository, database, downgrade, snapmanager, host, schedule, create, version, post, task 
+summary: 'Vous devez effectuer quelques étapes supplémentaires après la restauration d"une base de données de référentiel et la mise à niveau de l"hôte SnapManager de SnapManager 3.2 vers SnapManager 3.0, afin d"afficher les planifications créées dans la version antérieure de la base de données de référentiel.' 
+---
+= Tâches post-restauration
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez effectuer quelques étapes supplémentaires après la restauration d'une base de données de référentiel et la mise à niveau de l'hôte SnapManager de SnapManager 3.2 vers SnapManager 3.0, afin d'afficher les planifications créées dans la version antérieure de la base de données de référentiel.
+
+.Étapes
+. Accédez à `C:\Program Files\NetApp\SnapManager for Oracle\repositories`.
++
+Le `repositories` le répertoire peut contenir deux fichiers pour chaque référentiel. Le nom de fichier avec le signe de numéro (#) est créé à l'aide de SnapManager 3.1 ou version ultérieure et le nom de fichier avec le tiret (-) est créé à l'aide de SnapManager 3.0.
+
++
+*Exemple*
+
++
+Les noms de fichiers peuvent être les suivants :
+
++
+** `repository#SMSAP300a#SMSAPREPO1#10.72.197.141#1521`
+** `repository-smsap300a-smsaprepo1-10.72.197.141-1521`
+
+
+. Remplacez le signe numérique (#) dans le nom de fichier par le tiret (-).
++
+*Exemple*
+
++
+Le nom du fichier qui a le signe de numéro (#), contient maintenant le tiret (-): `repository-SMSAP300a-SMSAPREPO1-10.72.197.141-1521.`
+
+

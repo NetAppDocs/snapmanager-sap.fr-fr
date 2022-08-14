@@ -1,0 +1,22 @@
+---
+permalink: windows/concept-restore-files-from-an-alternate-location.html 
+sidebar: sidebar 
+keywords: snapmanager, enable, restore, data, file, control, location, snapshot, copies, copy, volume, alternate, location 
+summary: 'SnapManager vous permet de restaurer les fichiers de données et de contrôler à partir d"un emplacement autre que celui des copies Snapshot dans le volume d"origine.' 
+---
+= Restaurez les fichiers à partir d'un autre emplacement
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager vous permet de restaurer les fichiers de données et de contrôler à partir d'un emplacement autre que celui des copies Snapshot dans le volume d'origine.
+
+L'emplacement d'origine correspond à l'emplacement du fichier sur le système de fichiers actif au moment de la sauvegarde. L'autre emplacement est l'emplacement à partir duquel un fichier sera restauré.
+
+Vous pouvez effectuer une restauration à partir d'un autre emplacement pour restaurer les fichiers de données d'un système de fichiers intermédiaire vers un système de fichiers actif.
+
+La restauration est automatisée par SnapManager. Lors de la récupération de fichiers à partir d'emplacements externes, SnapManager utilise le `recovery automatic from location` commande.
+
+SnapManager utilise également Oracle Recovery Manager (RMAN) pour restaurer les fichiers. Les fichiers à récupérer doivent être reconnaissables par Oracle. Les noms de fichiers doivent être au format par défaut. Lors de la restauration à partir de la zone de restauration Flash, SnapManager constitue la voie vers Oracle. Oracle cependant, ne récupère pas à partir de la zone de récupération flash car il ne peut pas générer le nom de fichier correct. Idéalement, la zone de restauration Flash est une destination destinée à fonctionner avec RMAN.

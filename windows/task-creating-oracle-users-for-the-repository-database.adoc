@@ -1,0 +1,37 @@
+---
+permalink: windows/task-creating-oracle-users-for-the-repository-database.html 
+sidebar: sidebar 
+keywords: create, oracle, user, repository, database, assign, privilege, operation, creating 
+summary: Vous pouvez créer un utilisateur Oracle pour la base de données du référentiel et attribuer des privilèges spécifiques pour effectuer différentes opérations sur la base de données du référentiel. 
+---
+= Création d'utilisateurs Oracle pour la base de données du référentiel
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez créer un utilisateur Oracle pour la base de données du référentiel et attribuer des privilèges spécifiques pour effectuer différentes opérations sur la base de données du référentiel.
+
+Vous devez attribuer les privilèges de connexion et de ressource à l'utilisateur Oracle. Il n'est pas nécessaire de créer un utilisateur pour la base de données du référentiel avec les privilèges sysdba.
+
+
+NOTE: Cependant, vous devez créer un utilisateur Oracle avec le rôle sysdba pour la base de données cible.
+
+. Connectez-vous à SQL *plus.
++
+À l'invite de commande, entrez la commande suivante : `sqlplus '/ as sysdba'`
+
++
+[listing]
+----
+SQL*Plus: Release 11.2.0.1.0 Production on Wed Jun 1 06:01:26 2011
+Copyright (c) 1982, 2009, Oracle.  All rights reserved.
+Connected to:
+Oracle Database 11g Enterprise Edition Release 11.2.0.1.0 - Production
+With the Partitioning, Automatic Storage Management, OLAP, Data Mining
+and Real Application Testing options
+----
+. Pour créer un utilisateur, par exemple repo1_user, pour le référentiel avec le mot de passe administrateur, par exemple adminpw1, entrez la commande suivante à l'invite SQL : `SQL> create user repo1_user identified by adminpw1;`
+. Pour accorder des privilèges de connexion et de ressource à l'utilisateur, entrez la commande suivante : `grant connect, resource to repo1_user;`
+

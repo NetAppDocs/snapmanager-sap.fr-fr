@@ -1,0 +1,37 @@
+---
+permalink: unix-installation-cmode/reference-supported-storage-types.html 
+sidebar: sidebar 
+keywords: snapmanager, support, wide, range, storage, type, physical, virtual, machine, verify, install, upgrade, storage, type 
+summary: 'SnapManager prend en charge un large éventail de types de stockage sur les serveurs physiques et virtuels. Vous devez vérifier le support de votre type de stockage avant d"installer ou de mettre à niveau SnapManager.' 
+---
+= Types de stockage pris en charge
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager prend en charge un large éventail de types de stockage sur les serveurs physiques et virtuels. Vous devez vérifier le support de votre type de stockage avant d'installer ou de mettre à niveau SnapManager.
+
+|===
+| Machine | Type de stockage 
+
+
+ a| 
+Serveur physique
+ a| 
+* Volumes connectés par NFS
+* LUN connectés via FC
+* LUN connectées à l'iSCSI
+
+
+
+
+ a| 
+VMware ESX
+ a| 
+* Volumes NFS connectés directement au système invité
+* LUN RDM sur le système d'exploitation invité
+
+
+|===

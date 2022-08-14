@@ -1,0 +1,87 @@
+---
+permalink: unix-administration/reference-the-smosmsaprepository-update-command.html 
+sidebar: sidebar 
+keywords: command, update, repository, store, database, profile, credentials, upgrade, snapmanager, install, version, incomplete, smsap 
+summary: 'Cette commande met à jour le référentiel qui stocke les profils de base de données et les informations d"identification associées lors de la mise à niveau de SnapManager. Chaque fois que vous installez une nouvelle version de SnapManager, vous devez exécuter la commande de mise à jour du référentiel avant de pouvoir utiliser la nouvelle version. Vous ne pouvez utiliser cette commande que s"il n"y a pas de commandes incomplètes dans le référentiel.' 
+---
+= La commande smsap repository update
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Cette commande met à jour le référentiel qui stocke les profils de base de données et les informations d'identification associées lors de la mise à niveau de SnapManager. Chaque fois que vous installez une nouvelle version de SnapManager, vous devez exécuter la commande de mise à jour du référentiel avant de pouvoir utiliser la nouvelle version. Vous ne pouvez utiliser cette commande que s'il n'y a pas de commandes incomplètes dans le référentiel.
+
+
+
+== Syntaxe
+
+[listing]
+----
+smsap repository update
+-repository
+-dbname repo_service_name
+-host repo_host
+-login -username repo_username
+-port repo_port
+[-force] [-noprompt]
+[-quiet | -verbose]
+----
+
+
+== Paramètres
+
+* ``*-repository*``
++
+Les options suivantes `-repository` spécifiez les détails de la base de données pour le référentiel.
+
+* ``*-dbname _repo_service_name_*``
++
+Indique le nom de la base de données qui stocke le référentiel. Utilisez le nom global ou le SID.
+
+* ``*-host _repo_host_*``
++
+Indique le nom ou l'adresse IP de l'ordinateur hôte sur lequel s'exécute la base de données de référentiel.
+
+* ``*-login*``
++
+Démarre les détails de connexion au référentiel.
+
+* ``*-username _repo_username_*``
++
+Indique le nom d'utilisateur nécessaire pour accéder à la base de données qui stocke le référentiel.
+
+* ``*-port _repo_port_*``
++
+Spécifie le numéro de port TCP utilisé pour accéder à la base de données qui stocke le référentiel.
+
+* ``*-force*``
++
+Tente de forcer la mise à jour du référentiel. SnapManager vous invite à effectuer une sauvegarde du référentiel actuel avant la mise à jour.
+
+* ``*-noprompt*``
++
+N'affiche pas l'invite avant la mise à jour de la base de données du référentiel. À l'aide du `-noprompt` permet de s'assurer que l'invite ne s'affiche pas, ce qui facilite la mise à jour des référentiels à l'aide d'un script.
+
+* ``*-quiet*``
++
+Affiche uniquement les messages d'erreur sur la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* ``*-verbose*``
++
+Affiche des messages d'erreur, d'avertissement et d'information sur la console.
+
+
+
+
+
+== Exemple de commande
+
+L'exemple suivant met à jour le référentiel dans la base de données SALESDB.
+
+[listing]
+----
+smsap repository update -repository -dbname SALESDB
+-host server1 -login -username admin -port 1521
+----

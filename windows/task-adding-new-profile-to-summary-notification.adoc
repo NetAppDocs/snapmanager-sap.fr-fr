@@ -1,0 +1,23 @@
+---
+permalink: windows/task-adding-new-profile-to-summary-notification.html 
+sidebar: sidebar 
+keywords: configure, summary, email, notification, repository, database, profile, command, add 
+summary: 'Après avoir configuré une notification de synthèse par e-mail pour la base de données du référentiel, vous pouvez ajouter un nouveau profil à la notification de synthèse à l"aide de la commande de notification de synthèse.' 
+---
+= Ajout d'un nouveau profil aux notifications par e-mail récapitulatives
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après avoir configuré une notification de synthèse par e-mail pour la base de données du référentiel, vous pouvez ajouter un nouveau profil à la notification de synthèse à l'aide de la commande de notification de synthèse.
+
+. Saisissez la commande suivante : `smsap profile create -profileprofile_name [-profile-passwordprofile_password] -repository-dbnamerepo_service_name-hostrepo_host-portrepo_port-login-usernamerepo_username-database-dbnamedb_dbname-hostdb_host [-siddb_sid] [-login-usernamedb_username-passworddb_password-portdb_port] [-rman {-controlfile | \{-login-usernamerman_username-passwordrman_password-tnsnamerman_tnsname} } ] [-retain [-hourly-countn] [-durationm]] [-daily-countn] [-durationm]] [-weekly-countn] [-durationm]] [-monthly-countn] [-durationm]]] [-commentcomment][-snapname-patternpattern][ [ ]] [-summary-notification]`
++
+Les autres options de cette commande sont les suivantes :
+
++
+[-force]
+
+

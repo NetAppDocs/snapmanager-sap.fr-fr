@@ -1,0 +1,68 @@
+---
+permalink: windows/reference-the-smosmsapoperation-dump-command.html 
+sidebar: sidebar 
+keywords: run, operation, dump, command, jar, file, diagnostic, information, smsap 
+summary: Vous pouvez exécuter la commande opération dump pour créer un fichier JAR qui contient des informations de diagnostic sur une opération. 
+---
+= La commande smsap operation dump
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez exécuter le `operation dump` Commande pour créer un fichier JAR qui contient des informations de diagnostic sur une opération.
+
+
+
+== Syntaxe
+
+[listing]
+----
+
+smsap operation dump
+-profile profile_name
+[-label label_name | -id guid]
+[-quiet | -verbose]
+----
+
+
+== Paramètres
+
+* *`-profile _profile_name_`*
++
+Spécifie le profil pour lequel vous souhaitez créer les fichiers de vidage. Le profil contient l'identifiant de la base de données et d'autres informations sur la base de données.
+
+* *`-label _label_name_`*
++
+Crée des fichiers de vidage pour l'opération et attribue l'étiquette spécifiée.
+
+* *`-id _guid_`*
++
+Crée des fichiers de vidage pour l'opération avec le GUID spécifié. Le GUID est généré par SnapManager au démarrage de l'opération.
+
+* *`-quiet`*
++
+Affiche uniquement les messages d'erreur dans la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* *`-verbose`*
++
+Affiche les messages d'erreur, d'avertissement et d'information dans la console.
+
+
+
+
+
+== Exemple
+
+L'exemple suivant crée le fichier de vidage pour la sauvegarde :
+
+[listing]
+----
+smsap operation dump -profile SALES1
+-id 8abc01ec0e78f3e2010e78f3fdd00001
+----
+[listing]
+----
+Dump file created Path: C:\userhomedirectory\netapp\smsap\3.3\smsap_dump_8abc01ec0e78f3e2010e78f3fdd00001.jar
+----

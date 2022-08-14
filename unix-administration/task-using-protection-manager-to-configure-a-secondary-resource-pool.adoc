@@ -1,0 +1,47 @@
+---
+permalink: unix-administration/task-use-protection-manager-to-configure-a-secondary-resource-pool.html 
+sidebar: sidebar 
+keywords: support, backup, database, secondary, storage, administrator, protection, manager, organize, snapvault, license, resource, pool 
+summary: 'Pour prendre en charge la sauvegarde de la base de données sur le stockage secondaire, l"administrateur du stockage utilise protection Manager pour organiser les systèmes de stockage secondaires activés avec la licence SnapVault secondaire dans un pool de ressources pour les sauvegardes.' 
+---
+= Utilisez protection Manager pour configurer un pool de ressources secondaire
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Pour prendre en charge la sauvegarde de la base de données sur le stockage secondaire, l'administrateur du stockage utilise protection Manager pour organiser les systèmes de stockage secondaires activés avec la licence SnapVault secondaire dans un pool de ressources pour les sauvegardes.
+
+*Ce dont vous aurez besoin*
+
+Idéalement, les systèmes de stockage d'un pool de ressources sont interchangeables en termes d'acceptabilité en tant que destination de sauvegarde. Par exemple, lors du développement de la stratégie de protection de la base de données de paie, vous, en tant qu'administrateur du stockage, avez identifié des systèmes de stockage secondaires ayant des niveaux de performance et de qualité de service similaires à ceux qui appartiennent au même pool de ressources.
+
+Vous avez déjà créé des agrégats d'espace inutilisé sur les systèmes de stockage que vous envisagez d'attribuer à des pools de ressources. Cela permet de s'assurer que l'espace disponible est suffisant pour contenir les sauvegardes.
+
+.Étapes
+. Accédez à la console de gestion NetApp de protection Manager.
+. Dans la barre de menus, cliquez sur *Data* > *Resource pools*.
++
+La fenêtre pools de ressources s'affiche.
+
+. Cliquez sur *Ajouter*.
++
+L'assistant Ajouter un pool de ressources démarre.
+
+. Suivez les étapes de l'assistant pour créer le pool de ressources *paydb_backup_Resource*.
++
+Utilisez les paramètres suivants :
+
++
+** Nom : utilisez *paydb-backup_Resource*
+** Seuils d'espace (utilisez les valeurs par défaut) :
++
+*** Seuils d'utilisation de l'espace : activés
+*** Seuil presque atteint (pour le pool de ressources) : 80 %
+*** Seuil complet (pour le pool de ressources) : 90 %
+
+
+
+
+

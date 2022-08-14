@@ -1,0 +1,20 @@
+---
+permalink: windows/task-starting-snapmanager-for-oraclefor-sap.html 
+sidebar: sidebar 
+keywords: snapmanager, startup, section, task, perform, start, sap 
+summary: La section démarrage de SnapManager répertorie les tâches que vous effectuez au démarrage de SnapManager. À utiliser également cette section si vous venez de découvrir SnapManager. 
+---
+= À la base de SnapManager pour SAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La section démarrage de SnapManager répertorie les tâches que vous effectuez au démarrage de SnapManager. À utiliser également cette section si vous venez de découvrir SnapManager.
+
+Avant d'utiliser SnapManager, vous devez avoir effectué les actions suivantes :
+
+* Téléchargez et installez le logiciel SnapManager.
+* Déterminez si vous allez utiliser l'interface utilisateur graphique ou l'interface de ligne de commande - effectué.
+

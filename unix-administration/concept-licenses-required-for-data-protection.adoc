@@ -1,0 +1,34 @@
+---
+permalink: unix-administration/concept-licenses-required-for-data-protection.html 
+sidebar: sidebar 
+keywords: ensure, license, require, data, protection, install, enable, primary, secondary, storage, system 
+summary: Vous devez vous assurer que les licences requises pour la protection des données sont installées et activées sur les systèmes de stockage primaire et secondaire. 
+---
+= Licences requises pour la protection des données dans SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez vous assurer que les licences requises pour la protection des données sont installées et activées sur les systèmes de stockage primaire et secondaire.
+
+Les systèmes de stockage primaires reçoivent les dernières mises à jour de transactions pour la base de données Oracle, stockent les données et assurent une protection de sauvegarde locale de la base de données. Le système de stockage principal gère également les fichiers de données de base de données, les fichiers journaux et les fichiers de contrôle. Les systèmes de stockage secondaire servent de stockage à distance pour les sauvegardes protégées.
+
+Pour la protection des données, les licences suivantes doivent être installées et activées sur les systèmes de stockage primaires :
+
+
+NOTE: Si vous souhaitez activer la protection des données sur les systèmes de stockage secondaires, vous devez également installer et activer ces licences sur les systèmes de stockage secondaires.
+
+* Data ONTAP 7-mode (7.3.1 ou version ultérieure) ou clustered Data ONTAP (8.2 ou version ultérieure)
+* SnapVault (selon la règle de protection)
+* SnapRestore
+* SnapMirror (selon la règle de protection)
+* FlexClone est requis pour le clonage et les systèmes de fichiers en réseau (NFS).
++
+FlexClone est également requis pour le réseau de stockage SAN uniquement si SnapDrive est configuré pour utiliser FlexClone dans les environnements SAN.
+
+* Le protocole approprié, par exemple NFS, iSCSI (Internet Small Computer System interface) ou Fibre Channel (FC)
+
+
+En fonction des règles de protection utilisées, SnapVault ou SnapMirror doit se trouver sur les systèmes de stockage principal et secondaire. Les politiques de protection de base requièrent uniquement l'installation de SnapVault sur les systèmes de prise en charge. Les règles qui incluent la protection en miroir nécessitent l'installation de SnapMirror sur les systèmes de prise en charge. Les politiques de sauvegarde et de reprise après incident en miroir nécessitent l'installation de SnapMirror sur les systèmes pris en charge.

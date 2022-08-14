@@ -1,0 +1,48 @@
+---
+permalink: windows/reference-the-smosmsapcmdfile-command.html 
+sidebar: sidebar 
+keywords: cmdfile, command, shell, host, character, number, line, smsap 
+summary: Vous pouvez utiliser la commande cmdfile pour exécuter une commande si le shell de votre hôte limite le nombre de caractères pouvant apparaître sur une ligne de commande. 
+---
+= Commande smsap cmdfile
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez utiliser le `cmdfile` commande pour exécuter n'importe quelle commande si le shell de votre hôte limite le nombre de caractères pouvant apparaître sur une ligne de commande.
+
+
+
+== Syntaxe
+
+[listing]
+----
+
+smsap cmdfile
+-file file_name
+[-quiet | -verbose]
+----
+Vous pouvez inclure la commande dans un fichier texte et utiliser le `smsap cmdfile` commande pour exécuter la commande. Vous ne pouvez ajouter qu'une seule commande dans un fichier texte. Vous ne devez pas inclure smsap dans la syntaxe de commande.
+
+
+NOTE: Le `smsap cmdfile` la commande remplace le `smsap pfile` commande. Le `smsap cmdfile` n'est pas compatible avec `smsap pfile` commande.
+
+
+
+== Paramètres
+
+* *`-file _file_name_`*
++
+Indique le chemin d'accès au fichier texte contenant la commande à exécuter.
+
+* *`-quiet`*
++
+Spécifie que seuls les messages d'erreur s'affichent dans la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* *`-verbose`*
++
+Spécifie que les messages d'erreur, d'avertissement et d'information sont affichés dans la console.
+
+

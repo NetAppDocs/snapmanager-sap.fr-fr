@@ -1,0 +1,106 @@
+---
+permalink: unix-administration/task-store-the-task-scripts.html 
+sidebar: sidebar 
+keywords: store, pretask, post-task, policy, task, script, backup, clone, create, restore, operation, directory, target, server, storing 
+summary: 'Vous devez stocker les scripts de tâches de pré-tâche, post-tâche et de stratégie dans un répertoire spécifié sur le serveur cible sur lequel les sauvegardes ou clones seront créés. Pour l"opération de restauration, les scripts doivent être placés dans le répertoire spécifié sur le serveur cible sur lequel vous souhaitez restaurer la sauvegarde.' 
+---
+= Stocker les scripts de tâche
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez stocker les scripts de tâches de pré-tâche, post-tâche et de stratégie dans un répertoire spécifié sur le serveur cible sur lequel les sauvegardes ou clones seront créés. Pour l'opération de restauration, les scripts doivent être placés dans le répertoire spécifié sur le serveur cible sur lequel vous souhaitez restaurer la sauvegarde.
+
+.Étapes
+. Créez votre script.
+. Enregistrez le script à l'un des emplacements suivants :
++
+*Pour l'opération de sauvegarde*
+
++
+[cols="1a,2a"]
+|===
+| Répertoire | Description 
+
+
+ a| 
+`*<default_install_directory >/plugins/backup/create/policy*`
+ a| 
+Les scripts de stratégie s'exécutent avant les opérations de sauvegarde.
+
+
+
+ a| 
+`*<default_install_directory >/plugins/backup/create/pre*`
+ a| 
+Les scripts de prétraitement exécutent les opérations avant sauvegarde.
+
+
+
+ a| 
+`*<default_install_directory >/plugins/backup/create/post*`
+ a| 
+Les scripts de post-traitement s'exécutent après les opérations de sauvegarde.
+
+|===
++
+*Pour l'opération de restauration*
+
++
+[cols="1a,2a"]
+|===
+| Répertoire | Description 
+
+
+ a| 
+`*<default_install_directory >/plugins/restore/create/policy*`
+ a| 
+Les scripts de stratégie s'exécutent avant les opérations de restauration.
+
+
+
+ a| 
+`*<default_install_directory >/plugins/restore/create/pre*`
+ a| 
+Les scripts de prétraitement s'exécutent avant les opérations de restauration.
+
+
+
+ a| 
+`*<default_install_directory >/plugins/restore/create/post*`
+ a| 
+Les scripts de post-traitement s'exécutent après les opérations de restauration.
+
+|===
++
+*Pour l'opération de clonage*
+
++
+[cols="1a,2a"]
+|===
+| Répertoire | Description 
+
+
+ a| 
+`*<default_install_directory >/plugins/clone/create/policy*`
+ a| 
+Les scripts de règles s'exécutent avant les opérations de clonage.
+
+
+
+ a| 
+`*<default_install_directory >/plugins/clone/create/pre*`
+ a| 
+Les scripts de prétraitement s'exécutent avant les opérations de clonage.
+
+
+
+ a| 
+`*<default_install_directory >/plugins/clone/create/post*`
+ a| 
+Les scripts de post-traitement s'exécutent après les opérations de clonage.
+
+|===
+

@@ -1,0 +1,74 @@
+---
+permalink: unix-administration/task-use-protection-manager-to-configure-a-secondary-backup-protection-policy.html 
+sidebar: sidebar 
+keywords: configure, configuring, backup, schedule, storage, administrator, protect, protection, manager, secondary, policy 
+summary: 'Après avoir configuré le planning de sauvegarde, l"administrateur du stockage configure une stratégie de stockage de sauvegarde protégée dans laquelle ce planning doit être inclus.' 
+---
+= Utilisez protection Manager pour configurer une stratégie de protection de sauvegarde secondaire
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après avoir configuré le planning de sauvegarde, l'administrateur du stockage configure une stratégie de stockage de sauvegarde protégée dans laquelle ce planning doit être inclus.
+
+*Ce dont vous aurez besoin*
+
+Avant de configurer la règle de protection, l'administrateur du stockage confère au partenaire DBA les informations suivantes :
+
+* Durée de conservation à spécifier pour le stockage secondaire
+* Type de protection de stockage secondaire requis
+
+
+*À propos de cette tâche*
+
+La stratégie de protection créée peut être répertoriée dans SnapManager for SAP par le partenaire de l'administrateur de bases de données, ainsi que dans le profil de base de données à protéger pour les données.
+
+. Accédez à la console de gestion NetApp de protection Manager.
+. Dans la barre de menus, cliquez sur *stratégies* > *protection* > *Présentation*.
++
+L'onglet Présentation de la fenêtre stratégies de protection s'affiche.
+
+. Cliquez sur *Ajouter une stratégie* pour lancer l'assistant *Ajouter une stratégie de protection*.
+. Exécutez l'assistant en procédant comme suit :
++
+.. Spécifiez un nom de stratégie descriptif.
++
+Dans cet exemple, entrez *données de paie TechCo : sauvegarde* et une description, puis cliquez sur *Suivant*.
+
+.. Sélectionnez une stratégie de base.
++
+Pour cet exemple, sélectionnez *Sauvegarder* et cliquez sur *Suivant*.
+
+.. Dans la feuille de propriétés de la stratégie de noeud *données primaires*, acceptez les paramètres par défaut et cliquez sur *Suivant*.
++
+
+NOTE: Dans cet exemple, la planification de sauvegarde locale configurée dans SnapManager est appliquée. Tout programme de sauvegarde local spécifié à l'aide de cette méthode est ignoré.
+
+.. Dans la feuille de propriétés de connexion *données primaires à sauvegarde*, sélectionnez un programme de sauvegarde.
++
+Dans cet exemple, sélectionnez *Payroll Saturday à 1 AM plus Daily à 7 PM* comme programme de sauvegarde, puis cliquez sur *Next*.
+
++
+Dans cet exemple, la planification que vous avez sélectionnée inclut à la fois les horaires hebdomadaires et quotidiens que vous avez configurés précédemment.
+
+.. Dans la feuille de propriétés *Backup policy*, indiquez le nom du nœud de sauvegarde et les temps de conservation pour les sauvegardes quotidiennes, hebdomadaires ou mensuelles.
++
+Dans cet exemple, indiquez une durée de conservation quotidienne des sauvegardes de 10 jours et une durée de conservation hebdomadaire des sauvegardes de 52 semaines. Après avoir terminé chaque feuille de propriétés, cliquez sur *Suivant*.
+
++
+Une fois toutes les feuilles de propriétés terminées, l'assistant Ajout de stratégie de protection affiche une feuille récapitulative pour la stratégie de protection que vous souhaitez créer.
+
+
+
+. Cliquez sur *Terminer* pour enregistrer vos modifications.
+
+
+*Résultat*
+
+La politique de protection * données de paie TechCo : sauvegarde* figure parmi les autres politiques configurées pour protection Manager.
+
+*Après la fin*
+
+Le partenaire de l'administrateur de base de données peut désormais utiliser SnapManager for SAP pour répertorier et affecter cette stratégie lors de la création du profil de base de données pour les données à protéger.

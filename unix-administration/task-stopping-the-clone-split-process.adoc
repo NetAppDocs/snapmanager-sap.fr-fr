@@ -1,0 +1,32 @@
+---
+permalink: unix-administration/task-stop-the-clone-split-process.html 
+sidebar: sidebar 
+keywords: stop, run, clone, split, process 
+summary: 'Vous pouvez arrêter le processus de fractionnement du clone en cours d"exécution.' 
+---
+= Arrêter le processus de fractionnement du clone
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez arrêter le processus de fractionnement du clone en cours d'exécution.
+
+*À propos de cette tâche*
+
+Après avoir arrêté le processus de fractionnement, vous ne pouvez pas le reprendre.
+
+.Étape
+. Pour arrêter l'opération de fractionnement du clone, entrez la commande suivante :
++
+`*smsap clone split-stop -profile _profile_ [-host _hostname_] [-label _split-label_ | -id _split-id_] [-quiet | -verbose]*`
+
+
+
+'''
+[listing]
+----
+smsap clone split-stop -profile p1 -id 8abc01ec0e78f3e2010e78f3fdd00001
+----
+'''

@@ -1,0 +1,41 @@
+---
+permalink: unix-administration/task-use-snapmanager-for-oraclesnapmanager-for-sap-to-restore-backups-from-secondary-storage.html 
+sidebar: sidebar 
+keywords: administrator, restore, protect, backup, secondary, storage, copy, data, back, primary, snapmanager 
+summary: 'Les administrateurs peuvent restaurer des sauvegardes protégées à partir d"un stockage secondaire et choisir le mode de copie des données vers le stockage primaire.' 
+---
+= Utilisez SnapManager pour SAP pour restaurer les sauvegardes à partir de systèmes de stockage secondaire
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les administrateurs peuvent restaurer des sauvegardes protégées à partir d'un stockage secondaire et choisir le mode de copie des données vers le stockage primaire.
+
+*Ce dont vous aurez besoin*
+
+Avant de tenter de restaurer la sauvegarde, vérifiez les propriétés de la sauvegarde, puis assurez-vous que la sauvegarde est libérée sur le système de stockage primaire et protégée sur le stockage secondaire.
+
+.Étapes
+. Dans l'arborescence du référentiel SnapManager pour SAP, cliquez avec le bouton droit de la souris sur la sauvegarde à restaurer et sélectionnez *Restaurer*.
+. Dans la page d'accueil de l'Assistant de restauration et de récupération, cliquez sur *Suivant*.
+. Dans la page Restore Configuration information (Restaurer les informations de configuration), cliquez sur *Complete Datafile/tablespace Restore with Control Files*.
+. Cliquez sur *Autoriser l'arrêt de la base de données si nécessaire*, puis cliquez sur *Suivant*.
++
+SnapManager modifie l'état de la base de données si nécessaire. Par exemple, si la base de données est hors ligne et doit être en ligne, SnapManager la force en ligne.
+
+. Sur la page informations sur la configuration de la récupération, cliquez sur *tous les journaux*. Cliquez ensuite sur *Suivant*.
++
+SnapManager restaure et restaure la base de données vers la dernière transaction et applique tous les journaux requis.
+
+. Dans la page Restore Source Location Configuration (Configuration de l'emplacement source de restauration), sélectionnez l'ID de la source de sauvegarde protégée et cliquez sur *Next* (Suivant).
+. Dans la page informations sur la configuration de la restauration de volume, cliquez sur *tentative de restauration de volume* pour tenter la restauration de volume.
+. Cliquez sur *Retour à la restauration basée sur les fichiers*.
++
+Ceci permet à SnapManager d'utiliser la méthode de restauration basée sur les fichiers si la méthode de restauration de volume ne peut pas être terminée.
+
+. Pour consulter les vérifications d'éligibilité pour la restauration rapide et les informations sur les vérifications obligatoires et les vérifications à découvert, cliquez sur *Preview*.
+. Sur la page Exécuter l'opération, vérifiez les informations que vous avez fournies et cliquez sur *Restaurer*.
+. Pour afficher les détails du processus, cliquez sur *Détails de l'opération*.
+

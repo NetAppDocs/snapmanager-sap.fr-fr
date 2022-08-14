@@ -1,0 +1,56 @@
+---
+permalink: unix-administration/concept-restores-of-protected-backups-overview.html 
+sidebar: sidebar 
+keywords: restore, method, backup, data, secondary, primary, storage, protect, overview 
+summary: Vous pouvez choisir la méthode de restauration à utiliser pour restaurer les données de sauvegarde depuis un stockage secondaire vers un stockage primaire. 
+---
+= Présentation des restaurations des sauvegardes protégées
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez choisir la méthode de restauration à utiliser pour restaurer les données de sauvegarde depuis un stockage secondaire vers un stockage primaire.
+
+Le tableau ci-dessous décrit les différents scénarios et méthodes que vous pouvez utiliser pour restaurer une sauvegarde à partir d'un système de stockage secondaire :
+
+[cols="1a,3a"]
+|===
+| Restaurer la cible | Explication 
+
+
+ a| 
+Directement au stockage primaire
+ a| 
+Renvoie directement les données du système de stockage secondaire vers leur emplacement d'origine sur le système de stockage primaire sur le même réseau que celui utilisé pour protéger les données.
+
+Dans la mesure du possible, SnapManager utilise la méthode de stockage direct. Cette méthode n'est pas possible si les données se trouvent dans un système de fichiers sur le réseau SAN (Storage Area Network) et si l'une des conditions suivantes s'applique :
+
+* Les autres fichiers ne provenant pas de bases de données ne sont pas restaurés dans le même système de fichiers.
+* Des copies Snapshot des fichiers de contrôle et des fichiers de données d'un système de fichiers en cours de restauration ont été effectuées à différents moments.
+* Le numéro d'unité logique (LUN) se trouve dans un groupe de volumes, mais les autres LUN du même groupe de volumes ne sont pas en cours de restauration.
+
+
+
+
+ a| 
+Directement à l'hôte
+ a| 
+Il clonage les données sur le système de stockage secondaire et monte les données clonées sur l'hôte. Une fois les données clonées et montées, SnapManager les copie à leur emplacement d'origine.
+
+
+
+ a| 
+Indirectement au stockage ou à l'hôte
+ a| 
+Renvoie les données du système de stockage secondaire vers un nouvel emplacement sur le système primaire sur le même réseau que celui utilisé pour protéger les données et monter le nouveau stockage sur l'hôte. Une fois les données renvoyées et montées, SnapManager les copie à leur emplacement d'origine. La méthode de stockage indirect peut nécessiter un certain temps pour renvoyer les données.
+
+SnapManager copie d'abord les données sur un volume de travail de l'hôte principal avant que SnapManager l'utilise pour restaurer et restaurer la base de données. La suppression automatique des données de travail dépend du protocole utilisé.
+
+* Pour SAN, SnapManager supprime les données renvoyées.
+* Dans le cas du stockage NAS, SnapManager supprime le contenu des qtrees renvoyés, mais ne les supprime pas eux-mêmes. Pour supprimer les qtrees, les administrateurs doivent monter le volume de travail et supprimer les qtrees à l'aide de la commande rmdir UNIX.
+
+
+|===
+Si vous ne pouvez pas renvoyer directement les données vers le stockage, SnapManager peut les renvoyer directement à l'hôte ou indirectement au stockage ou à l'hôte. La méthode dépend de la règle permettant à l'entreprise de se connecter directement à un stockage secondaire ou dont les données doivent être copiées sur le réseau de stockage. Vous pouvez gérer cette stratégie en définissant les informations de configuration dans le fichier sssap.config.

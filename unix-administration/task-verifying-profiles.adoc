@@ -1,0 +1,21 @@
+---
+permalink: unix-administration/task-verify-profiles.html 
+sidebar: sidebar 
+keywords: verify, exist, profile, set, up, correct, snapmanager, environment, accessible 
+summary: 'Vous pouvez vérifier qu"un profil existant est correctement configuré. Lorsque vous vérifiez un profil, SnapManager vérifie l"environnement correspondant au profil que vous spécifiez et vérifie que le profil est configuré et que la base de données de ce profil est accessible.' 
+---
+= Vérifiez les profils
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez vérifier qu'un profil existant est correctement configuré. Lorsque vous vérifiez un profil, SnapManager vérifie l'environnement correspondant au profil que vous spécifiez et vérifie que le profil est configuré et que la base de données de ce profil est accessible.
+
+.Étape
+. Pour vérifier si le profil est configuré correctement, entrez la commande suivante :
++
+`*smsap profile verify -profile _profile_name_*`
+
+

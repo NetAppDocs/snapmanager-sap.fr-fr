@@ -1,0 +1,90 @@
+---
+permalink: windows/task-customizing-e-mail-subject-for-a-new-profile.html 
+sidebar: sidebar 
+keywords: customize, email, subject, profile, create, cusomtizing 
+summary: 'Vous pouvez personnaliser l"objet de l"e-mail pour le nouveau profil lorsque vous le créez.' 
+---
+= Personnalisation de l'objet de l'e-mail pour un nouveau profil
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez personnaliser l'objet de l'e-mail pour le nouveau profil lorsque vous le créez.
+
+Vous pouvez personnaliser l'objet de l'e-mail en utilisant le modèle \{profile}_\{nom-opération}_\{db-sid}_\{db-host}_\{date-début}_\{date-fin}_\{statut} ou en entrant votre propre texte.
+
+|===
+| Nom de variable | Description | Exemple de valeur 
+
+
+ a| 
+profil
+ a| 
+Nom de profil utilisé pour l'opération de base de données
+ a| 
+PROF1
+
+
+
+ a| 
+nom-opération
+ a| 
+Nom de l'opération de base de données
+ a| 
+Sauvegarde, sauvegarde des données, sauvegarde des journaux de données et d'archives
+
+
+
+ a| 
+db-sid
+ a| 
+SID de la base de données
+ a| 
+DB1
+
+
+
+ a| 
+hôte bdd
+ a| 
+Nom du serveur hôte
+ a| 
+HôtA
+
+
+
+ a| 
+date de début
+ a| 
+Heure de début de l'opération de base de données au format mmjj:hh:ss aaaa
+ a| 
+Avril 27 21:00:45 PST 2012
+
+
+
+ a| 
+date de fin
+ a| 
+Heure de fin de l'opération de base de données au format mmjj:hh:ss aaaa
+ a| 
+Avril 27 21:10:45 PST 2012
+
+
+
+ a| 
+état
+ a| 
+État de fonctionnement de la base de données
+ a| 
+Réussite
+
+|===
+Si vous n'indiquez aucune valeur pour les variables, SnapManager affiche le message d'erreur suivant : valeur(s) manquante(s) -subject.
+
+. Saisissez la commande suivante :
++
+`smsap profile create -profileprofile [-profile-passwordprofile_password] -repository-dbnamerepo_service_name-hostrepo_host-portrepo_port-login-usernamerepo_username-database-dbnamedb_dbname-hostdb_host [-siddb_sid] [-login-usernamedb_username-passworddb_password-portdb_port] [-rman {-controlfile | {-login-usernamerman_username-passwordrman_password-tnsnamerman_tnsname} } ] [-retain [-hourly [-countn] [-durationm]] [-daily [-countn] [-durationm]] [-weekly [-countn] [-durationm]] [-monthly [-countn] [-durationm]]] [-commentcomment][-snapname-patternpattern][ [ ]] [-notification [-success-emailemail_address1,email_address2-subjectsubject_pattern] [-failure-emailemail_address1,email_address2-subjectsubject_pattern]]`
+
+

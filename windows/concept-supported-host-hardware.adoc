@@ -1,0 +1,45 @@
+---
+permalink: windows/concept-supported-host-hardware.html 
+sidebar: sidebar 
+keywords: memory, disk, space, cpu, requirement, support, host, hardware 
+summary: 'Tenez compte des exigences en matière de mémoire, d"espace disque et de processeur.' 
+---
+= Matériel hôte pris en charge
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Tenez compte des exigences en matière de mémoire, d'espace disque et de processeur.
+
+SnapManager nécessite la configuration suivante :
+
+|===
+| Fonction matérielle | Configuration matérielle requise 
+
+
+ a| 
+Mémoire
+ a| 
+Le serveur SnapManager nécessite 128 Mo de mémoire.
+
+L'exécution des interfaces utilisateur graphiques nécessite au moins 512 Mo de RAM.
+
+Chaque opération exécutée par le serveur SnapManager nécessite 48 Mo de mémoire supplémentaire pendant son exécution.
+
+
+
+ a| 
+D'espace disque supplémentaire
+ a| 
+128 Mo d'espace disque disponible pour l'application graphique utilisateur (minimum).
+
+
+
+ a| 
+Vitesse du processeur
+ a| 
+Vitesse du processeur de 1.0 GHz (minimum).
+
+|===

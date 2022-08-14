@@ -1,0 +1,27 @@
+---
+permalink: windows/reference-unable-to-restore-rac-database-from-one-of-the-rac-nodes-where-the-profile-was-not-created.html 
+sidebar: sidebar 
+keywords: oracle, rac, environment, node, cluster, restore, backup, operation, fail, profile 
+summary: 'Dans un environnement Oracle RAC où les deux nœuds appartiennent au même cluster, si vous tentez une opération de restauration à partir d"un nœud différent du nœud où la sauvegarde a été créée, l"opération de restauration échoue.' 
+---
+= Impossible de restaurer la base de données RAC à partir d'un des nœuds RAC où le profil n'a pas été créé
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dans un environnement Oracle RAC où les deux nœuds appartiennent au même cluster, si vous tentez une opération de restauration à partir d'un nœud différent du nœud où la sauvegarde a été créée, l'opération de restauration échoue.
+
+Par exemple, si vous créez une sauvegarde dans le nœud A et que vous tentez de restaurer à partir du nœud B, l'opération de restauration échoue.
+
+*Que faire*
+
+Avant d'effectuer l'opération de restauration à partir du nœud B, effectuez les opérations suivantes sur le nœud B :
+
+.Étapes
+. Ajoutez le référentiel.
+. Synchronisez le profil en exécutant la commande `smo profile sync`.
+. Définissez les informations d'identification du profil à utiliser pour l'opération de restauration en exécutant la commande `smo credential set`.
+. Mettez à jour le profil pour ajouter le nouveau nom d'hôte et le SID correspondant en exécutant la commande `smo profile update`.
+

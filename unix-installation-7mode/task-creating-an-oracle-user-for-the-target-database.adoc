@@ -1,0 +1,38 @@
+---
+permalink: unix-installation-7mode/task-create-an-oracle-user-for-the-target-database.html 
+sidebar: sidebar 
+keywords: oracle, database, user, require, log, in, snapmanager, operation, create, user, sysdba, privilege, target, creating, target 
+summary: 'Un utilisateur de base de données Oracle est requis pour se connecter à la base de données et effectuer des opérations SnapManager. Vous devez créer cet utilisateur avec le privilège sysdba si un utilisateur avec le privilège sysdba n"existe pas pour la base de données cible.' 
+---
+= Créez un utilisateur de base de données Oracle pour la base de données cible
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Un utilisateur de base de données Oracle est requis pour se connecter à la base de données et effectuer des opérations SnapManager. Vous devez créer cet utilisateur avec le privilège _sysdba_ si un utilisateur avec le privilège _sysdba_ n'existe pas pour la base de données cible.
+
+*À propos de cette tâche*
+
+SnapManager peut utiliser n'importe quel utilisateur Oracle disposant du privilège _sysdba_ existant pour la base de données cible. Par exemple, SnapManager peut utiliser l'utilisateur par défaut _sys_. Cependant, même si l'utilisateur existe, vous pouvez créer un nouvel utilisateur pour la base de données cible et attribuer le privilège _sysdba_.
+
+Vous pouvez également utiliser la méthode d'authentification du système d'exploitation dans laquelle le système d'exploitation permet à la base de données Oracle d'utiliser les informations d'identification gérées par le système d'exploitation pour authentifier les utilisateurs pour qu'ils se connectent à la base de données et effectuent des opérations SnapManager. Si vous êtes authentifié par le système d'exploitation, vous pouvez vous connecter à la base de données Oracle sans spécifier de nom d'utilisateur ou de mot de passe.
+
+.Étapes
+. Connectez-vous à SQL *plus :
++
+`*sqlplus '/ as sysdba'*`
+
+. Créer un nouvel utilisateur avec un mot de passe administrateur :
++
+`*create user _user_name_ identified by _admin_password;_*`
+
++
+`_user_name_` est le nom de l'utilisateur que vous créez et `_admin_password_` est le mot de passe que vous souhaitez attribuer à l'utilisateur.
+
+. Attribuez le privilège sysdba au nouvel utilisateur Oracle :
++
+`*grant sysdba to _user_name;_*`
+
+

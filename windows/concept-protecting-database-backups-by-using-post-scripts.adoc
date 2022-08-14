@@ -1,0 +1,29 @@
+---
+permalink: windows/concept-protecting-database-backups-by-using-post-scripts.html 
+sidebar: sidebar 
+keywords: snapmanager, enable, protect, database, backup, postscript, snapmirror, snapvault, establish, primary, secondary, storage, system, default, post-process, activity, cli, gui 
+summary: 'SnapManager vous permet de protéger les sauvegardes de bases de données à l"aide de scripts postaux, lorsque la relation SnapMirror ou SnapVault est établie entre les systèmes de stockage principal et secondaire. Vous pouvez utiliser les scripts postaux par défaut pour l"activité de post-traitement de l"opération de sauvegarde à partir de l"interface de ligne de commande et de l"interface utilisateur graphique de SnapManager.' 
+---
+= Protection des sauvegardes de bases de données à l'aide de scripts postaux
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager vous permet de protéger les sauvegardes de bases de données à l'aide de scripts postaux, lorsque la relation SnapMirror ou SnapVault est établie entre les systèmes de stockage principal et secondaire. Vous pouvez utiliser les scripts postaux par défaut pour l'activité de post-traitement de l'opération de sauvegarde à partir de l'interface de ligne de commande et de l'interface utilisateur graphique de SnapManager.
+
+Vous pouvez utiliser les scripts postaux par défaut suivants disponibles à l'adresse `default_install_directory\plugins\backup\create\post`:
+
+* Le script PostScript SnapMirror, `Mirror_the_backup.cmd` Si vous utilisez Data ONTAP sous 7-mode
+* Le script PostScript SnapVault, `Vault_the_backup.cmd` Si vous utilisez Data ONTAP sous 7-mode
+* Le script PostScript SnapMirror, `Mirror_the_backup_cDOT.cmd` Si vous utilisez clustered Data ONTAP
+* Le script PostScript SnapVault, `Vault_the_backup_cDOT.cmd` Si vous utilisez clustered Data ONTAP
+
+
+Pour plus d'informations, reportez-vous à la section `readme.txt` disponible sur la page `default_install_directory\plugins`.
+
+SnapManager 3.1 ou version antérieure fournit des scripts de prétraitement ou de post-traitement uniquement pour les opérations de clonage. SnapManager 3.2 ou version ultérieure fournit des scripts de prétraitement et de post-traitement pour les opérations de sauvegarde et de restauration. Vous pouvez utiliser ces scripts pour s'exécuter avant ou après les opérations de sauvegarde ou de restauration.
+
+
+NOTE: Les scripts sont fournis à titre de référence uniquement. Ils ont été testés avec SnapDrive 7.0 pour Windows ou version ultérieure, mais ils ne fonctionnent peut-être pas dans tous les environnements. Vous devez personnaliser les scripts en fonction de vos exigences de protection secondaire. Les scripts ne fonctionnent pas avec les versions SnapDrive antérieures à 6.2.

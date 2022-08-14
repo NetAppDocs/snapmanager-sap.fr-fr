@@ -1,0 +1,88 @@
+---
+permalink: unix-administration/task-preview-backup-restore-information.html 
+sidebar: sidebar 
+keywords: preview, information, backup, restore, process, snapmanager, sap, successful 
+summary: 'Vous pouvez obtenir un aperçu des informations relatives à un processus de restauration de sauvegarde avant qu"il ne se produise afin d"afficher des informations sur les conditions de restauration que SnapManager pour SAP a trouvées sur votre système de sauvegarde. SnapManager analyse les données de votre sauvegarde afin de déterminer si le processus de restauration peut être effectué avec succès.' 
+---
+= Aperçu des informations de restauration de sauvegarde
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez obtenir un aperçu des informations relatives à un processus de restauration de sauvegarde avant qu'il ne se produise afin d'afficher des informations sur les conditions de restauration que SnapManager pour SAP a trouvées sur votre système de sauvegarde. SnapManager analyse les données de votre sauvegarde afin de déterminer si le processus de restauration peut être effectué avec succès.
+
+*À propos de cette tâche*
+
+L'aperçu de restauration fournit les informations suivantes :
+
+* Quel mécanisme de restauration (restauration rapide, restauration du système de fichiers côté stockage, restauration de fichiers côté stockage ou restauration de copie de fichiers côté hôte) peut être utilisé pour restaurer chaque fichier.
+* Pourquoi des mécanismes plus efficaces n'ont pas été utilisés pour restaurer chaque fichier lorsque vous spécifiez le `-verbose` option.
+
+
+Si vous spécifiez le `-preview` dans le `backup restore` SnapManager ne restaure rien, mais répertorie les fichiers à restaurer et indique leur mode de restauration.
+
+
+NOTE: Vous pouvez afficher un aperçu de tous les types de mécanismes de restauration. L'aperçu affiche des informations sur jusqu'à 20 fichiers.
+
+.Étapes
+. Saisissez la commande suivante :
++
+`*smsap backup restore -profile _profile_name_ -label _label_ -complete -preview -verbose*`
+
++
+*Exemple*
+
++
+Par exemple, entrez :
+
++
+[listing]
+----
+smsap backup restore -profile targetdb1_prof1
+      -label full_bkup_sales_nov_08  -complete -preview -verbose
+----
++
+L'exemple suivant montre certains fichiers en cours de restauration à l'aide du processus de restauration de copie de fichier côté hôte et explique également pourquoi certains fichiers ne peuvent pas être restaurés à l'aide de l'option de restauration rapide. Si vous spécifiez le `-verbose` Option, SnapManager affiche une section d'aperçu et une section d'analyse qui explique pourquoi chaque fichier ne peut pas être restauré via le processus de restauration rapide.
+
++
+[listing]
+----
+PREVIEW:
+The following files will be restored via host side file copy restore:
++DG2/sid/datafile10.dbf
++DG2/sid/datafile11.dbf
+
+ANALYSIS:
+The following reasons prevent certain files from being restored via fast restore:
+Reasons:
+ Newer snapshots of /vol/volume2 have volume clones: SNAP_1
+*Newer backups will be freed: nightly2, nightly3
+Files to Restore:
+/mnt/systemB/volume2/system.dbf
+/mnt/systemB/volume2/users.dbf
+/mnt/systemB/volume2/sysaux.dbf
+/mnt/systemB/volume2/datafile04.dbf
+/mnt/systemB/volume2/datafile05.dbf
+
+The following reasons prevent certain files from being restored via fast restore:
+Reasons:
+* Newer snapshots of /vol/adm_disks will be lost: ADM_SNAP_5
+* Luns present which were created after snapshot SNAP_0 was created: /vol/adm_disks/disk5.lun
+* Files not part of the restore scope will be reverted in file system: +DG2
+
+Files Not in Restore Scope: +DG2/someothersid/data01.dbf
++DG2/someothersid/data02.dbf
+Files to Restore:
++DG2/sid/datafile08.dbf +DG2/sid/datafile09.dbf
++DG2/sid/datafile10.dbf +DG2/sid/datafile11.dbf
+
+* Reasons denoted with an asterisk (*) are overridable.
+----
+. Vérifiez les raisons pour lesquelles d'autres processus de restauration ne peuvent pas être utilisés.
+. Lancez l'opération de restauration sans le `-preview` si seules les raisons qui peuvent être surridables sont affichées.
++
+Vous pouvez quand même remplacer les vérifications non obligatoires.
+
+

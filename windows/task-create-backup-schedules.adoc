@@ -1,0 +1,171 @@
+---
+permalink: windows/task-create-backup-schedules.html 
+sidebar: sidebar 
+keywords: schedule, backup, time, frequency, suit, data, environment, create 
+summary: Vous pouvez programmer une sauvegarde à un moment et à une fréquence adaptés à vos données et à votre environnement. 
+---
+= Créer des planifications de sauvegarde
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez programmer une sauvegarde à un moment et à une fréquence adaptés à vos données et à votre environnement.
+
+
+
+== Description de la tâche
+
+À partir de SnapManager 3.2 pour SAP, vous pouvez planifier séparément les sauvegardes des fichiers journaux d'archive. Cependant, vous devez utiliser le profil que vous avez créé pour séparer les fichiers journaux d'archives.
+
+Si vous avez planifié simultanément les sauvegardes des fichiers de données et des fichiers journaux d'archive, SnapManager crée d'abord la sauvegarde des fichiers de données.
+
+Si vous sélectionnez l'intervalle de planification comme `-onetimeonly`, alors toutes les options de taille sont disponibles. Si vous sélectionnez un intervalle d'horaire autre que `-onetimeonly`, puis les options d'élagage `-until-SCN` et `-until-date` ne sont pas pris en charge et le message d'erreur suivant s'affiche : `The archive log pruning option you have specified, -until-scn or -until-date for the schedule interval hourly is invalid. Specify either the -onetimeonly option for the schedule interval, or prune the archive logs using any one of the option all, or -before {-months | -days | -weeks| -hours}`.
+
+Lorsqu'un basculement se produit dans les environnements Microsoft Windows Server Failover Cluster (WSFC) et Microsoft Cluster Server (MSCS), vous devez redémarrer le serveur SnapManager pour SAP afin que l'adresse (virtuelle) du service soit mappée à l'hôte actif et que les planifications SnapManager soient ajustées à l'hôte SnapManager actif.
+
+
+NOTE: Si le même profil et le même nom de planification existent dans un autre référentiel, l'opération de planification de sauvegarde n'est pas lancée dans ce référentiel. L'opération se quitte et le message suivant s'affiche : `operation is already running`.
+
+.Étape
+. Saisissez la commande suivante :
++
+`*smsap schedule create -profile _profile_name_ {[-full {-online | -offline | -auto}[-retain [-hourly | -daily | -weekly | -monthly | -unlimited] [-verify]] | [-data [-files _files_ [_files_]] | [-tablespaces _-tablespaces_ [_-tablespaces_]] {-online | -offline | -auto}[-retain [-hourly | -daily | -weekly | -monthly | -unlimited] [-verify]] | [-archivelogs]} [-comment _comment_][-backup-dest _path1_ [,[_path2_]] [-exclude-dest _path1_ [,_path2_]] [-prunelogs{-all | -untilSCN _untilSCN_ | -until-date _yyyy-MM-dd HH:mm:ss_ | -before {-months | -weeks | -days | -hours}} -prune-dest _prune_dest1_,_prune_dest2_] -schedule-name _schedule_name_ [-schedule-comment _schedule_comment_] -interval {-hourly | -daily | -weekly | -monthly | -onetimeonly} -cronstring _cronstring_ -start-time {_start-time_ _start_time_ _<yyyy-MM-dd HH:mm>_} -runasuser _-runasuser_ [-force] [-taskspec _-taskspec_] [-quiet | -verbose]*`
+
++
+|===
+| Les fonctions que vous recherchez... | Alors... 
+
+
+ a| 
+*Programmer une sauvegarde d'une base de données en ligne ou hors ligne*
+ a| 
+Spécifiez `-offline` ou `-online` pour programmer une sauvegarde de la base de données hors ligne ou en ligne. Si vous les spécifiez, vous ne pouvez pas utiliser `-auto`.
+
+
+
+ a| 
+*Laissez SnapManager gérer la planification d'une base de données, qu'elle soit en ligne ou hors ligne*
+ a| 
+Spécifiez `-auto`. Si vous spécifiez `-auto`, vous ne pouvez pas utiliser `--offline` ou `-online`.
+
+
+
+ a| 
+*Programmer une sauvegarde des fichiers de données*
+ a| 
+Spécifiez `-data` `-files` pour lister les fichiers séparés par des virgules. Par exemple, utilisez les noms de fichier f1,f2,f3.
+
+
+
+ a| 
+*Annexe a sauvegarde partielle d'espaces de stockage spécifiques*
+ a| 
+Spécifiez `-tablespaces` pour lister les espaces de stockage séparés par des virgules. Par exemple, utilisez ts1,ts2,ts3.
+
+
+
+ a| 
+*Programmer la sauvegarde des fichiers journaux d'archive*
+ a| 
+Spécifiez les éléments suivants :
+
+** `-archivelogs` pour programmer la sauvegarde des fichiers journaux d'archives
+** `-backup-dest` permet de programmer les destinations des fichiers journaux d'archive à inclure dans la sauvegarde
+** `-exclude-dest` pour planifier les destinations du journal d'archivage à exclure de la sauvegarde
+
+
+
+
+ a| 
+*Spécifiez les valeurs de classe de rétention*
+ a| 
+Spécifiez `-retain` et indiquer si la sauvegarde doit être conservée selon l'une des classes de rétention suivantes :
+
+** `-hourly`
+** `-daily`
+** `-weekly`
+** `-monthly`
+** `-unlimited`SnapManager prend par défaut la valeur horaire.
+
+
+
+
+ a| 
+*Planification de l'élagage des fichiers journaux d'archives*
+ a| 
+Spécifiez : ** `-prunelogs` pour élaguer les fichiers journaux d'archive lors de la planification d'une sauvegarde ** `-prune-dest` pour spécifier la destination du journal d'archivage à partir de laquelle les fichiers journaux d'archives sont élagués
+
+
+
+ a| 
+*Inclure un nom pour l'horaire*
+ a| 
+Spécifiez `-schedule-name`.
+
+
+
+ a| 
+*Programmer la sauvegarde de la base de données à un intervalle de temps spécifique*
+ a| 
+Spécifiez le `interval` et sélectionnez l'intervalle de temps suivant, à partir duquel les sauvegardes doivent être créées :
+
+** `-hourly`
+** `-daily`
+** `-weekly`
+** `-monthly`
+** `-onetimeonly`
+
+
+
+
+ a| 
+*Configurer une planification*
+ a| 
+Spécifiez `-cronstring` et incluez les sept sous-expressions suivantes qui décrivent l'option individuelle :
+
+** 1 correspond aux secondes.
+** 2 correspond aux minutes.
+** 3 correspond aux heures.
+** 4 correspond à un jour dans un mois.
+** 5 correspond au mois.
+** 6 correspond à un jour dans une semaine.
+** (Facultatif) 7 correspond à l'année.
+
+
+[NOTE]
+====
+Si vous avez planifié votre sauvegarde à des heures différentes dans `-cronstring` et `-start-time`, puis la planification de la sauvegarde est écrasée et déclenchée par le `-start-time`.
+
+====
+
+
+ a| 
+*Ajouter un commentaire sur le programme de sauvegarde*
+ a| 
+Spécifiez `-schedule-comment` suivi de la chaîne de description.
+
+
+
+ a| 
+*Spécifiez l'heure de début de l'opération de planification*
+ a| 
+Spécifiez `-start-time` au format aaaa-mm-jj hh:mm.
+
+
+
+ a| 
+*Modifiez l'utilisateur de l'opération de sauvegarde planifiée pendant la planification de la sauvegarde*
+ a| 
+Spécifiez `-runasuser`. L'opération s'exécute comme l'utilisateur (utilisateur root ou utilisateur Oracle) qui a créé le planning. Toutefois, vous pouvez utiliser votre propre ID utilisateur si vous disposez d'informations d'identification valides pour le profil de base de données et l'hôte.
+
+
+
+ a| 
+*Activer une activité de prétâche ou de post-tâche de l'opération de planification de sauvegarde en utilisant le fichier XML de spécification de prétâche et de post-tâche*
+ a| 
+Spécifiez le `-taskspec` Et fournit le chemin absolu du fichier XML de spécification de tâche pour effectuer un prétraitement ou une activité de post-traitement avant ou après l'opération de planification de sauvegarde.
+
+|===
+

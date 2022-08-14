@@ -1,0 +1,92 @@
+---
+permalink: windows/reference-the-smosmsaprepository-create-command.html 
+sidebar: sidebar 
+keywords: command, create, repository, store, database, profile, associate, credential, adequate, smsap 
+summary: 'Cette commande crée un référentiel dans lequel stocker les profils de base de données et les informations d"identification associées. Cette commande vérifie également que la taille de bloc est appropriée.' 
+---
+= Commande smsap repository create
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+
+
+== Syntaxe
+
+Cette commande crée un référentiel dans lequel stocker les profils de base de données et les informations d'identification associées. Cette commande vérifie également que la taille de bloc est appropriée.
+
+[listing]
+----
+
+smsap repository create
+-repository
+-port repo_port
+-dbname repo_service_name
+-host repo_host
+-login -username repo_username
+[-force] [-noprompt]
+[-quiet | -verbose]
+----
+
+
+== Paramètres
+
+* *`-repository`*
++
+Les options suivantes -repository spécifient les détails de la base de données pour le référentiel
+
+* *`-port _repo_port_`*
++
+Spécifie le numéro de port TCP utilisé pour accéder à la base de données qui stocke le référentiel.
+
+* *`-dbname _repo_service_name_`*
++
+Indique le nom de la base de données qui stocke le référentiel. Utilisez le nom global ou le SID.
+
+* *`-host _repo_host_`*
++
+Indique le nom ou l'adresse IP de l'ordinateur hôte sur lequel s'exécute la base de données de référentiel.
+
+* *`-login`*
++
+Démarre les détails de connexion au référentiel.
+
+* *`-username _repo_username_`*
++
+Indique le nom d'utilisateur nécessaire pour accéder à la base de données qui stocke le référentiel.
+
+* *`-force`*
++
+Tentatives de forcer la création du référentiel. L'utilisation de cette option entraîne la création du référentiel par SnapManager, qui vous invite à le sauvegarder avant de le créer.
+
+* *`-noprompt`*
++
+N'affiche pas l'invite de sauvegarde du référentiel avant de le créer si vous utilisez le `-force` option. À l'aide du `-noprompt` permet de s'assurer que l'invite ne s'affiche pas, ce qui facilite la création de référentiels à l'aide d'un script.
+
+* *`-quiet`*
++
+Affiche uniquement les messages d'erreur sur la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* *`-verbose`*
++
+Affiche des messages d'erreur, d'avertissement et d'information sur la console.
+
+
+
+
+
+== Exemple de commande
+
+L'exemple suivant crée un référentiel dans la base de données SMSAPREPO sur l'hôte hotspur.
+
+[listing]
+----
+smsap repository create -repository -port 1521 -dbname SMSAPREPO -host hotspur -login -username grabal21 -verbose
+SMSAP-09202 [INFO ]: Creating new schema as grabal21 on jdbc:oracle:thin:@//hotspur:1521/SMSAPREPO.
+SMSAP-09205 [INFO ]: Schema generation complete.
+SMSAP-09209 [INFO ]: Performing repository version INSERT.
+SMSAP-09210 [INFO ]: Repository created with version: 30
+SMSAP-13037 [INFO ]: Successfully completed operation: Repository Create
+SMSAP-13049 [INFO ]: Elapsed Time: 0:00:08.844
+----

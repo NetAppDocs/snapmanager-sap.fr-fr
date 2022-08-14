@@ -1,0 +1,66 @@
+---
+permalink: windows/reference-where-to-go-for-more-information.html 
+sidebar: sidebar 
+keywords: information, task, install, snapmanager 
+summary: 'Vous trouverez des informations sur les tâches de base impliquées dans l"installation et l"utilisation de SnapManager.' 
+---
+= Où obtenir des informations complémentaires
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous trouverez des informations sur les tâches de base impliquées dans l'installation et l'utilisation de SnapManager.
+
+|===
+| Documentation | Description 
+
+
+ a| 
+Description de SnapManager
+ a| 
+Cette page fournit des informations sur SnapManager, des liens vers la documentation en ligne et un lien vers la page de téléchargement SnapManager à partir de laquelle vous pouvez télécharger le logiciel.
+
+
+
+ a| 
+_Guide de configuration SAN de Data ONTAP pour 7-mode_
+ a| 
+Ce document est disponible à l'adresse http://mysupport.netapp.com/["Support NetApp"^].
+
+Il s'agit d'un document dynamique en ligne qui contient les informations les plus récentes sur les exigences de configuration d'un système dans un environnement SAN. Il fournit des informations actualisées sur les systèmes de stockage et les plateformes hôte, les problèmes de câblage, les problèmes de switch et les configurations.
+
+
+
+ a| 
+Matrice de compatibilité SnapManager et SnapDrive
+ a| 
+Ce document est disponible dans la section interopérabilité à l'adresse http://mysupport.netapp.com/matrix["Matrice d'interopérabilité"^].
+
+Il s'agit d'un document en ligne dynamique qui contient les toutes dernières informations spécifiques à SnapManager et à ses exigences de plateforme.
+
+
+
+ a| 
+Notes de version de SnapManager
+ a| 
+Ce document est fourni avec SnapManager. Vous pouvez également télécharger une copie à partir de http://mysupport.netapp.com/["Support NetApp"^].
+
+Il contient toutes les informations de dernière minute dont vous avez besoin pour configurer votre système et son fonctionnement fluide.
+
+
+
+ a| 
+Documentation des kits de liaison d'hôtes (Host Attach) et de support NetApp
+ a| 
+http://mysupport.netapp.com/["Support NetApp"^].
+
+
+
+ a| 
+Informations sur le système d'exploitation hôte et la base de données
+ a| 
+Ces documents fournissent des informations sur votre système d'exploitation hôte et votre logiciel de base de données.
+
+|===

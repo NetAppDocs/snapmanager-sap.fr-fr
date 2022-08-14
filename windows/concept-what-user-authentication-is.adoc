@@ -1,0 +1,44 @@
+---
+permalink: windows/concept-what-user-authentication-is.html 
+sidebar: sidebar 
+keywords: snapmanager, authenticate, user, operate, system, os, login, host, server, enable, password, smo, credential, smsap, set 
+summary: 'SnapManager authentifie l"utilisateur à l"aide d"une connexion du système d"exploitation sur l"hôte sur lequel le serveur SnapManager est exécuté. Vous pouvez activer l"authentification utilisateur via des invites de mot de passe sur les opérations ou en utilisant les informations d"identification smo, vous pouvez activer l"authentification utilisateur via des invites de mot de passe sur les opérations ou à l"aide de l"ensemble d"informations d"identification smsap.' 
+---
+= Qu'est-ce que l'authentification utilisateur
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager authentifie l'utilisateur à l'aide d'une connexion du système d'exploitation sur l'hôte sur lequel le serveur SnapManager est exécuté. Vous pouvez activer l'authentification utilisateur via des invites de mot de passe sur les opérations ou en utilisant les informations d'identification smo pour activer l'authentification utilisateur via des invites de mot de passe sur les opérations ou à l'aide de `smsap credential set`.
+
+Les exigences d'authentification de l'utilisateur dépendent de l'endroit où l'opération est effectuée.
+
+* Si le client SnapManager se trouve sur le même serveur que l'hôte SnapManager, vous êtes authentifié par les informations d'identification du système d'exploitation.
++
+Vous n'êtes pas invité à saisir un mot de passe car vous êtes déjà connecté à l'hôte sur lequel le serveur SnapManager est exécuté.
+
+* Si le client SnapManager et le serveur SnapManager se trouvent sur des hôtes différents, SnapManager doit vous authentifier auprès des deux identifiants du système d'exploitation.
++
+SnapManager vous invite à saisir des mots de passe pour toute opération, si vous n'avez pas enregistré vos identifiants de système d'exploitation dans le cache des informations d'identification utilisateur SnapManager. Si vous saisissez le `smsap credential set -host` Commande, vous enregistrez les informations d'identification du système d'exploitation dans le fichier de cache des informations d'identification SnapManager. SnapManager ne demande donc pas le mot de passe pour une opération.
+
+
+
+Si vous êtes authentifié avec le serveur SnapManager, vous êtes considéré comme l'utilisateur efficace. L'utilisateur effectif pour toute opération doit être un compte utilisateur valide sur l'hôte sur lequel l'opération est exécutée. Par exemple, si vous exécutez une opération de clonage, vous devez pouvoir vous connecter à l'hôte de destination du clone.
+
+
+NOTE: SnapManager pour SAP peut ne pas autoriser les utilisateurs créés dans les services Active Directory centraux, tels que LDAP et ADS. Pour vous assurer que l'authentification ne échoue pas, vous devez définir configurable `auth.disableServerAuthorization` à *vrai*.
+
+En tant qu'utilisateur efficace, vous pouvez gérer les informations d'identification de la manière suivante :
+
+* Vous pouvez également configurer SnapManager pour stocker les informations d'identification de l'utilisateur dans le fichier des informations d'identification de l'utilisateur SnapManager.
++
+Par défaut, SnapManager ne stocke pas les informations d'identification de l'hôte. Vous pouvez modifier ce type de script, par exemple si vous avez des scripts personnalisés qui nécessitent un accès sur un hôte distant. L'opération de clonage à distance est un exemple d'opération SnapManager qui nécessite les identifiants de connexion d'un utilisateur pour un hôte distant. Pour que SnapManager se souvienne des informations d'identification de l'hôte utilisateur dans le cache des informations d'identification de l'utilisateur SnapManager, définissez le `host.credentials.persist` propriété à *true* dans le `smsap.config` fichier.
+
+* Vous pouvez autoriser l'accès des utilisateurs au référentiel.
+* Vous pouvez autoriser l'accès des utilisateurs aux profils.
+* Vous pouvez afficher toutes les informations d'identification utilisateur.
+* Vous pouvez effacer les informations d'identification d'un utilisateur pour toutes les ressources (hôtes, référentiels et profils).
+* Vous pouvez supprimer des informations d'identification pour des ressources individuelles (hôtes, référentiels et profils).
+

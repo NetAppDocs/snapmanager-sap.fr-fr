@@ -1,0 +1,21 @@
+---
+permalink: windows/task-viewing-the-detailed-history-of-a-specific-operation-associated-with-a-profile.html 
+sidebar: sidebar 
+keywords: view, detail, history, snapmanager, operation, associate, profile 
+summary: 'Vous pouvez afficher l"historique détaillé d"une opération SnapManager spécifique associée à un profil.' 
+---
+= Affichage de l'historique détaillé d'une opération spécifique associée à un profil
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez afficher l'historique détaillé d'une opération SnapManager spécifique associée à un profil.
+
+.Étape
+. Pour afficher des informations détaillées sur une opération SnapManager spécifique associée à un profil, entrez la commande suivante :
++
+`smsap history operation-show -profile profile_name {-label label | -id id} [-quiet | -verbose]`
+
+

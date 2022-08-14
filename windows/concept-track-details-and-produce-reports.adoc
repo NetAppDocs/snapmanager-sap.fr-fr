@@ -1,0 +1,16 @@
+---
+permalink: windows/concept-track-details-and-produce-reports.html 
+sidebar: sidebar 
+keywords: snapmanager, reduce, level, detail, database, administrator, track, status, operation, monitor, interface, produce, report 
+summary: 'SnapManager réduit le niveau de détail nécessaire aux administrateurs de bases de données pour suivre l"état des différentes opérations grâce à la possibilité de méthodes de surveillance des opérations à partir d"une interface unique.' 
+---
+= Effectuer le suivi des détails et générer des rapports
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager réduit le niveau de détail nécessaire aux administrateurs de bases de données pour suivre l'état des différentes opérations grâce à la possibilité de méthodes de surveillance des opérations à partir d'une interface unique.
+
+Une fois que les administrateurs ont spécifié les bases de données à sauvegarder, SnapManager identifie automatiquement les fichiers de base de données à sauvegarder. SnapManager affiche des informations sur les référentiels, les hôtes, les profils, les sauvegardes et les clones. Vous pouvez surveiller les opérations sur des hôtes ou des bases de données spécifiques.

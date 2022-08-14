@@ -1,0 +1,21 @@
+---
+permalink: windows/task-updating-a-backup-schedule.html 
+sidebar: sidebar 
+keywords: list, schedule, operation, update, scheduling, frequency, cronstring, expression, user, backup, updating 
+summary: 'Vous pouvez afficher la liste des opérations planifiées et les mettre à jour si nécessaire. Vous pouvez mettre à jour la fréquence de programmation, l"heure de début de la planification, l"expression de chaîne de caractères et l"utilisateur qui a planifié la sauvegarde.' 
+---
+= Mise à jour d'un programme de sauvegarde
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez afficher la liste des opérations planifiées et les mettre à jour si nécessaire. Vous pouvez mettre à jour la fréquence de programmation, l'heure de début de la planification, l'expression de chaîne de caractères et l'utilisateur qui a planifié la sauvegarde.
+
+.Étape
+. Pour mettre à jour le planning d'une sauvegarde, entrez la commande suivante :
++
+`smsap schedule update -profile profile_name-schedule-nameschedulename [-schedule-commentschedule comment] -interval {-hourly | -daily | -weekly | -monthly | -onetimeonly} -start-timestarttime-cronstringcronstring-runasuserrunasuser [-quiet | -verbose]`
+
+

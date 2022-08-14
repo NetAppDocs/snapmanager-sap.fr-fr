@@ -1,0 +1,18 @@
+---
+permalink: unix-administration/concept-what-resource-pools-are.html 
+sidebar: sidebar 
+keywords: resource, pool, collection, physical, storage, system, volume, lun, provision, assign, aggregate 
+summary: 'Un pool de ressources est un ensemble de stockage physique inutilisé (systèmes ou agrégats de stockage, par exemple), à partir duquel de nouveaux volumes ou LUN peuvent être provisionnés pour contenir des données. Si vous attribuez un système de stockage à un pool de ressources, tous les agrégats du système de stockage sont disponibles pour le provisionnement.' 
+---
+= En quoi sont les pools de ressources
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Un pool de ressources est un ensemble de stockage physique inutilisé (systèmes ou agrégats de stockage, par exemple), à partir duquel de nouveaux volumes ou LUN peuvent être provisionnés pour contenir des données. Si vous attribuez un système de stockage à un pool de ressources, tous les agrégats du système de stockage sont disponibles pour le provisionnement.
+
+Les administrateurs de stockage utilisent la console protection Manager pour attribuer un pool de ressources aux copies de sauvegarde et de miroir. L'application de provisionnement peut alors automatiquement provisionner des volumes à partir des ressources physiques du pool de ressources pour contenir des sauvegardes et des copies en miroir.
+
+Pour les profils protégés, SnapManager affiche des informations sur un profil et indique si un pool de ressources de stockage a été affecté à ce profil. Si ce n'est pas le cas, le profil est considéré comme un « non-répondant ». Après l'affectation d'un pool de ressources de stockage au jeu de données du profil correspondant, ce profil est considéré comme « informateur ».

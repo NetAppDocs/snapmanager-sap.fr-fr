@@ -1,0 +1,56 @@
+---
+permalink: unix-administration/reference-the-smosmsap-history-operation-show-command.html 
+sidebar: sidebar 
+keywords: command, enable, history, snapmanager, operation, associated, profile, smsap, operation-show 
+summary: 'Cette commande vous permet d"afficher l"historique d"une opération SnapManager spécifique associée à un profil.' 
+---
+= La commande smsap history operation-show
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Cette commande vous permet d'afficher l'historique d'une opération SnapManager spécifique associée à un profil.
+
+
+
+== Syntaxe
+
+[listing, subs="+macros"]
+----
+pass:quotes[smsap history operation-show
+-profile _profile_ {-label _label_ | -id _id_} [-quiet | -verbose\]]
+----
+
+
+== Paramètres
+
+* `*-profile _profile_*`
++
+Spécifie le nom du profil. Ce nom peut comporter jusqu'à 30 caractères et doit être unique au sein de l'hôte.
+
+* `*-label _label_ | -id _id_*`
++
+Spécifie l'ID ou le libellé de l'opération SnapManager pour lequel vous souhaitez afficher l'historique.
+
+* `*-quiet*`
++
+Affiche uniquement les messages d'erreur sur la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* `*-verbose*`
++
+Affiche des messages d'erreur, d'avertissement et d'information sur la console.
+
+
+
+'''
+
+
+== Exemple de commande
+
+[listing]
+----
+ smsap history operation-show -profile PROFILE1 -label backup1 -verbose
+----
+'''

@@ -1,0 +1,116 @@
+---
+permalink: unix-administration/task-protect-database-backups-on-secondary-storage.html 
+sidebar: sidebar 
+keywords: snapmanager, protect, backup, copies, copy, secondary, tertiary, storage, system 
+summary: SnapManager permet de protéger les copies de sauvegarde sur les systèmes de stockage secondaires ou tertiaires. 
+---
+= Protection des sauvegardes de bases de données sur des systèmes de stockage secondaires ou tertiaires
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager permet de protéger les copies de sauvegarde sur les systèmes de stockage secondaires ou tertiaires.
+
+*À propos de cette tâche*
+
+Vous ne pouvez pas protéger immédiatement la sauvegarde créée à l'aide de la commande BRBACKUP sur un stockage secondaire après avoir effectué avec succès la sauvegarde sur le stockage primaire.
+
+.Étape
+. Saisissez la commande suivante :
++
+`*smsap backup create -profile _profile_name_ {[-full {-online | -offline | -auto} [-retain {-hourly | -daily | -weekly | -monthly | -unlimited}] [-verify] | [-data [[-files _files_ [_files_]] | [-tablespaces _-tablespaces_ [_-tablespaces_]] [-datalabel _label_] {-online | -offline | -auto} [-retain {-hourly | [-daily | -weekly | -monthly | -unlimited]} [-verify] | [-archivelogs [-label _label_] [-comment _comment_] [-snapvaultlabel _SnapVault_label_][-protect | -noprotect | -protectnow] [-backup-dest _path1_ [,[_path2_]]] [-exclude-dest _path1_ [_,path2_]]] [-prunelogs {-all | -untilSCN _untilSCN_ | -until-date _yyyy-MM-dd:HH:mm:ss_ | -before {-months | -days | -weeks | -hours}} -prune-dest _prune_dest1_,[_prune_dest2_]] [-taskspec _taskspec_]} [-dump] [-force] [-quiet | -verbose]*`
+
++
+[cols="1a,3a"]
+|===
+| Les fonctions que vous recherchez... | Alors, procédez comme ça... 
+
+
+ a| 
+*Créez une sauvegarde d'une base de données en ligne ou hors ligne, plutôt que de permettre à SnapManager de gérer s'il est en ligne ou hors ligne*
+ a| 
+Spécifiez le `-offline` ou `-online` option permettant de créer une sauvegarde de la base de données hors ligne ou de la base de données en ligne. Si vous utilisez le `-offline` ou `-online` vous ne pouvez pas utiliser l'option -auto.
+
+
+
+ a| 
+*Permettre à SnapManager de gérer la sauvegarde d'une base de données, qu'elle soit en ligne ou hors ligne*
+ a| 
+Spécifiez le `-auto` option. Si vous utilisez l'option -auto, vous ne pouvez pas utiliser le `-offline` ou `-online` option.
+
+
+
+ a| 
+*Ajouter un commentaire sur la sauvegarde*
+ a| 
+Spécifiez le `-comment` suivi de la chaîne de description.
+
+
+
+ a| 
+*Forcer la base de données à l'état dans lequel vous avez spécifié pour la sauvegarder, quel que soit l'état en cours*
+ a| 
+Spécifiez le `-force` option.
+
+
+
+ a| 
+*Vérifier la sauvegarde au moment de la création*
+ a| 
+Spécifiez le `-verify` option.
+
+
+
+ a| 
+*Créez une sauvegarde sur stockage secondaire*
+ a| 
+Spécifiez le `-protect` option.
+
+** Si vous utilisez ONTAP et que vous souhaitez protéger immédiatement la sauvegarde sur le stockage secondaire, spécifiez le `-protect` option.
++
+
+NOTE: Le `-protectnow` Cette option n'est pas applicable dans clustered Data ONTAP.
+
+** Si vous utilisez Data ONTAP sous 7-mode et que vous souhaitez protéger immédiatement la sauvegarde sur un système de stockage secondaire, en ignorant la planification de protection de protection de protection Manager, spécifiez le `-protectnow` option.
+** Pour empêcher la sauvegarde sur le stockage secondaire, spécifiez `-noprotect` option. Si vous utilisez ONTAP et que vous avez sélectionné la stratégie de protection _SnapManager_cdot_Vault_ lors de la création du profil, vous devez spécifier le `-snapvaultlabel` option. Vous devez fournir l'étiquette SnapMirror que vous avez spécifiée dans les règles de la règle SnapMirror lors de la configuration de la relation SnapVault comme valeur.
+
+
+
+
+ a| 
+*Spécifiez les valeurs de classe de rétention*
+ a| 
+Spécifiez le `-retain` et indiquez si la sauvegarde doit être conservée selon l'une des classes de rétention suivantes :
+
+** `-hourly`
+** `-daily`
+** `-weekly`
+** `-monthly`
+** `-unlimited`
+
+
+Si vous ne spécifiez pas la classe de rétention, SnapManager utilise -hourly par défaut.
+
+|===
+
+
+'''
+
+
+== Exemples
+
+La commande suivante protège une sauvegarde de base de données :
+
+[listing]
+----
+smsap backup create -profile PAYDB -protect -retain -daily -full auto -label full_bkup_sales
+----
+La commande suivante protège immédiatement la sauvegarde de la base de données :
+
+[listing]
+----
+smsap backup create -profile PAYDB -protectnow -retain -daily -full auto -label full_bkup_sales
+----
+'''

@@ -1,0 +1,188 @@
+---
+permalink: unix-administration/concept-primary-and-secondary-storage-configuration-and-topology.html 
+sidebar: sidebar 
+keywords: techco, corportation, payroll, database, server, snapmanager, sap, host, fifty, mile, primary, secondary, storage, configuration, topology 
+summary: 'Dans cet exemple, la société TechCo exécute sa base de données de paie sur un serveur de base de données qui est également un hôte SnapManager pour SAP et stocke ses données de paie et ses fichiers de configuration sur des systèmes de stockage primaires au siège de l"entreprise. Il est donc impératif de protéger la base de données en conservant des sauvegardes quotidiennes et hebdomadaires sur le système de stockage local ainsi que des sauvegardes sur les systèmes de stockage secondaires situés à cinquante kilomètres.' 
+---
+= Configuration et topologie du stockage primaire et secondaire
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dans cet exemple, la société TechCo exécute sa base de données de paie sur un serveur de base de données qui est également un hôte SnapManager pour SAP et stocke ses données de paie et ses fichiers de configuration sur des systèmes de stockage primaires au siège de l'entreprise. Il est donc impératif de protéger la base de données en conservant des sauvegardes quotidiennes et hebdomadaires sur le système de stockage local ainsi que des sauvegardes sur les systèmes de stockage secondaires situés à cinquante kilomètres.
+
+L'illustration suivante présente SnapManager pour SAP et les composants de protection des données de la console de gestion NetApp requis pour prendre en charge la protection des sauvegardes locales et secondaires.
+
+image::../media/scrn_en_drw_smsap_architecture.gif[Cette figure présente les composants associés à une architecture combinée de protection de base de données SnapManager pour SAP et Management Console]
+
+Pour gérer la base de données de paie et soutenir sa protection de sauvegarde locale et secondaire comme illustré dans le graphique précédent, le déploiement suivant est utilisé.
+
+* *Hôte SnapManager*
++
+L'hôte SnapManager, payroll.techco.com, est situé au siège de l'entreprise et fonctionne sur un serveur UNIX, qui exécute également le programme de base de données qui génère et gère la base de données des salaires.
+
++
+** *Connexions*
++
+Pour prendre en charge la sauvegarde locale et la protection de sauvegarde secondaire, l'hôte SnapManager dispose de connexions réseau aux composants suivants :
+
++
+*** SnapManager pour client SAP
+*** Un référentiel SnapManager, qui exécute le programme de base de données, SnapDrive pour UNIX et SnapManager
+*** Systèmes de stockage primaire
+*** Systèmes de stockage secondaires
+*** Serveur DataFabric Manager
+
+
+** *Produits installés*
++
+L'hôte SnapManager est installé avec les produits suivants pour cet exemple :
+
++
+*** Serveur SnapManager
+*** SnapDrive pour UNIX
+*** Utilitaires hôtes
+
+
+
+
+* *Systèmes de stockage primaire TechCo*
++
+La base de données de paie, y compris les fichiers de données, les fichiers journaux et les fichiers de contrôle associés, réside dans les systèmes de stockage primaires. Ces sociétés sont situées au siège de la société TechCo, ainsi qu'à l'hôte SnapManager et au réseau connectant le stockage principal et l'hôte SnapManager. Les dernières transactions et mises à jour de la base de données de paie sont écrites sur les systèmes de stockage primaires. Les copies Snapshot, qui offrent une protection de sauvegarde locale de la base de données des paies, résident également sur les systèmes de stockage primaires.
+
++
+** *Connexions*
++
+Pour prendre en charge la protection secondaire de la sauvegarde, les systèmes de stockage primaires disposent de connexions réseau vers les composants suivants :
+
++
+*** Hôte SnapManager exécutant le programme de base de données, SnapDrive pour UNIX et SnapManager
+*** Systèmes de stockage secondaires
+*** Serveur DataFabric Manager
+
+
+** *Produits installés*
++
+Les licences suivantes doivent être activées sur ces systèmes pour cet exemple :
+
++
+*** Data ONTAP 7.3.1 ou version ultérieure
+*** SourceData ONTAP primaire
+*** FlexVol (requis pour NFS)
+*** SnapRestore
+*** Protocole NFS
+
+
+
+
+* *Systèmes de stockage secondaire TechCo*
++
+Les systèmes de stockage secondaires, situés sur un site de stockage secondaire connecté au réseau à cinquante kilomètres, sont utilisés pour stocker des sauvegardes secondaires de la base de données de paie.
+
++
+** *Connexions*
++
+Pour prendre en charge la protection secondaire de la sauvegarde, les systèmes de stockage secondaires disposent de connexions réseau aux composants suivants :
+
++
+*** Systèmes de stockage primaire
+*** Serveur DataFabric Manager
+
+
+** *Produits installés*
++
+Les licences suivantes doivent être activées sur les systèmes de stockage secondaires dans cet exemple :
+
++
+*** Data ONTAP
+*** SourceData ONTAP secondaire
+*** SnapRestore
+*** FlexVol (requis pour NFS)
+*** Protocole NFS
+
+
+
+
+* *Serveur DataFabric Manager*
++
+Le serveur DataFabric Manager, techco_dfm, est situé au siège de l'entreprise dans un emplacement accessible à l'administrateur du stockage. Le serveur DataFabric Manager, entre autres fonctions, coordonne les tâches de sauvegarde entre le stockage primaire et secondaire.
+
++
+** *Connexions*
++
+Pour prendre en charge la protection de sauvegarde secondaire, le serveur DataFabric Manager maintient des connexions réseau vers les composants suivants :
+
++
+*** Console de gestion NetApp
+*** Systèmes de stockage primaire
+*** Systèmes de stockage secondaires
+
+
+** *Produits installés*
++
+Pour cet exemple, le serveur DataFabric Manager dispose d'une licence pour les produits de serveur suivants :
+
++
+*** DataFabric Manager
+
+
+
+
+* *Référentiel SnapManager*
++
+Le référentiel SnapManager, situé sur un serveur dédié, stocke les données sur les opérations réalisées par SnapManager, par exemple l'heure des sauvegardes, des espaces de stockage et des fichiers de données sauvegardés, les systèmes de stockage utilisés, les clones et les copies Snapshot créées. Lorsqu'un administrateur de base de données tente une restauration complète ou partielle, SnapManager interroge le référentiel afin d'identifier les sauvegardes créées par SnapManager pour SAP à des fins de restauration.
+
++
+** *Connexions*
++
+Pour prendre en charge la protection secondaire de la sauvegarde, les systèmes de stockage secondaires disposent de connexions réseau aux composants suivants :
+
++
+*** Hôte SnapManager
+*** SnapManager pour client SAP
+
+
+
+
+* *Console de gestion NetApp*
++
+La console de gestion NetApp est la console d'interface graphique utilisée par l'administrateur du stockage pour configurer les planifications, les règles, les jeux de données et les affectations de pools de ressources afin de permettre la sauvegarde sur les systèmes de stockage secondaires, accessibles à l'administrateur du stockage.
+
++
+** *Connexions*
++
+Pour prendre en charge la protection de sauvegarde secondaire, NetApp Management Console dispose de connexions réseau vers les composants suivants :
+
++
+*** Systèmes de stockage primaire
+*** Systèmes de stockage secondaires
+*** Serveur DataFabric Manager
+
+
+
+
+* *SnapManager pour client SAP*
++
+Le client SnapManager pour SAP est l'interface graphique et la console de ligne de commande utilisées par l'administrateur de base de données de paie pour configurer et exécuter des sauvegardes et des sauvegardes locales sur le stockage secondaire.
+
++
+** *Connexions*
++
+Pour prendre en charge la sauvegarde locale et la protection de sauvegarde secondaire, le client SnapManager pour SAP dispose de connexions réseau aux composants suivants :
+
++
+*** Hôte SnapManager
+*** Référentiel SnapManager, exécutant le programme de base de données, SnapDrive pour UNIX et SnapManager
+*** Hôte de base de données (s'il est distinct de l'hôte exécutant SnapManager)
+*** Serveur DataFabric Manager
+
+
+** *Produits installés*
++
+Pour prendre en charge la sauvegarde locale et la protection de sauvegarde secondaire, le logiciel client SnapManager pour SAP doit être installé sur ce composant.
+
+
+
+

@@ -1,0 +1,18 @@
+---
+permalink: unix-administration/task-change-the-backup-retention-policy.html 
+sidebar: sidebar 
+keywords: change, properties, backup, eligible, ineligible, deletion, retention, policy, changing 
+summary: 'Vous pouvez modifier les propriétés d"une sauvegarde de sorte qu"elle soit éligible ou non pour la suppression conformément à la politique de rétention.' 
+---
+= Modifier la stratégie de conservation des sauvegardes
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez modifier les propriétés d'une sauvegarde de sorte qu'elle soit éligible ou non pour la suppression conformément à la politique de rétention.
+
+*À propos de cette tâche*
+
+Lorsque vous créez une sauvegarde, vous pouvez définir sa stratégie de rétention. Vous pouvez ensuite choisir de conserver cette sauvegarde pour une période plus longue que celle de la stratégie de rétention ne le permet ou de spécifier que vous n'avez plus besoin de la sauvegarde et que la stratégie de rétention la gère.

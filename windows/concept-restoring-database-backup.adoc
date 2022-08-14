@@ -1,0 +1,36 @@
+---
+permalink: windows/concept-restoring-database-backup.html 
+sidebar: sidebar 
+keywords: snapmanager, sap, enable, restore, database, snapshot, copy, backup, mean-time-to-recovery, mttrm restore 
+summary: 'SnapManager pour SAP permet de restaurer une base de données avec un état antérieur à la création d"une copie Snapshot, Les sauvegardes étant créées plus fréquemment, le nombre de journaux à appliquer est réduit, ce qui réduit le délai moyen de restauration pour une base de données.' 
+---
+= Restauration des sauvegardes de bases de données
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager pour SAP permet de restaurer une base de données avec un état antérieur à la création d'une copie Snapshot, Les sauvegardes étant créées plus fréquemment, le nombre de journaux à appliquer est réduit, ce qui réduit le délai moyen de restauration pour une base de données.
+
+Vous pouvez effectuer les tâches suivantes liées à la restauration et à la récupération des données dans des bases de données :
+
+* Effectuez une restauration basée sur des fichiers.
+* Restaurez la sauvegarde complète ou une partie de celle-ci.
++
+Si vous restaurez une partie de celui-ci, vous spécifiez un groupe d'espaces de stockage ou un groupe de fichiers de données. Vous pouvez également restaurer les fichiers de contrôle avec les données ou uniquement les fichiers de contrôle eux-mêmes.
+
+* Récupérer les données en fonction d'un point dans le temps ou de tous les journaux disponibles, qui stocke la dernière transaction effectuée dans la base de données.
++
+Le point dans le temps peut être un numéro de changement de système Oracle (SCN) ou une date et une heure (aaaa-mm-jj:hh:mm:ss). SnapManager utilise l'horloge de 24 heures.
+
+* Effectuez des restaurations à partir des sauvegardes sur le stockage primaire (sauvegardes locales).
+* Restaurez et restaurez la sauvegarde à l'aide de SnapManager, ou utilisez SnapManager pour restaurer la sauvegarde et utilisez un autre outil, tel que Recovery Manager (RMAN), pour restaurer les données.
+* Restaurer des sauvegardes à partir d'emplacements secondaires
+
+
+Pour plus d'informations, reportez-vous à la section .
+
+Vous pouvez restaurer une sauvegarde effectuée par une version précédente de SnapManager en utilisant SnapManager 3.0 et versions ultérieures.
+
+Les administrateurs peuvent effectuer des opérations de restauration et de restauration à l'aide de l'interface utilisateur graphique de SnapManager ou via l'interface de ligne de commandes.

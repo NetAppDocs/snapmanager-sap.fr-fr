@@ -1,0 +1,41 @@
+---
+permalink: windows/concept-general-layout-and-configuration.html 
+sidebar: sidebar 
+keywords: information, recommend, general, database, layout, storage, configuration, issue, disk, group, file, type, tablespace 
+summary: Pour éviter tout problème lié aux groupes de disques, aux types de fichiers et aux espaces de stockage, des informations sont disponibles sur les dispositions générales recommandées des bases de données et les configurations de stockage. 
+---
+= Disposition générale et configuration
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Pour éviter tout problème lié aux groupes de disques, aux types de fichiers et aux espaces de stockage, des informations sont disponibles sur les dispositions générales recommandées des bases de données et les configurations de stockage.
+
+* N'incluez pas de fichiers provenant de plusieurs types de système de fichiers SAN dans votre base de données.
++
+Tous les fichiers qui font partie d'une base de données doivent résider sur le même type de système de fichiers.
+
+* La baie SnapManager requiert un grand nombre de blocs de 4 Ko.
+
+
+Voici quelques consignes pour la séparation des volumes :
+
+* Les fichiers de données d'une seule base de données doivent se trouver dans le volume.
+* Vous devez utiliser des volumes distincts pour chacune des classifications de fichiers suivantes : fichiers binaires de base de données, fichiers de données, fichiers journaux de reprise en ligne, fichiers journaux de reprise archivés et fichiers de contrôle.
+* Il n'est pas nécessaire de créer un volume distinct pour les fichiers de base de données temporaires, car SnapManager ne sauvegarde pas les fichiers de base de données temporaires.
+
+
+SAP utilise une disposition standard pour les installations de bases de données Oracle. Dans cette disposition, SAP place des copies du fichier de contrôle Oracle dans `E:\oracle\SID\origlogA, E:\oracle\SID\origlogB, and E:\oracle\SID\sapdata1 file systems`.
+
+
+NOTE: Comme les sauvegardes BR*Tools incluent les profils Oracle et SAP situés dans le sous-répertoire de base de données de l'installation Oracle, l'installation Oracle doit se trouver sur le stockage.
+
+Dans le cas d'une nouvelle installation, vous pouvez modifier l'emplacement des fichiers de contrôle à l'aide de SAPINST et déplacer le fichier de contrôle normalement placé dans le système de fichiers sapdata1 vers un système de fichiers qui ne se trouve pas dans le même volume que les fichiers de données. (SAPINST est l'outil fourni par SAP pour l'installation des systèmes SAP.)
+
+Pour plus d'informations, consultez le document _SnapManager for SAP Best Practices_.
+
+*Informations connexes*
+
+http://media.netapp.com/documents/tr-3823.pdf["Meilleures pratiques SnapManager pour SAP : media.netapp.com/documents/tr-3823.pdf"^]

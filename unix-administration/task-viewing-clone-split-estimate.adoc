@@ -1,0 +1,36 @@
+---
+permalink: unix-administration/task-view-clone-split-estimate.html 
+sidebar: sidebar 
+keywords: clone, split, estimate, help, total, free, space, available, aggregate, database, view 
+summary: 'L"estimation du fractionnement du clone permet de connaître l"espace libre total disponible sur l"agrégat, la quantité d"espace partagé entre le clone et la base de données d"origine, et l"espace utilisé exclusivement par le clone. Vous pouvez également afficher la date et l"heure de création du clone sous-jacent ainsi que l"âge du clone. En fonction de cette estimation, vous décidez de séparer un clone ou non.' 
+---
+= Afficher une estimation de séparation de clones
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+L'estimation du fractionnement du clone permet de connaître l'espace libre total disponible sur l'agrégat, la quantité d'espace partagé entre le clone et la base de données d'origine, et l'espace utilisé exclusivement par le clone. Vous pouvez également afficher la date et l'heure de création du clone sous-jacent ainsi que l'âge du clone. En fonction de cette estimation, vous décidez de séparer un clone ou non.
+
+*À propos de cette tâche*
+
+Pour afficher l'estimation de séparation de clones, vous devez entrer le nom de profil du clone d'origine ainsi que le libellé ou le GUID de l'opération de clonage. Si le clone se trouve dans un autre hôte, vous pouvez spécifier le nom d'hôte.
+
+.Étape
+. Pour afficher l'estimation de séparation de clones, entrez la commande suivante :
++
+`*smsap clone split-estimate -profile _profile_ [-host _hostname_] [-label _clone-label_ | -id _clone-id_][-quiet | -verbose]*`
+
+
+
+'''
+L'exemple suivant montre la commande pour cloner le stockage divisé :
+
+[listing]
+----
+
+					smsap clone split-estimate
+-profile p1 -label clone_test_label
+----
+'''

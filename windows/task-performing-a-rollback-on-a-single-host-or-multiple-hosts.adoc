@@ -1,0 +1,66 @@
+---
+permalink: windows/task-performing-a-rollback-on-a-single-host-or-multiple-hosts.html 
+sidebar: sidebar 
+keywords: perform, rollback, single, multiple, snapmanager, server, host, command-line, interface, cli, multiple 
+summary: 'Vous pouvez effectuer une restauration sur un ou plusieurs hôtes de serveur SnapManager à l"aide de l"interface de ligne de commande \(CLI\).' 
+---
+= Exécution d'une restauration sur un ou plusieurs hôtes
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez effectuer une restauration sur un ou plusieurs hôtes de serveur SnapManager à l'aide de l'interface de ligne de commande.
+
+Vous devez vous assurer que toutes les conditions préalables à l'exécution d'une restauration sont terminées.
+
+. Pour effectuer une restauration sur un seul hôte, entrez la commande suivante :
++
+`smsaprepository rollback-repository-dbnamerepo_service_name-hostrepo_host-login-usernamerepo_username-portrepo_port-rollbackhosthost_with_target_database`
+
++
+L'exemple suivant montre la commande permettant de restaurer toutes les bases de données cibles montées sur hostA et une base de données de référentiel nommée REPOA située sur l'hôte de référentiel, repo_host :
+
++
+[listing]
+----
+
+smsap repository rollback
+    -repository
+      -dbname repoA
+      -host repo_host
+      -login
+       -username repouser
+       -port 1521
+     -rollbackhost hostA
+----
+. Pour effectuer une restauration sur plusieurs hôtes, entrez la commande suivante : `smsaprepository rollback-repository-dbnamerepo_service_name-hostrepo_host-login-usernamerepo_username-portrepo_port-rollbackhosthost_with_target_database1,host_with_target_database2`
++
+
+NOTE: Pour plusieurs hôtes, entrez les noms d'hôte séparés par une virgule et assurez-vous qu'il n'y a pas d'espace entre la virgule et le nom d'hôte suivant.Assurez-vous également que vous entrez l'ensemble des noms d'hôte multiples dans des guillemets doubles.
+
++
+L'exemple suivant montre la commande permettant de restaurer toutes les bases de données cibles montées sur les hôtes, hostA, hostB, et une base de données de référentiel nommée REPOA située sur l'hôte de référentiel, repo_host :
+
++
+[listing]
+----
+
+smsap repository rollback
+    -repository
+      -dbname repoA
+      -host repo_host
+      -login
+       -username repouser
+       -port 1521
+     -rollbackhost hostA,hostB
+----
++
+Les hôtes, les profils, les planifications, les sauvegardes et les clones associés aux profils des bases de données cibles de l'hôte sont restaurés dans le référentiel précédent.
+
+
+
+*Informations connexes*
+
+xref:concept-prerequisites-for-performing-a-rollback.adoc[Conditions préalables à l'exécution d'une restauration]

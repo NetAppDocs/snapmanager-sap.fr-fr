@@ -1,0 +1,48 @@
+---
+permalink: unix-administration/task-clone-databases-from-backups.html 
+sidebar: sidebar 
+keywords: clone, database, backup, create, command, cloning 
+summary: 'Vous pouvez cloner une base de données à partir d"une sauvegarde à l"aide de la commande clone create.' 
+---
+= Clonage des bases de données à partir des sauvegardes
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez cloner une base de données à partir d'une sauvegarde à l'aide du `clone create` commande.
+
+*À propos de cette tâche*
+
+Vous devez d'abord créer un fichier de spécifications de clone pour la base de données. SnapManager crée le clone sur la base des informations contenues dans ce fichier de spécifications.
+
+Après avoir cloné une base de données, vous pouvez mettre à jour votre `tnsnames.ora` fichiers sur vos ordinateurs clients avec les nouvelles informations de connexion de base de données clonées. Le `tnsnames.ora` Les fichiers sont utilisés pour se connecter à une instance Oracle sans avoir à spécifier les informations complètes de la base de données. SnapManager ne met pas à jour le `tnsnames.ora` fichiers.
+
+SnapManager crée toujours une sauvegarde comprenant les fichiers journaux d'archive, si vous utilisez le profil créé avec `-include-with-online-backups`. SnapManager vous permet de cloner uniquement les sauvegardes complètes de base de données.
+
+SnapManager (3.2 ou version ultérieure) vous permet de cloner les sauvegardes contenant les fichiers de données et les fichiers journaux d'archivage.
+
+Si le journal d'archivage est disponible à partir d'un emplacement externe, vous pouvez spécifier l'emplacement externe pendant le clonage pour restaurer la base de données clonée à un état cohérent. Vous devez vous assurer que l'emplacement externe est accessible par Oracle. Le clonage des sauvegardes de journaux d'archives uniquement n'est pas pris en charge.
+
+Bien que la sauvegarde du journal d'archivage soit créée avec la sauvegarde partielle en ligne, vous ne pouvez pas créer de clone de base de données à l'aide de cette sauvegarde.
+
+Vous pouvez cloner la sauvegarde de la base de données à partir de l'emplacement du fichier journal d'archives externe uniquement pour une base de données autonome.
+
+Le clonage de la sauvegarde de base de données en ligne de la base de données RAC (Real application clusters) à l'aide de l'emplacement du fichier journal d'archives externe échoue en raison d'un échec de restauration. Ceci est dû au fait que la base de données Oracle ne parvient pas à trouver et à appliquer les fichiers journaux d'archive pour la récupération à partir de l'emplacement du journal d'archivage externe pendant le clonage de la sauvegarde de la base de données.
+
+Vous pouvez spécifier le `-dump` option en tant que paramètre facultatif pour collecter les fichiers de vidage après l'opération de création du clone réussie ou échec.
+
+*Clonage de sauvegarde de fichier de données sans sauvegarde de journal d'archivage*
+
+Lorsque la sauvegarde des fichiers de données n'inclut pas la sauvegarde du journal d'archivage, SnapManager pour SAP clone la base de données en fonction du numéro SCN (System change Number) enregistré lors de la sauvegarde. Si la base de données clonée ne peut pas être restaurée, le système `Archived log file for thread <number> and change <SCN> required to complete recovery` Le message d'erreur s'affiche, même si SnapManager pour SAP continue à cloner la base de données et parvient enfin à créer le clone.
+
+Lors du clonage à l'aide de la sauvegarde des fichiers de données sans inclure la sauvegarde du journal d'archivage, SnapManager récupère la base de données clonée jusqu'au dernier SCN du journal d'archivage, qui est enregistré pendant la sauvegarde.
+
+.Étapes
+. Créer un fichier de spécification clone.
+. Pour créer un clone, entrez la commande suivante :
++
+`*smsap clone create-backup-label _backup_name_ -newsid _new_sid_ -label _clone_label_ -profile _profile_name_ -clonespec _full_path_to_clonespecfile_ [-taskspec _taskspec_] [-recover-from-location] _path1 [,<path2>...]_] [-dump]*`
+
+

@@ -1,0 +1,25 @@
+---
+permalink: windows/task-cloning-databases-and-using-custom-plugin-scripts.html 
+sidebar: sidebar 
+keywords: snapmanager, method, custom, script, clone, operation, sid, policy, naming, name, plug-in 
+summary: 'SnapManager offre une méthode d"utilisation de vos scripts personnalisés avant et après une opération de clonage. Par exemple, vous avez peut-être créé un script personnalisé qui valide un SID de base de données clone et garantit que le SID est autorisé par votre stratégie de nommage. Le plug-in de clonage SnapManager vous permet d"inclure vos scripts personnalisés et de les exécuter automatiquement avant ou après une opération de clonage SnapManager.' 
+---
+= Clonage de bases de données et à l'aide de scripts de plug-in personnalisés
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager offre une méthode d'utilisation de vos scripts personnalisés avant et après une opération de clonage. Par exemple, vous avez peut-être créé un script personnalisé qui valide un SID de base de données clone et garantit que le SID est autorisé par votre stratégie de nommage. Le plug-in de clonage SnapManager vous permet d'inclure vos scripts personnalisés et de les exécuter automatiquement avant ou après une opération de clonage SnapManager.
+
+. Afficher des exemples de scripts de plug-ins.
+. Créez un script à partir de zéro ou modifiez l'un des exemples de scripts de plug-in.
++
+Créez votre script personnalisé conformément aux instructions du script du plug-in SnapManager.
+
+. Placez votre script personnalisé dans un emplacement de répertoire spécifié.
+. Mettez à jour le fichier XML de spécifications de clone et incluez des informations sur votre script personnalisé qui doit être utilisé pendant le processus de clonage.
+. Utilisez une commande SnapManager pour vérifier que les scripts personnalisés sont opérationnels.
+. Lorsque vous lancez l'opération de clonage, incluez le nom du script et les paramètres facultatifs.
+

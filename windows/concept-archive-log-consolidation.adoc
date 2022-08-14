@@ -1,0 +1,14 @@
+---
+permalink: windows/concept-archive-log-consolidation.html 
+sidebar: sidebar 
+keywords: snapmanager, sap, consolidate, archive, log, backup, file, identify, identifies, consolidation 
+summary: 'SnapManager (3.2 ou version ultérieure) pour SAP consolide les sauvegardes des journaux d"archivage afin de conserver un nombre minimal de sauvegardes pour les fichiers journaux d"archivage. SnapManager pour SAP identifie et libère les sauvegardes qui contiennent des fichiers journaux d"archive qui sont des sous-ensembles d"autres sauvegardes.' 
+---
+= Consolidation des journaux d'archivage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager (3.2 ou version ultérieure) pour SAP consolide les sauvegardes des journaux d'archivage afin de conserver un nombre minimal de sauvegardes pour les fichiers journaux d'archivage. SnapManager pour SAP identifie et libère les sauvegardes qui contiennent des fichiers journaux d'archive qui sont des sous-ensembles d'autres sauvegardes.

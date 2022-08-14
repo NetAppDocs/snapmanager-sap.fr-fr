@@ -1,0 +1,73 @@
+---
+permalink: windows/task-creating-repositories.html 
+sidebar: sidebar 
+keywords: snapmanager, require, repository, host, data, operation, perform, creating, create 
+summary: SnapManager nécessite un référentiel sur un hôte pour héberger les données concernant les opérations que vous effectuez. 
+---
+= Création de référentiels
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager nécessite un référentiel sur un hôte pour héberger les données concernant les opérations que vous effectuez.
+
+Assurez-vous que les tâches suivantes sont effectuées :
+
+. Créez un utilisateur Oracle et un mot de passe dans la base de données du référentiel.
+. Autoriser l'accès de l'utilisateur au référentiel.
+
+
+Pour un référentiel, SnapManager pour SAP nécessite au moins une taille de bloc de 4 Ko pour l'espace de stockage dans lequel il est installé. Pour vérifier la taille de bloc, utilisez la commande SQL suivante :
+
+[listing]
+----
+select a.username, a.default_tablespace, b.block_size
+from dba_users a, dba_tablespaces b
+a.username = repo_user
+----
+où
+
+* a.default_tablespace = b.tablespace_name
+* a.username = le nom d'utilisateur dans le référentiel
+
+
+Si vous mettez à niveau les référentiels, vous devez redémarrer le serveur SnapManager pour redémarrer les plannings associés.
+
+. Pour créer le référentiel, entrez la commande repository create, au format général suivant :
++
+`smsap repository create -repository -dbname repo_service_name -host repo_host -login -username repo_username -port repo_port [-force] [-noprompt] [-quiet | -verbose]`
+
++
+Où ?
+
++
+** -repository -dbname est le nom de la base de données du référentiel.
+** -host est le nom de l'hôte pour le référentiel.
+** -username est le nom de l'utilisateur de la base de données qui a accès au référentiel.
+** -port est le port de l'hôte. Les autres options de cette commande sont les suivantes :
+
+
++
+[-force] [-noprompt]
+
++
++
+
++
++ REMARQUE : si vous disposez d'un référentiel existant portant le même nom et que vous utilisez l'option -force, toutes les données d'un schéma de référentiel existant seront écrasées.
+
+
+
+
+
+== Création d'un référentiel
+
+La ligne de commande suivante crée un référentiel.
+
+[listing]
+----
+smsap repository create -repository -dbname HR1
+-host server1 -login -username admin -port 1521
+----

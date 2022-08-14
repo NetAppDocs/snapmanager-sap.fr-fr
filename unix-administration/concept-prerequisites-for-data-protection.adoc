@@ -1,0 +1,33 @@
+---
+permalink: unix-administration/concept-prerequisites-for-data-protection.html 
+sidebar: sidebar 
+keywords: aware, certain, consideration, perform, data, protection 
+summary: Pour assurer la protection des données, vous devez tenir compte de certaines considérations. 
+---
+= Points à prendre en compte pour la protection des données
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Pour assurer la protection des données, vous devez tenir compte de certaines considérations.
+
+* Pour effectuer des opérations de clonage ou de restauration à partir de systèmes secondaires, vous devez monter le volume de destination dans l'espace de noms et l'exporter correctement.
+* Vous devez désactiver le paramètre de configuration SnapDrive `check-export-permission-nfs-clone` en définissant la valeur sur `*off*`.
++
+La documentation SnapDrive pour UNIX disponible sur le site de support NetApp contient des informations supplémentaires sur la `check-export-permission-nfs-clone` paramètre.
+
+* Vous devez configurer la relation SnapMirror pour les volumes de stockage secondaire requis dans le système de stockage secondaire.
+* Vous devez configurer la relation SnapVault pour les qtrees de stockage secondaire requis dans le système de stockage secondaire pour Data ONTAP 7-mode.
+* Vous devez définir une règle et des règles pour l'étiquette SnapMirror définie par l'utilisateur si vous utilisez un post-script SnapVault pour clustered Data ONTAP.
++
+SnapVault post-script prend en charge les volumes Data ONTAP en cluster et les types de relations SnapMirror DP et XDP. La documentation ONTAP disponible sur le site de support NetApp contient des informations sur la configuration de SnapMirror et de SnapVault.
+
+* Dans les environnements NAS, vous devez configurer le chemin d'accès aux données NAS principal et secondaire en utilisant le `snapdrive config set -mgmtpath _management_path management_path management_path datapath_path_` commande.
++
+Par exemple : `*snapdrive config set -mgmtpath f3050-197-91 f3050-197-91 f3050-197-91 f3050-220-91*`, où `f3050-197-91` est le chemin de gestion et `f3050-220-91` est le chemin d'accès aux données.
+
+
+
+http://mysupport.netapp.com/["Documentation sur le site de support NetApp"^]

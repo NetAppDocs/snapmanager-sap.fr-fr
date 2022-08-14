@@ -1,0 +1,49 @@
+---
+permalink: windows/concept-database-backups-created-using-brbackup-and-brarchive.html 
+sidebar: sidebar 
+keywords: brbackup, command, create, backup, database, snapshot, copy, storage, system, host, command-line, interface, cli, graphical, user, interface, gui, offline, redo, log, file, brarchive 
+summary: 'La commande BRBACKUP crée une sauvegarde de la base de données SAP à l"aide de la copie Snapshot du système de stockage. Vous pouvez exécuter la commande BRBACKUP à partir de l’interface de ligne de commande (CLI) de l’hôte SAP, de l’interface CLI BR*Tools ou de l’interface utilisateur graphique (GUI) de l’hôte SAP. Pour sauvegarder les fichiers journaux de reprise hors ligne, vous pouvez utiliser LA commande BRARCHIVE.' 
+---
+= Sauvegardes de base de données créées à l'aide de BRBACKUP et BRARCHIVE
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le `BRBACKUP` La commande crée une sauvegarde de la base de données SAP à l'aide d'une copie Snapshot sur le système de stockage. Vous pouvez exécuter le `BRBACKUP` Commande à partir de l'interface de ligne de commande (CLI) de l'hôte SAP, de l'interface de ligne de commande BR*Tools ou de l'interface utilisateur graphique (GUI). Pour sauvegarder les fichiers journaux de reprise hors ligne, vous pouvez utiliser le `BRARCHIVE` commande.
+
+ `BRBACKUP` Sauvegarde les fichiers de données, les fichiers de contrôle et les fichiers journaux de reprise en ligne de la base de données SAP. Vous devez sauvegarder les autres fichiers de configuration SAP, par exemple les fichiers journaux SAP, les fichiers du noyau et les demandes de transport à l'aide de `BRBACKUP` avec le `SAP_DIR` et restaurez à l'aide de `BRRESTORE`.
+
+Si la valeur de `_SQLNET.AUTHENTICATION_SERVICES_` paramètre dans le `sqlnet.ora` Est défini sur *NONE*, assurez-vous que l'utilisateur de base de données Oracle (système) dispose des privilèges sysoper. Le système est l'utilisateur par défaut créé lors de la création de la base de données Oracle. Pour activer les privilèges SYSOPER, exécutez la commande suivante : `grant sysoper to system;`
+
+Vous devez utiliser les commandes BR*Tools ou SnapManager pour gérer les fichiers journaux d'archive.
+
+Vous ne devez pas utiliser la combinaison de profils SnapManager et des commandes BR*Tools pour gérer les sauvegardes du journal d'archivage par rapport aux opérations suivantes :
+
+* Création de sauvegardes séparées de fichiers de données et d'archives de fichiers journaux à l'aide du `BRBACKUP` et `BRARCHIVE` Commandes avec le profil SnapManager (créées à l'aide de l'option pour séparer les sauvegardes du journal d'archivage)
+* Suppression des fichiers journaux d'archives lors de la création de la sauvegarde à l'aide du profil SnapManager
+
+
+
+NOTE: SnapManager n'affiche aucun message d'avertissement ou d'erreur lorsque vous utilisez une combinaison de profils SnapManager pour SAP et des commandes BR*Tools pour gérer les fichiers journaux d'archive.
+
+Vous devez créer un profil sans utiliser l'option pour séparer les sauvegardes du journal d'archivage et utiliser ce profil pour les opérations BR*Tools régulières.
+
+Vous pouvez restaurer la sauvegarde à l'aide de `BRRESTORE`. Pour les sauvegardes de bases de données (les sauvegardes incluent des fichiers de données, des fichiers de contrôle ou des fichiers journaux de reprise en ligne) créés à l'aide de BRBACKUP avec le `-m all` ou `-m full` Et vous pouvez également restaurer la sauvegarde à l'aide de l'interface de ligne de commandes ou de l'interface graphique de SnapManager.
+
+Pour plus d'informations sur la manière dont SnapManager gère la sauvegarde, reportez-vous à la section _sauvegarde des bases de données_.
+
+Reportez-vous à la documentation SAP pour obtenir des instructions spécifiques et la syntaxe du `BRBACKUP` et `BRARCHIVE` commandes. Avant d'utiliser la commande BRBACKUP et BRARCHIVE avec un système de stockage, s'assurer que les conditions suivantes sont remplies :
+
+* Si le nom du profil SnapManager est différent de l'identificateur du système de la base de données SAP, spécifiez le nom du fichier de paramètres contenant le nom du profil SnapManager.
++
+Vous pouvez le faire de l'une des manières suivantes :
+
++
+** Spécifiez le fichier de paramètres de l'utilitaire de sauvegarde (`initSID.utl`) à l'aide de l' `-r` avec le `BRBACKUP` commande.
+** Spécifiez le fichier de paramètres dans le fichier d'initialisation (`initSID.sap`). Pour plus d'informations, reportez-vous à la section _spécification du profil de BR*Tools backups_.
+
+
+* Créez des sauvegardes supplémentaires de vos données SAP avec un autre support, tel qu'une bande, si cela est approprié dans votre environnement. Les copies Snapshot sont destinées à une sauvegarde et une restauration rapides. Elles sont stockées sur le même support physique que les données sauvegardées et ne sont pas destinées à la reprise après sinistre, sauf si elles sont copiées sur d'autres périphériques de stockage.
+

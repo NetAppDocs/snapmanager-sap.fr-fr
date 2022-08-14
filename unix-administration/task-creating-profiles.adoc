@@ -1,0 +1,228 @@
+---
+permalink: unix-administration/task-create-profiles.html 
+sidebar: sidebar 
+keywords: creating, create, profile, assign, oracle, database, account, retention, policy, protection, backup, duration, class 
+summary: 'Lors de la création de profils, vous pouvez attribuer un compte utilisateur de base de données Oracle particulier au profil. Vous pouvez définir la stratégie de conservation du profil, activer la protection de la sauvegarde sur le stockage secondaire pour toutes les sauvegardes à l"aide de ce profil, et définir le nombre et la durée de conservation pour chaque classe de rétention.' 
+---
+= Créer des profils
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lors de la création de profils, vous pouvez attribuer un compte utilisateur de base de données Oracle particulier au profil. Vous pouvez définir la stratégie de conservation pour le profil, activer la protection de sauvegarde sur le stockage secondaire pour toutes les sauvegardes à l'aide de ce profil, et définir le nombre et la durée de conservation pour chaque classe de rétention.
+
+*À propos de cette tâche*
+
+Si vous ne fournissez pas les valeurs de l' `-login`, `-password`, et `-port` Paramètres de la base de données, le mode d'authentification du système d'exploitation utilise les informations d'identification par défaut.
+
+Lors de la création d'un profil, SnapManager effectue une vérification d'éligibilité pour la restauration afin de déterminer le mécanisme de restauration qui peut être utilisé pour restaurer la base de données. Si la base de données se trouve sur un qtree et que le volume parent n'est pas éligible à une restauration rapide ou basée sur les volumes, l'analyse risque d'être erronée.
+
+SnapManager (3.2 ou version ultérieure) vous permet de séparer les fichiers journaux d'archives des fichiers de données tout en créant un nouveau profil ou en mettant à jour un profil existant. Après avoir séparé la sauvegarde à l'aide du profil, vous pouvez créer uniquement la sauvegarde des fichiers de données uniquement ou la sauvegarde du journal d'archivage de la base de données uniquement. Vous pouvez utiliser le nouveau profil ou le profil mis à jour pour créer la sauvegarde contenant à la fois les fichiers de données et les fichiers journaux d'archivage. Cependant, vous ne pouvez pas utiliser le profil pour créer la sauvegarde complète ou rétablir les paramètres.
+
+*Profils pour la création de sauvegardes complètes et partielles*
+
+Vous pouvez créer des profils pour créer la sauvegarde complète de la base de données contenant les fichiers de données, les fichiers de contrôle, les fichiers journaux d'archivage et la sauvegarde partielle de la base de données contenant des fichiers de données ou des espaces de stockage spécifiés, tous les fichiers de contrôle et tous les fichiers journaux d'archive. SnapManager ne vous permet pas de créer des sauvegardes de journaux d'archive distinctes en utilisant les profils créés pour les sauvegardes complètes et partielles.
+
+*Profils pour la création de sauvegardes de fichiers de données uniquement et de sauvegardes archiveils-only*
+
+Lorsque vous créez un nouveau profil, vous pouvez inclure `-separate-archivelog-backups` pour séparer la sauvegarde du journal d'archivage de la sauvegarde du fichier de données. Vous pouvez également mettre à jour le profil existant pour séparer la sauvegarde du journal d'archivage de la sauvegarde du fichier de données.
+
+En utilisant les nouvelles options de profil pour séparer les sauvegardes du journal d'archivage, vous pouvez effectuer les opérations SnapManager suivantes :
+
+* Créez une sauvegarde du journal d'archivage
+* Supprimer une sauvegarde du journal d'archivage
+* Montez une sauvegarde du journal d'archivage
+* Libérer une sauvegarde du journal d'archivage
+
+
+Lors de la création du profil pour séparer les sauvegardes du journal d'archivage de la sauvegarde des fichiers de données, si les fichiers journaux d'archive n'existent pas dans la base de données pour laquelle le profil est créé, un message d'avertissement s'affiche.
+
+
+WARNING: `Archived log file does not exist in the active file system. The archived log file versions earlier than the <archive log thread version> log file will not be included in the backup`
+
+Même si vous créez des sauvegardes pour cette base de données, les fichiers journaux d'archive ne sont pas disponibles dans les sauvegardes de la base de données.
+
+
+NOTE: Si vous rencontrez une erreur lors de la création d'un profil, utilisez le `smsap system dump` commande. Après avoir créé un profil, si vous rencontrez une erreur, utilisez le `smsap operation` dump et `smsap profile dump` commandes.
+
+. Pour créer un profil avec un nom d'utilisateur, un mot de passe et un port (authentification Oracle), entrez la commande suivante :
++
+`*smsap profile create -profileprofile [-profile-password _profile_password_] -repository-dbname _repo_dbname_ -host _repo_host_ -port _repo_port_ -login -username _repo_username_ -database -dbname _db_dbname_ -host _db_host_ [-siddb_sid] [-login [-username _db_username_-password _db_password_ -port _db_port_][-asminstance -asmusername _asminstance_username_ -asmpassword _asminstance_password_]] [-rman {-controlfile | {-login-username _rman_username_ -password _rman_password_ -tnsname _rman_tnsname_} } ] -osaccount osaccount-osgroup _osgroup_ [-retain [-hourly [-count _n_] [-duration _m_]] [-daily [-count _n_] [-duration _m_]] [-weekly [-count _n_] [-duration _m_]] [-monthly [-count _n_] [-duration _m_]]] [-comment _comment_][-snapname-pattern _pattern_][-protect [-protection-policy _policy_name_]] [-summary-notification] [-notification [-success-email _email_address1, email_address2_ -subject _subject_pattern_] [-failure-email _email_address1, email_address2_ -subject _subject_pattern_]][-separate-archivelog-backups-retain-archivelog-backups-hours _hours_ | -days _days_ | -weeks _weeks_ | -months _months_ [-protect [-protection-policy _policy_name_] | -noprotect] [-include-with-online-backups | -no-include-with-online-backups]] [-dump]*`
+
++
+Les autres options de cette commande sont les suivantes :
+
++
+``[-force] [-noprompt]``
+
++
+``[-quiet | verbose]``
+
++
+
+NOTE: Pour les environnements RAC (Real application clusters), lors de la création d'un nouveau profil, vous devez fournir la valeur du `db_unique_name` ens. paramètre `_db_dbname_`.
+
++
+Vous pouvez également inclure d'autres options lors de la création de profils, selon la manière dont vous souhaitez accéder à la base de données.
+
++
+|===
+| Si... | Alors... 
+
+
+ a| 
+*Vous voulez utiliser l'authentification du système d'exploitation pour créer le profil*
+ a| 
+Spécifiez les variables d'un compte de système d'exploitation dans le groupe DBA (généralement le compte utilisé pour installer Oracle). Au lieu d'ajouter le nom d'utilisateur, le mot de passe et le port, spécifiez ce qui suit :
+
+** `-osaccount _account_name_` en tant que nom du compte du système d'exploitation
+** `-osgroup _osgroup_` en tant que groupe associé au compte du système d'exploitation
+
+
+
+
+ a| 
+*Vous souhaitez utiliser l'authentification d'instance ASM (Automatic Storage Management) pour créer le profil*
+ a| 
+Spécifiez les informations d'identification pour l'authentification de l'instance ASM.
+
+** `-asmusername _asmintance_username_` Est le nom d'utilisateur utilisé pour se connecter à l'instance ASM.
+** `-asmpassword _asminstance_password_` Est le mot de passe utilisé pour se connecter à l'instance ASM.
+
+
+
+
+ a| 
+*Vous voulez utiliser l'authentification de base de données pour créer un profil*
+ a| 
+Spécifiez les détails de connexion à la base de données. Si le mot de passe contient des caractères spéciaux tels que point d'exclamation (!), signe dollar ($) ou accent grave (`), SnapManager ne permet pas de créer le profil authentifié de la base de données à partir de l'interface de ligne de commande (CLI).
+
+
+
+ a| 
+*Vous utilisez un catalogue comme référentiel Oracle Recovery Manager (RMAN)*
+ a| 
+Spécifiez les options et variables suivantes :
+
+** `-tnsname _tnsname_` comme le nom de la ttnsname défini dans la `tnsnames.ora` fichier.
+** `-login -username _username_` Comme nom d'utilisateur requis pour la connexion au catalogue RMAN.
++
+S'il n'est pas spécifié, SnapManager utilise les informations d'authentification du système d'exploitation. Vous ne pouvez pas utiliser l'authentification du système d'exploitation avec des bases de données RAC.
+
+** `-password _password_` Comme mot de passe RMAN requis pour se connecter au catalogue RMAN.
+
+
+
+
+ a| 
+*Vous utilisez le fichier de contrôle comme référentiel RMAN*
+ a| 
+Spécifiez le `-controlfile` option.
+
+
+
+ a| 
+*Vous voulez spécifier une stratégie de conservation de sauvegarde pour les sauvegardes*
+ a| 
+Spécifiez soit le nombre de rétention, soit la durée d'une classe de rétention, soit les deux. La durée est exprimée en unités de la classe (par exemple, heures pour l'heure, jours pour la journée).
+
+** `-hourly` est la classe de rétention horaire, pour laquelle `[-count _n_]` `[-duration _m_]` sont respectivement le nombre de rétention et la durée de conservation.
+** `-daily` est la classe de rétention quotidienne, pour laquelle `[-count _n_]` `[-duration _m_]` sont respectivement le nombre de rétention et la durée de conservation.
+** `-weekly` est la classe de conservation hebdomadaire, pour laquelle `[-count _n_]` `[-duration _m_]` sont respectivement le nombre de rétention et la durée de conservation.
+** `-monthly` est la classe de rétention mensuelle, pour laquelle `[-count _n_]` `[-duration _m_]` sont respectivement le nombre de rétention et la durée de conservation.
+
+
+
+
+ a| 
+*Vous voulez activer la protection de sauvegarde pour le profil*
+ a| 
+Spécifiez les options et variables suivantes :
+
+** `-protect` assure la protection des sauvegardes.
++
+Si vous utilisez Data ONTAP fonctionnant en 7-mode, cette option crée un jeu de données d'application sur le serveur DFM (Data Fabric Manager) et ajoute des membres en rapport avec la base de données, le fichier de données, les fichiers de contrôle et les journaux d'archivage. Si le jeu de données existe déjà, le même jeu de données est réutilisé lors de la création d'un profil.
+
+** `-protection-policy _policy_` vous permet de spécifier la stratégie de protection.
++
+Si vous utilisez Data ONTAP sous 7-mode et que SnapManager est intégré à protection Manager, vous devez spécifier l'une des règles de protection Manager.
+
++
+
+NOTE: Pour répertorier les stratégies de protection possibles, utilisez sssap `protection-policy list` commande.
+
++
+Si vous utilisez clustered Data ONTAP, vous devez sélectionner _SnapManager_cdot_Mirror_ ou _SnapManager_cdot_Vault_.
+
++
+
+NOTE: L'opération de création de profil échoue dans les scénarios suivants :
+
++
+*** Si vous utilisez clustered Data ONTAP, mais que vous sélectionnez protection Manager
+*** Si vous utilisez Data ONTAP sous 7-mode et sélectionnez _SnapManager_cdot_Mirror_ ou _SnapManager_cdot_Vault_ policy
+*** Si vous avez créé la relation SnapMirror mais que vous avez sélectionné la politique _SnapManager_cdot_Vault_ ou la relation SnapVault mais que vous avez sélectionnée la politique _SnapManager_cdot_Mirror_
+*** Si vous n'avez pas créé de relation SnapMirror ou SnapVault mais que vous avez sélectionné la stratégie _SnapManager_cdot_Vault_ ou la règle _SnapManager_cdot_Mirror_
+
+
+** `-noprotect` indique de ne pas protéger les sauvegardes de base de données créées à l'aide du profil.
+
+
+
+NOTE: Si `-protect` est spécifié sans `-protection-policy`, le dataset ne dispose alors pas d'une règle de protection. Si `-protect` est spécifié et `-protection-policy` n'est pas défini lors de la création du profil, puis il peut être défini ultérieurement par le `smsap profile update` Contrôlez ou définissez par l'administrateur du stockage à l'aide de la console protection Manager.
+
+
+
+ a| 
+*Vous voulez activer la notification par e-mail pour l'état d'achèvement des opérations de la base de données*
+ a| 
+Spécifiez les options et variables suivantes :
+
+** `-summary-notification` permet de configurer une notification par e-mail de synthèse pour plusieurs profils sous une base de données de référentiel.
+** `-notification` vous permet de recevoir une notification par e-mail pour l'état d'achèvement de l'opération de base de données pour un profil.
+** `-success-email _email_address2_` vous permet de recevoir une notification par e-mail sur l'opération de base de données réussie effectuée à l'aide d'un profil nouveau ou existant.
+** `-failure-email _email_address2_` vous permet de recevoir une notification par e-mail sur l'opération de base de données ayant échoué effectuée à l'aide d'un nouveau profil ou d'un profil existant.
+** `-subject _subject_text_` spécifie le texte de l'objet de la notification par e-mail lors de la création d'un profil ou d'un profil existant. Si les paramètres de notification ne sont pas configurés pour le référentiel et que vous essayez de configurer des notifications de profil ou de résumé à l'aide de l'interface de ligne de commande, le message suivant est consigné dans le journal de la console : `SMSAP-14577: Notification Settings not configured.`
++
+Si vous avez configuré les paramètres de notification et que vous tentez de configurer la notification récapitulative à l'aide de l'interface de ligne de commande sans activer la notification récapitulative pour le référentiel, le message suivant s'affiche dans le journal de la console : `SMSAP-14575: Summary notification configuration not available for this repository`
+
+
+
+
+
+ a| 
+*Vous voulez sauvegarder les fichiers journaux d'archive séparément des fichiers de données*
+ a| 
+Spécifiez les options et variables suivantes :
+
+** `-separate-archivelog-backups` vous permet de séparer la sauvegarde du journal d'archivage de la sauvegarde du fichier de données.
+** `-retain-archivelog-backups` définit la durée de conservation des sauvegardes des journaux d'archives. Vous devez spécifier une durée de rétention positive.
++
+Les sauvegardes du journal d'archivage sont conservées en fonction de la durée de conservation du journal d'archivage. Les fichiers de données sont conservés selon les règles de conservation existantes.
+
+** `-protect` permet la protection des sauvegardes du journal d'archivage.
+** `-protection-policy` définit la stratégie de protection sur les sauvegardes du journal d'archivage.
++
+Les sauvegardes du journal d'archivage sont protégées selon la stratégie de protection du journal d'archivage. Les sauvegardes de fichiers de données sont protégées en fonction des règles de protection existantes.
+
+** `-include-with-online-backups` inclut la sauvegarde du journal d'archivage et la sauvegarde de base de données en ligne.
++
+Cette option vous permet de créer une sauvegarde des fichiers de données en ligne et d'archiver les journaux à des fins de clonage. Lorsque cette option est définie, chaque fois que vous créez une sauvegarde de fichiers de données en ligne, les sauvegardes des journaux d'archive sont créées avec les fichiers de données immédiatement.
+
+** `-no-include-with-online-backups` n'inclut pas la sauvegarde du journal d'archivage avec la sauvegarde de base de données.
+
+
+
+
+ a| 
+*Vous pouvez collecter les fichiers de vidage après l'opération de création de profil réussie*
+ a| 
+Spécifiez l'option -dump à la fin du `profile create` commande.
+
+|===
++
+Lorsque vous créez un profil, SnapManager analyse les fichiers au cas où vous souhaiteriez effectuer une opération de restauration basée sur le volume sur les fichiers spécifiés dans le profil.
+
+

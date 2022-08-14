@@ -1,0 +1,21 @@
+---
+permalink: windows/task-assigning-backups-with-a-specific-retention-class.html 
+sidebar: sidebar 
+keywords: dba, retention, class, hourly, daily, weekly, monthly, backup, eligible, assign 
+summary: 'Les administrateurs de bases de données peuvent attribuer une classe de conservation horaire, quotidienne, hebdomadaire ou mensuelle aux sauvegardes. L"attribution d"une classe de rétention spécifique rend les sauvegardes effectuées sous cette modification éligibles pour la suppression.' 
+---
+= Affectation de sauvegardes avec une classe de rétention spécifique
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les administrateurs de bases de données peuvent attribuer une classe de conservation horaire, quotidienne, hebdomadaire ou mensuelle aux sauvegardes. L'attribution d'une classe de rétention spécifique rend les sauvegardes effectuées sous cette modification éligibles pour la suppression.
+
+.Étape
+. Pour affecter une classe de rétention de sauvegarde spécifique, entrez la commande suivante :
++
+`smsap backup update -profileprofile_name {-labellabel [data | -archivelogs] | -idid} -retain [-hourly | -daily | -weekly | -monthly ]`
+
+

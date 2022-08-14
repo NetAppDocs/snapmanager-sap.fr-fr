@@ -1,0 +1,28 @@
+---
+permalink: unix-administration/concept-disabling-client-access-to-snapshot-copies.html 
+sidebar: sidebar 
+keywords: storage, system, volume, nfs, protocol, sap, tools, snapshot, copies, copy, snapshot, directory, directories, backup, diable, disabling, client, access 
+summary: 'Pour tout volume de système de stockage utilisant le protocole NFS et contenant les données SAP sauvegardées à l"aide de BR*Tools, vous devez désactiver l"accès client aux copies Snapshot de ce volume. Si l"accès client est activé, BR*Tools tente de créer des sauvegardes des répertoires .snapshot masqués contenant des sauvegardes précédentes.' 
+---
+= Désactivation de l'accès client aux copies Snapshot
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Pour tout volume de système de stockage utilisant le protocole NFS et contenant les données SAP sauvegardées à l'aide de BR*Tools, vous devez désactiver l'accès client aux copies Snapshot de ce volume. Si l'accès client est activé, BR*Tools tente de créer des sauvegardes des répertoires .snapshot masqués contenant des sauvegardes précédentes.
+
+Pour désactiver l'accès client, utilisez l'une des méthodes suivantes.
+
+* Utilisation de Data ONTAP : à l'aide de l'interface de ligne de commande Data ONTAP, entrez la commande suivante : vol options nom_volume nosnadir sur laquelle nom_volume correspond au nom du volume contenant des données SAP, par exemple, `/vol/falls_sap_cer9i_data1`
+* À l'aide de FilerView : pour désactiver l'accès à l'interface utilisateur graphique de FilerView, il est nécessaire de disposer d'une copie Snapshot du volume.
++
+.. Dans le volet gauche de FilerView, sélectionnez *volumes* > *snapshots* > *gérer*.
+.. Sur la page gérer les instantanés, cliquez sur le nom du volume dans la colonne Volume.
+.. Sur la page configurer les instantanés, décochez la case répertoire d'instantanés visible et cliquez sur *appliquer.*
+
+
+
+
+Pour plus d'informations sur la désactivation de l'accès client aux copies Snapshot, reportez-vous au chapitre à propos de la gestion des snapshots du _Data ONTAP Data protection Online Backup and Recovery Guide_ pour votre version de Data ONTAP.

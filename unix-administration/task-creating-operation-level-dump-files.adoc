@@ -1,0 +1,32 @@
+---
+permalink: unix-administration/task-create-operation-level-dump-files.html 
+sidebar: sidebar 
+keywords: smsap, operation, dump, command, name, id, fail, log, information, level, information, host, environment 
+summary: 'Vous pouvez utiliser la commande smsap operation dump avec le nom ou l"ID de l"opération ayant échoué pour obtenir des informations de journal sur une opération particulière. Vous pouvez spécifier différents niveaux de journalisation pour recueillir des informations sur une opération, un profil, un hôte ou un environnement spécifique.' 
+---
+= Créer des fichiers de vidage au niveau des opérations
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez utiliser le `smsap operation` Commande dump avec le nom ou l'ID de l'opération ayant échoué à obtenir les informations de journalisation concernant une opération particulière. Vous pouvez spécifier différents niveaux de journalisation pour recueillir des informations sur une opération, un profil, un hôte ou un environnement spécifique.
+
+.Étape
+. Saisissez la commande suivante :
++
+`*smsap operation dump -id _guid_*`
+
+
+
+
+NOTE: La commande smsap operation dump fournit un super ensemble des informations fournies par `smsap profile dump` commande, qui fournit à son tour un super jeu d'informations fournies par la commande smsap system dump.
+
+Emplacement du fichier de vidage :
+
+[listing]
+----
+Path:/<user-home>
+/.netapp/smsap/3.3.0/smsap_dump_8abc01c814649ebd0114649ec69d0001.jar
+----

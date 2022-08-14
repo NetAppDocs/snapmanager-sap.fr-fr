@@ -1,0 +1,48 @@
+---
+permalink: unix-administration/concept-what-protection-states-are.html 
+sidebar: sidebar 
+keywords: snapmanager, state, backup, administrator, monitor, protection 
+summary: 'SnapManager indique l"état de chaque sauvegarde. Les administrateurs doivent connaître les différents États et surveiller l"état de leurs sauvegardes.' 
+---
+= Quels sont les États de protection
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager indique l'état de chaque sauvegarde. Les administrateurs doivent connaître les différents États et surveiller l'état de leurs sauvegardes.
+
+Une sauvegarde de base de données peut avoir les États de protection suivants :
+
+[cols="1a,2a,3a"]
+|===
+| État | Définition | Explication 
+
+
+ a| 
+Protection
+ a| 
+La protection a été demandée et a été activée.
+ a| 
+La protection est activée pour la sauvegarde dans SnapManager et protection Manager a correctement copié la sauvegarde sur un autre jeu de disques physiques (également appelé stockage secondaire). Si protection Manager supprime une sauvegarde du stockage secondaire en raison d'une stratégie de rétention, la sauvegarde peut revenir à un état non protégé.
+
+
+
+ a| 
+Non protégé
+ a| 
+La protection a été demandée, mais n'a pas été achevée.
+ a| 
+La protection est activée pour la sauvegarde, mais la sauvegarde n'est pas copiée sur un autre jeu de disques physiques. La sauvegarde n'est pas encore protégée, la protection a échoué ou la sauvegarde a été protégée plus tôt mais n'est plus protégée. Lorsque vous créez une sauvegarde, l'état de protection initial de la sauvegarde n'est pas demandé ou n'est pas protégé. Si la sauvegarde n'est pas protégée, elle est protégée lorsqu'elle est transférée vers le stockage secondaire.
+
+
+
+ a| 
+Non demandé
+ a| 
+La protection n'a pas été demandée.
+ a| 
+La protection n'est pas activée pour la sauvegarde. Une copie logique des données existe sur les mêmes disques physiques (également appelés sauvegarde locale). Si la protection n'est pas demandée lors de la création de la sauvegarde, la protection sur la sauvegarde est toujours affichée comme non demandée.
+
+|===

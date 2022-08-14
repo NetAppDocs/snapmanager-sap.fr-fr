@@ -1,0 +1,31 @@
+---
+permalink: unix-administration/concept-splitting-a-clone.html 
+sidebar: sidebar 
+keywords: snapmanager, enable, split, manage, clone, exist, flexclone, technology, data, block, database 
+summary: 'SnapManager vous permet de séparer et de gérer un clone existant créé à l"aide de la technologie FlexClone. Dans la technologie FlexClone, le clone et la base de données d"origine partagent les mêmes blocs de données physiques.' 
+---
+= Séparation d'un clone
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager vous permet de séparer et de gérer un clone existant créé à l'aide de la technologie FlexClone. Dans la technologie FlexClone, le clone et la base de données d'origine partagent les mêmes blocs de données physiques.
+
+Avant d'effectuer l'opération de fractionnement de clone, vous pouvez connaître la taille estimée du clone à diviser et l'espace requis disponible sur l'agrégat.
+
+Un nouveau profil est généré par SnapManager si l'opération de fractionnement de clone réussit. Si SnapManager ne parvient pas à créer le nouveau profil, vous pouvez créer manuellement un nouveau profil. Vous pouvez utiliser le nouveau profil pour créer des sauvegardes de bases de données, restaurer des données et créer des clones. Si le fractionnement du clone réussit, que le nouveau profil soit créé ou non, les métadonnées liées au clone sont supprimées de la base de données du référentiel.
+
+Vous pouvez effectuer les tâches suivantes relatives au fractionnement des clones :
+
+* Afficher l'estimation de séparation de clones.
+* Séparer un clone sur un stockage primaire.
+* Séparer un clone sur un système de stockage secondaire.
+* Afficher l'état de l'opération de séparation de clones.
+* Arrêter l'opération de séparation des clones.
+* Détruire le profil avec le stockage sous-jacent.
+* Supprimer le profil créé pour un clone fractionné.
+
+
+Lorsque vous séparez un clone de son volume parent, les copies Snapshot associées au volume cloné sont supprimées. Les sauvegardes créées pour la base de données clonée avant que le processus de fractionnement du clone ne puisse pas être utilisé, car les copies Snapshot de ces sauvegardes sont supprimées et les sauvegardes restent comme des entrées obsolètes dans le référentiel.

@@ -1,0 +1,39 @@
+---
+permalink: windows/concept-how-to-collect-dump-files.html 
+sidebar: sidebar 
+keywords: dump, snapmanager, command, collect, file, successful, fail, operation 
+summary: Vous pouvez inclure -dump dans la commande SnapManager afin de collecter les fichiers de dump après une opération SnapManager réussie ou échec. 
+---
+= Comment recueillir des fichiers de vidage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez inclure `-dump` Dans la commande SnapManager pour collecter les fichiers de dump après une opération SnapManager réussie ou échec.
+
+Vous pouvez collecter des fichiers de vidage pour les opérations SnapManager suivantes :
+
+* Création de profils
+* Mise à jour des profils
+* Création de sauvegardes
+* Vérification des sauvegardes
+* Suppression de sauvegardes
+* Sauvegardes libérées
+* Montage des supports
+* Démontage des sauvegardes
+* Restauration des sauvegardes
+* Création de clones
+* Suppression des clones
+
+
+
+NOTE: Lorsque vous créez un profil, vous ne pouvez recueillir des fichiers de vidage que si l'opération a réussi. Si vous rencontrez une erreur lors de la création d'un profil, vous devez utiliser le `smsap system dump` commande. Pour les profils réussis, vous pouvez utiliser `smsap operation dump` et `smsap profile dump` commandes pour collecter les fichiers de vidage.
+
+*Exemple*
+
+[listing]
+----
+ smsap backup create -profile targetdb1_prof1 -auto -full -online -dump
+----

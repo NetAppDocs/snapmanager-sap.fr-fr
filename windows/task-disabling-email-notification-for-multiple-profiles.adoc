@@ -1,0 +1,27 @@
+---
+permalink: windows/task-disabling-email-notification-for-multiple-profiles.html 
+sidebar: sidebar 
+keywords: enable, summary, email, notification, multiple, profile, disable, alert, disabling 
+summary: 'Après avoir activé la notification par e-mail de synthèse pour plusieurs profils, vous pouvez les désactiver pour ne plus recevoir d"alertes par e-mail.' 
+---
+= Désactivation de la notification par e-mail pour plusieurs profils
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après avoir activé la notification par e-mail de synthèse pour plusieurs profils, vous pouvez les désactiver pour ne plus recevoir d'alertes par e-mail.
+
+SnapManager vous permet de désactiver la notification de synthèse par e-mail pour les opérations de base de données exécutées par profil. Dans l'interface de ligne de commande SnapManager, entrez la commande notification de suppression-résumé-notification pour désactiver la notification de synthèse par e-mail pour plusieurs profils et le nom de la base de données de référentiel pour laquelle vous n'avez pas besoin de notification par e-mail.
+
+. Pour désactiver la notification récapitulative pour plusieurs profils sur une base de données de référentiel, entrez la commande suivante : `smsap notification remove-summary-notification -repository-portrepo_port-dbnamerepo_service_name-hostrepo_host-login-usernamerepo_username`
+
+
+L'exemple suivant montre que la notification de synthèse est désactivée pour plusieurs profils d'une base de données de référentiel :
+
+[listing]
+----
+
+smsap notification remove-summary-notification –repository –port 1521 –dbname repo2 –host 10.72.197.133 –login –username oba5
+----

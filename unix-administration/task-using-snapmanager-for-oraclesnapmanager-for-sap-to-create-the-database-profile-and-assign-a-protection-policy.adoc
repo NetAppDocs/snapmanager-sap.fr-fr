@@ -1,0 +1,100 @@
+---
+permalink: unix-administration/task-use-snapmanager-for-oraclesnapmanager-for-sap-to-create-the-database-profile-and-assign-a-protection-policy.html 
+sidebar: sidebar 
+keywords: create, profile, snapmanager, sap, enable, protection, assign, policy, protection, backup 
+summary: Vous devez créer un profil dans SnapManager pour SAP, activer la protection dans le profil et attribuer une règle de protection pour créer une sauvegarde protégée. 
+---
+= Utilisez SnapManager pour SAP pour créer le profil de base de données et affecter une règle de protection
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez créer un profil dans SnapManager pour SAP, activer la protection dans le profil et attribuer une règle de protection pour créer une sauvegarde protégée.
+
+*À propos de cette tâche*
+
+Un profil contient des informations sur la base de données gérée, notamment ses informations d'identification, ses paramètres de sauvegarde et ses paramètres de protection pour les sauvegardes. Après avoir créé un profil, vous n'avez pas besoin de spécifier les détails de la base de données chaque fois que vous effectuez une opération. Un profil ne peut référencer qu'une seule base de données, mais cette même base de données peut être référencée par plusieurs profils.
+
+.Étapes
+. Accédez au client SnapManager pour SAP.
+. Dans l'arborescence des référentiels, cliquez avec le bouton droit de la souris sur l'hôte et sélectionnez *Créer un profil*.
+. Sur la page *informations de configuration du profil*, entrez les détails du profil et cliquez sur *Suivant*.
++
+*Exemple*
+
++
+Vous pouvez entrer les informations suivantes :
+
++
+** Nom du profil : P01_BACKUP
+** Mot de passe du profil: Payroll123
+** Commentaire : base de données paie de production
+
+
+. Dans les pages *informations de configuration de la base de données*, entrez les détails de la base de données, puis cliquez sur *Suivant*.
++
+*Exemple*
+
++
+Vous pouvez entrer les informations suivantes :
+
++
+** Nom de la base de données : P01
+** SID de base de données : P01
+** Hôte de base de données : acceptez la valeur par défaut. Comme vous créez un profil à partir d'un hôte dans l'arborescence du référentiel, SnapManager affiche le nom de l'hôte.
+** Compte hôte, représentant le compte utilisateur Oracle (pour ora<sid>) : orapayrolldb
+** Groupe hôte, représentant le groupe Oracle : dba
+
+
+. Sur la page *Database Connection information*, cliquez sur *Use database Authentication* (utiliser l'authentification de la base de données*) pour permettre aux utilisateurs de s'authentifier à l'aide des informations de la base de données.
+. Entrez les détails de la connexion à la base de données et cliquez sur *Suivant*.
++
+*Exemple*
+
++
+Vous pouvez entrer les informations suivantes :
+
++
+** SYSDBA Privileged User Name, représentant l'administrateur de la base de données système disposant de privilèges d'administration : sys
+** Mot de passe (mot de passe SYSDBA) : oracle
+** Port de connexion à l'hôte de base de données : 1527
+
+
+. Sur la page informations d'attribution de nom d'instantané, spécifiez une convention d'attribution de nom pour les snapshots associés à ce profil en sélectionnant des variables.
++
+Le `_smid_` variable crée un identificateur de snapshot unique.
+
++
+Effectuez les opérations suivantes :
+
++
+.. Dans la liste *jeton variable*, sélectionnez `_usertext_` Et cliquez sur *Ajouter*.
+.. Entrez `_prod01.sample.com__` Comme nom d'hôte et cliquez sur *OK*.
+.. Cliquez sur *Left* jusqu'à ce que le nom d'hôte s'affiche juste après smsap dans la zone format.
+.. Cliquez sur *Suivant*.
+
+
++
+convention de nom de Snapshot de `_smsap_hostname_smsapprofile_dbsid_scope_mode_smid_` Devient "smsap_prpd01.sample.com_P01_BACKUP_P01_f_a_x" (où "f" indique une sauvegarde complète, "a" indique le mode automatique et "x" représente l'unique SMID).
+
+. Sélectionnez *protection Manager protection Policy*.
++
+*Protection Manager protection Policy* permet de sélectionner une règle de protection qui a été configurée à l'aide de NetApp Management Console.
+
+. Sélectionnez *TechCo données de paie : sauvegarde* comme règle de protection dans les règles de protection extraites de la console de gestion NetApp, et cliquez sur *Next*.
+. Sur la page *Perform Operation*, vérifiez les informations et cliquez sur *Create*.
+. Cliquez sur *Operation Details* pour afficher des informations sur l'opération de création de profil et les informations d'éligibilité à la restauration basée sur le volume.
+
+
+*Résultat*
+
+* L'affectation d'une règle de protection NetApp Management Console au profil de base de données crée automatiquement un jeu de données non conforme, visible par l'opérateur de la console de gestion NetApp, avec le nom de convention smsap_<hostname>_<profilname>, ou dans cet exemple : smsap_prod01.sample.com_P01_BACKUP.
+* Si le profil n'est pas éligible pour la restauration de volume (également appelée « restauration rapide »), les événements suivants se produisent :
++
+** L'onglet *Résultats* indique que la création du profil a réussi et que des avertissements se sont produits pendant l'opération.
+** L'onglet *Operation Details* contient un journal D'AVERTISSEMENT, qui indique que le profil n'est pas éligible pour la restauration rapide et explique pourquoi.
+
+
+

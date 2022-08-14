@@ -1,0 +1,25 @@
+---
+permalink: windows/task-retaining-backups-forever.html 
+sidebar: sidebar 
+keywords: specify, backup, ineligible, deletion, retention, policy, indefinite, retain, forever 
+summary: 'Vous pouvez indiquer qu"une sauvegarde ne peut pas être supprimée par la stratégie de rétention pour conserver indéfiniment la sauvegarde.' 
+---
+= Conservation des sauvegardes indéfiniment
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez indiquer qu'une sauvegarde ne peut pas être supprimée par la stratégie de rétention pour conserver indéfiniment la sauvegarde.
+
+.Étape
+. Pour spécifier qu'une sauvegarde est conservée sans limite, entrez la commande suivante :
++
+`smsap backup update -profileprofile_name {-labellabel [data | -archivelogs] | -idid} -retain -unlimited`
+
+
+
+*Informations connexes*
+
+xref:reference-the-smosmsapbackup-update-command.adoc[La commande smsap backup update]

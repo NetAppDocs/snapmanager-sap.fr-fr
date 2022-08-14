@@ -1,0 +1,18 @@
+---
+permalink: windows/concept-clustered-configurations.html 
+sidebar: sidebar 
+keywords: snapmanager, operate, cluster, configuration 
+summary: 'SnapManager s"exécute dans des configurations en cluster.' 
+---
+= Configurations en cluster
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager s'exécute dans des configurations en cluster.
+
+SnapManager prend en charge le même cluster hôte et les mêmes configurations que le produit SnapDrive et le kit d'utilitaires hôtes.
+
+SnapManager prend également en charge des configurations non en cluster dans lesquelles un hôte unique est connecté à un système de stockage unique, des clusters hôtes pris en charge et des systèmes de stockage exécutant le basculement du contrôleur Data ONTAP.

@@ -1,0 +1,65 @@
+---
+permalink: windows/task-configure-e-mail-notification-for-a-new-profile.html 
+sidebar: sidebar 
+keywords: create, profile, configure, receive, email, notification, completion, database, operation, profile 
+summary: 'Lorsque vous créez un nouveau profil, vous pouvez configurer pour recevoir une notification par e-mail à la fin de l"opération de base de données.' 
+---
+= Configurez la notification par e-mail pour un nouveau profil
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lorsque vous créez un nouveau profil, vous pouvez configurer pour recevoir une notification par e-mail à la fin de l'opération de base de données.
+
+
+
+== Ce dont vous aurez besoin
+
+* Vous devez configurer l'adresse e-mail à partir de laquelle les alertes sont envoyées.
+* Vous devez utiliser une liste séparée par des virgules pour plusieurs adresses électroniques.
++
+Vous devez vous assurer qu'il n'y a pas d'espace entre la virgule et l'adresse e-mail suivante.
+
++
+
+NOTE: Vous devez vous assurer de saisir l'ensemble des adresses électroniques entre guillemets.
+
+
+
+.Étape
+. Saisissez la commande suivante :
++
+`*smsap profile create -profile _profile_ [-profile-password _profile_password_] -repository -dbname _repo_service_name_ -host _repo_host_ -port _repo_port_ -login -username _repo_username_ -database -dbname _db_dbname_ -host _db_host_ [-sid _db_sid_] [-login -username _db_username_ -password _db_password_ -port _db_port_] [-rman {-controlfile | {-login -username _rman_username_ -password _rman_password_ -tnsname _rman_tnsname_} } ] [-retain [-hourly [-count _n_] [-duration _m_]] [-daily [-count _n_] [-duration _m_]] [-weekly [-count _n_] [-duration _m_]] [-monthly [-count _n_] [-duration _m_]]] [-comment _comment_][-snapname-pattern _pattern_][-protect [ ]][-notification [-success-email _email_address1_,_email_address2_ -subject _subject_pattern_] [-failure -email _email_address1_,_email_address2_ -subject _subject_pattern_]]*`
+
++
+Les autres options de cette commande sont les suivantes :
+
++
+[`-force`]
+
++
+[`quiet` | `-verbose`]
+
++
+
+NOTE: SnapManager prend en charge jusqu'à 1000 caractères pour les adresses e-mail.
+
++
+Lorsque vous créez une sauvegarde des fichiers de données et des fichiers journaux d'archive ensemble à l'aide du profil (pour la création de sauvegardes de journaux d'archive séparés) et que la création de la sauvegarde du fichier de données échoue, la notification par e-mail est envoyée avec la sauvegarde des données comme nom de l'opération au lieu de la sauvegarde des journaux d'archivage et de sauvegarde des données. Lorsque l'opération de sauvegarde du fichier de données et du fichier journal d'archives réussit, le résultat s'affiche comme suit :
+
++
+[listing]
+----
+
+Profile Name    : PROF_31
+Operation Name 	: Data Backup and Archive Logs Backup
+Database SID   	: TENDB1
+Database Host 	 : repo1.rtp.org.com
+Start Date 	    : Fri Sep 23 13:37:21 EDT 2011
+End Date 	      : Fri Sep 23 13:45:24 EDT 2011
+Status 	        : SUCCESS
+Error messages 	:
+----
+

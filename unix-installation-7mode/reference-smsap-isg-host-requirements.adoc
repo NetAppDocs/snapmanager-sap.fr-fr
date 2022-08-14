@@ -1,0 +1,35 @@
+---
+permalink: unix-installation-7mode/reference-smsap-isg-host-requirements.html 
+sidebar: sidebar 
+keywords: install, snapmanager, sap, host, database, backup, host, minimum, requirement, configuration, unix, requirement 
+summary: Vous devez installer SnapManager pour SAP sur chaque hôte sur lequel la base de données à sauvegarder est hébergée. Vous devez vous assurer que vos hôtes répondent aux exigences minimales pour la configuration SnapManager. 
+---
+= Configuration requise pour l'hôte UNIX
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez installer SnapManager pour SAP sur chaque hôte sur lequel la base de données à sauvegarder est hébergée. Vous devez vous assurer que vos hôtes répondent aux exigences minimales pour la configuration SnapManager.
+
+* Vous devez installer SnapDrive sur l'hôte de base de données avant d'installer SnapManager.
+* Vous pouvez installer SnapManager sur des machines physiques ou virtuelles.
+* Vous devez installer la même version de SnapManager sur tous les hôtes partageant le même référentiel.
+* Vous devez installer le correctif Oracle `13366202` Si vous utilisez des bases de données Oracle 11.2.0.2 ou 11.2.0.3.
++
+Si vous utilisez dNFS, vous devez également installer les correctifs répertoriés dans le rapport My Oracle support (MOS) `1495104.1` pour des performances et une stabilité optimales.
+
+
+
+Pour utiliser l'interface graphique utilisateur SnapManager, un hôte doit s'exécuter sur l'une des plates-formes suivantes. L'interface utilisateur nécessite également que Java Runtime Environment (JRE) 1.8 soit installé sur l'hôte.
+
+* Red Hat Enterprise Linux
+* Oracle Enterprise Linux
+* SUSE Enterprise Linux
+* Solaris SPARC, x86 et x86_64
+* IBM AIX
+
+
+
+NOTE: SnapManager fonctionne également dans l'environnement virtualisé VMware ESX.

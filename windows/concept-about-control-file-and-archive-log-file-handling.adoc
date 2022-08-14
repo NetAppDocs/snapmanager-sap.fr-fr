@@ -1,0 +1,45 @@
+---
+permalink: windows/concept-about-control-file-and-archive-log-file-handling.html 
+sidebar: sidebar 
+keywords: snapmanager, control, file, archive, log, backup, recovery, handle 
+summary: 'SnapManager inclut les fichiers de contrôle et inclut éventuellement les fichiers journaux d"archivage avec chaque sauvegarde. Les fichiers journaux d"archivage sont utilisés pour les opérations de restauration.' 
+---
+= À propos du traitement des fichiers de contrôle et des fichiers journaux d'archives
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager inclut les fichiers de contrôle et inclut éventuellement les fichiers journaux d'archivage avec chaque sauvegarde. Les fichiers journaux d'archivage sont utilisés pour les opérations de restauration.
+
+La base de données utilise des fichiers de contrôle pour identifier les noms, emplacements et tailles des fichiers de base de données. SnapManager inclut des fichiers de contrôle dans chaque sauvegarde car les fichiers de contrôle sont utilisés dans le processus de restauration.
+
+Les modifications apportées à une base de données sont suivies à l'aide des journaux de reprise en ligne, qui sont finalement archivés et appelés journaux de reprise archivés (ou journaux d'archivage). SnapManager (3.2 ou version ultérieure) vous permet de sauvegarder des fichiers de données et d'archiver les fichiers journaux séparément avec différentes fréquences et rétentions. SnapManager peut effectuer des sauvegardes des journaux d'archivage ou des sauvegardes combinées de fichiers de données et de journaux d'archivage. SnapManager offre une gestion automatisée et complète des journaux d'archivage, sans intervention manuelle pour la restauration de bases de données. La possibilité d'élaguer les journaux d'archivage à partir d'un ou plusieurs emplacements de journaux d'archivage une fois la sauvegarde effectuée.
+
+
+NOTE: Pour voir les espaces de stockage et les fichiers de données inclus dans une sauvegarde, utilisez le `backup show command` Ou la fenêtre Propriétés de la sauvegarde.
+
+Le tableau suivant illustre la façon dont SnapManager gère les fichiers journaux de contrôle et d'archivage au cours de chaque opération :
+
+|===
+| Type d'opération | Fichiers de contrôle | Archiver les fichiers journaux 
+
+
+ a| 
+Sauvegarde
+ a| 
+Inclus avec chaque sauvegarde
+ a| 
+Peut être incluse dans chaque sauvegarde
+
+
+
+ a| 
+Restaurer
+ a| 
+Peut être restauré seul ou avec les espaces de stockage ou les fichiers de données
+ a| 
+Peut être utilisé pour le processus de récupération
+
+|===

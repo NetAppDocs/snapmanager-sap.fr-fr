@@ -1,0 +1,78 @@
+---
+permalink: unix-administration/task-restore-backups-from-secondary-storage.html 
+sidebar: sidebar 
+keywords: restore, protect, backup, secondary, storage, copy, data, back, primary, storage, restoring 
+summary: 'Vous pouvez restaurer les sauvegardes protégées à partir d"un stockage secondaire et choisir le mode de copie des données vers le stockage primaire.' 
+---
+= Restaurer les sauvegardes à partir du système de stockage secondaire
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez restaurer les sauvegardes protégées à partir d'un stockage secondaire et choisir le mode de copie des données vers le stockage primaire.
+
+*À propos de cette tâche*
+
+Vous pouvez utiliser le `backup restore` commande avec `-from-secondary` option permettant de restaurer les données à partir d'un stockage secondaire. Si vous ne spécifiez pas le `-from-secondary` SnapManager restaure les données à partir des copies Snapshot sur le stockage primaire.
+
+Vous ne pouvez pas utiliser `-from-secondary` option si la sauvegarde existe sur le stockage primaire ; la sauvegarde primaire doit être libérée avant de pouvoir être restaurée depuis un stockage secondaire. Si vous utilisez un volume temporaire, vous devez spécifier le volume en utilisant le `-temp-volume` option.
+
+Vous devez spécifier le `-copy-id` lorsque vous spécifiez le `-from-secondary` option. S'il y a plusieurs sauvegardes sur le système de stockage secondaire, le `-copy-id` permet de spécifier la copie de sauvegarde du stockage secondaire à utiliser pour l'opération de restauration.
+
+
+NOTE: Si vous utilisez Data ONTAP sous 7-mode, vous devez indiquer une valeur valide pour le système `-copy-id` option. Cependant, si vous utilisez clustered Data ONTAP, le `-copy-id` cette option n'est pas requise.
+
+Lors de la restauration des données à partir d'un stockage secondaire, SnapManager tente d'abord de restaurer les données directement depuis le système de stockage secondaire vers le système de stockage primaire (sans impliquer l'hôte). Si SnapManager ne peut pas effectuer ce type de restauration (par exemple, si les fichiers ne font pas partie du système de fichiers), SnapManager revient à une copie de fichier côté hôte. SnapManager propose deux méthodes pour effectuer une restauration de copie de fichiers côté hôte à partir du stockage secondaire. La méthode sélectionnée par SnapManager est configurée dans `smsap.config` fichier.
+
+* Si `_restore.secondaryAccessPolicy_ = *direct*`, SnapManager clone les données sur un stockage secondaire, monte les données clonées du système de stockage secondaire sur l'hôte, puis copie les données hors du clone dans l'environnement actif.
++
+Il s'agit de la stratégie d'accès secondaire par défaut.
+
+* Si `_restore.secondaryAccessPolicy_ = *indirect*`, SnapManager copie d'abord les données sur un volume temporaire du stockage primaire, monte les données du volume temporaire sur l'hôte, puis copie les données hors du volume temporaire dans l'environnement actif.
++
+Cette règle doit être utilisée uniquement si l'hôte ne dispose pas d'un accès direct au système de stockage secondaire. Les restaurations à l'aide de la méthode indirecte prennent deux fois plus de temps que la méthode directe, car deux copies des données sont créées.
+
+
+
+.Étape
+. Effectuez l'une des opérations suivantes :
++
+[cols="1a,3a"]
+|===
+| Les fonctions que vous recherchez... | Alors... 
+
+
+ a| 
+Restaurez une base de données complète si la sauvegarde sélectionnée existe sur le stockage primaire
+ a| 
+Saisissez la commande suivante :
+
+`*smsap backup restore -profile _profile_name_ -label _label_ -complete -recover -alllogs[-copy-id _id_]*`
+
+
+
+ a| 
+Restaurez une base de données complète si la sauvegarde sélectionnée n'existe pas sur le stockage primaire
+ a| 
+Saisissez la commande suivante :
+`*smsap backup restore -profile _profile_name_ -label _label_ -complete-recover -alllogs-from-secondary [-temp-volume _<temp_volume>_] [-copy-id _id_]*`
+
+|===
+
+
+'''
+
+
+== Exemple
+
+La commande suivante restaure une sauvegarde protégée à partir du système de stockage secondaire :
+
+[listing]
+----
+smsap backup restore -profile PAYDB -label daily_monday -complete
+-recover alllogs -from-secondary -copy-id 3042 -temp-volume smsap_scratch_restore_volume
+Operation Id [8abc011215d385920115d38599470001] succeeded.
+----
+'''

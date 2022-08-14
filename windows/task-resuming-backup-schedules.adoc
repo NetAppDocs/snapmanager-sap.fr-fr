@@ -1,0 +1,23 @@
+---
+permalink: windows/task-resuming-backup-schedules.html 
+sidebar: sidebar 
+keywords: administrator, option, resume, suspend, backup, schedule, resuming 
+summary: Les administrateurs ont la possibilité de reprendre la planification de sauvegarde suspendue. 
+---
+= Reprise des planifications de sauvegarde
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les administrateurs ont la possibilité de reprendre la planification de sauvegarde suspendue.
+
+Si vous essayez de reprendre les planifications actives, le message d'erreur suivant peut-être : « Impossible de reprendre : planning <schedulename> déjà en état de reprise ».
+
+.Étape
+. Pour reprendre le planning de sauvegarde suspendu, entrez la commande suivante :
++
+`smsap schedule resume -profile profile_name-schedule-nameschedulename [-quiet | -verbose]`
+
+

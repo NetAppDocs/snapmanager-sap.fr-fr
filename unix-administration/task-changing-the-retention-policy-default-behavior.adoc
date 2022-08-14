@@ -1,0 +1,49 @@
+---
+permalink: unix-administration/task-change-the-retention-policy-default-behavior.html 
+sidebar: sidebar 
+keywords: backup, expire, base, retention, policy, snapmanager, determine, delete, back, up, setting, behavior, unprotect, protect, changing, change 
+summary: 'Lorsqu"une sauvegarde expire en fonction de la stratégie de conservation, SnapManager détermine si elle doit être supprimée en fonction des paramètres de conservation. La suppression des sauvegardes est le comportement par défaut. Vous pouvez modifier ce comportement par défaut et choisir de libérer à la place les sauvegardes non protégées.' 
+---
+= Modifiez le comportement par défaut de la stratégie de rétention des médias
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lorsqu'une sauvegarde expire en fonction de la stratégie de conservation, SnapManager détermine si elle doit être supprimée en fonction des paramètres de conservation. La suppression des sauvegardes est le comportement par défaut. Vous pouvez modifier ce comportement par défaut et choisir de libérer à la place les sauvegardes non protégées.
+
+*À propos de cette tâche*
+
+Par défaut, SnapManager supprime ou libère les sauvegardes selon qu'elles sont protégées ou non comme suit :
+
+* Pour les sauvegardes protégées, SnapManager libère les sauvegardes locales lorsqu'elles expirent.
+* Dans le cas de sauvegardes non protégées, SnapManager supprime les sauvegardes locales lorsqu'elles expirent.
++
+Vous pouvez modifier ce comportement par défaut.
+
+
+
+Pour les sauvegardes protégées, SnapManager ne tient pas compte des points suivants lors de la décision de supprimer ou non la copie locale :
+
+* La sauvegarde vers un système de stockage secondaire a échoué ou est en cours de protection.
++
+Cela permet de transférer les sauvegardes vers un stockage secondaire avant que la stratégie de conservation ne soit appliquée.
+
+* La copie a ensuite été supprimée du stockage secondaire.
+
+
+.Étapes
+. Accédez à l'emplacement par défaut suivant :
++
+`_default smsap installation location_/properties/smsap.config`
+
+. Modifiez le `smsap.config` fichier.
+. Réglez le `retain.alwaysFreeExpiredBackups` propriété dans le `smsap.config` fichier à vrai.
++
+Par exemple :
+
++
+`*retain.alwaysFreeExpiredBackups = true*`
+
+

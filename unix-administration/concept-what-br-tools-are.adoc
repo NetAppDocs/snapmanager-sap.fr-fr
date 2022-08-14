@@ -1,0 +1,212 @@
+---
+permalink: unix-administration/concept-what-br-tools-are.html 
+sidebar: sidebar 
+keywords: information, sap, storage, system, br, tools 
+summary: Vous trouverez toutes les informations dont vous pourriez avoir besoin pour utiliser SAP avec les systèmes de stockage. 
+---
+= Que sont BR*Tools
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous trouverez toutes les informations dont vous pourriez avoir besoin pour utiliser SAP avec les systèmes de stockage.
+
+Pour des informations générales sur l'utilisation de BR*Tools, y compris la syntaxe des commandes, consultez la documentation SAP telle que BR*Tools for Oracle Database Administration en ligne.
+
+
+
+== Exigences du profil
+
+Le profil SnapManager pour SAP doit être nommé correctement pour fonctionner avec BR*Tools. Par défaut, BACKINT utilise le profil, qui a le même nom que le SID SAP, à partir du référentiel déterminé par l'ID utilisateur qui émet les commandes BR*Tools.
+
+Vous devez utiliser un nom de profil différent si le SID SAP n'est pas unique dans votre environnement. Pour plus d'informations, reportez-vous à la section _Profile usage for BR* Tools backups_.
+
+Vous devez disposer d'un lien entre le répertoire BR*Tools et le `/opt/NetApp/smsap/bin/backint` Fichier installé par SnapManager pour SAP. Pour plus d'informations sur la création du lien, voir _intégration avec SAP BR* Tools_.
+
+Impossible de vérifier les sauvegardes créées avec les versions antérieures à BR*Tools 7.00. La taille du bloc de l'espace table ou du fichier de données est requise pour effectuer la vérification. Toutefois, les versions antérieures à BR*Tools 7.00 ne le fournissent pas.
+
+
+
+== A propos de la combinaison BR*Tools et SnapManager pour les interfaces SAP
+
+Vous pouvez utiliser une combinaison des outils BR*Tools et de l'interface utilisateur graphique SnapManager for SAP (GUI) ou de l'interface de ligne de commande (CLI) pour exécuter les opérations suivantes :
+
+[cols="1a,1a"]
+|===
+| Fonctionnement | Interfaces que vous pouvez utiliser 
+
+
+ a| 
+Liste, restauration, récupération et suppression des sauvegardes de base de données (sauvegardes comprenant des fichiers de données, des fichiers de contrôle ou des fichiers journaux de reprise en ligne) créés à l'aide de BRBACKUP
+ a| 
+SnapManager pour l'interface de ligne de commandes et l'interface graphique SAP
+
+
+NOTE: BR*Tools peut lister et restaurer uniquement les sauvegardes créées à l'aide de BR*Tools.
+
+
+
+ a| 
+Liste et suppression des sauvegardes d'autres jeux de fichiers créés avec BRBACKUP
+ a| 
+SnapManager pour l'interface de ligne de commandes et l'interface graphique SAP
+
+
+
+ a| 
+Cloner les sauvegardes d'autres jeux de fichiers créés avec BRBACKUP
+ a| 
+Une sauvegarde complète en ligne ou hors ligne effectuée à l'aide de la commande BRBACKUP peut être clonée à l'aide de l'interface de ligne de commande SnapManager pour SAP ou de l'interface utilisateur graphique.
+
+|===
+
+
+== Options disponibles sous BR*Tools CLI avec SnapManager pour SAP
+
+Les options suivantes sont disponibles dans l'interface de ligne de commande BR*Tools :
+
+[cols="1a,2a"]
+|===
+| Option | Tâches pouvant être effectuées 
+
+
+ a| 
+Gestion des instances
+ a| 
+Enregistrez toutes les actions dans le système de fichiers et les tables de base de données et enregistrez également les journaux et les profils de sauvegarde sur le support de sauvegarde.
+
+
+
+ a| 
+Gestion de l'espace
+ a| 
+Permet une gestion complète des volumes. Pour utiliser les fonctions fournies dans la gestion de l'espace, vous devez initialiser les volumes avec BRBACKUP ou BRARCHIVE pour vous assurer qu'ils incluent un libellé spécifique à SAP.
+
+
+
+ a| 
+Sauvegarde et copie de base de données
+ a| 
+Créez une sauvegarde de base de données, effectuez un journal de reprise hors ligne (journal d'archivage) et vérifiez les sauvegardes.
+
+
+
+ a| 
+Restauration et reprise
+ a| 
+Restaurez et restaurez les sauvegardes.
+
+
+
+ a| 
+Statistiques de base de données
+ a| 
+Conservez les statistiques des tables et des index.
+
+|===
+
+
+== Fonctions similaires disponibles dans l'interface utilisateur de BR*Tools
+
+Les opérations suivantes sont disponibles dans l'interface utilisateur de BR*Tools :
+
+[cols="1a,1a"]
+|===
+| Type d'assistant | Tâches pouvant être effectuées 
+
+
+ a| 
+Assistant de création de référentiel
+ a| 
+Créer un référentiel dans une base de données.
+
+
+
+ a| 
+Assistant de profil
+ a| 
+Créer un profil dans un référentiel.
+
+
+
+ a| 
+Assistant de sauvegarde
+ a| 
+Créer une sauvegarde du profil.
+
+
+
+ a| 
+Assistant de restauration et de récupération
+ a| 
+Restaurer et récupérer une sauvegarde d'un profil.
+
+
+
+ a| 
+Assistant de suppression du clone SnapManager
+ a| 
+Supprimer le clone d'une sauvegarde.
+
+
+
+ a| 
+Assistant de suppression de sauvegarde SnapManager
+ a| 
+Supprimer la sauvegarde d'un profil.
+
+|===
+
+
+== À propos du clonage des sauvegardes créées avec BR*Tools
+
+Une sauvegarde complète en ligne ou hors ligne effectuée à l'aide de la commande BRBACKUP peut être clonée à l'aide de l'interface de ligne de commande ou de l'interface utilisateur graphique SnapManager pour SAP.
+
+Pour créer un clone de la sauvegarde de base de données créée à l'aide de la commande BRBACKUP, assurez-vous que vous définissez le paramètre de configuration brbackup.enable.clonable.backups sur true dans le fichier smsap.config, puis redémarrez le serveur SnapManager pour SAP. Saisissez la commande suivante : `brbackup.enable.cloneable.backups=true`
+
+Pour les sauvegardes en ligne créées à l'aide de la commande BRBACKUP, SnapManager for SAP vous permet de cloner la sauvegarde sans apporter de modifications à partir de l'interface de ligne de commande ou de l'interface utilisateur graphique de SnapManager pour SAP.
+
+Pour les sauvegardes hors ligne créées par la commande BRBACKUP, SnapManager pour SAP vous permet de cloner la sauvegarde à partir de l'interface de ligne de commande SnapManager pour SAP ou de l'interface utilisateur graphique après avoir effectué les opérations suivantes :
+
+. Ajoutez les variables de configuration suivantes dans le fichier smsap.config.
++
+Les valeurs des variables indiquées ci-dessous sont des valeurs par défaut. Vous pouvez conserver ces valeurs si vous souhaitez les définir par défaut.
+
++
+** brbackup.oracle.maxsadsdonnées=254
+** brbackup.oracle.maxloghistory=1168
+** brbackup.oracle.maxinstances=50
+** brbackup.oracle.maxlogfiles=255
+** brbackup.oracle.maxlogmembermembres=3
+** brbackup.oracle.character_set=UTF8
+
+
+. Pour modifier l'une de ces valeurs de paramètre de configuration par défaut dans le fichier smsap.config, exécutez la commande suivante à partir de l'invite de commande SQL :
++
+`alter database backup controlfile to trace as file`
+
++
+Le fichier peut être n'importe quel nom défini par l'utilisateur et est créé dans le même répertoire à partir duquel SQL*plus est appelé.
+
+. Ouvrez le fichier pour définir ces valeurs sur les variables de configuration correspondantes dans le fichier smsap.config.
+. Redémarrez le serveur SnapManager.
+
+
+
+
+== A propos de la suppression des sauvegardes créées avec BR*Tools
+
+BR*Tools ne supprime pas les sauvegardes. Comme les sauvegardes SnapManager pour SAP reposent sur des copies Snapshot, le nombre de sauvegardes que vous pouvez conserver est limité. Vous devez vous assurer que les sauvegardes sont supprimées lorsqu'elles ne sont plus nécessaires.
+
+Sur le système de stockage NetApp, chaque volume peut disposer d'un maximum de 255 copies Snapshot. Si un volume atteint la limite, les sauvegardes échouent. Une sauvegarde effectuée avec BRBACKUP crée généralement deux copies Snapshot de chaque volume concerné.
+
+Pour éviter d'atteindre le maximum de 255 copies Snapshot, vous pouvez gérer les sauvegardes de l'une des manières suivantes :
+
+* Vous pouvez définir les options de conservation dans le profil utilisé pour les opérations BR*Tools.
++
+SnapManager for SAP supprime ensuite automatiquement les anciennes sauvegardes si nécessaire.
+
+* Vous pouvez supprimer manuellement les sauvegardes qui ne sont plus nécessaires via l'interface de ligne de commande ou l'interface graphique de SnapManager pour SAP.
+

@@ -1,0 +1,63 @@
+---
+permalink: windows/task-updating-target-database-hostname-associated-with-a-profile.html 
+sidebar: sidebar 
+keywords: snapmanager, sap, provide, ability, update, host, name, target, database, profile, updating, associate 
+summary: 'SnapManager \(3.2 ou version ultérieure\) pour SAP permet de mettre à jour le nom d"hôte de la base de données cible dans le profil SnapManager.' 
+---
+= Mise à jour du nom d'hôte de la base de données cible associé à un profil
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager (3.2 ou version ultérieure) pour SAP permet de mettre à jour le nom d'hôte de la base de données cible dans le profil SnapManager.
+
+* Le répertoire personnel de l'utilisateur local doit connaître les mappages de profil à référentiel.
+* Les sessions de l'interface utilisateur graphique de SnapManager doivent être fermées.
+
+
+Vous pouvez mettre à jour le profil avec le nouveau nom d'hôte en utilisant uniquement l'interface de ligne de commande.
+
+*Les scénarios ne sont pas pris en charge pour modifier le nom d'hôte de la base de données cible dans le profil*
+
+Les scénarios suivants ne sont pas pris en charge pour la modification du nom d'hôte de la base de données cible dans le profil :
+
+* Modification du nom d'hôte de la base de données cible à l'aide de l'interface graphique SnapManager
+* Reprise de la base de données du référentiel après la mise à jour du nom d'hôte de la base de données cible du profil
+* Mise à jour de plusieurs profils pour un nouveau nom d'hôte de base de données cible en exécutant une seule commande
+* Modification du nom d'hôte de la base de données cible lors de l'exécution d'une opération SnapManager
+
+
+
+NOTE: Après avoir mis à jour le nom d'hôte de la base de données cible dans le profil, seul le nom d'hôte de la base de données cible est modifié. Tous les autres paramètres de configuration définis sur le profil sont conservés.
+
+Une fois que vous avez mis à jour le nom d'hôte de la base de données cible, vous ne pouvez pas supprimer ou démonter la sauvegarde si le clone ou la sauvegarde montée n'est pas disponible dans le nouvel hôte. Dans de tels cas, l'exécution des opérations SnapManager depuis le nouvel hôte entraîne une défaillance, ainsi que des entrées obsolètes dans l'hôte précédent. Pour effectuer des opérations SnapManager, vous devez revenir au nom d'hôte précédent à l'aide de la mise à jour du profil.
+
+.Étapes
+. Saisissez la commande suivante :
++
+`smsap profile update -profileprofile [-profile-passwordprofile_password][-database-dbnamedb_dbname-hostdb_host [-siddb_sid] [-login-usernamedb_username-passworddb_password-portdb_port]] [{-rman{-controlfile | {-login-usernamerman_username-passwordrman_password-tnsnamerman_tnsname}}} | -remove-rman] [-retain [-hourly [-countn] [-durationm]] [-daily [-countn] [-durationm]] [-weekly [-countn] [-durationm]] [-monthly [-countn] [-durationm]]] [-commentcomment][-snapname-patternpattern][-summary-notification] [-notification [-success-emailemail_address1, email_address2-subjectsubject_pattern] [-failure-emailemail_address1, email_address2-subjectsubject_pattern]] [-separate-archivelog-backups-retain-archivelog-backups-hourshours | -daysdays | -weeksweeks| -monthsmonths [-protect [-include-with-online-backups | -no-include-with-online-backups]] [-dump]`
+
++
+Les autres options de cette commande sont les suivantes :
+
++
+[-force] [-noprompt]
+
++
+|===
+| Les fonctions que vous recherchez... | Alors... 
+
+
+ a| 
+*Changer le nom d'hôte de la base de données cible*
+ a| 
+Spécifiez -hostNew_db_host
+
+|===
+. Pour afficher le nom d'hôte de la base de données cible du profil, entrez la commande suivante :
++
+`smsap profile show`
+
+

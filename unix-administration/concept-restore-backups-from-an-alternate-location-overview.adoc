@@ -1,0 +1,25 @@
+---
+permalink: unix-administration/concept-restore-backups-from-an-alternate-location-overview.html 
+sidebar: sidebar 
+keywords: restore, database, backup, alternate, location, overview 
+summary: 'Pour restaurer une sauvegarde de base de données à partir d"un autre emplacement, suivez les étapes principales suivantes, chacune d"entre elles étant décrite plus en détail dans cette section.' 
+---
+= Vue d'ensemble de la restauration des sauvegardes à partir d'un autre emplacement
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Pour restaurer une sauvegarde de base de données à partir d'un autre emplacement, suivez les étapes principales suivantes, chacune d'entre elles étant décrite plus en détail dans cette section.
+
+* Effectuez l'une des opérations suivantes, en fonction de la disposition de votre base de données et de ce qui doit être restauré :
++
+** Restaurez les fichiers de données requis à partir de bandes, de SnapVault, de SnapMirror ou de tout autre support vers n'importe quel système de fichiers monté sur l'hôte de base de données.
+** Restaurez le système de fichiers requis et montez-le sur l'hôte de base de données.
+** Connectez-vous aux périphériques bruts requis qui existent dans l'hôte local.
+
+
+* Créez un fichier XML (extensible Markup Language) de spécification de restauration qui inclut les mappages requis par SnapManager pour restaurer de l'autre emplacement vers l'emplacement d'origine. Enregistrez le fichier dans un emplacement auquel SnapManager peut accéder.
+* Utilisez SnapManager pour restaurer et récupérer les données à l'aide du fichier XML de spécification de restauration.
+

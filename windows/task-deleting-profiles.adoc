@@ -1,0 +1,21 @@
+---
+permalink: windows/task-deleting-profiles.html 
+sidebar: sidebar 
+keywords: delete, profile, successful, incomplete, backup, free, deleting 
+summary: 'Vous pouvez supprimer un profil à tout moment, tant qu"il ne contient pas de sauvegardes réussies ou incomplètes. Vous pouvez supprimer des profils qui contiennent des sauvegardes libérées ou supprimées.' 
+---
+= Suppression de profils
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez supprimer un profil à tout moment, tant qu'il ne contient pas de sauvegardes réussies ou incomplètes. Vous pouvez supprimer des profils qui contiennent des sauvegardes libérées ou supprimées.
+
+. Pour supprimer un profil, entrez la commande suivante :``smsap profile delete -profileprofile_name``
+
+
+*Informations connexes*
+
+xref:reference-the-smosmsapprofile-delete-command.adoc[La commande smsap profile delete]

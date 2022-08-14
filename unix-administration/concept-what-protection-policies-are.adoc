@@ -1,0 +1,24 @@
+---
+permalink: unix-administration/concept-what-protection-policies-are.html 
+sidebar: sidebar 
+keywords: protection, policy, policies, govern, database, backup, profile 
+summary: Les règles de protection régissent la protection des sauvegardes de bases de données. Vous pouvez sélectionner les règles de protection lors de la création du profil. 
+---
+= Quelles sont les règles de protection
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les règles de protection régissent la protection des sauvegardes de bases de données. Vous pouvez sélectionner les règles de protection lors de la création du profil.
+
+Une règle de protection définit les paramètres suivants :
+
+* Lors du transfert des copies vers un système de stockage secondaire
+* Quantité maximale de données à transférer aux heures planifiées
+* La durée de conservation des copies pour chaque emplacement de sauvegarde
+* Seuils d'avertissement et d'erreur pour les temps de décalage
+
+
+Lorsque la protection est activée, SnapManager crée un jeu de données pour la base de données. Un jeu de données se compose d'un ensemble de jeux de données de stockage, ainsi que d'informations de configuration associées à leurs données. Les jeux de données associés à un jeu de données incluent un jeu de stockage principal utilisé pour exporter les données vers les clients, ainsi que l'ensemble des répliques et des archives qui existent sur d'autres jeux de stockage. Les jeux de données représentent des données utilisateur exportables. Si l'administrateur désactive la protection d'une base de données, SnapManager supprime le jeu de données.

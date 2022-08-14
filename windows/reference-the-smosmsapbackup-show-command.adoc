@@ -1,0 +1,102 @@
+---
+permalink: windows/reference-the-smosmsapbackup-show-command.html 
+sidebar: sidebar 
+keywords: backup, show, command, display, detail, information, protection, status, retention, class, primary, secondary, storage, smsap 
+summary: Vous pouvez utiliser la commande backup show pour afficher des informations détaillées sur une sauvegarde, notamment son état de protection, sa classe de rétention des sauvegardes et les sauvegardes sur un stockage primaire et secondaire. 
+---
+= La commande smsap backup show
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez utiliser le `backup show` commande permettant d'afficher des informations détaillées sur une sauvegarde, notamment son état de protection, sa classe de conservation de sauvegarde et ses sauvegardes sur les systèmes de stockage primaire et secondaire.
+
+
+
+== Syntaxe
+
+[listing]
+----
+
+smsap backup show
+-profile profile_name
+[-label label [-data | -archivelogs] | [-id id]
+[-quiet | -verbose]
+----
+
+
+== Paramètres
+
+* *`-profile _profile_name_`*
++
+Spécifie le profil pour lequel afficher les sauvegardes. Le profil contient l'identifiant de la base de données et d'autres informations sur la base de données.
+
+* *`-label _label_`*
++
+Spécifie le libellé de la sauvegarde.
+
+* *`-data`*
++
+Spécifie les fichiers de données.
+
+* *`-archivelogs`*
++
+Spécifie les fichiers journaux d'archive.
+
+* *`-id _id_`*
++
+Spécifie l'ID de sauvegarde.
+
+* *`-quiet`*
++
+Affiche uniquement les messages d'erreur dans la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* *`-verbose`*
++
+Affiche les messages d'erreur, d'avertissement et d'information dans la console, ainsi que toutes les informations de clonage et de vérification.
+
+
+
+
+
+== Exemple
+
+L'exemple suivant montre des informations détaillées sur la sauvegarde :
+
+[listing]
+----
+smsap backup show -profile SALES1 -label BTNFS -verbose
+Backup id: 8abc013111a450480111a45066210001
+Backup status: SUCCESS
+Primary storage resources: EXISTS
+Protection sate: NOT REQUESTED
+Retention class: DAILY
+Backup scope: FULL
+Backup mode: OFFLINE
+Mount status: NOT MOUNTED
+Backup label: BTNFS
+Backup comment:
+
+Backup start time: 2007-03-30 15:26:30
+Backup end time: 2007-03-30 15:34:13
+Verification status: OK
+Backup Retention Policy: NORMAL
+Backup database: hsdb1
+Checkpoint: 2700620
+Tablespace: SYSAUX
+Datafile: E:\disks\data\hsdb\sysaux01.dbf [ONLINE]
+...
+Control Files:
+File: E:\disks\data\control03.ctl
+...
+Archive Logs:
+File: E:\disks\data\archive_logs\2_131_626174106.dbf
+...
+Volume: hs_data
+Snapshot: SMSAP_HSDBR_hsdb1_F_C_1_
+8abc013111a450480111a45066210001_0
+File: E:\disks\data\hsdb\SMSAPBakCtl_1175283005231_0
+...
+----

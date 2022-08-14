@@ -1,0 +1,204 @@
+---
+permalink: windows/task-viewing-sample-plugin-scripts.html 
+sidebar: sidebar 
+keywords: snapmanager, include, script, example, basis, custom, view, sample, plug-in 
+summary: SnapManager comprend des scripts que vous pouvez utiliser comme exemples pour créer vos propres scripts ou comme base pour vos scripts personnalisés. 
+---
+= Affichage des exemples de scripts de plug-in
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager comprend des scripts que vous pouvez utiliser comme exemples pour créer vos propres scripts ou comme base pour vos scripts personnalisés.
+
+Vous trouverez les exemples de scripts de plug-in à l'emplacement suivant :
+
+* <default_install_directory>\plugins\exemples\backup\create
+* <default_install_directory>\plugins\exemples\clone\create
+* <default_install_directory>\plugins\windows\exemples\backup\create\post
+
+
+Le répertoire contenant les exemples de scripts de plug-in comprend les sous-répertoires suivants :
+
+* Policy : contient des scripts qui, lorsqu'ils sont configurés, s'exécutent toujours sur l'opération de clonage.
+* Pre : contient les scripts qui, lorsqu'ils sont configurés, s'exécutent avant l'opération de clonage.
+* Post : contient des scripts qui, lorsqu'ils sont configurés, s'exécutent après l'opération de clonage.
+
+
+Le tableau suivant décrit les exemples de scripts.
+
+|===
+| Nom de script | Description | Type de script 
+
+
+ a| 
+validate_sid.sh
+ a| 
+Contient des vérifications supplémentaires de l'ID système utilisé sur le système cible. Le script vérifie que le SID présente les caractéristiques suivantes :
+
+* Contient trois caractères alphanumériques
+* Commence par une lettre
+* N'inclut pas les PEID SAP réservés
+
+ a| 
+Politique
+
+
+
+ a| 
+cleanup.sh
+ a| 
+Nettoie le système cible afin qu'il soit prêt à stocker le nouveau clone créé. Préserve ou supprime les fichiers et les répertoires selon les besoins.
+ a| 
+Prétâche
+
+
+
+ a| 
+sap_follow_up_activities.sh
+ a| 
+Il effectue les tâches d'activité de suivi telles que décrites dans le _SAP System Copy Guide_ et le TR-3442, SAP avec Oracle sous UNIX, NFS et stockage NetApp. Par exemple, ce script supprime ou modifie des entrées de table dans le schéma SAP.
+ a| 
+Post-tâche
+
+
+
+ a| 
+os_db_authentication.sh
+ a| 
+Adapte l'authentification du système d'exploitation pour l'utilisateur OPS$, comme recommandé dans SAP Note 316641. Voici un exemple de la façon de traiter des fichiers SQL externes.
+ a| 
+Post-tâche
+
+
+
+ a| 
+Mirror_the_backup.cmd
+ a| 
+Met en miroir les volumes après l'opération de sauvegarde dans un environnement Windows lorsque vous utilisez l'un des systèmes Data ONTAP 7-mode.
+ a| 
+Post-tâche
+
+
+
+ a| 
+Vault_the_backup.cmd
+ a| 
+Bascule les qtrees après la sauvegarde, dans un environnement Windows lorsque vous utilisez l'un ou l'autre de Data ONTAP sous 7-mode.
+ a| 
+Post-tâche
+
+
+
+ a| 
+Mirror_the_backup_cdot.cmd
+ a| 
+Met en miroir les volumes après l'opération de sauvegarde dans un environnement Windows lorsque vous utilisez clustered Data ONTAP.
+ a| 
+Post-tâche
+
+
+
+ a| 
+Vault_the_backup_cdot.cmd
+ a| 
+Bascule les qtrees après la sauvegarde, dans un environnement Windows lorsque vous utilisez clustered Data ONTAP.
+ a| 
+Post-tâche
+
+|===
+Les scripts fournis avec SnapManager utilisent par défaut le shell BASH. Vous devez vous assurer que la prise en charge du shell BASH est installée sur votre système d'exploitation avant de tenter d'exécuter l'un des scripts types.
+
+. Pour vérifier que vous utilisez le shell BASH, entrez la commande suivante à l'invite de commande : `bash`
++
+Si vous ne voyez pas d'erreur, le shell BASH fonctionne correctement.
+
++
+Vous pouvez également saisir la commande qui-bash à l'invite de commande.
+
+. Recherchez le script dans le répertoire suivant :
++
+<installdir>\plugins\samples\clone\create
+
+. Ouvrez le script dans un éditeur de script tel que vi.
+
+
+
+
+== Exemple de script
+
+L'exemple de script personnalisé suivant valide les noms SID de base de données et empêche l'utilisation de noms non valides dans la base de données clonée. Il comprend trois opérations (vérification, description et exécution), qui sont appelées après l'exécution du script. Le script inclut également la gestion des messages d'erreur avec les codes 0, 4 et 4.
+
+[listing]
+----
+@echo off
+REM $Id: //depot/prod/capstan/Rcapstan_ganges/src/plugins/windows/examples/clone/create/policy/validate_sid.cmd#1 $
+REM $Revision: #1 $ $Date: 2011/12/06 $
+REM
+REM
+
+set /a EXIT=0
+
+set name="Validate SID"
+set description="Validate SID used on the target system"
+set parameter=()
+
+rem reserved system IDs
+set INVALID_SIDS=("ADD" "ALL" "AND" "ANY" "ASC" "COM" "DBA" "END" "EPS" "FOR" "GID" "IBM" "INT" "KEY" "LOG" "MON" "NIX" "NOT" "OFF" "OMS" "RAW" "ROW" "SAP" "SET" "SGA" "SHG" "SID" "SQL" "SYS" "TMP" "UID" "USR" "VAR")
+
+if /i "%1" == "-check" goto :check
+if /i "%1" == "-execute" goto :execute
+if /i "%1" == "-describe" goto :describe
+
+:usage:
+	echo usage: %0 "{ -check | -describe | -execute }"
+	set /a EXIT=99
+	goto :exit
+
+:check
+	set /a EXIT=0
+	goto :exit
+
+:describe
+	echo SM_PI_NAME:%name%
+	echo SM_PI_DESCRIPTION:%description%
+	set /a EXIT=0
+	goto :exit
+
+:execute
+	set /a EXIT=0
+
+	rem SM_TARGET_SID must be set
+	if "%SM_TARGET_SID%" == "" (
+		set /a EXIT=4
+		echo SM_TARGET_SID not set
+		goto :exit
+	)
+
+	rem exactly three alphanumeric characters, with starting with a letter
+	echo %SM_TARGET_SID% | findstr "\<[a-zA-Z][a-zA-Z0-9][a-zA-Z0-9]\>" >nul
+	if %ERRORLEVEL% == 1 (
+		set /a EXIT=4
+		echo SID is defined as a 3 digit value starting with a letter. [%SM_TARGET_SID%] is not valid.
+		goto :exit
+	)
+
+	rem not a SAP reserved SID
+	echo %INVALID_SIDS% | findstr /i \"%SM_TARGET_SID%\" >nul
+	if %ERRORLEVEL% == 0 (
+		set /a EXIT=4
+		echo SID [%SM_TARGET_SID%] is reserved by SAP
+		goto :exit
+	)
+
+	goto :exit
+
+
+
+:exit
+	echo Command complete.
+	exit /b %EXIT%
+----
+http://media.netapp.com/documents/tr-3442.pdf["SAP avec Oracle sous UNIX et NFS et stockage NetApp : tr-3442"]

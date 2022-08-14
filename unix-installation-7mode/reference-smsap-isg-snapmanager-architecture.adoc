@@ -1,0 +1,85 @@
+---
+permalink: unix-installation-7mode/reference-smsap-isg-snapmanager-architecture.html 
+sidebar: sidebar 
+keywords: snapmanager, sap, component, comprehensive, powerful, backup, restore, recovery, cloning, clone, solution, oracle, database 
+summary: SnapManager pour SAP comprend des composants qui fonctionnent ensemble pour fournir une solution complète et puissante de sauvegarde, de restauration, de restauration et de clonage pour les bases de données Oracle. 
+---
+= Architecture SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager pour SAP comprend des composants qui fonctionnent ensemble pour fournir une solution complète et puissante de sauvegarde, de restauration, de restauration et de clonage pour les bases de données Oracle.
+
+image::../media/smsap_architecture_7mode.gif[schéma d'architecture smsap pour 7-mode]
+
+
+
+== SnapDrive pour UNIX
+
+SnapManager requiert SnapDrive pour établir la connexion avec le système de stockage. Vous devez installer SnapDrive pour UNIX sur chaque hôte de base de données cible avant d'installer SnapManager.
+
+
+
+== SnapManager pour SAP
+
+Vous devez installer SnapManager pour SAP sur chaque hôte de base de données cible.
+
+Vous pouvez utiliser l'interface de ligne de commande ou l'interface utilisateur à partir de l'hôte de base de données sur lequel SnapManager for SAP est installé. Vous pouvez également utiliser l'interface utilisateur SnapManager à distance en utilisant un navigateur Web depuis n'importe quel système exécuté sur un système d'exploitation pris en charge par SnapManager.
+
+
+NOTE: La version de JRE prise en charge est 1.8.
+
+
+
+== Base de données cible
+
+La base de données cible est une base de données Oracle que vous souhaitez gérer à l'aide de SnapManager en effectuant des opérations de sauvegarde, de restauration, de restauration et de clonage.
+
+La base de données cible peut être un RAC (Real application clusters) autonome ou résider sur des volumes ASM (Automatic Storage Management) d'Oracle. Pour plus d'informations sur les versions, les configurations, les systèmes d'exploitation et les protocoles pris en charge de la base de données Oracle, consultez la matrice d'interopérabilité NetApp.
+
+
+
+== Référentiel SnapManager
+
+Le référentiel SnapManager réside dans une base de données Oracle et stocke les métadonnées sur les profils, les sauvegardes, la restauration, la restauration et le clonage. Un référentiel unique peut contenir des informations sur les opérations effectuées sur plusieurs profils de base de données.
+
+Le référentiel SnapManager ne peut pas résider dans la base de données cible. La base de données de référentiel SnapManager et la base de données cible doivent être en ligne avant d'effectuer des opérations SnapManager.
+
+
+
+== Offre principale OnCommand Unified Manager
+
+Le package principal de OnCommand Unified Manager intègre les fonctionnalités d'Operations Manager, de protection Manager et de Provisioning Manager. Il centralise les règles de provisionnement, de clonage, de sauvegarde, de restauration et de reprise après incident. L'intégration de toutes ces fonctionnalités permet d'effectuer de nombreuses fonctions de gestion depuis un outil unique.
+
+
+
+== Operations Manager
+
+Operations Manager est l'interface utilisateur Web du package principal de OnCommand Unified Manager. Il est utilisé pour la surveillance quotidienne du stockage, les alertes et les rapports sur l'infrastructure de stockage et de gestion. L'intégration d'SnapManager exploite les fonctionnalités RBAC d'Operations Manager.
+
+
+
+== Protection Manager
+
+Protection Manager offre aux administrateurs une console de gestion facile d'utilisation pour configurer et contrôler rapidement toutes les opérations SnapMirror et SnapVault. L'application permet aux administrateurs d'appliquer des règles de protection homogènes, d'automatiser les processus complexes de protection des données et de regrouper les ressources de réplication et de sauvegarde afin d'optimiser l'utilisation.
+
+L'interface de protection Manager est la console de gestion NetApp, la plateforme client pour les applications logicielles de gestion NetApp. La console de gestion NetApp s'exécute sur un système Windows ou Linux différent du serveur sur lequel le serveur OnCommand est installé. Il permet aux administrateurs de stockage, d'applications et de serveurs d'effectuer des tâches quotidiennes sans avoir à basculer d'une interface utilisateur à une autre. Les applications exécutées dans la console de gestion NetApp sont protection Manager, Provisioning Manager et Performance Advisor.
+
+
+
+== Système de stockage primaire
+
+SnapManager sauvegarde les bases de données cibles sur le système de stockage NetApp principal.
+
+
+
+== Système de stockage secondaire
+
+Lorsque vous activez la protection des données sur un profil de base de données, les sauvegardes créées par SnapManager sur le système de stockage primaire sont répliquées sur un système de stockage NetApp secondaire à l'aide des technologies SnapVault et SnapMirror.
+
+*Informations connexes*
+
+http://mysupport.netapp.com/matrix["Matrice d'interopérabilité NetApp"^]

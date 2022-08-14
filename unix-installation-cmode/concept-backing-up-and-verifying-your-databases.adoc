@@ -1,0 +1,14 @@
+---
+permalink: unix-installation-cmode/concept-backing-up-and-verifying-your-databases.html 
+sidebar: sidebar 
+keywords: install, snapmanager, create, backup, database, verify, corrupt, file, back up 
+summary: Après avoir installé SnapManager, vous pouvez créer une sauvegarde de base de votre base de données et vérifier que cette sauvegarde ne contient aucun fichier corrompu. 
+---
+= Sauvegarde et vérification des bases de données
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après avoir installé SnapManager, vous pouvez créer une sauvegarde de base de votre base de données et vérifier que cette sauvegarde ne contient aucun fichier corrompu.

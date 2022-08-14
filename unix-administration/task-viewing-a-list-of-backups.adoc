@@ -1,0 +1,21 @@
+---
+permalink: unix-administration/task-view-a-list-of-backups.html 
+sidebar: sidebar 
+keywords: check, backup, create, profile, state, smsap, list, command, information, information 
+summary: 'Vous pouvez vérifier quelles sauvegardes ont été créées pour un profil et l"état de sauvegarde à l"aide de la commande smsap backup list. Pour chaque profil, la commande affiche d"abord les informations relatives à la sauvegarde la plus récente, puis continue jusqu"à ce que les informations de toutes les sauvegardes soient affichées.' 
+---
+= Afficher la liste des sauvegardes
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez vérifier quelles sauvegardes ont été créées pour un profil et l'état de sauvegarde en utilisant le `smsap backup list` commande. Pour chaque profil, la commande affiche d'abord les informations relatives à la sauvegarde la plus récente, puis continue jusqu'à ce que les informations de toutes les sauvegardes soient affichées.
+
+.Étape
+. Saisissez la commande suivante :
++
+`*smsap backup list -profile _profile_name_ [-delimiter _character_] [data | -archivelogs] [-quiet | -verbose]*`
+
+

@@ -1,0 +1,23 @@
+---
+permalink: windows/concept-backup-recovery.html 
+sidebar: sidebar 
+keywords: snapmanager, perform, restore, recover, operation, backup 
+summary: Dans SnapManager, vous devez effectuer les opérations de restauration et de restauration en même temps. Vous ne pouvez pas effectuer une opération de restauration, puis effectuer une opération de restauration SnapManager ultérieurement. 
+---
+= Restauration des sauvegardes
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Dans SnapManager, vous devez effectuer les opérations de restauration et de restauration en même temps. Vous ne pouvez pas effectuer une opération de restauration, puis effectuer une opération de restauration SnapManager ultérieurement.
+
+Dans SnapManager 3.2 ou version antérieure, vous pouvez utiliser SnapManager pour restaurer et récupérer la sauvegarde ou utiliser SnapManager pour restaurer la sauvegarde et utiliser un autre outil, tel qu'Oracle Recovery Manager (RMAN), pour restaurer les données. Étant donné que SnapManager peut enregistrer ses sauvegardes avec RMAN, vous pouvez utiliser RMAN pour restaurer et restaurer la base de données à des grains plus fins, tels que les blocs. Cette intégration allie la rapidité et l'efficacité de l'espace des copies Snapshot à un niveau de contrôle précis pour la restauration à l'aide de RMAN.
+
+
+NOTE: Vous devez récupérer une base de données avant de pouvoir l'utiliser. Vous pouvez utiliser n'importe quel outil ou script pour récupérer une base de données.
+
+À partir de SnapManager 3.2 pour SAP, SnapManager permet la restauration automatique des sauvegardes de bases de données à l'aide des sauvegardes du journal d'archivage. Même lorsque les sauvegardes du journal d'archivage sont disponibles à l'emplacement externe, SnapManager utilise les sauvegardes du journal d'archivage à partir de l'emplacement externe pour restaurer les sauvegardes de la base de données.
+
+Si de nouveaux fichiers de données sont ajoutés à la base de données, Oracle vous recommande de procéder immédiatement à une nouvelle sauvegarde. En outre, si vous restaurez une sauvegarde effectuée avant l'ajout des nouveaux fichiers de données et que vous tentez de restaurer à un point donné après l'ajout des nouveaux fichiers de données, le processus de restauration automatique Oracle risque d'échouer, car il est impossible de créer des fichiers de données. Consultez la documentation Oracle pour le processus de récupération des fichiers de données ajoutés après une sauvegarde.

@@ -1,0 +1,43 @@
+---
+permalink: windows/concept-collecting-additional-log-information-for-easier-debugging.html 
+sidebar: sidebar 
+keywords: additional, log, debug, fail, snapmanager, operation, external, environment, variable, server.log.level, file, collect 
+summary: 'Si vous avez besoin de journaux supplémentaires pour déboguer une opération SnapManager ayant échoué, vous devez définir une variable d"environnement externe Server.log.level. Cette variable remplace le niveau de journal par défaut et vide tous les messages du journal dans le fichier journal. Par exemple, vous pouvez changer le niveau de journalisation en DEBUG, qui consigne des messages supplémentaires et peut aider au débogage des problèmes.' 
+---
+= Collecte d'informations de journal supplémentaires pour faciliter le débogage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous avez besoin de journaux supplémentaires pour déboguer une opération SnapManager ayant échoué, vous devez définir une variable d'environnement externe `server.log.level`. Cette variable remplace le niveau de journal par défaut et vide tous les messages du journal dans le fichier journal. Par exemple, vous pouvez changer le niveau de journalisation en DEBUG, qui consigne des messages supplémentaires et peut aider au débogage des problèmes.
+
+Les journaux SnapManager sont disponibles aux emplacements suivants :
+
+* `SnapManager_install_directory\log`
+
+
+Pour remplacer le niveau de journalisation par défaut, vous devez effectuer les opérations suivantes :
+
+. Créer un `platform.override` Fichier texte dans le répertoire d'installation de SnapManager.
+. Ajoutez le `server.log.level` paramètre dans le `platform.override` fichier texte.
+. Attribuez une valeur (*_TRACE, DEBUG, INFO, AVERTIR, ERREUR, FATAL, ou PROGRÈS_*) à `server.log.level` paramètre.
++
+Par exemple, pour changer le niveau de journal à _ERROR_, définissez la valeur de `server.log.level` À _ERREUR_.
+
++
+`server.log.level=ERROR`
+
+. Redémarrez le serveur SnapManager.
+
+
+
+NOTE: Si les informations supplémentaires du journal ne sont pas requises, vous pouvez supprimer le `server.log.level` paramètre du `platform.override` fichier texte.
+
+SnapManager gère le volume de fichiers journaux de serveur en fonction des valeurs définies par l'utilisateur des paramètres suivants dans le `smsap.config` fichier :
+
+* `log.max_log_files`
+* `log.max_log_file_size`
+* `log.max_rolling_operation_factory_logs`
+

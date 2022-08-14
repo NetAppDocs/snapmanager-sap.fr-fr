@@ -1,0 +1,48 @@
+---
+permalink: windows/task-delete-clones.html 
+sidebar: sidebar 
+keywords: delete, clone, size, snapshot, copy, backup, data 
+summary: 'Vous pouvez supprimer ces clones lorsque la taille de la copie Snapshot atteint entre 10 % et 20 % de la sauvegarde. Cela garantit également que le clone dispose des données les plus récentes.' 
+---
+= Supprimer les clones
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez supprimer ces clones lorsque la taille de la copie Snapshot atteint entre 10 % et 20 % de la sauvegarde. Cela garantit également que le clone dispose des données les plus récentes.
+
+
+
+== Description de la tâche
+
+L'étiquette est l'identifiant unique de chaque clone d'un profil. Vous pouvez utiliser l'étiquette ou l'ID du clone, mais pas l'identifiant système (SID) pour supprimer le clone.
+
+
+NOTE: Le SID du clone et le libellé du clone ne sont pas identiques.
+
+Lorsque vous supprimez un clone, la base de données doit être en cours d'exécution. Sinon, de nombreux fichiers et répertoires du clone existant ne seront pas supprimés, ce qui entraînera un travail plus important avant qu'un autre clone ne puisse être créé.
+
+Les répertoires spécifiés pour certains paramètres Oracle du clone sont détruits lors de la suppression du clone et ne doivent contenir que des données pour la base de données clonée : destinations du journal d'archivage, arrière-plan, noyau et destinations du vidage utilisateur. Les fichiers d'audit ne sont pas supprimés.
+
+
+NOTE: Vous ne pouvez pas supprimer un clone lorsque celui-ci est utilisé dans d'autres opérations.
+
+Vous pouvez éventuellement collecter les fichiers de dump après une opération de suppression des clones réussie ou ayant échoué.
+
+.Étape
+. Saisissez la commande suivante :
++
+`*smsap clone delete -profile _profile_name_ [-label _label_ | -id _guid_] [-force][-dump][-quiet]|[-verbose]*`
+
+
+
+
+
+== Exemple
+
+[listing]
+----
+smsap clone delete -profile targetdb1_prof1 -label sales0908_clone1
+----

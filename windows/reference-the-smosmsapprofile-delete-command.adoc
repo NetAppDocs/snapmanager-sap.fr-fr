@@ -1,0 +1,55 @@
+---
+permalink: windows/reference-the-smosmsapprofile-delete-command.html 
+sidebar: sidebar 
+keywords: run, profile, delete, command, database, smsap 
+summary: Vous pouvez exécuter la commande de suppression de profil pour supprimer un profil de la base de données. 
+---
+= La commande smsap profile delete
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez exécuter le `profile delete` commande permettant de supprimer un profil de la base de données.
+
+
+
+== Syntaxe
+
+[listing]
+----
+
+smsap profile delete
+-profile profile
+[-quiet | -verbose]
+----
+
+
+== Paramètres
+
+* *`-profile _profile_`*
++
+Spécifie le profil à supprimer.
+
+* *`-quiet`*
++
+Affiche uniquement les messages d'erreur dans la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* *`-verbose`*
++
+Affiche les messages d'erreur, d'avertissement et d'information dans la console.
+
+
+
+
+
+== Exemple
+
+L'exemple suivant supprime le profil :
+
+[listing]
+----
+smsap profile delete -profile SALES1
+Operation Id [Ncaf00af0242b3e8dba5c68a57a5ae932] succeeded.
+----

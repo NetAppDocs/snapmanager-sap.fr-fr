@@ -1,0 +1,29 @@
+---
+permalink: unix-administration/concept-cloning-database-backup.html 
+sidebar: sidebar 
+keywords: clone, database, perform, task, upgrade, production, installation, cloning, backup 
+summary: 'Si vous clonez une base de données, vous pouvez effectuer des tâches telles que tester une mise à niveau vers une base de données sans affecter la base de données en production, dupliquer une installation principale vers plusieurs systèmes de formation ou dupliquer une installation principale comme installation de base vers d"autres serveurs, qui présentent des exigences similaires.' 
+---
+= Clonage des sauvegardes de base de données
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous clonez une base de données, vous pouvez effectuer des tâches telles que tester une mise à niveau vers une base de données sans affecter la base de données en production, dupliquer une installation principale vers plusieurs systèmes de formation ou dupliquer une installation principale comme installation de base vers d'autres serveurs, qui présentent des exigences similaires.
+
+Vous pouvez effectuer les tâches suivantes liées au clonage :
+
+* Cloner une base de données à partir d'une sauvegarde existante
+* Cloner une base de données dans son état actuel, ce qui permet de créer la sauvegarde et le clone en une procédure.
+* Clonez une sauvegarde protégée sur le stockage secondaire, voire tertiaire.
+* Clonez une base de données et utilisez des scripts de plug-ins personnalisés, qui s'exécutent avant ou après l'opération de clonage.
+* Cloner une base de données sur le même hôte sur lequel réside la base de données.
+* Cloner une base de données à l'aide de fichiers journaux d'archives à partir de l'emplacement du journal d'archivage externe.
+* Cloner une base de données sur un autre hôte.
+* Cloner une base de données RAC.
+* Afficher la liste des clones.
+* Affiche des informations détaillées sur les clones.
+* Supprimer les clones
+

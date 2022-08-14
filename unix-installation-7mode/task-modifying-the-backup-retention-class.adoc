@@ -1,0 +1,60 @@
+---
+permalink: unix-installation-7mode/task-modify-the-backup-retention-class.html 
+sidebar: sidebar 
+keywords: upgrading, upgrade, snapmanager, assign, default, backup, retention, class, exist, modify, value, requirement, modify 
+summary: Après la mise à niveau, SnapManager attribue la classe de conservation de sauvegarde par défaut aux sauvegardes existantes. Vous pouvez modifier les valeurs de classe de rétention par défaut pour répondre à vos exigences de sauvegarde. 
+---
+= Modifiez la classe de rétention des sauvegardes
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après la mise à niveau, SnapManager attribue la classe de conservation de sauvegarde par défaut aux sauvegardes existantes. Vous pouvez modifier les valeurs de classe de rétention par défaut pour répondre à vos exigences de sauvegarde.
+
+*À propos de cette tâche*
+
+La classe de rétention des sauvegardes par défaut attribuée aux sauvegardes existantes est la suivante :
+
+[cols="2a,3a"]
+|===
+| Type de sauvegarde | Attribution de classe de conservation après la mise à niveau 
+
+
+ a| 
+Sauvegardes à conserver indéfiniment
+ a| 
+Illimitée
+
+
+
+ a| 
+Autres sauvegardes
+ a| 
+Tous les jours
+
+|===
+
+NOTE: Vous pouvez supprimer les sauvegardes qui sont conservées à jamais sans modifier la classe de rétention.
+
+Si vous effectuez une mise à niveau vers SnapManager 3.0 ou version ultérieure, les deux valeurs suivantes sont attribuées aux profils existants :
+
+* Nombre de rétention précédent pour le profil
+* Valeurs par défaut pour le nombre de rétention et la durée des sauvegardes quotidiennes, comme indiqué dans le `smsap.config` fichier
+
+
+.Étape
+. Modifiez les valeurs attribuées à `retain.hourly.count` et `retain.hourly.duration` dans le `smsap.config` fichier.
++
+Le `smsap.config` le fichier est situé à `_default installation location_/properties/smsap.config`.
+
++
+Vous pouvez entrer les valeurs suivantes :
+
++
+** retain.hourly.count = `*12*`
+** retain.hourly.durée = `*2*`
+
+
+

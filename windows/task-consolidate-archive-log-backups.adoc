@@ -1,0 +1,45 @@
+---
+permalink: windows/task-consolidate-archive-log-backups.html 
+sidebar: sidebar 
+keywords: snapmanager, consolidate, archivelog-only, archive, log, backup, duplicate, consolidation 
+summary: SnapManager consolide les sauvegardes archivelog à chaque fois que vous effectuez une sauvegarde en libérant les doublons de sauvegardes archiveelog uniquement. Par défaut, la consolidation est activée. 
+---
+= Consolider les sauvegardes des journaux d'archivage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager consolide les sauvegardes archivelog à chaque fois que vous effectuez une sauvegarde en libérant les doublons de sauvegardes archiveelog uniquement. Par défaut, la consolidation est activée.
+
+
+
+== Description de la tâche
+
+SnapManager identifie les sauvegardes archivelog uniquement qui contiennent des fichiers journaux d'archives dans d'autres sauvegardes et les libère pour maintenir un nombre minimal de sauvegardes archiveelog avec des fichiers journaux d'archives uniques.
+
+Si les sauvegardes archiveelog-only sont libérées par la consolidation, ces sauvegardes sont supprimées en fonction de la durée de conservation du journal d'archivage.
+
+Lorsque la base de données est à l'état d'arrêt ou de nomount pendant la consolidation du journal d'archives, SnapManager change la base de données à l'état de montage.
+
+Si la sauvegarde ou l'élagage des fichiers journaux d'archives échoue, la consolidation ne sera pas effectuée. La consolidation des sauvegardes archivelog est uniquement suivie d'une sauvegarde réussie et d'une élagage réussie.
+
+.Étapes
+. Pour activer la consolidation des sauvegardes archiveelog uniquement, modifiez le paramètre de configuration `consolidation` et définissez la valeur comme `true` Dans le fichier de configuration SnapManager (smsap.config).
++
+Une fois le paramètre défini, les sauvegardes archivelog-only sont consolidées.
+
++
+Si la nouvelle sauvegarde archiveelog-only contient les mêmes fichiers journaux d'archive dans l'une des sauvegardes antérieures archiveelog-only, les sauvegardes antérieures du journal d'archives uniquement sont libérées.
+
++
+
+NOTE: SnapManager ne consolide pas la sauvegarde du journal d'archivage effectuée avec la sauvegarde des fichiers de données. SnapManager consolide la sauvegarde archivelog.
+
++
+
+NOTE: SnapManager consolide les sauvegardes du journal d'archivage même lorsque l'utilisateur supprime manuellement les fichiers journaux d'archivage des destinations du journal d'archivage ou lorsque les fichiers journaux d'archivage sont corrompus et peuvent être inclus dans la sauvegarde.
+
+. Pour désactiver la consolidation des sauvegardes du journal d'archives, modifiez le paramètre de configuration `consolidation` et définissez la valeur comme `false` Dans le fichier de configuration SnapManager (smsap.config).
+

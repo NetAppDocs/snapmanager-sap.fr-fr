@@ -1,0 +1,50 @@
+---
+permalink: windows/task-rename-profiles.html 
+sidebar: sidebar 
+keywords: snapmanager, enable, rename, profile, update, capabilities, capability, perform, retain 
+summary: SnapManager vous permet de renommer le profil lorsque vous mettez à jour le profil. Les fonctionnalités SnapManager définies sur le profil et les opérations pouvant être effectuées avant le changement de nom sont conservées pour le profil renommé. 
+---
+= Renommer les profils
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager vous permet de renommer le profil lorsque vous mettez à jour le profil. Les fonctionnalités SnapManager définies sur le profil et les opérations pouvant être effectuées avant le changement de nom sont conservées pour le profil renommé.
+
+
+
+== Ce dont vous aurez besoin
+
+* Vous devez vous assurer qu'aucune opération SnapManager n'est en cours d'exécution sur le profil lors du changement de nom du profil.
+
+
+
+
+== Description de la tâche
+
+Vous pouvez renommer le profil à partir de l'interface de ligne de commande SnapManager et de l'interface utilisateur graphique. Lors de la mise à jour du profil, SnapManager vérifie et met à jour le nom du profil dans le référentiel.
+
+
+NOTE: SnapManager ne prend pas en charge le changement de nom du profil dans la fenêtre de mise à jour multi-profil.
+
+Lorsque vous fournissez un nouveau nom de profil, le nouveau nom de profil est ajouté dans le cache des informations d'identification côté client et le nom de profil précédent est supprimé. Lorsque vous renommez le profil à partir d'un client, le cache d'informations d'identification de ce client est mis à jour uniquement. Vous devez exécuter le `smsap profile sync` commande de chacun des clients pour mettre à jour le nouveau cache d'informations d'identification avec le nouveau nom de profil.
+
+Vous pouvez définir le mot de passe du profil à l'aide de la `smsap credential set` commande.
+
+Si le nom du profil était inclus dans un modèle de dénomination de copie Snapshot, lorsque vous renommez un profil, le nouveau nom du profil est mis à jour. Toutes les opérations SnapManager effectuées sur le profil utilisent le nouveau nom de profil. Les sauvegardes créées avec le profil précédent continuent d'avoir le nom de profil précédent et sont utilisées pour effectuer d'autres opérations SnapManager.
+
+Si vous effectuez une mise à niveau par roulement des hôtes de serveur SnapManager, vous devez vous assurer que vous effectuez la mise à niveau complète avant de renommer le profil.
+
+Le nouveau nom du profil est mis à jour uniquement à partir du client SnapManager à partir duquel la demande est effectuée. Les clients SnapManager connectés au serveur SnapManager ne sont pas notifiés de la modification du nom du profil. Vous pouvez consulter le journal des opérations pour connaître la modification dans le nom du profil.
+
+
+NOTE: Si une opération de sauvegarde planifiée commence au moment du changement de nom du profil, l'opération planifiée échoue.
+
+.Étape
+. Saisissez la commande suivante :
++
+`*smsap profile update -profile _profile_ [-new-profile _new_profile_name_]*`
+
+

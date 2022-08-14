@@ -1,0 +1,19 @@
+---
+permalink: windows/concept-why-you-should-prune-archive-log-files.html 
+sidebar: sidebar 
+keywords: snapmanager, sap, enable, delete, archive, log, file, system, back, up 
+summary: 'SnapManager pour SAP vous permet de supprimer les fichiers journaux d"archive du système de fichiers actif qui sont déjà sauvegardés.' 
+---
+= Pourquoi ne pas nettoyer les fichiers journaux d'archive
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager pour SAP vous permet de supprimer les fichiers journaux d'archive du système de fichiers actif qui sont déjà sauvegardés.
+
+L'élagage permet à SnapManager de créer des sauvegardes de fichiers journaux d'archives distincts. L'élagage, avec la stratégie de conservation des sauvegardes, libère de l'espace journal d'archivage lorsque les sauvegardes sont supprimées.
+
+
+NOTE: Vous ne pouvez pas élaguer les fichiers journaux d'archive lorsque la zone de récupération Flash (FRA) est activée pour les fichiers journaux d'archive. Si vous spécifiez l'emplacement du journal d'archivage dans la zone de récupération Flash, vous devez vous assurer que vous spécifiez également l'emplacement du journal d'archivage dans le `archive_log_dest` paramètre.

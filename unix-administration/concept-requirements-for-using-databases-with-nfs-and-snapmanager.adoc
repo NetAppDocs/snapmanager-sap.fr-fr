@@ -1,0 +1,30 @@
+---
+permalink: unix-administration/concept-requirements-for-using-databases-with-nfs-and-snapmanager.html 
+sidebar: sidebar 
+keywords: requirement, database, network, file, system, nfs, snapmanager, root, attribute, caching, cache, sybolic, link 
+summary: 'Vous devez connaître les conditions d"utilisation des bases de données avec NFS et SnapManager. Les recommandations incluent l"exécution en tant que racine, la mise en cache d"attributs et les liens symboliques.' 
+---
+= Conditions requises pour l'utilisation de bases de données avec NFS et SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez connaître les conditions d'utilisation des bases de données avec NFS et SnapManager. Les recommandations incluent l'exécution en tant que racine, la mise en cache d'attributs et les liens symboliques.
+
+* Vous devez exécuter SnapManager en tant que root. SnapManager doit pouvoir accéder aux systèmes de fichiers qui contiennent des fichiers de données, des fichiers de contrôle, des journaux de reprise en ligne, des journaux d'archivage et le domicile de la base de données.
++
+Définissez l'une des options d'exportation NFS suivantes pour vous assurer que root peut accéder aux systèmes de fichiers :
+
++
+** racine=`_host name_`
+** rw=`_host name_`, anon=0
+
+
+* Vous devez désactiver la mise en cache des attributs pour tous les volumes qui contiennent des fichiers de données de base de données, des fichiers de contrôle, des journaux de reprise et d'archivage et l'accueil de la base de données.
++
+Exportez les volumes à l'aide des options noac (pour Solaris et AIX) ou actimeo=0 (pour Linux).
+
+* Vous devez lier les fichiers de données de la base de données du stockage local à NFS pour prendre en charge les liens symboliques au niveau du point de montage uniquement.
+

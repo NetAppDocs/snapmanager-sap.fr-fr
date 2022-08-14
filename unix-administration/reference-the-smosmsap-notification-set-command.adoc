@@ -1,0 +1,103 @@
+---
+permalink: unix-administration/reference-the-smosmsap-notification-set-command.html 
+sidebar: sidebar 
+keywords: notification, set, command, configure, mail, server, smsap 
+summary: Vous pouvez utiliser la commande jeu de notifications pour configurer le serveur de messagerie. 
+---
+= La commande smsap notification set
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez utiliser le `notification set` commande pour configurer le serveur de messagerie.
+
+
+
+== Syntaxe
+
+[listing, subs="+macros"]
+----
+pass:quotes[smsap notification set
+-sender-email _email_address_
+-mailhost _mailhost_
+-mailport _mailport_
+[-authentication
+-username _username_
+-password _password_]]
+pass:quotes[-repository
+-dbname _repo_service_name_
+-port _repo_port_]]
+pass:quotes[-host _repo_host_
+-login -username _repo_username_
+[-quiet | -verbose]]
+
+----
+
+
+== Paramètres
+
+* `*-sender-email _email_address_*`
++
+Spécifie l'adresse e-mail de l'expéditeur à partir de laquelle les alertes par e-mail sont envoyées. À partir de SnapManager 3.2 pour SAP, vous pouvez inclure un tiret (-) tout en spécifiant le nom de domaine de l'adresse e-mail. Par exemple, vous pouvez indiquer l'adresse e-mail de l'expéditeur comme -sender-email07lbfmdatacenter@continental-corporation.com.
+
+* `*-mailhost _mailhost_*`
++
+Spécifie le nom ou l'adresse IP du serveur hôte qui gère les notifications par e-mail.
+
+* `*-mailport _mailport_*`
++
+Spécifie le numéro de port du serveur de messagerie.
+
+* `*-authentication -username _username_ -password _password_*`
++
+Spécifie les détails d'authentification pour l'adresse e-mail. Vous devez indiquer le nom d'utilisateur et le mot de passe.
+
+* `*-repository*`
++
+Spécifie les détails de la base de données du référentiel.
+
+* `*-port _repo_port_*`
++
+Spécifie le numéro de port TCP (transmission Control Protocol) utilisé pour accéder à la base de données du référentiel.
+
+* `*-dbname _repo_service_name_*`
++
+Indique le nom de la base de données du référentiel. Vous pouvez utiliser le nom global ou l'identifiant système.
+
+* `*-host _repo_host_*`
++
+Indique le nom ou l'adresse IP de l'hôte sur lequel réside la base de données du référentiel.
+
+* `*-login*`
++
+Spécifie les détails de connexion au référentiel. Cette option est facultative. Si ce n'est pas le cas, SnapManager utilise par défaut le mode de connexion à l'authentification OS.
+
+* `*-username _repo_username_*`
++
+Indique le nom d'utilisateur requis pour accéder à la base de données du référentiel.
+
+* `*-quiet*`
++
+Affiche uniquement les messages d'erreur dans la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* `*-verbose*`
++
+Affiche les messages d'erreur, d'avertissement et d'information dans la console.
+
+
+
+'''
+
+
+== Exemple
+
+L'exemple suivant configure le serveur de messagerie :
+
+[listing]
+----
+smsap notification set -sender-email admin@org.com -mailhost hostname.org.com -mailport 25 authentication -username davis -password davis -repository -port 1521 -dbname SMSAPREPO -host hotspur
+-login -username grabal21 -verbose
+----
+'''

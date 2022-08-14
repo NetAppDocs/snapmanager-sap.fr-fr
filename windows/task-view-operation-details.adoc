@@ -1,0 +1,36 @@
+---
+permalink: windows/task-view-operation-details.html 
+sidebar: sidebar 
+keywords: view, detail, information, particular, profile, verify, success, failure, operation, resource, operation 
+summary: 'Vous pouvez afficher des informations détaillées sur un profil particulier pour vérifier le succès ou l"échec d"une opération. Il peut également vous aider à déterminer les ressources de stockage utilisées pour une opération en particulier.' 
+---
+= Afficher les détails de l'opération
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez afficher des informations détaillées sur un profil particulier pour vérifier le succès ou l'échec d'une opération. Il peut également vous aider à déterminer les ressources de stockage utilisées pour une opération en particulier.
+
+
+
+== Description de la tâche
+
+Vous pouvez afficher les détails suivants pour une opération particulière :
+
+* ID opération
+* Type d'opération
+* Indique si l'opération a été forcée
+* Informations d'exécution, y compris l'état, la date de début et la date de fin de l'opération
+* Hôte sur lequel l'opération a été exécutée, y compris l'ID de processus et la version SnapManager
+* Informations de référentiel
+* Ressources de stockage utilisées
+
+
+.Étape
+. Pour afficher les informations détaillées d'un ID d'opération spécifique, entrez la commande suivante :
++
+`*smsap operation show -profile _profile_name_ [-label _label_ | -id _id_] [-quiet | -verbose]*`
+
+

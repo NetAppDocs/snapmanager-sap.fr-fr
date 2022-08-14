@@ -1,0 +1,21 @@
+---
+permalink: unix-administration/task-delete-backup-schedules.html 
+sidebar: sidebar 
+keywords: delete, backup, schedule, deleting 
+summary: 'Vous pouvez supprimer les planifications de sauvegarde lorsqu"elles ne sont plus nécessaires.' 
+---
+= Supprimer les planifications de sauvegarde
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez supprimer les planifications de sauvegarde lorsqu'elles ne sont plus nécessaires.
+
+.Étape
+. Pour supprimer le planning de sauvegarde, entrez la commande suivante :
++
+`*smsap schedule delete -profile _profile_name_ -schedule-name _schedulename_ [-quiet | -verbose]*`
+
+

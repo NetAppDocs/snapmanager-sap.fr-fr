@@ -1,0 +1,56 @@
+---
+permalink: unix-administration/reference-the-smosmsapprofile-dump-command.html 
+sidebar: sidebar 
+keywords: run, profile, dump, command, create, jar, file, contain, diagnostic, information, smsap 
+summary: Vous pouvez exécuter la commande de vidage de profil pour créer le fichier .jar qui contient des informations de diagnostic sur un profil. 
+---
+= La commande smsap profile dump
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez exécuter le `profile dump` pour créer le `.jar` fichier contenant des informations de diagnostic sur un profil.
+
+
+
+== Syntaxe
+
+[listing, subs="+macros"]
+----
+pass:quotes[smsap profile dump
+-profile _profile_name_
+[-quiet | -verbose]]
+----
+
+
+== Paramètres
+
+* ``*-profile _profile_name_*``
++
+Spécifie le profil pour lequel vous souhaitez créer les fichiers de vidage. Le profil contient l'identifiant de la base de données et d'autres informations sur la base de données.
+
+* ``*-quiet*``
++
+Affiche uniquement les messages d'erreur dans la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* ``*-verbose*``
++
+Affiche les messages d'erreur, d'avertissement et d'information dans la console. ---
+
+
+
+
+
+== Exemple
+
+L'exemple suivant crée un vidage pour le profil SALES1 :
+
+[listing]
+----
+smsap profile dump -profile SALES1
+Dump file created
+Path:/userhomedirectory/.netapp/smsap/3.3.0/smsap_dump_SALES1_hostname.jar
+----
+'''

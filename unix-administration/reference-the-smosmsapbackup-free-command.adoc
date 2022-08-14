@@ -1,0 +1,82 @@
+---
+permalink: unix-administration/reference-the-smosmsapbackup-free-command.html 
+sidebar: sidebar 
+keywords: run, backup, free, command, snapshot, copies, copy, removing, remove, metadata, repository, smsap 
+summary: Vous pouvez exécuter la commande sans sauvegarde pour libérer les copies Snapshot des sauvegardes sans supprimer les métadonnées de sauvegarde du référentiel. 
+---
+= La commande smsap sauvegarde libre
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez exécuter le `backup free` Commande pour libérer les copies Snapshot des sauvegardes sans supprimer les métadonnées de sauvegarde du référentiel.
+
+
+
+== Syntaxe
+
+[listing, subs="+macros"]
+----
+pass:quotes[smsap backup free
+-profile profile_name
+[-label _label_ [-data | -archivelogs\] | [-id _guid_ | -all\]
+-force
+[-dump\] [-quiet | -verbose\]]
+----
+
+
+== Paramètres
+
+* `*-profile _profile_name_*`
++
+Spécifie le profil associé à la sauvegarde que vous souhaitez libérer. Le profil contient l'identifiant de la base de données et d'autres informations sur la base de données.
+
+* `*-id _guid_*`
++
+Spécifie les ressources de la sauvegarde avec le GUID spécifié. Le GUID est généré par SnapManager lors de la création d'une sauvegarde. Vous pouvez utiliser le `smsap backup list` Commande pour afficher le GUID de chaque sauvegarde. Incluez le `-verbose` Pour afficher les ID de sauvegarde.
+
+* `*-label _label_*`
++
+Spécifie la sauvegarde avec l'étiquette spécifiée.
+
+* `*-data*`
++
+Spécifie les fichiers de données.
+
+* `*-archivelogs*`
++
+Spécifie les fichiers journaux d'archive.
+
+* `*-all*`
++
+Spécifie toutes les sauvegardes. Pour supprimer des sauvegardes spécifiées à la place, utilisez le `-id` ou `-label` option.
+
+* `*-force*`
++
+Force la suppression des copies Snapshot.
+
+* `*-quiet*`
++
+Affiche uniquement les messages d'erreur dans la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* `*-verbose*`
++
+Affiche les messages d'erreur, d'avertissement et d'information dans la console.
+
+
+
+'''
+
+
+== Exemple
+
+L'exemple suivant libère la sauvegarde :
+
+[listing]
+----
+smsap backup free -profile SALES1 -label full_backup_sales_May
+Operation Id [8abc01ec0e79004b010e79006da60001] succeeded.
+----
+'''

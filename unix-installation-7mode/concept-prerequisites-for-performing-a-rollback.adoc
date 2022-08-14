@@ -1,0 +1,47 @@
+---
+permalink: unix-installation-7mode/concept-prerequisites-for-performing-a-rollback.html 
+sidebar: sidebar 
+keywords: perform, rollback, ensure, environment, requirement, prerequisite 
+summary: 'Avant d"effectuer une restauration, vous devez vous assurer que votre environnement répond à certaines exigences.' 
+---
+= Conditions préalables à l'exécution d'une restauration
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant d'effectuer une restauration, vous devez vous assurer que votre environnement répond à certaines exigences.
+
+* Si vous utilisez SnapManager 3.3 ou version ultérieure et que vous souhaitez restaurer une version antérieure à SnapManager 3.1, vous devez revenir à la version 3.2, puis à la version souhaitée.
+* Les scripts externes utilisés pour réaliser une protection externe ou la conservation des données doivent être sauvegardés.
+* La version SnapManager vers laquelle vous souhaitez restaurer doit être installée.
++
+
+NOTE: Si vous souhaitez effectuer une restauration de SnapManager 3.3 ou version ultérieure vers une version antérieure à SnapManager 3.1, vous devez d'abord installer SnapManager 3.2 et effectuer une restauration. Après avoir repassé à 3.2, vous pouvez installer SnapManager 3.1 ou une version antérieure et effectuer une autre restauration vers cette version.
+
+* La version de SnapDrive pour UNIX prise en charge avec la version de SnapManager à laquelle vous souhaitez restaurer doit être installée.
++
+Pour plus d'informations sur l'installation de SnapDrive, reportez-vous à la documentation SnapDrive.
+
+* La base de données du référentiel doit être sauvegardée.
+* Si l'hôte à retourner utilise un référentiel, les opérations SnapManager ne doivent pas être effectuées sur les autres hôtes qui utilisent le même référentiel.
++
+Les opérations planifiées ou en cours d'exécution sur les autres hôtes attendent la fin de la restauration.
+
+* Les profils qui pointent vers la même base de données de référentiel doivent être créés avec des noms différents dans les hôtes du serveur SnapManager.
++
+Si vous utilisez des profils portant le même nom, l'opération de restauration impliquant cette base de données de référentiel échoue sans avertissement.
+
+* Les opérations SnapManager ne doivent pas être effectuées sur l'hôte à restaurer.
++
+Si une opération est en cours d'exécution, vous devez attendre la fin de cette opération et avant de poursuivre la restauration.
+
+
+
+
+NOTE: L'opération de restauration s'exécute plus longtemps au fur et à mesure que le nombre cumulé de sauvegardes des hôtes qui sont redéployés ensemble augmente. La durée de la restauration peut varier en fonction du nombre de profils et de sauvegardes associés à un hôte donné.
+
+*Informations connexes*
+
+http://mysupport.netapp.com/["Documentation sur le site de support NetApp"^]

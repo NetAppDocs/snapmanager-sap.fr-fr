@@ -1,0 +1,117 @@
+---
+permalink: unix-administration/reference-troubleshooting-clone-issues.html 
+sidebar: sidebar 
+keywords: information, clone, operation, resolve, troubleshooting, issue 
+summary: Vous pouvez trouver des informations sur ce problème au cours des opérations de clonage et la façon de les résoudre. 
+---
+= Résolution des problèmes liés au clonage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez trouver des informations sur ce problème au cours des opérations de clonage et la façon de les résoudre.
+
+|===
+| Symptôme | Explication | Solution de contournement 
+
+
+ a| 
+L'opération de clonage échoue lorsque la destination d'archivage est définie sur `_USE_DB_RECOVERY_FILE_DEST_.`
+ a| 
+Lorsque la destination d'archivage fait référence à USE_DB_RECOVERY_FILE_DEST, la zone de récupération Flash (FRA) gère activement le journal d'archives. SnapManager n'utilise pas l'emplacement FRA pendant les opérations de clonage ou de restauration et donc les opérations échouent.
+ a| 
+Remplacez la destination d'archivage par l'emplacement du journal d'archivage réel au lieu de l'emplacement FRA.
+
+
+
+ a| 
+L'opération de clonage échoue et le message d'erreur suivant apparaît : `Cannot perform operation: Clone Create. Root cause: ORACLE-00001: Error executing SQL: [ALTER DATABASE OPEN RESETLOGS;]. The command returned: ORA-01195: online backup of file 1 needs more recovery to be consistent.`
+ a| 
+Ce problème survient si le programme d'écoute Oracle ne parvient pas à se connecter à la base de données.
+ a| 
+Si vous utilisez l'interface graphique de SnapManager pour cloner une sauvegarde, effectuez les opérations suivantes :
+
+. Dans l'arborescence référentiel, cliquez sur *Repository* > *Host* > *Profile* pour afficher les sauvegardes.
+. Cliquez avec le bouton droit de la souris sur la sauvegarde à cloner et sélectionnez *Clone*.
+. Sur la page initialisation du clone, saisissez les valeurs obligatoires et sélectionnez la méthode de spécification du clone.
+. Sur la page spécification de clone, sélectionnez *Paramètres*.
+. Cliquez sur l'onglet *paramètre*.
+. Dans le champ *Nom du paramètre*, entrez le nom sous `_local_listener_` Puis cliquez sur *OK*.
+. Cochez la case *remplacer par défaut* pour la ligne listener_local.
+. Cliquez sur n'importe quel paramètre, puis double-cliquez sur le paramètre local_Listener et entrez la valeur suivante :``*(ADDRESS=(PROTOCOL=TCP)(HOST=<your_host_name>)(PORT=<port#>))*``
+. Cliquez sur *Enregistrer dans un fichier*.
+. Cliquez sur *Suivant* et continuez avec l'assistant de création de clone.
+
+
+Si vous utilisez l'interface de ligne de commande pour cloner une sauvegarde, vous devez inclure les informations suivantes dans la balise *<paramètres>* du fichier de spécification de clone :
+
+[listing]
+----
+
+<parameters>
+  <parameter>
+  <name>local_listener</name>
+  <value>(DESCRIPTION=(ADDRESS=(PROTOCOL=TCP)(HOST=<hostname>)(PORT=<port#>)))</value>
+  </parameter>
+</parameters>
+----
+
+
+ a| 
+L'opération de clonage échoue et un message d'erreur indique que le point de montage que vous utilisez est déjà en cours d'utilisation.
+ a| 
+SnapManager ne vous permet pas de monter un clone sur un point de montage existant. Un clone incomplet n'a donc pas supprimé le point de montage.
+ a| 
+Spécifiez un point de montage différent à utiliser par le clone ou démontez ce point de montage problématique.
+
+
+
+ a| 
+L'opération de clonage échoue et un message d'erreur s'affiche concernant les fichiers de données qui n'ont pas l'extension .dbf.
+ a| 
+Certaines versions de l'utilitaire Oracle NID ne fonctionnent pas avec les fichiers de données, sauf si les fichiers utilisent une extension .dbf.
+ a| 
+* Renommez le fichier de données pour lui donner une extension .dbf.
+* Répétez l'opération de sauvegarde.
+* Cloner la nouvelle sauvegarde.
+
+
+
+
+ a| 
+L'opération de clonage échoue en raison des exigences non respectées.
+ a| 
+Vous tentez de créer un clone, mais certaines conditions préalables ne sont pas remplies.
+ a| 
+Procédez comme décrit dans la section _création d'un clone_ pour répondre aux conditions préalables.
+
+
+
+ a| 
+SnapManager ne parvient pas à générer un nouveau profil après l'opération de fractionnement de clone et l'utilisateur ne sait pas si le nouveau profil est créé.
+ a| 
+SnapManager ne parvient pas à vous demander si un nouveau profil n'est pas créé après le fractionnement du clone. Comme l'invite ne s'affiche pas, vous pouvez supposer que le profil est créé.
+ a| 
+Dans l'interface de ligne de commande SnapManager, entrez la `clone split-result` commande pour afficher le résultat détaillé de l'opération de fractionnement de clone.
+
+
+
+ a| 
+SnapManager pour SAP ne parvient pas à cloner des bases de données de secours Oracle 10gR2 (10.2.0.5) physiques Oracle Data Guard.
+ a| 
+SnapManager pour SAP ne désactive pas le mode de restauration gérée lors d'une sauvegarde hors ligne des bases de données de secours physiques Oracle 10gR2 (10.2.0.5) créées à l'aide des services Oracle Data Guard. En raison de ce problème, la sauvegarde hors ligne effectuée est incohérente. Lorsque SnapManager pour SAP tente de cloner la sauvegarde hors ligne, il ne tente même pas d'effectuer une restauration sur la base de données clonée. Étant donné que la sauvegarde est incohérente, la base de données clonée nécessite une restauration, et par conséquent SAP ne parvient pas à créer le clone correctement.
+ a| 
+Mettez à niveau la base de données Oracle vers Oracle 11gR1 (correctif 11.1.0.7).
+
+
+
+ a| 
+Le clonage d'une sauvegarde sur un hôte distant échoue avec le message d'erreur suivant `Error: Access is denied.`
+ a| 
+Lors du montage, si l'adresse IP de l'hôte est fournie à la commande snap mount, l'opération de clonage risque d'échouer. Ce problème se produit si l'hôte sur lequel réside la base de données se trouve dans le groupe de travail alors que l'hôte distant est dans le domaine, ou vice-versa.
+ a| 
+Vous devez vous assurer que l'hôte distant et l'hôte sur lequel réside la base de données se trouvent dans le domaine et non dans le groupe de travail.
+
+|===

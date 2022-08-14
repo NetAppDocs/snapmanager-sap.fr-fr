@@ -1,0 +1,69 @@
+---
+permalink: unix-administration/reference-the-backint-register-sld-command.html 
+sidebar: sidebar 
+keywords: sap, br, tools, backint, register-sld, command, snapmanager, backint, interface, system, landscape, directory, sld 
+summary: 'Si vous souhaitez utiliser SAP BR*Tools, vous pouvez exécuter la commande backint register-sld avec SnapManager for SAP pour enregistrer l"interface BACKINT dans votre répertoire du paysage système (SLD). L"interface BACKINT est fournie par le fournisseur de stockage pour que le système de stockage fonctionne avec les commandes BR*Tools. SnapManager pour SAP installe son fichier d"interface BACKINT sur /opt/NetApp/smsap/bin/.' 
+---
+= La commande backint register-SLD
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Si vous souhaitez utiliser SAP BR*Tools, vous pouvez exécuter la commande backint register-sld avec SnapManager for SAP pour enregistrer l'interface BACKINT dans votre répertoire du paysage système (SLD). L'interface BACKINT est fournie par le fournisseur de stockage pour que le système de stockage fonctionne avec les commandes BR*Tools. SnapManager pour SAP installe son fichier d'interface BACKINT sur /opt/NetApp/smsap/bin/.
+
+
+
+== Syntaxe
+
+[listing, subs="+macros"]
+----
+pass:quotes[backint register-sld-host  _host_name_-port  _port_id_-username
+_username_-password _password_-template _template_ID_]
+----
+
+
+== Paramètres
+
+* `*-host _host_name_*`
++
+Spécifie le nom de l'hôte sur lequel le serveur SAP SLD s'exécute.
+
+* `*-port _port_id_*`
++
+Spécifie l'ID du port sur lequel SAP SLD accepte les requêtes HTTP. L'ID doit être numérique et être inférieur ou égal à neuf chiffres.
+
+* `*-username _username_*`
++
+Spécifie un nom d'utilisateur SAP SLD valide et autorisé.
+
+* `*-password _password_*`
++
+Spécifie un mot de passe utilisateur SAP SLD valide et autorisé. Cette option est facultative. Si vous ne définissez pas le mot de passe à l'aide de -password, vous êtes invité à entrer un mot de passe au format suivant :
+
++
+`*username@http://_host:port_*`
+
+
+
+Si vous ne saisissez pas le mot de passe correct, la commande échoue et se ferme après trois tentatives.
+
+* `*-template _template_id_*`
++
+Spécifie le nom du fichier XML du modèle principal, qui peut être utilisé comme base pour votre fichier personnalisé.
+
+
+
+
+
+== Exemple de commande
+
+L'exemple suivant illustre la réussite de la commande :
+
+[listing, subs="+macros"]
+----
+pass:quotes[backint register-sld -host jack12 -port 50100
+-username j2ee_admin -password user123 -template /u/template.xml
+Operation Id [N96f4142a1442b31ee4636841babbc1d7] succeeded.
+----

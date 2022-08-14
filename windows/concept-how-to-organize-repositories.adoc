@@ -1,0 +1,35 @@
+---
+permalink: windows/concept-how-to-organize-repositories.html 
+sidebar: sidebar 
+keywords: organize, snapmanager, repository, repositories, business, application, type, usage 
+summary: 'Vous pouvez organiser vos référentiels SnapManager pour répondre aux besoins de votre entreprise. Vous pouvez les organiser de différentes manières, notamment par type d"application et par utilisation.' 
+---
+= Comment organiser les référentiels
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez organiser vos référentiels SnapManager pour répondre aux besoins de votre entreprise. Vous pouvez les organiser de différentes manières, notamment par type d'application et par utilisation.
+
+Vous pouvez organiser les référentiels de plusieurs manières. Deux méthodes sont les suivantes :
+
+|===
+| Type | Caractéristiques 
+
+
+ a| 
+Par application
+ a| 
+Si plusieurs bases de données Oracle exécutent des applications différentes, vous pouvez créer un référentiel SnapManager pour chaque type d'application. Chaque référentiel SnapManager aurait des profils pour les bases de données d'un type d'application particulier. Toutes les bases de données de production, de développement et de test de ce type d'applications sont gérées par le même référentiel SnapManager. Cette option permet de regrouper des bases de données similaires et de simplifier le clonage. Toutefois, si vous avez plusieurs types d'applications, vous devrez peut-être gérer plusieurs référentiels SnapManager. Si vous choisissez d'implémenter un autre type d'application, vous devrez créer un autre référentiel SnapManager. Ces référentiels SnapManager gérant des bases de données de production, chacun de ces référentiels doit se trouver sur un serveur à haute disponibilité, ce qui peut être coûteux. Par ailleurs, la gestion des bases de données de production et des bases de données de développement et de test du même type dans le même référentiel SnapManager peut constituer un problème de sécurité.
+
+
+
+ a| 
+Par utilisation
+ a| 
+Vous pouvez distribuer les bases de données parmi les référentiels SnapManager en fonction de leur utilisation (par exemple, production, développement, tests et formation). Cette option limite le nombre de référentiels aux différents types de bases de données dont vous disposez. Comme toutes les bases de données de production sont gérées par un seul référentiel SnapManager, seuls les administrateurs de la base de données de production peuvent avoir accès à ce référentiel. En outre, si vous choisissez de déployer une autre base de données pour un nouveau type d'application, il vous suffit d'enregistrer la base de données dans le référentiel SnapManager correspondant au lieu de créer un nouveau référentiel. La haute disponibilité ne peut être fournie que pour le référentiel SnapManager qui contient les profils de toutes les bases de données de production.
+
+|===
+SnapManager pour Oracle et SnapManager pour SAP ne doivent pas partager le même référentiel. Pour SnapManager pour Oracle et SnapManager pour SAP, vous devez utiliser un référentiel différent (un autre utilisateur de base de données Oracle) pour chaque produit si les deux dans votre environnement. L'utilisation d'un référentiel différent, dans des bases de données identiques ou différentes, offre davantage de flexibilité en autorisant des cycles de mise à niveau indépendants pour chaque produit.

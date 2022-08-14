@@ -1,0 +1,85 @@
+---
+permalink: unix-installation-cmode/reference-smsap-isg-snapmanager-licensing.html 
+sidebar: sidebar 
+keywords: snapmanager, license, storage, system, license, require, enable, operation, license, per-server, database, per-storage 
+summary: 'Une licence SnapManager et plusieurs licences de système de stockage sont nécessaires pour activer les opérations SnapManager. La licence SnapManager est disponible dans deux modèles de licence : par serveur, où la licence SnapManager réside sur chaque hôte de base de données, et par système de stockage où réside la licence SnapManager sur le système de stockage.' 
+---
+= Licences SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Une licence SnapManager et plusieurs licences de système de stockage sont nécessaires pour activer les opérations SnapManager. La licence SnapManager est disponible dans deux modèles de licence : _par serveur license_, où la licence SnapManager réside sur chaque hôte de base de données. Et _par système de stockage license_, dans lequel la licence SnapManager réside sur le système de stockage.
+
+Les exigences relatives à la licence SnapManager sont les suivantes :
+
+|===
+| Licence | Description | Si nécessaire 
+
+
+ a| 
+SnapManager par serveur
+ a| 
+Une licence côté hôte pour un hôte de base de données spécifique.les licences sont uniquement requises pour les hôtes de base de données sur lesquels SnapManager est installé. Aucune licence SnapManager n'est requise pour le système de stockage.
+ a| 
+Sur l'hôte SnapManager. Aucune licence SnapManager n'est requise sur les systèmes de stockage primaires et secondaires, lorsqu'une licence par serveur est utilisée.
+
+
+
+ a| 
+SnapManager par système de stockage
+ a| 
+Licence côté stockage prenant en charge n'importe quel nombre d'hôtes de base de données. Obligatoire uniquement si vous n'utilisez pas de licence par serveur sur l'hôte de base de données.
+ a| 
+Sur les systèmes de stockage primaires et secondaires.
+
+
+
+ a| 
+SnapRestore
+ a| 
+Licence requise qui permet à SnapManager de restaurer les bases de données.
+ a| 
+Sur les systèmes de stockage primaire et secondaire.requis sur les systèmes de destination SnapMirror pour effectuer une vérification à distance.
+
+Indispensable sur les systèmes de destination SnapVault pour effectuer une vérification à distance et une restauration à partir d'une sauvegarde.
+
+
+
+ a| 
+FlexClone
+ a| 
+Licence facultative pour le clonage de bases de données
+ a| 
+Sur les systèmes de stockage primaires et secondaires.requis sur les systèmes de destination SnapVault lors de la création de clones à partir d'une sauvegarde.
+
+
+
+ a| 
+SnapMirror
+ a| 
+Licence facultative pour la mise en miroir des sauvegardes sur un système de stockage de destination.
+ a| 
+Sur les systèmes de stockage primaires et secondaires.
+
+
+
+ a| 
+SnapVault
+ a| 
+Licence facultative pour l'archivage des sauvegardes sur un système de stockage de destination.
+ a| 
+Sur les systèmes de stockage primaires et secondaires.
+
+
+
+ a| 
+Protocoles
+ a| 
+Une licence NFS, iSCSI ou FC est requise en fonction du protocole utilisé.
+ a| 
+Sur les systèmes de stockage primaires et secondaires. Indispensable sur les systèmes de destination SnapMirror pour transmettre les données en cas d'indisponibilité d'un volume source.
+
+|===

@@ -1,0 +1,21 @@
+---
+permalink: windows/task-viewing-a-list-of-snapmanager-history-operation-as-a-report.html 
+sidebar: sidebar 
+keywords: view, history, snapmanager, operation, report, base, retention, setting, list 
+summary: 'Vous pouvez afficher l"historique d"une ou de toutes les opérations SnapManager en tant que rapport basé sur les paramètres de conservation.' 
+---
+= Affichage de la liste de l'historique des opérations SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez afficher l'historique d'une ou de toutes les opérations SnapManager en tant que rapport basé sur les paramètres de conservation.
+
+.Étape
+. Pour afficher la liste des opérations liées à l'historique SnapManager, entrez la commande suivante :
++
+`smsap history list -profile {-name, profile_name [profile_name1,profile_name2] | -all-repository-login [-passwordrepo_password] -usernamerepo_username-dbnamerepo_dbname-hostrepo_host-portrepo_port} -operation {-operationsoperation_name [operation_name1, operation_name2] | -all} [-delimiterdelimiter] [-quiet | -verbose]`
+
+

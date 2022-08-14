@@ -1,0 +1,52 @@
+---
+permalink: unix-installation-7mode/reference-smsap-isg-where-to-go-next.html 
+sidebar: sidebar 
+keywords: install, snapmanager, successful, creating, create, backup, restore, recovery, cloning, clone, operation, addition, information, scheduling, schedule, where, to, go, next 
+summary: 'Après avoir installé SnapManager et créé une sauvegarde avec succès, vous pouvez utiliser SnapManager pour effectuer des opérations de restauration, de reprise et de clonage. Par ailleurs, vous pouvez rechercher des informations sur d"autres fonctionnalités de SnapManager, telles que la planification, la gestion des opérations SnapManager et la maintenance d"un historique d"opérations.' 
+---
+= Par où aller plus loin
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Après avoir installé SnapManager et créé une sauvegarde avec succès, vous pouvez utiliser SnapManager pour effectuer des opérations de restauration, de reprise et de clonage. Par ailleurs, vous pouvez rechercher des informations sur d'autres fonctionnalités de SnapManager, telles que la planification, la gestion des opérations SnapManager et la maintenance d'un historique d'opérations.
+
+Vous trouverez plus d'informations sur ces fonctionnalités et des informations sur les versions de SnapManager dans la documentation suivante, disponibles sur le http://mysupport.netapp.com["Support NetApp"^].
+
+* https://library.netapp.com/ecm/ecm_download_file/ECMP12481453["Guide d'administration SnapManager 3.4.1 pour SAP pour UNIX"^]
++
+Décrit la configuration de l'outil administrer SnapManager pour SAP. Ses rubriques portent sur la configuration, la sauvegarde, la restauration et le clonage des bases de données, la protection secondaire, Plus une explication des commandes CLI.
+
+* https://library.netapp.com/ecm/ecm_download_file/ECMP12481455["Notes de version de SnapManager 3.4 pour SAP"^]
++
+Décrit les nouvelles fonctionnalités, les problèmes résolus, les mises en garde importantes, les problèmes connus et les limites de SnapManager pour SAP.
+
+* _SnapManager pour SAP aide en ligne_
++
+Décrit les procédures détaillées permettant d'effectuer différentes opérations SnapManager à l'aide de l'interface utilisateur de SnapManager.
+
++
+
+NOTE: L'aide en ligne _est intégrée à l'interface utilisateur SnapManager et n'est pas disponible sur le site de support.
+
+* http://www.netapp.com/us/media/tr-3761.pdf["Rapport technique de NetApp 3761 : SnapManager pour Oracle : meilleures pratiques"^]
++
+Décrit les meilleures pratiques SnapManager pour Oracle.
+
+* http://www.netapp.com/us/media/tr-3633.pdf["Rapport technique NetApp 3633 : meilleures pratiques pour les bases de données Oracle sur le stockage NetApp"^]
++
+Décrit les meilleures pratiques pour configurer des bases de données Oracle sur un système de stockage NetApp.
+
+* http://www.netapp.com/us/media/tr-3442.pdf["Rapport technique NetApp 3442 : SAP avec Oracle sous UNIX et NFS et le stockage NetApp"^]
++
+Décrit les meilleures pratiques relatives au déploiement d'un système de stockage NetApp pour prendre en charge les solutions SAP.
+
+
+
+*Informations connexes*
+
+http://mysupport.netapp.com["Support NetApp"^]
+
+http://mysupport.netapp.com/documentation/productsatoz/index.html["Documentation NetApp : bibliothèque de produits De A à Z"^]

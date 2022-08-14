@@ -1,0 +1,60 @@
+---
+permalink: windows/concept-what-database-restore-is.html 
+sidebar: sidebar 
+keywords: snapmanager, enable, perform, file-based, backup, restore, operation, database 
+summary: 'SnapManager vous permet d"effectuer des opérations de sauvegarde et de restauration basées sur des fichiers.' 
+---
+= Quelle est la restauration de la base de données
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager vous permet d'effectuer des opérations de sauvegarde et de restauration basées sur des fichiers.
+
+Le tableau suivant décrit les méthodes de restauration :
+
+|===
+| Processus de restauration | Détails 
+
+
+ a| 
+Restaurations basées sur des fichiers
+ a| 
+Restauration complète du système de fichiers côté stockage (primaire ou secondaire) : SnapManager effectue une restauration complète du numéro d'unité logique (LUN).
+
+|===
+
+
+== Restauration du système de fichiers complet côté stockage
+
+Une restauration complète du système de fichiers côté stockage est effectuée lorsqu'une restauration de volume ne peut pas être effectuée, mais l'intégralité du système de fichiers peut être restaurée sur le système de stockage.
+
+Lorsqu'une restauration du système de fichiers côté stockage est effectuée, les opérations suivantes se produisent :
+
+* Dans un environnement SAN, toutes les LUN utilisées par le système de fichiers (et le groupe de volumes sous-jacent le cas échéant) sont restaurées sur le système de stockage.
+
+
+Lorsqu'une restauration du système de fichiers côté stockage est effectuée, les opérations suivantes se produisent, selon l'emplacement de stockage :
+
+* Lors de la restauration de SnapManager à partir des systèmes de stockage primaires, les LUN (SAN) sont restaurés via SFSR.
+* Lorsque SnapManager restaure les données à partir de systèmes de stockage secondaires, les LUN (SAN) sont copiées à partir des systèmes de stockage secondaires vers le système de stockage primaire sur le réseau.
+
+
+Comme le système de fichiers est entièrement restauré, les fichiers qui ne font pas partie de la sauvegarde sont également restaurés. Un remplacement est nécessaire si des fichiers, qui ne font pas partie de la restauration, existent dans le système de fichiers en cours de restauration.
+
+
+
+== Restauration de fichiers côté hôte
+
+La restauration de copies de fichiers côté hôte est utilisée pour dernier recours dans les environnements SAN lorsque la restauration du système de fichiers côté stockage et la restauration de fichiers côté stockage ne peuvent pas être effectuées.
+
+La restauration d'une copie de fichier côté hôte implique les tâches suivantes :
+
+* Clonage du stockage
+* Connexion du stockage cloné à l'hôte
+* Copie des fichiers hors des systèmes de fichiers clones dans les systèmes de fichiers actifs
+* Déconnexion du stockage clone de l'hôte
+* Suppression du stockage clone
+

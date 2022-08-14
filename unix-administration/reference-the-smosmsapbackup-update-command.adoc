@@ -1,0 +1,83 @@
+---
+permalink: unix-administration/reference-the-smosmsapbackup-update-command.html 
+sidebar: sidebar 
+keywords: run, backup, update, command, retention, policy, smsap 
+summary: Vous pouvez exécuter la commande backup update pour mettre à jour la stratégie de rétention des sauvegardes. 
+---
+= La commande smsap backup update
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez exécuter le `backup update` commande pour mettre à jour la stratégie de conservation des sauvegardes.
+
+
+
+== Syntaxe
+
+[listing, subs="+macros"]
+----
+pass:quotes[smsap backup update
+-profile _profile_name_
+[-label _label_ [-data | -archivelogs\] | [-id _guid_\]
+[-retain {-hourly | -daily | -weekly | -monthly | -unlimited}\]
+[-comment _comment_text_\]
+[-quiet | -verbose]]
+----
+
+
+== Paramètres
+
+* ``*-profile _profile_name_*``
++
+Spécifie le profil pour lequel mettre à jour les sauvegardes. Le profil contient l'identifiant de la base de données et d'autres informations sur la base de données.
+
+* ``*-id _guid_*``
++
+Vérifie la sauvegarde à l'aide du GUID spécifié. Le GUID est généré par SnapManager lors de la création d'une sauvegarde. Vous pouvez utiliser la commande smsap backup list pour afficher le GUID pour chaque sauvegarde.
+
+* ``*-label _label_*``
++
+Indique l'étiquette de sauvegarde et l'étendue de la sauvegarde en tant que fichier de données ou journal d'archivage.
+
+* ``*-data*``
++
+Spécifie les fichiers de données.
+
+* ``*-archivelogs*``
++
+Spécifie les fichiers journaux d'archive.
+
+* ``*-comment _comment_text_*``
++
+Saisissez du texte (jusqu'à 200 caractères) sur la mise à jour de sauvegarde. Vous pouvez inclure des espaces.
+
+* ``*-quiet*``
++
+Affiche uniquement les messages d'erreur dans la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* ``*-verbose*``
++
+Affiche les messages d'erreur, d'avertissement et d'information dans la console.
+
+* ``*-retain {-hourly | -daily | -weekly | -monthly | -unlimited}*``
++
+Indique si la sauvegarde doit être conservée toutes les heures, tous les jours, toutes les semaines, tous les mois ou sans limite. Si `-retain` n'est pas spécifié, la classe de rétention est par défaut définie sur `-hourly`. Pour conserver des sauvegardes permanentes, utilisez le `-unlimited` option. Le `-unlimited` l'option rend la sauvegarde non éligible pour la suppression.
+
+
+
+'''
+
+
+== Exemple
+
+L'exemple suivant met à jour la sauvegarde pour qu'elle soit définie sur illimitée :
+
+[listing]
+----
+smsap backup update -profile SALES1 -label full_backup_sales_May
+-retain -unlimited -comment save_forever_monthly_backup
+----
+'''

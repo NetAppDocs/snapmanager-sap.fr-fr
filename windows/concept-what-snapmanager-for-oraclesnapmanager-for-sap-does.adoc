@@ -1,0 +1,135 @@
+---
+permalink: windows/concept-what-snapmanager-for-oraclesnapmanager-for-sap-does.html 
+sidebar: sidebar 
+keywords: snapmanager, sap, simplify, simplifies, automate, database, backup, recovery, clone, leverage, snapshot, copies, copy, snaprestore, flexclone, technology, technologies 
+summary: SnapManager for SAP simplifie et automatise la sauvegarde, la restauration et le clonage des bases de données en exploitant les copies Snapshot, SnapRestore et FlexClone. 
+---
+= Ce que propose SnapManager pour SAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager for SAP simplifie et automatise la sauvegarde, la restauration et le clonage des bases de données en exploitant les copies Snapshot, SnapRestore et FlexClone.
+
+SnapManager offre les avantages suivants aux administrateurs de base de données :
+
+* Utilisation des profils de base de données
++
+** Vous pouvez organiser et conserver les informations sur les hôtes et les bases de données dans les profils.
++
+Lorsque vous lancez une sauvegarde basée sur un profil, vous pouvez réutiliser les informations au lieu de les entrer de nouveau pour chaque sauvegarde. SnapManager vous permet également de surveiller rapidement les opérations en utilisant des profils.
+
+** Dans le profil, vous pouvez définir les modèles d'attribution de nom des copies Snapshot et entrer du texte personnalisé (préfixe ou suffixe). Ainsi, toutes les copies Snapshot peuvent utiliser la même convention de nom que les règles de l'entreprise.
+** Il n'est pas nécessaire de connaître le nom du système de stockage car les fichiers de base de données sont automatiquement mappés au stockage associé.
+** Lorsque vous créez un nouveau profil, vous pouvez spécifier l'option permettant de séparer la sauvegarde du journal d'archivage de la sauvegarde du fichier de données.
++
+Vous pouvez également mettre à jour le profil existant pour séparer la sauvegarde du journal d'archivage de la sauvegarde du fichier de données.
+
+
+
+* Exécution de l'opération de sauvegarde de la base de données
++
+** Sauvegarde de bases de données complètes et partielles
++
+*** Vous pouvez créer rapidement une sauvegarde complète ou partielle très peu encombrante, ce qui vous permet d'effectuer des sauvegardes plus fréquemment.
++
+La sauvegarde complète de la base de données contient tous les fichiers de données, les fichiers de contrôle et les fichiers journaux d'archive dans une seule sauvegarde.
+
++
+La sauvegarde partielle de la base de données contient des fichiers de données ou des espaces de stockage spécifiés, tous les fichiers de contrôle et tous les fichiers journaux d'archivage.
+
+*** Vous pouvez protéger vos sauvegardes sur un stockage secondaire à l'aide de scripts de post-traitement.
+*** Vous pouvez planifier des sauvegardes toutes les heures, toutes les semaines, tous les jours, tous les mois ou sans limite.
+
+
+** Séparation de la sauvegarde des fichiers de données et des fichiers journaux d'archivage
++
+*** SnapManager (3.2 ou version ultérieure) vous permet de sauvegarder les fichiers de données et d'archiver les fichiers journaux séparément. Pour effectuer cette opération, vous devez spécifier l'option permettant de séparer les fichiers journaux d'archive lors de la création ou de la mise à jour du profil.
+*** Vous pouvez spécifier le nombre et la durée pour lesquels les sauvegardes de fichiers de données seront conservées, dans la stratégie de conservation.
+*** Vous pouvez spécifier la durée de conservation des sauvegardes du fichier journal d'archivage pendant la durée de conservation du journal d'archivage.
+*** SnapManager (3.2 ou version ultérieure) consolide également les sauvegardes des journaux d'archive sur un nombre minimal de sauvegardes en libérant les sauvegardes des journaux d'archivage avec des fichiers journaux d'archive dupliqués et en conservant uniquement les sauvegardes des journaux d'archivage avec des fichiers journaux d'archive uniques. Toutefois, cette consolidation peut être désactivée en option.
+
+
+
+
+* Gestion des fichiers journaux d'archive
++
+** SnapManager (3.2 ou version ultérieure) vous permet de régler les fichiers journaux d'archive à partir des destinations du journal d'archivage.
++
+L'espace occupé par les fichiers journaux d'archive élagués est libéré lorsque les sauvegardes du journal d'archivage contenant ces fichiers journaux d'archive sont supprimées.
+
+** SnapManager garantit que les fichiers journaux d'archives sont sauvegardés avant de les élaguer à partir des destinations du journal d'archivage.
++
+Les fichiers journaux d'archive qui ne sont pas sauvegardés ne sont pas élagués.
+
+** SnapManager garantit que les fichiers journaux d'archives sont envoyés à la base de données de secours Data Guard tout en élaquant les fichiers journaux d'archive à partir d'une base de données primaire Data Guard.
+** Le cas échéant, SnapManager s'assure que les fichiers journaux d'archivage sont capturés par le processus Oracle Streams Capture.
+** Recommandation
++
+*** Pour gérer efficacement l'espace de destination du journal d'archivage, vous devez créer les sauvegardes du journal d'archivage et les nettoyer avec les fichiers journaux d'archivage.
+
+
+** SnapManager consolide les sauvegardes des journaux d'archive pour limiter le nombre de sauvegardes en libérant les sauvegardes des journaux d'archive avec des fichiers journaux d'archive dupliqués et en conservant uniquement les sauvegardes des journaux d'archivage avec des fichiers journaux d'archivage uniques.
++
+Toutefois, cette consolidation peut être désactivée en option. Les sauvegardes des journaux d'archivage, qui contiennent des fichiers journaux d'archive dupliqués, sont libérées, tandis qu'une seule sauvegarde avec des journaux d'archivage uniques est conservée.
+
+
+
+* Exécution de l'opération de restauration de la base de données
++
+** Vous pouvez effectuer des opérations de restauration basées sur des fichiers.
++
+Vous pouvez également prévisualiser les opérations de restauration et obtenir une analyse fichier par fichier des opérations de restauration avant l'exécution de l'opération.
+
+** Afin de réduire le délai moyen de restauration d'une base de données à l'aide de SnapRestore.
+** SnapManager (3.2 ou version ultérieure) vous permet de récupérer automatiquement la base de données en utilisant les fichiers journaux d'archive de la sauvegarde, même si les fichiers journaux d'archive ne sont pas disponibles dans la destination du journal d'archivage.
++
+SnapManager (3.2 ou version ultérieure) fournit également un moyen de récupérer la base de données en utilisant les fichiers journaux d'archive de l'emplacement externe dans une certaine mesure.
+
+
+
+* Effectuer un clonage de base de données à des fins de test et de développement
++
+** Vous pouvez créer un clone de la base de données pour la configurer en dehors de l'environnement de production.
++
+Par exemple, vous pouvez cloner les environnements de développement et de test à des fins de test des mises à niveau vers des systèmes vitaux.
+
+** Vous pouvez cloner une base de données sur un système de stockage primaire.
+** SnapManager (3.2 ou version ultérieure) vous permet de cloner les sauvegardes de fichiers de données avec les fichiers journaux d'archivage disponibles dans la sauvegarde.
++
+*** Vous ne pouvez cloner les sauvegardes de fichiers de données que lorsque la sauvegarde du journal d'archivage est effectuée avec elle.
+*** Vous pouvez également cloner les sauvegardes de fichiers de données si les fichiers journaux d'archives sont disponibles dans les sauvegardes du journal d'archivage effectuées séparément dans une certaine mesure.
+*** Vous pouvez également cloner, dans une certaine mesure, les sauvegardes de fichiers de données d'une base de données autonome avec des fichiers journaux d'archive à partir d'un emplacement externe accessible par Oracle.
+*** Si les sauvegardes sont disponibles à partir d'un emplacement externe, vous pouvez spécifier l'emplacement externe pendant le clonage pour restaurer la base de données clonée à un état cohérent.
+
+
+** Le clonage des sauvegardes de journaux d'archives uniquement n'est pas pris en charge.
+
+
+* Généralités
++
+** Intégration avec BR*Tools de SAP.
++
+Le progiciel BR*Tools fournit des outils SAP tels QUE BRARCHIVE, BRBACKUP, BRCONNECT, BRRECOVER, BRRESTORE, BRSPACE et BRTOOLS.
+
+
+
+
+
+SnapManager offre aux administrateurs du stockage les avantages suivants :
+
+* Prise en charge de différents protocoles SAN
+* Vous permet d'optimiser les sauvegardes en fonction du type de sauvegarde (complète ou partielle) qui fonctionne le mieux dans votre environnement.
+* Création de sauvegardes de bases de données compactes
+* Création de clones compacts.
+
+
+SnapManager fonctionne également avec les fonctions Oracle suivantes :
+
+* SnapManager peut cataloguer ses sauvegardes avec RMAN d'Oracle.
++
+Si vous utilisez RMAN, un administrateur de base de données peut utiliser les sauvegardes SnapManager et conserver la valeur de toutes les fonctions RMAN, telles que la restauration au niveau des blocs. SnapManager permet à RMAN d'utiliser les copies Snapshot lorsqu'il effectue des restaurations ou des restaurations. Par exemple, vous pouvez utiliser RMAN pour restaurer une table au sein d'un espace de table et effectuer des restaurations et des restaurations complètes de bases de données et d'espaces de table à partir de copies Snapshot effectuées par SnapManager. Le catalogue de restauration RMAN ne doit pas figurer dans la base de données en cours de sauvegarde.
+
+

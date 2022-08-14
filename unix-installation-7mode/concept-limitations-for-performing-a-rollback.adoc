@@ -1,0 +1,43 @@
+---
+permalink: unix-installation-7mode/concept-limitations-for-performing-a-rollback.html 
+sidebar: sidebar 
+keywords: scenario, perform, rollback, task, limitation 
+summary: 'Vous devez connaître les scénarios dans lesquels vous ne pouvez pas effectuer de restauration. Toutefois, pour certains de ces scénarios, vous pouvez effectuer quelques tâches supplémentaires avant d"effectuer la restauration.' 
+---
+= Limitations pour l'exécution d'une restauration
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez connaître les scénarios dans lesquels vous ne pouvez pas effectuer de restauration. Toutefois, pour certains de ces scénarios, vous pouvez effectuer quelques tâches supplémentaires avant d'effectuer la restauration.
+
+Les scénarios dans lesquels vous ne pouvez pas effectuer de restauration ou que vous devez effectuer les tâches supplémentaires sont les suivants :
+
+* Si vous effectuez l'une des opérations suivantes après avoir effectué une mise à niveau par roulement :
++
+** Créer un nouveau profil.
+** Séparer un clone.
+** Modifier l'état de protection du profil.
+** Définissez des règles de protection, une classe de conservation ou des relations SnapVault et SnapMirror.
++
+Dans ce scénario, après avoir effectué une restauration, vous devez supprimer manuellement la règle de protection, la classe de rétention ou les relations SnapVault et SnapMirror affectées.
+
+** Modifier l'état de montage de la sauvegarde.
++
+Dans ce scénario, vous devez d'abord changer l'état de montage à son état d'origine, puis effectuer une restauration.
+
+** Restaurer une sauvegarde.
+** Passer du mode d'authentification de la base de données à l'authentification du système d'exploitation.
++
+Dans ce scénario, après avoir effectué une restauration, vous devez changer manuellement le mode d'authentification du système d'exploitation à la base de données.
+
+
+
+* Si le nom d'hôte du profil est modifié
+* Si des profils sont séparés pour créer des sauvegardes de journaux d'archive
++
+Dans ce scénario, vous ne pouvez pas revenir à une version antérieure à SnapManager 3.2.
+
+

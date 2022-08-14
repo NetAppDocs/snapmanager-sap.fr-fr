@@ -1,0 +1,74 @@
+---
+permalink: unix-administration/task-view-backup-details.html 
+sidebar: sidebar 
+keywords: view, detail, information, backup, smsap, show, command 
+summary: 'Vous pouvez afficher les informations détaillées sur une sauvegarde particulière d"un profil à l"aide de la commande smsap backup show.' 
+---
+= Afficher les détails de la sauvegarde
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez afficher les informations détaillées sur une sauvegarde particulière dans un profil en utilisant sssap `backup show` commande.
+
+*À propos de cette tâche*
+
+Le `smsap backup show` la commande affiche les informations suivantes pour chaque sauvegarde :
+
+* L'ID de sauvegarde
+* Si la sauvegarde a réussi ou échoué
+* Étendue de la sauvegarde (complète, partielle, en ligne ou hors ligne)
+* Mode de sauvegarde
+* Statut de montage
+* L'étiquette de sauvegarde
+* Commentaire
+* Date et heure de début et de fin de l'opération
+* Informations concernant la vérification ou non de la sauvegarde
+* Classe de conservation des sauvegardes
+* Nom de la base de données et de l'hôte
+* Le numéro de changement du système du point de contrôle (SCN)
+* Le SCN de sauvegarde de bout en bout (pour les sauvegardes en ligne uniquement)
+* Les espaces de stockage et les fichiers de données de la base de données sauvegardés
+* Les fichiers de contrôle de la base de données sauvegardée
+* Les journaux d'archive de la base de données sauvegardée
+* Le système de stockage et les volumes où les fichiers sont situés
+* Les copies Snapshot effectuées et leur emplacement
+* L'état des ressources de stockage principales
+* État de la protection de sauvegarde
+* Liste des copies sur le stockage secondaire, sous la forme ID_sauvegarde - nom du nœud
+* Mode de sauvegarde
+
+
+Si vous spécifiez le `-verbose` les informations supplémentaires suivantes s'affichent :
+
+* Les clones créés à partir de la sauvegarde, le cas échéant
+* Informations de vérification
+* Si la sauvegarde est montée, SnapManager affiche les points de montage utilisés
+
+
+Pour la sauvegarde du fichier journal d'archives, les mêmes informations s'affichent que celles de l'autre sauvegarde de base de données, à l'exception des informations suivantes :
+
+* SCN de point de contrôle
+* Terminer SCN de sauvegarde
+* Espace de table
+* Fichiers de contrôle
+
+
+Cependant, la sauvegarde du fichier journal d'archivage contient les informations supplémentaires suivantes :
+
+* Premier numéro de modification de la sauvegarde
+* Le numéro de changement suivant de la sauvegarde
+* Numéro de filetage
+* Réinitialiser l'ID des journaux
+* Incarnation
+* Nom du fichier journal
+
+
+.Étape
+. Saisissez la commande suivante :
++
+`*smsap backup show -profile _profile_name_ {-labellabel [data | -archivelogs] | -id id [-quiet | -verbose]*`
+
+

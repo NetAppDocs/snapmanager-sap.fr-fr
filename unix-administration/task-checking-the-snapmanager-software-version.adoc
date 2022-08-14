@@ -1,0 +1,18 @@
+---
+permalink: unix-administration/task-check-the-snapmanager-software-version.html 
+sidebar: sidebar 
+keywords: determine, version, product, run, local, host, command, check, software, snapmanager 
+summary: Vous pouvez déterminer la version du produit que vous exécutez sur votre hôte local en exécutant la commande version. 
+---
+= Vérifiez la version du logiciel SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez déterminer la version du produit que vous exécutez sur votre hôte local en exécutant le `version` commande.
+
+.Étape
+. Pour vérifier la version du SnapManager, entrez la commande suivante : `*smsap version*`
+

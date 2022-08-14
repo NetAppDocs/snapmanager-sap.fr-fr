@@ -1,0 +1,341 @@
+---
+permalink: unix-administration/concept-fast-restore-eligibility-checks.html 
+sidebar: sidebar 
+keywords: perform, restore, backup, snapmanager, eligibility, check, fast 
+summary: 'Lorsque vous choisissez d"effectuer une restauration rapide d"une sauvegarde, SnapManager effectue d"abord une vérification d"éligibilité pour déterminer si le processus de restauration rapide peut être utilisé.' 
+---
+= Vérifications rapides de l'éligibilité à la restauration
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lorsque vous choisissez d'effectuer une restauration rapide d'une sauvegarde, SnapManager effectue d'abord une vérification d'éligibilité pour déterminer si le processus de restauration rapide peut être utilisé.
+
+SnapManager fournit les types de vérifications suivants :
+
+* Vérifications obligatoires : SnapManager ne peut exécuter le processus de restauration rapide que si toutes les conditions de cette vérification sont remplies.
+* Vérifications à découvert : si les conditions de cette vérification échouent, les administrateurs peuvent remplacer la vérification pour forcer un processus de restauration rapide. Cependant, vous devez remplacer ces vérifications avec précaution.
+
+
+Le tableau suivant répertorie les problèmes que vous pouvez rencontrer et indique si la vérification d'éligibilité de restauration rapide peut être annulée :
+
+|===
+| Problème | Passe requis | Détails 
+
+
+ a| 
+ACFS, disque de vote ou OCR est présent sur le groupe de disques ASM dans 11gR2
+ a| 
+Oui.
+ a| 
+La restauration rapide ne peut pas être effectuée. Résolution : aucune
+
+Impossible de remplacer.
+
+
+
+ a| 
+Seules les sauvegardes créées avec SnapManager 3.0 ou version ultérieure peuvent être restaurées rapidement
+ a| 
+Oui.
+ a| 
+Impossible de remplacer.
+
+
+
+ a| 
+Seules les copies Snapshot créées avec SnapDrive pour UNIX 4.0 ou version ultérieure peuvent être restaurées rapidement
+ a| 
+Oui.
+ a| 
+Impossible de remplacer.
+
+
+
+ a| 
+Le volume est un volume root
+ a| 
+Oui.
+ a| 
+Le volume en cours de restauration est un volume root sur le système de stockage. Résolution : n'utilisez pas le volume racine sur le système de stockage.
+
+Impossible de remplacer.
+
+
+
+ a| 
+La restauration de volume n'est pas disponible sous Windows
+ a| 
+Oui.
+ a| 
+Le volume en cours de restauration est un volume root sur le système de stockage. Résolution : aucune
+
+Impossible de remplacer.
+
+
+
+ a| 
+La restauration de volume est désactivée
+ a| 
+Oui.
+ a| 
+La restauration de volume a été désactivée. Résolution : activez la restauration de volume en sélectionnant différentes options lors du démarrage de la restauration. Dans l'interface de ligne de commande, n'utilisez pas `-fast -off`.
+
+Impossible de remplacer.
+
+
+
+ a| 
+Fichiers de contrôle et fichiers de données sur le même volume
+ a| 
+Oui.
+ a| 
+Pour les sauvegardes en ligne, les fichiers de contrôle et les fichiers de données ne peuvent pas se trouver sur le même volume, car SnapManager effectue deux copies Snapshot du volume (dont une pour laquelle les fichiers de données sont cohérents en mode de sauvegarde à chaud, et un dans lequel les fichiers de contrôle de sauvegarde sont cohérents après la fin du mode de sauvegarde à chaud.) La restauration du volume revient à la première copie Snapshot, qui supprime la seconde copie Snapshot contenant les fichiers de contrôle de sauvegarde. Lorsqu'une restauration de fichier de données uniquement se produit, les fichiers de contrôle sont restaurés à un état incohérent, et SnapManager restaure le fichier de contrôle de sauvegarde, puis ouvre la base de données avec l'option resetlogs, ce qui n'est pas le comportement souhaité.
+
+Résolution : migrez les fichiers de contrôle et les fichiers de données sur des systèmes de fichiers distincts qui ne partagent pas le même volume sous-jacent. Cela n'aide pas la restauration dans laquelle la vérification a échoué, mais aidera les opérations de restauration de sauvegarde futures.
+
+Impossible de remplacer.
+
+
+
+ a| 
+Les journaux d'archivage et les fichiers de données ne doivent pas exister sur le même volume
+ a| 
+Oui.
+ a| 
+Les journaux d'archivage de bases de données et les fichiers de données résident dans des systèmes de fichiers qui sont sauvegardés par le même volume de système de stockage. Si une restauration de volume a été effectuée, SnapManager ne peut pas ouvrir la base de données après la restauration d'une sauvegarde en ligne car le fichier journal archivé qui est écrit après la mise en veille de la base de données en mode de sauvegarde à chaud n'est pas disponible. De plus, vous ne pourrez pas faire défiler les transactions ultérieures qui auraient pu se trouver dans les fichiers journaux d'archive.
+
+Résolution : migrer les fichiers journaux et les fichiers de données d'archive sur des systèmes de fichiers distincts qui ne partagent pas le même volume de système de stockage sous-jacent. Cela n'aide pas la restauration dans laquelle la vérification a échoué, mais aidera les opérations de restauration de sauvegarde futures.
+
+Impossible de remplacer.
+
+
+
+ a| 
+Les fichiers de données et les journaux en ligne ne peuvent pas exister sur le même volume
+ a| 
+Oui.
+ a| 
+Les journaux de reprise en ligne de la base de données et les fichiers de données résident dans des systèmes de fichiers qui sont sauvegardés par le même volume de système de stockage. Si une restauration de volume a été effectuée, la restauration ne peut pas utiliser les journaux de reprise en ligne car ils auraient été restaurés.
+
+Résolution : migrez les fichiers de données et les journaux de reprise en ligne sur des systèmes de fichiers distincts qui ne partagent pas le même volume de système de stockage sous-jacent. Cela n'aide pas la restauration dans laquelle la vérification a échoué, mais aidera les opérations de restauration de sauvegarde futures.
+
+Impossible de remplacer.
+
+
+
+ a| 
+Les fichiers du système de fichiers ne faisant pas partie de la durée de restauration sont restaurés
+ a| 
+Oui.
+ a| 
+Les fichiers visibles sur l'hôte, autres que les fichiers en cours de restauration, existent dans un système de fichiers sur le volume. Si une restauration rapide ou une restauration du système de fichiers côté stockage a été effectuée, les fichiers visibles sur l'hôte seront restaurés à leur contenu d'origine lors de la création de la copie Snapshot. Si SnapManager détecte 20 fichiers ou moins, ils sont répertoriés dans le chèque d'éligibilité. Dans le cas contraire, SnapManager affiche un message que vous devez examiner le système de fichiers.
+
+Résolution : migrer les fichiers non utilisés par la base de données sur un système de fichiers différent qui utilise un volume différent. Vous pouvez également supprimer les fichiers.
+
+Si SnapManager ne peut pas déterminer le but du fichier, vous pouvez annuler l'échec de la vérification. Si vous annulez la vérification, les fichiers ne se trouvant pas dans la zone de restauration sont restaurés. Annulez cette vérification uniquement si vous êtes certain que le rétablissement des fichiers n'affectera rien.
+
+
+
+ a| 
+Les systèmes de fichiers du groupe de volumes spécifié ne font pas partie de la durée de restauration
+ a| 
+Non
+ a| 
+Plusieurs systèmes de fichiers se trouvent dans le même groupe de volumes, mais tous les systèmes de fichiers ne sont pas sollicités pour être restaurés. La restauration du système de fichiers côté stockage et la restauration rapide ne peuvent pas être utilisées pour restaurer des systèmes de fichiers individuels au sein d'un groupe de volumes, car les LUN utilisées par ce groupe contiennent les données de tous les systèmes de fichiers. Tous les systèmes de fichiers d'un groupe de volumes doivent être restaurés en même temps afin d'utiliser la restauration rapide ou la restauration du système de fichiers côté stockage. Si SnapManager détecte 20 fichiers ou moins, SnapManager les répertorie dans le chèque d'éligibilité. Dans le cas contraire, SnapManager fournit un message vous demandant d'étudier le système de fichiers.
+
+Résolution : migrez les fichiers non utilisés par la base de données vers un autre groupe de volumes. Vous pouvez également supprimer les systèmes de fichiers du groupe de volumes.
+
+Peut remplacer.
+
+
+
+ a| 
+Les volumes hôte du groupe de volumes spécifié ne font pas partie de la durée de restauration
+ a| 
+Non
+ a| 
+Plusieurs volumes hôtes (volumes logiques) se trouvent dans le même groupe de volumes, mais tous les volumes hôtes ne sont pas sollicités pour être restaurés. Cette vérification est similaire aux systèmes de fichiers du groupe de volumes qui ne font pas partie de la portée de restauration sera rétablie, sauf que les autres volumes hôtes du groupe de volumes ne sont pas montés en tant que systèmes de fichiers sur l'hôte. Résolution : migrer les volumes hôtes utilisés par la base de données vers un autre groupe de volumes. Ou supprimez les autres volumes hôtes du groupe de volumes.
+
+Si vous annulez la vérification, tous les volumes hôtes du groupe de volumes sont restaurés. Annulez cette vérification uniquement si vous êtes certain que le rétablissement des autres volumes hôtes n'affecte rien.
+
+
+
+ a| 
+Les extensions de fichier ont été modifiées depuis la dernière sauvegarde
+ a| 
+Oui.
+ a| 
+Impossible de remplacer.
+
+
+
+ a| 
+Les LUN mappées dans le volume ne faisant pas partie de la portée de restauration sont rétablies
+ a| 
+Oui.
+ a| 
+Les LUN autres que celles demandées pour être restaurées dans le volume sont actuellement mappées à un hôte. Une restauration de volume ne peut pas être effectuée car les autres hôtes ou applications qui utilisent ces LUN deviennent instables. Si les noms de LUN se terminent par un trait de soulignement et un index entier (par exemple, _0 ou _1), ces LUN sont généralement des clones d'autres LUN au sein du même volume. Il est possible qu'une autre sauvegarde de la base de données soit montée, ou qu'un clone d'une autre sauvegarde existe.
+
+Résolution : migrer les LUN non utilisées par la base de données sur un volume différent. Si les LUN mappées sont des clones, recherchez les sauvegardes montées de la même base de données ou des clones de la base de données, puis démontez la sauvegarde ou supprimez le clone.
+
+Impossible de remplacer.
+
+
+
+ a| 
+LES LUN non mappées dans le volume ne faisant pas partie de la portée de restauration sont rétablies
+ a| 
+Non
+ a| 
+Les LUN autres que celles demandées pour être restaurées dans le volume existent. Ces LUN ne sont actuellement mappées à aucun hôte. Donc, la restauration de ces LUN n'interrompt pas les processus actifs. Toutefois, le mappage des LUN peut être temporairement annulé. Résolution : migrer les LUN non utilisées par la base de données sur un autre volume ou supprimer les LUN.
+
+Si vous annulez cette vérification, la restauration de volume replace ces LUN dans l'état à partir duquel la copie Snapshot a été créée. Si la LUN n'existait pas au moment de la copie Snapshot, elle n'existe pas après la restauration du volume. Annulez cette vérification uniquement si vous êtes sûr que le rétablissement des LUN n'affecte pas quelque chose.
+
+
+
+ a| 
+Il se peut que les LUN présentes dans la copie Snapshot du volume ne soient pas cohérentes lors de la rétablir
+ a| 
+Non
+ a| 
+Lors de la création de la copie Snapshot, les LUN autres que celles pour lesquelles la copie Snapshot a été demandée, existaient dans le volume. Ces autres LUN peuvent ne pas être dans un état cohérent. Résolution : migrer les LUN non utilisées par la base de données sur un autre volume ou supprimer les LUN. Cela n'aidera pas le processus de restauration dans lequel la vérification a échoué, mais les restaurations des futures sauvegardes effectuées après le déplacement ou la suppression des LUN seront réalisées.
+
+Si vous annulez cette vérification, les LUN reviennent à l'état incohérent dont la copie Snapshot a été effectuée. Annulez cette vérification uniquement si vous êtes sûr que le rétablissement des LUN n'affecte pas quelque chose.
+
+
+
+ a| 
+Les nouvelles copies Snapshot ont un clone de volume
+ a| 
+Oui.
+ a| 
+Des clones ont été créés pour des copies Snapshot qui ont été créés après la demande de restauration de la copie Snapshot. Étant donné qu'une restauration de volume supprime les copies Snapshot ultérieures et qu'une copie Snapshot ne peut pas être supprimée si le volume possède un clone, aucune restauration de volume ne peut être effectuée. Résolution : supprimer les clones de copies Snapshot ultérieures.
+
+Impossible de remplacer.
+
+
+
+ a| 
+Les sauvegardes les plus récentes sont montées
+ a| 
+Oui.
+ a| 
+Les sauvegardes effectuées après la restauration de la sauvegarde sont montées. Étant donné qu'une restauration de volume supprime par la suite des copies Snapshot, une copie Snapshot ne peut pas être supprimée si elle contient un clone, une opération de montage de sauvegarde crée du stockage cloné et que la restauration de volume ne peut pas être effectuée. Résolution : démontez la sauvegarde ultérieure ou restaurez-la à partir d'une sauvegarde effectuée après la sauvegarde montée.
+
+Impossible de remplacer.
+
+
+
+ a| 
+Il existe des clones de sauvegardes plus récentes
+ a| 
+Oui.
+ a| 
+Les sauvegardes effectuées après la restauration de la sauvegarde ont été clonées. Étant donné qu'une restauration de volume supprime par la suite des copies Snapshot et qu'une copie Snapshot ne peut pas être supprimée si un clone est présent, une restauration de volume ne peut pas être effectuée. Résolution : supprimer le clone de la nouvelle sauvegarde ou effectuer une restauration à partir d'une sauvegarde effectuée après les sauvegardes ayant des clones.
+
+Impossible de remplacer.
+
+
+
+ a| 
+Les nouvelles copies Snapshot du volume sont perdues
+ a| 
+Non
+ a| 
+La restauration d'un volume supprime toutes les copies Snapshot créées après la copie Snapshot vers laquelle le volume est en cours de restauration. Si SnapManager peut mapper une copie Snapshot ultérieure vers une sauvegarde SnapManager dans le même profil, le message « les sauvegardes plus récentes seront libérées ou supprimées » s'affiche. Si SnapManager ne peut pas mapper une copie Snapshot ultérieure vers une sauvegarde SnapManager du même profil, ce message n'apparaît pas. Résolution : restaurez vos données à partir d'une sauvegarde ultérieure ou supprimez les copies Snapshot ultérieures.
+
+Peut remplacer.
+
+
+
+ a| 
+Les sauvegardes plus récentes sont libérées ou supprimées
+ a| 
+Non
+ a| 
+La restauration d'un volume supprime toutes les copies Snapshot créées après la copie Snapshot vers laquelle le volume est en cours de restauration. Par conséquent, toutes les sauvegardes créées après la sauvegarde en cours de restauration sont supprimées ou libérées. Les sauvegardes ultérieures sont supprimées dans les scénarios suivants :
+
+* L'état de sauvegarde n'EST pas PROTÉGÉ
+* `retain.alwaysFreeExpiredBackups` est `*false*` dans `smsap.config`
+
+
+Les sauvegardes ultérieures sont libérées dans les scénarios suivants :
+
+* L'état de sauvegarde EST PROTÉGÉ
+* `retain.alwaysFreeExpiredBackups` est vrai `*false*` dans `smsap.config`
+
+
+Résolution : restauration à partir d'une sauvegarde ultérieure ou sauvegarde libre ou suppression ultérieure.
+
+Si vous annulez cette vérification, les sauvegardes créées après la sauvegarde en cours de restauration sont supprimées ou libérées.
+
+
+
+ a| 
+La relation SnapMirror pour le volume est perdue
+ a| 
+Oui (si le RBAC est désactivé ou si vous ne disposez pas des autorisations RBAC)
+ a| 
+La restauration d'un volume sur une copie Snapshot antérieure à la copie Snapshot de référence dans une relation SnapMirror détruit la relation. Résolution : restauration à partir d'une sauvegarde créée après la copie Snapshot de base de la relation. Il est également possible d'interrompre la relation de stockage manuellement (puis de recréer et redéfinir la relation de base une fois la restauration terminée).
+
+Peut remplacer, si RBAC est activé et que vous disposez des droits RBAC.
+
+
+
+ a| 
+La relation SnapVault relative au volume est perdue si le processus de restauration rapide s'est produit
+ a| 
+Oui (si le RBAC est désactivé ou si vous ne disposez pas des autorisations RBAC)
+ a| 
+La restauration d'un volume sur une copie Snapshot antérieure à la copie Snapshot de référence dans une relation SnapVault détruit la relation. Résolution : restauration à partir d'une sauvegarde créée après la copie Snapshot de base de la relation. Il est également possible d'interrompre la relation de stockage manuellement (puis de recréer et redéfinir la relation de base une fois la restauration terminée).
+
+Impossible de remplacer, si le RBAC est activé et que vous disposez de l'autorisation RBAC.
+
+
+
+ a| 
+Les fichiers NFS du volume ne font pas partie de la durée de restauration
+ a| 
+Non
+ a| 
+Les fichiers présents dans le volume du système de stockage, qui ne sont pas visibles sur l'hôte, sont restaurés si une restauration de volume est effectuée. Résolution : migrer les fichiers non utilisés par la base de données sur un autre volume ou supprimer les fichiers.
+
+Peut remplacer. Si vous annulez cette vérification, les LUN sont supprimées.
+
+
+
+ a| 
+Les partages CIFS existent pour le volume
+ a| 
+Non
+ a| 
+Le volume restauré possède des partages CIFS. D'autres hôtes peuvent accéder aux fichiers du volume lors de la restauration du volume. Résolution : supprimer les partages CIFS inutiles.
+
+Peut remplacer.
+
+
+
+ a| 
+Restauration à partir d'un autre emplacement
+ a| 
+Oui.
+ a| 
+Une spécification de restauration a été fournie pour l'opération de restauration qui spécifie que les fichiers doivent être restaurés à partir d'un autre emplacement. Seuls les utilitaires de copie côté hôte peuvent être utilisés pour la restauration à partir d'un autre emplacement.
+
+Résolution : aucune.
+
+Impossible de remplacer.
+
+
+
+ a| 
+La restauration du système de fichiers côté stockage n'est pas prise en charge dans une base de données RAC
+ a| 
+Oui.
+ a| 
+Impossible de remplacer.
+
+|===

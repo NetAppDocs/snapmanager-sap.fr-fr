@@ -1,0 +1,28 @@
+---
+permalink: unix-administration/concept-what-repositories-are.html 
+sidebar: sidebar 
+keywords: snapmanager, organize, information, profile, repository, repositories, data 
+summary: SnapManager organise les informations dans des profils, qui sont ensuite associés aux référentiels. Les profils contiennent des informations sur la base de données en cours de gestion, tandis que le référentiel contient des données sur les opérations effectuées sur les profils. 
+---
+= En est-il des référentiels
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager organise les informations dans des profils, qui sont ensuite associés aux référentiels. Les profils contiennent des informations sur la base de données en cours de gestion, tandis que le référentiel contient des données sur les opérations effectuées sur les profils.
+
+Ce référentiel enregistre lors de la sauvegarde, les fichiers sauvegardés et si un clone a été créé à partir de la sauvegarde. Lorsque les administrateurs de bases de données restaurent une base de données ou en restaurent une partie, SnapManager interroge le référentiel pour déterminer le contenu sauvegardé.
+
+Étant donné que le référentiel stocke les noms des copies Snapshot de la base de données créées lors des opérations de sauvegarde, la base de données de référentiel ne peut pas exister dans la même base de données et ne peut pas faire partie de la même base de données que SnapManager sauvegarde. Lors de l'exécution d'opérations SnapManager, vous devez avoir au moins deux bases de données (la base de données de référentiel SnapManager et la base de données cible gérées par SnapManager).
+
+Si vous essayez d'ouvrir l'interface utilisateur graphique lorsque la base de données du référentiel est en panne, le message d'erreur suivant est consigné dans le `sm_gui.log` Fichier : [AVERTIR] : `SMSAP-01106: Error occurred while querying the repository: No more data to read from socket`. De même, les opérations SnapManager échouent lorsque la base de données du référentiel est en panne. Pour plus d'informations sur les différents messages d'erreur, reportez-vous à la section _Dépannage des problèmes connus_.
+
+Vous pouvez utiliser n'importe quel nom d'hôte, nom de service ou nom d'utilisateur valide pour effectuer des opérations. Pour qu'un référentiel puisse prendre en charge les opérations SnapManager, le nom d'utilisateur et le nom de service du référentiel doivent comprendre uniquement les caractères alphabétiques (A-Z), les chiffres (0-9), le signe moins (-), le trait de soulignement (_) et la période (.).
+
+Le port du référentiel peut être n'importe quel numéro de port valide et le nom d'hôte du référentiel peut être n'importe quel nom d'hôte valide. Le nom d'hôte doit comprendre des caractères alphabétiques (A-Z), des chiffres (0-9), un signe moins (-) et un point (.), mais pas un trait de soulignement (_).
+
+Le référentiel doit être créé dans une base de données Oracle. La base de données utilisée par SnapManager doit être configurée conformément aux procédures Oracle pour la configuration de la base de données.
+
+Un référentiel unique peut contenir des informations sur plusieurs profils ; cependant, chaque base de données est normalement associée à un seul profil. Vous pouvez avoir plusieurs référentiels, chaque référentiel contenant plusieurs profils.

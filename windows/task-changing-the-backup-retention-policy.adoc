@@ -1,0 +1,20 @@
+---
+permalink: windows/task-changing-the-backup-retention-policy.html 
+sidebar: sidebar 
+keywords: change, property, properties, eligible, ineligible, deletion, retention, policy, changing, backup 
+summary: 'Vous pouvez modifier les propriétés d"une sauvegarde de sorte qu"elle soit éligible ou non pour la suppression conformément à la politique de rétention.' 
+---
+= Modification de la stratégie de conservation des sauvegardes
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez modifier les propriétés d'une sauvegarde de sorte qu'elle soit éligible ou non pour la suppression conformément à la politique de rétention.
+
+Lorsque vous créez une sauvegarde, vous pouvez définir sa stratégie de rétention. Vous pouvez ensuite choisir de conserver cette sauvegarde pour une période plus longue que celle de la stratégie de rétention ne le permet ou de spécifier que vous n'avez plus besoin de la sauvegarde et que la stratégie de rétention la gère.
+
+*Informations connexes*
+
+xref:reference-the-smosmsapbackup-update-command.adoc[La commande smsap backup update]

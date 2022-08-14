@@ -1,0 +1,44 @@
+---
+permalink: unix-installation-cmode/task-smsap-isg-access-the-snapmanager-user-interface.html 
+sidebar: sidebar 
+keywords: access, snapmanager, user, interface, ui, remote, web, browser, system, operate, support, target, database, smsapgui, command 
+summary: 'Vous pouvez accéder à distance à l"interface utilisateur SnapManager en utilisant un navigateur Web depuis tout système exécuté sur un système d"exploitation pris en charge par SnapManager. Vous pouvez également accéder à l"interface utilisateur SnapManager à partir de l"hôte de la base de données cible en exécutant la commande smsapgui.' 
+---
+= Accéder à l'interface utilisateur de SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez accéder à distance à l'interface utilisateur SnapManager en utilisant un navigateur Web depuis tout système exécuté sur un système d'exploitation pris en charge par SnapManager. Vous pouvez également accéder à l'interface utilisateur SnapManager à partir de l'hôte de la base de données cible en exécutant le `smsapgui` commande.
+
+
+
+== Ce dont vous aurez besoin
+
+* Vous devez vous assurer que SnapManager est en cours d'exécution.
+* Vous devez vous assurer que le système d'exploitation pris en charge et Java sont installés sur le système sur lequel vous souhaitez accéder à l'interface utilisateur SnapManager.
++
+Pour plus d'informations sur le système d'exploitation pris en charge et Java, reportez-vous à la matrice d'interopérabilité.
+
+
+
+.Étapes
+. Dans la fenêtre du navigateur Web, saisissez :``*+https://server_name.domain.com:port_number+*``
++
+** `_server_name_` Est le nom de l'hôte de la base de données cible sur lequel SnapManager est installé.
++
+Vous pouvez également saisir l'adresse IP de l'hôte de la base de données cible.
+
+** `_port_number_` Est le port sur lequel SnapManager s'exécute.
++
+La valeur par défaut est 27214.
+
+
+
+. Cliquez sur le lien *lancer SnapManager pour SAP*.
++
+L'interface utilisateur de SnapManager pour SAP s'affiche.
+
+

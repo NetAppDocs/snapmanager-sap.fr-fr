@@ -1,0 +1,42 @@
+---
+permalink: unix-administration/concept-database-state-needed-for-restore-process.html 
+sidebar: sidebar 
+keywords: state, database, restore, process, perform 
+summary: 'L"état de la base de données à restaurer dépend du type de processus de restauration que vous souhaitez exécuter et du type de fichiers à inclure.' 
+---
+= État de la base de données nécessaire au processus de restauration
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+L'état de la base de données à restaurer dépend du type de processus de restauration que vous souhaitez exécuter et du type de fichiers à inclure.
+
+Le tableau suivant répertorie l'état de la base de données en fonction de l'option de restauration sélectionnée et du type de fichiers à inclure dans la restauration :
+
+[cols="1,1,1,1"]
+|===
+| Type de restauration | Fichiers inclus | État de la base de données pour cette instance | État de la base de données pour une autre instance (RAC uniquement) 
+
+
+.3+| Restauration uniquement | Fichiers de contrôle | Arrêt | Arrêt 
+
+
+| Fichiers système | Montage ou arrêt | Montage ou arrêt 
+
+
+| Aucun fichier système | Quel que soit l'état | Quel que soit l'état 
+
+
+.3+| Restauration et reprise | Fichiers de contrôle | Arrêt | Arrêt 
+
+
+| Fichiers système | Montage | Montage ou arrêt 
+
+
+| Aucun fichier système | Monter ou ouvrir | Toutes 
+|===
+L'état de la base de données requis par SnapManager pour une opération de restauration dépend du type de restauration en cours (fichiers complets, partiels ou de contrôle). SnapManager ne fait pas passer la base de données à un état inférieur (par exemple, de Ouvrir à montage), sauf si l'option forcer est spécifiée.
+
+SnapManager pour SAP ne vérifie pas si SAP est en cours d'exécution. SnapManager pour SAP attend qu'un délai s'écoule, puis arrête la base de données, ce qui peut ajouter une heure de délai de restauration supplémentaire.

@@ -1,0 +1,90 @@
+---
+permalink: unix-installation-7mode/task-upgrade-snapmanager-for-oracle-snapmanager-for-sap-hosts.html 
+sidebar: sidebar 
+keywords: upgrade, exist, host, version, snapmanager, simultaneous, result, schedule, upgrading 
+summary: 'Vous pouvez mettre à niveau tous les hôtes existants pour utiliser la dernière version de SnapManager. Tous les hôtes sont mis à niveau simultanément. Toutefois, cela peut entraîner des temps d"indisponibilité de tous les hôtes SnapManager et des opérations planifiées pendant cette période.' 
+---
+= Mettre à niveau les hôtes SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez mettre à niveau tous les hôtes existants pour utiliser la dernière version de SnapManager. Tous les hôtes sont mis à niveau simultanément. Toutefois, cela peut entraîner des temps d'indisponibilité de tous les hôtes SnapManager et des opérations planifiées pendant cette période.
+
+.Étapes
+. Connectez-vous au système hôte en tant qu'utilisateur racine.
+. À partir de l'interface de ligne de commande (CLI), accédez à l'emplacement où vous avez téléchargé le fichier d'installation.
+. Si le fichier n'est pas exécutable, modifiez les autorisations : `*chmod 544 netapp.smsap**`
+. Arrêtez le serveur SnapManager :
++
+`*smsap_server stop*`
+
+. En fonction de l'hôte UNIX, installez SnapManager :
++
+[cols="2a,3a"]
+|===
+| Si le système d'exploitation est... | Puis exécuter... 
+
+
+ a| 
+*Solaris (SPARC64)*
+ a| 
+`*# ./netapp.smsap.sunos-sparc64-version_number.bin*`
+
+
+
+ a| 
+*Solaris (x86_64)*
+ a| 
+`*# ./netapp.smsap.sunos-x64-version_number.bin*`
+
+
+
+ a| 
+*AIX (PPC64)*
+ a| 
+`*# ./netapp.smsap.aix-ppc64-version_number.bin*`
+
+
+
+ a| 
+*Linux x86*
+ a| 
+`*# ./netapp.smsap.linux-x86-version_number.bin*`
+
+
+
+ a| 
+*Linux x64*
+ a| 
+`*# ./netapp.smsap.linux-x64-version_number.bin*`
+
+|===
+. Sur la page *Introduction*, appuyez sur *entrée* pour continuer.
++
+Le message suivant s'affiche : `Existing SnapManager For SAP Detected`.
+
+. Appuyez sur *entrée*.
+. À l'invite de commande, effectuez les opérations suivantes :
++
+.. Définissez la valeur par défaut de l'utilisateur du système d'exploitation sur `*ora* _sid_`.
++
+`_sid_` Est l'identifiant système de la base de données SAP.
+
+.. Entrez la valeur correcte pour le groupe de systèmes d'exploitation ou appuyez sur *entrée* pour accepter la valeur par défaut.
+.. Entrez la valeur correcte pour le type de démarrage du serveur ou appuyez sur *entrée* pour accepter la valeur par défaut.
+
+
++
+Le récapitulatif de la configuration s'affiche.
+
+. Appuyez sur *entrée* pour continuer.
++
+Le message suivant s'affiche : `Uninstall of Existing SnapManager For SAP has started.`
+
++
+La désinstallation est terminée et la dernière version de SnapManager est installée.
+
+

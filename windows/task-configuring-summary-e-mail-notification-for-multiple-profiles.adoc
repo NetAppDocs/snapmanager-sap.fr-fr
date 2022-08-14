@@ -1,0 +1,61 @@
+---
+permalink: windows/task-configuring-summary-e-mail-notification-for-multiple-profiles.html 
+sidebar: sidebar 
+keywords: snapmanager, enable, configure, summary, email, notification, multiple, profile, repository, database, configuring 
+summary: SnapManager vous permet de configurer une notification par e-mail de synthèse pour plusieurs profils dans une base de données de référentiel. 
+---
+= Configuration des notifications par e-mail récapitulatives pour plusieurs profils
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager vous permet de configurer une notification par e-mail de synthèse pour plusieurs profils dans une base de données de référentiel.
+
+Vous pouvez définir l'hôte du serveur SnapManager comme hôte de notification à partir duquel l'e-mail de notification de synthèse est envoyé aux destinataires. Si le nom d'hôte ou l'adresse IP du serveur SnapManager est modifié, l'hôte de notification peut également être mis à jour.
+
+Vous pouvez sélectionner l'une des heures d'horaire auxquelles vous avez besoin d'une notification par e-mail :
+
+* Horaire : pour recevoir une notification par e-mail toutes les heures
+* Quotidien : pour recevoir une notification par e-mail tous les jours
+* Hebdomadaire : pour recevoir une notification par e-mail chaque semaine
+* Mensuel : pour recevoir une notification par e-mail tous les mois
+
+
+Vous devez entrer une seule adresse e-mail ou une liste d'adresses e-mail séparées par des virgules afin de recevoir des notifications pour les opérations effectuées à l'aide de ces profils. Vous devez vous assurer qu'il n'y a pas d'espace entre la virgule et l'adresse e-mail suivante lorsque vous saisissez plusieurs adresses e-mail.
+
+
+NOTE: Vous devez vous assurer que vous entrez l'ensemble de plusieurs adresses e-mail entre guillemets.
+
+SnapManager vous permet d'ajouter un objet d'e-mail personnalisé à l'aide des variables suivantes :
+
+* Nom de profil utilisé pour l'opération de base de données.
+* Nom de la base de données
+* SID de la base de données
+* Nom du serveur hôte
+* Heure de début de l'opération de base de données au format aaaammjj:hh:ss
+* Heure de fin de l'opération de base de données au format aaaammjj:hh:ss
+* État de fonctionnement de la base de données
+
+
+Si vous choisissez de ne pas ajouter d'objet personnalisé, SnapManager affiche un message d'erreur : valeur manquante -objet.
+
+.Étape
+. Saisissez la commande suivante :
++
+`+smsap notification update-summary-notification -repository-portrepo_port-dbnamerepo_service_name-hostrepo_host-login-usernamerepo_username-emailemail_address1,email_address2-subjectsubject-pattern-frequency {-daily-timedaily_time | -hourly-timehourly_time | -monthly-timemonthly_time-date {1|2...|31} | -weekly-timeweekly_time-day {1|2|3|4|5|6|7}} -profilesprofile1profile2-notification-hostnotification-host+`
+
++
+Les autres options de cette commande sont les suivantes :
+
++
+[-force] [-noprompt]
+
++
+[quiet | -verbose]
+----
+
+smsap notification update-summary-notification –repository –port 1521 –dbname repo2 –host 10.72.197.133 –login –username oba5 –email-address admin@org.com –subject success –frequency -daily -time 19:30:45 –profiles sales1 -notification-host wales
+----
+

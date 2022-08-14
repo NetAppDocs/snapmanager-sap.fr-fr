@@ -1,0 +1,35 @@
+---
+permalink: unix-administration/task-unmount-backups.html 
+sidebar: sidebar 
+keywords: snapmanager, automatic, unmount, backup, unavailable, host, server, unmount, external, tool, oracle, recovery, manager, rman, file, backup, state, remove, access 
+summary: 'SnapManager démonte automatiquement la sauvegarde pour la rendre indisponible au serveur hôte. SnapManager vous permet également de démonter si vous utilisez un outil externe, tel qu"Oracle Recovery Manager (RMAN), pour accéder aux fichiers de la sauvegarde, et pour modifier l"état de la sauvegarde afin de supprimer l"accès.' 
+---
+= Démonter les sauvegardes
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager démonte automatiquement la sauvegarde pour la rendre indisponible au serveur hôte. SnapManager vous permet également de démonter si vous utilisez un outil externe, tel qu'Oracle Recovery Manager (RMAN), pour accéder aux fichiers de la sauvegarde, et pour modifier l'état de la sauvegarde afin de supprimer l'accès.
+
+*À propos de cette tâche*
+
+Si vous annulez le montage d'une sauvegarde de base de données à partir d'un hôte distant, vous devez vous assurer que les informations d'identification ASM (Automatic Storage Management) sont identiques sur les deux hôtes.
+
+Vous pouvez éventuellement collecter les fichiers de vidage après une opération de sauvegarde réussie ou ayant échoué.
+
+L'opération de démontage peut échouer si le point de montage est occupé, par exemple, par un message d'erreur `--[ERROR] FLOW-11019: Failure in Disconnect: SD-10046: You cannot unmount the backup as the mount point is busy with the following mount paths and PID's: /opt/NetApp/smsap/mnt/-mnt-neuse_nfsvrdb_arch-20120427052319903_0 with PID 6598.`
+
+Vous devez identifier le PID de la session qui provoque l'échec de l'opération de démontage. Arrêtez la session en exécutant la commande suivante :
+
+`*kill _pid_*`
+
+L'opération de démontage s'exécute alors correctement.
+
+.Étape
+. Saisissez la commande suivante :
++
+`*smsap backup unmount -profile _profile_name_ {label _label_ [data | -archivelogs] | -id _id_} [-quiet | -verbose]*`
+
+

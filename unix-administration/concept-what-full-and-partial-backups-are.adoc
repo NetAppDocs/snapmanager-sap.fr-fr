@@ -1,0 +1,41 @@
+---
+permalink: unix-administration/concept-what-full-and-partial-backups-are.html 
+sidebar: sidebar 
+keywords: entire, database, portion, tablespace, data, file, full, partial, backup 
+summary: 'Vous pouvez choisir de sauvegarder l"intégralité de la base de données ou une partie seulement de celle-ci. Si vous choisissez de sauvegarder une partie de la base de données, vous pouvez choisir de sauvegarder un groupe d"espaces de stockage ou de fichiers de données. Vous pouvez choisir de sauvegarder séparément les espaces de stockage et les fichiers de données.' 
+---
+= Quelles sont les sauvegardes complètes et partielles
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez choisir de sauvegarder l'intégralité de la base de données ou une partie seulement de celle-ci. Si vous choisissez de sauvegarder une partie de la base de données, vous pouvez choisir de sauvegarder un groupe d'espaces de stockage ou de fichiers de données. Vous pouvez choisir de sauvegarder séparément les espaces de stockage et les fichiers de données.
+
+Le tableau suivant répertorie les avantages et conséquences de chaque type de sauvegarde :
+
+[cols="1a,2a,2a"]
+|===
+| Type de sauvegarde | Avantages | Inconvénients 
+
+
+ a| 
+Pleine
+ a| 
+Réduction du nombre de copies Snapshot. Pour les sauvegardes en ligne, chaque espace table est en mode de sauvegarde pendant toute la durée de l'opération de sauvegarde. SnapManager prend une copie Snapshot pour chaque volume utilisé par la base de données, plus une copie Snapshot pour chaque volume occupé par les fichiers journaux.
+ a| 
+Pour les sauvegardes en ligne, chaque espace table est en mode de sauvegarde pendant toute la durée de l'opération de sauvegarde.
+
+
+
+ a| 
+Partiel
+ a| 
+Réduit au minimum le temps passé par chaque espace de stockage en mode de sauvegarde. SnapManager regroupe les copies Snapshot qu'il prend par espace de table. Chaque espace de stockage est en mode sauvegarde assez long pour créer les copies Snapshot. Cette méthode de regroupement des copies Snapshot minimise les écritures de blocs physiques dans les fichiers journaux au cours d'une sauvegarde en ligne.
+ a| 
+La sauvegarde peut nécessiter la création de copies Snapshot de plusieurs espaces de stockage dans le même volume. Par cette méthode, SnapManager peut créer plusieurs copies Snapshot d'un volume unique lors de la sauvegarde.
+
+|===
+
+NOTE: Bien que vous puissiez effectuer une sauvegarde partielle, vous devez toujours effectuer une sauvegarde complète de la base de données.

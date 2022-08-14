@@ -1,0 +1,88 @@
+---
+permalink: windows/reference-the-smosmsaprepository-delete-command.html 
+sidebar: sidebar 
+keywords: command, delete, repository, store, database, profile, associate, credential, smsap 
+summary: 'Cette commande supprime un référentiel utilisé pour stocker les profils de base de données et les informations d"identification associées. Vous ne pouvez supprimer un référentiel que s"il n"y a aucun profil dans le référentiel.' 
+---
+= Commande smsap repository delete
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Cette commande supprime un référentiel utilisé pour stocker les profils de base de données et les informations d'identification associées. Vous ne pouvez supprimer un référentiel que s'il n'y a aucun profil dans le référentiel.
+
+
+
+== Syntaxe
+
+[listing]
+----
+
+smsap repository delete
+-repository
+-port repo_port
+-dbname repo_service_name
+-host repo_host
+-login -username repo_username
+[-force] [-noprompt]
+[-quiet | -verbose]
+----
+
+
+== Paramètres
+
+* *`-repository`*
++
+Les options suivantes `-repository` spécifiez les détails de la base de données pour le référentiel.
+
+* *`-port _repo_port_`*
++
+Spécifie le numéro de port TCP utilisé pour accéder à la base de données qui stocke le référentiel.
+
+* *`-dbname _repo_service_name_`*
++
+Indique le nom de la base de données qui stocke le référentiel. Utilisez le nom global ou le SID.
+
+* *`-host _repo_host_`*
++
+Indique le nom ou l'adresse IP de l'ordinateur hôte sur lequel s'exécute la base de données de référentiel.
+
+* *`-login`*
++
+Démarre les détails de connexion au référentiel.
+
+* *`-username _repo_username_`*
++
+Indique le nom d'utilisateur nécessaire pour accéder à la base de données qui stocke le référentiel.
+
+* *`-force`*
++
+Tente de forcer la suppression du référentiel, même si des opérations sont incomplètes. SnapManager émet une invite s'il y a des opérations incomplètes, vous demandant si vous êtes sûr de vouloir supprimer le référentiel.
+
+* *`-noprompt`*
++
+Ne vous invite pas avant de supprimer le référentiel. À l'aide du `-noprompt` permet de s'assurer que l'invite ne s'affiche pas, ce qui facilite la suppression des référentiels à l'aide d'un script.
+
+* *`-quiet`*
++
+Affiche uniquement les messages d'erreur sur la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* *`-verbose`*
++
+Affiche des messages d'erreur, d'avertissement et d'information sur la console.
+
+
+
+
+
+== Exemple de commande
+
+L'exemple suivant supprime le référentiel dans la base de données SALESDB.
+
+[listing]
+----
+smsap repository delete -repository -dbname SALESDB
+-host server1 -login -username admin -port 1527 -force -verbose
+----

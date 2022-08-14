@@ -1,0 +1,57 @@
+---
+permalink: windows/task-previewing-backup-restore-information.html 
+sidebar: sidebar 
+keywords: preview, information, backup, restore, process, snapmanager, sap, analyze, determine, successful 
+summary: 'Vous pouvez obtenir un aperçu des informations relatives à un processus de restauration de sauvegarde avant qu"il ne se produise afin d"afficher des informations sur les conditions de restauration que SnapManager pour SAP a trouvées sur votre système de sauvegarde. SnapManager analyse les données de votre sauvegarde afin de déterminer si le processus de restauration peut être effectué avec succès.' 
+---
+= Prévisualisation des informations de restauration de sauvegarde
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez obtenir un aperçu des informations relatives à un processus de restauration de sauvegarde avant qu'il ne se produise afin d'afficher des informations sur les conditions de restauration que SnapManager pour SAP a trouvées sur votre système de sauvegarde. SnapManager analyse les données de votre sauvegarde afin de déterminer si le processus de restauration peut être effectué avec succès.
+
+L'aperçu de restauration fournit les informations suivantes :
+
+* Quel mécanisme de restauration (restauration du système de fichiers côté stockage, restauration de fichiers côté stockage ou restauration de copie de fichiers côté hôte) peut être utilisé pour restaurer chaque fichier.
+* Pourquoi des mécanismes plus efficaces n'ont pas été utilisés pour restaurer chaque fichier lorsque vous spécifiez l'option -verbose.
+
+
+Si vous spécifiez l'option Aperçu dans la commande backup restore, SnapManager ne restaure rien, mais répertorie les fichiers à restaurer et indique leur mode de restauration.
+
+
+NOTE: Vous pouvez afficher un aperçu de tous les types de mécanismes de restauration. L'aperçu affiche des informations sur jusqu'à 20 fichiers.
+
+. Saisissez la commande suivante :``smsap backup restore -profileprofile_name-labellabel-complete -preview -verbose``
++
+Par exemple, entrez :
+
++
+[listing]
+----
+smsap backup restore -profile targetdb1_prof1
+      -label full_bkup_sales_nov_08  -complete -preview -verbose
+----
++
+L'exemple suivant montre les fichiers prêts à être restaurés et répertorie les différentes méthodes utilisées pour chacun :
+
++
+[listing]
+----
+The following files will be restored via storage side full file system
+restore:
+E:\disks\sysaux.dbf
+E:\disks\system.dbf
+
+The following files will be restored via host side file copy restore:
+E:\disks\undotbs1.dbf
+E:\disks\undotbs2.dbf
+----
+. Vérifiez les raisons pour lesquelles d'autres processus de restauration ne peuvent pas être utilisés.
+. Commencez l'opération de restauration sans l'option -preview, si seules les raisons qui sont susceptibles d'être écraables sont affichées.
++
+Vous pouvez quand même remplacer les vérifications non obligatoires.
+
+

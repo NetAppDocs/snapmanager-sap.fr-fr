@@ -1,0 +1,95 @@
+---
+permalink: windows/task-performing-rolling-upgrade-on-a-single-host-or-multiple-hosts.html 
+sidebar: sidebar 
+keywords: perform, roll, upgrade, single, multiple, snapmanager, server, host, command-line, interface, cli 
+summary: 'Vous pouvez effectuer la mise à niveau continue sur un ou plusieurs hôtes de serveur SnapManager à l"aide de l"interface de ligne de commande \(interface de ligne de commande\). L"hôte du serveur SnapManager mis à niveau est ensuite géré uniquement avec la version ultérieure de SnapManager.' 
+---
+= Déploiement de la mise à niveau sur un ou plusieurs hôtes
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez effectuer une mise à niveau propagée sur un ou plusieurs hôtes de serveur SnapManager à l'aide de l'interface de ligne de commande. L'hôte du serveur SnapManager mis à niveau est ensuite géré uniquement avec la version ultérieure de SnapManager.
+
+Vous devez vous assurer que toutes les conditions préalables à la mise à niveau par roulement sont remplies.
+
+. Pour effectuer une mise à niveau par roulement sur un seul hôte, entrez la commande suivante :
++
+`smsaprepository rollingupgrade-repository-dbnamerepo_service_name-hostrepo_host-login-usernamerepo_username-portrepo_port-upgradehosthost_with_target_database-force [-quiet | -verbose]`
+
++
+La commande suivante effectue la mise à niveau propagée de toutes les bases de données cibles montées sur hostA et d'une base de données de référentiel nommée REPOA située sur Repo_host :
+
++
+[listing]
+----
+
+smsap repository rollingupgrade
+    -repository
+      -dbname repoA
+      -host repo_host
+      -login
+       -username repouser
+       -port 1521
+     -upgradehost hostA
+----
+. Pour effectuer une mise à niveau propagée sur plusieurs hôtes, entrez la commande suivante : `smsaprepository rollingupgrade-repository-dbnamerepo_service_name-hostrepo_host-login-usernamerepo_username-portrepo_port-upgradehosthost_with_target_database1,host_with_target_database2-force [-quiet | -verbose]`
++
+
+NOTE: Pour plusieurs hôtes, entrez les noms d'hôte séparés par une virgule et assurez-vous de ne pas inclure d'espace entre la virgule et le nom d'hôte suivant.Assurez-vous également que vous entrez tous les noms d'hôte dans des guillemets doubles.
+
++
+La commande suivante exécute la mise à niveau propagée de toutes les bases de données cibles montées sur les hôtes, hostA et hostB, ainsi qu'une base de données de référentiel nommée REPOA située sur repo_host :
+
++
+[listing]
+----
+
+smsap repository rollingupgrade
+    -repository
+      -dbname repoA
+      -host repo_host
+      -login
+       -username repouser
+       -port 1521
+     -upgradehost hostA,hostB
+----
+. Pour effectuer une mise à niveau propagée sur tous les hôtes d'une base de données de référentiel, entrez la commande suivante : `smsaprepository rollingupgrade-repository-dbnamerepo_service_name-hostrepo_host-login-usernamerepo_username-portrepo_port-allhosts-force [-quiet | -verbose]`
++
+Une fois la base de données du référentiel mise à niveau, vous pouvez effectuer toutes les opérations SnapManager sur la base de données cible.
+
++
+La commande suivante effectue la mise à niveau propagée de toutes les bases de données cibles disponibles sur une base de données de référentiel appelée REPOA située sur repo_host :
+
++
+[listing]
+----
+
+smsap repository rollingupgrade
+    -repository
+      -dbname repoA
+      -host repo_host
+      -login
+       -username repouser
+       -port 1521
+      -allhosts
+----
++
+** Si le serveur SnapManager démarre automatiquement, vous devez redémarrer le serveur pour vous assurer que vous pouvez afficher les plannings.
+** Si vous mettez à niveau l'un des deux hôtes associés, vous devez mettre à niveau le second hôte après la mise à niveau du premier.
++
+Par exemple, si vous avez créé un clone de l'hôte A vers l'hôte B ou monté une sauvegarde de l'hôte A vers l'hôte B, les hôtes A et B sont liés les uns aux autres. Lorsque vous mettez à niveau l'hôte A, un message d'avertissement vous invite à mettre à niveau l'hôte B peu après la mise à niveau de l'hôte A.
+
++
+
+NOTE: Les messages d'avertissement s'affichent même si le clone est supprimé ou si la sauvegarde est démonté de l'hôte B pendant la mise à niveau de l'hôte A. En effet, des métadonnées existent dans le référentiel pour les opérations effectuées sur l'hôte distant.
+
+
+
+
+
+*Informations connexes*
+
+xref:concept-prerequisites-for-performing-rolling-upgrade.adoc[Conditions préalables pour effectuer des mises à niveau propagées]

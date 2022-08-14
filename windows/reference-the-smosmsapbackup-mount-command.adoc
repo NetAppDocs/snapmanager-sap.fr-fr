@@ -1,0 +1,99 @@
+---
+permalink: windows/reference-the-smosmsapbackup-mount-command.html 
+sidebar: sidebar 
+keywords: run, backup, mount, command, perform, recover, operation, external, tool, smsap 
+summary: 'Vous pouvez exécuter la commande backup mount pour monter une sauvegarde afin d"effectuer une opération de restauration à l"aide d"un outil externe.' 
+---
+= La commande smsap backup mount
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez exécuter le `backup mount` commande permettant de monter une sauvegarde afin d'effectuer une opération de récupération à l'aide d'un outil externe.
+
+
+
+== Syntaxe
+
+[listing]
+----
+
+smsap backup mount
+-profile profile_name
+[-label label [-data | -archivelogs] | [-id id]
+[-host  host]
+
+[-dump]
+[-quiet | -verbose]
+----
+
+
+== Paramètres
+
+* *`-profile _profile_name_`*
++
+Spécifie le profil associé à la sauvegarde que vous souhaitez monter. Le profil contient l'identifiant de la base de données et d'autres informations sur la base de données.
+
+* *`-id _guid_`*
++
+Monte la sauvegarde à l'aide du GUID spécifié. Le GUID est généré par SnapManager lors de la création d'une sauvegarde. Vous pouvez utiliser le `smsap backup list` Commande pour afficher le GUID de chaque sauvegarde.
+
+* *`-label _label_`*
++
+Permet de monter la sauvegarde avec l'étiquette spécifiée.
+
+* *`-data`*
++
+Spécifie les fichiers de données.
+
+* *`-archivelogs`*
++
+Spécifie les fichiers journaux d'archive.
+
+* *`-host _host_`*
++
+Spécifie l'hôte sur lequel vous souhaitez monter la sauvegarde.
+
+* *`-dump`*
++
+Collecte les fichiers de vidage après l'opération de montage réussie ou ayant échoué.
+
+* *`-quiet`*
++
+Affiche uniquement les messages d'erreur dans la console. Le paramètre par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* *`-verbose`*
++
+Affiche les messages d'erreur, d'avertissement et d'information dans la console.
+
+
+
+
+NOTE: Vous devez utiliser cette commande uniquement si vous utilisez un outil externe tel qu'Oracle Recovery Manager (RMAN). SnapManager prend automatiquement en charge le montage de sauvegardes si vous utilisez le `smsap backup restore` pour restaurer la sauvegarde. Cette commande affiche une liste, qui affiche les chemins d'accès vers lesquels les copies Snapshot ont été montées. Cette liste s'affiche uniquement lorsque le `-verbose` est spécifié.
+
+
+
+== Exemple
+
+L'exemple suivant monte la sauvegarde :
+
+[listing]
+----
+smsap backup mount -profile S10_BACKUP -label full_monthly_10 -verbose
+[INFO ]: SMSAP-13051: Process PID=6852
+[INFO ]: SMSAP-13036: Starting operation Backup Mount on host hadley.domain.private
+[INFO ]: SMSAP-13036: Starting operation Backup Mount on host hadley.domain.private
+[INFO ]: SMSAP-13046: Operation GUID 8abc01573883daf0013883daf5ac0001 starting on Profile FAS_P1
+[INFO ]: SD-00025: Beginning to connect filesystem(s) [I:\] from snapshot smsap_fas_p1_fasdb_d_h_2_8abc0157388344bc01388344c2d50001_0.
+[INFO ]: SD-00016: Discovering storage resources for C:\SnapManager_auto_mounts\I-2012071400592328_0.
+[INFO ]: SD-00017: Finished storage discovery for C:\SnapManager_auto_mounts\I-2012071400592328_0
+[INFO ]: SD-00026: Finished connecting filesystem(s) [I:\] from snapshot smsap_fas_p1_fasdb_d_h_2_8abc0157388344bc01388344c2d50001_0.
+[INFO ]: SD-00025: Beginning to connect filesystem(s) [H:\] from snapshot smsap_fas_p1_fasdb_d_h_1_8abc0157388344bc01388344c2d50001_0.
+[INFO ]: SD-00016: Discovering storage resources for C:\SnapManager_auto_mounts\H-2012071400592312_0.
+[INFO ]: SD-00017: Finished storage discovery for C:\SnapManager_auto_mounts\H-2012071400592312_0.
+[INFO ]: SD-00026: Finished connecting filesystem(s) [H:\] from snapshot smsap_fas_p1_fasdb_d_h_1_8abc0157388344bc01388344c2d50001_0.
+[INFO ]: SMSAP-13048: Backup Mount Operation Status: SUCCESS
+[INFO ]: SMSAP-13049: Elapsed Time: 0:19:05.620
+----

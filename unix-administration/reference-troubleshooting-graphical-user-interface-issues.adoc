@@ -1,0 +1,206 @@
+---
+permalink: unix-administration/reference-troubleshooting-graphical-user-interface-issues.html 
+sidebar: sidebar 
+keywords: information, common, graphical, user, interface, gui, issue, resolve, troubleshooting 
+summary: 'Vous trouverez des informations sur certains problèmes connus de l"interface utilisateur graphique (GUI) qui peuvent vous aider à les résoudre.' 
+---
+= Dépannage des problèmes liés à l'interface utilisateur graphique
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous trouverez des informations sur certains problèmes connus de l'interface utilisateur graphique (GUI) qui peuvent vous aider à les résoudre.
+
+|===
+| Problème | Explication | Solution de contournement 
+
+
+ a| 
+Lors de l'accès à l'interface graphique SnapManager pour effectuer une opération, le message d'erreur suivant peut s'afficher : `SMSAP-20111 : Authentication failed for user on host.`
+ a| 
+Ce problème se produit si le mot de passe de l'utilisateur est modifié dans l'hôte sur lequel le serveur SnapManager est exécuté.une fois le mot de passe modifié, le cache d'informations d'identification créé pour l'utilisateur qui a lancé l'interface utilisateur devient non valide. L'interface utilisateur graphique SnapManager utilise toujours les informations d'identification dans le cache pour s'authentifier et donc l'authentification échoue.
+ a| 
+Vous devez effectuer l'une des tâches suivantes :
+
+* Supprimez les informations d'identification de l'utilisateur dont le mot de passe a été modifié, puis ajoutez les nouvelles informations d'identification dans le cache en exécutant les commandes suivantes :
++
+.. `smsap credential delete`
+.. `smsap credential set`
+
+
+* Effacez tout le cache en exécutant le `smsap credential clear command`. Ouvrez à nouveau l'interface graphique et définissez les informations d'identification, si vous y êtes invité.
+
+
+
+
+ a| 
+Un avertissement de sécurité s'affiche lors de l'utilisation de Java Web Start pour accéder à l'interface graphique SnapManager.
+ a| 
+Lors de l'accès à l'interface utilisateur graphique SnapManager via Java Web Start, un avertissement de sécurité s'affiche. Ce problème se produit car les fichiers JAR JNLP sont autosignés et la version Java utilisée par SnapManager n'autorise pas les fichiers JAR auto-signés à un niveau de sécurité élevé.
+ a| 
+Modifiez les paramètres de sécurité sur support dans le panneau de configuration Java ou ajoutez l'URL de l'interface utilisateur graphique SnapManager à la liste des exceptions.
+
+
+
+ a| 
+L'interface graphique de démarrage en ligne de SnapManager affiche la version incorrecte.
+ a| 
+Après la restauration de SnapManager d'une version ultérieure à une version antérieure lorsque vous lancez l'interface utilisateur de démarrage Web, la version ultérieure de l'interface utilisateur de démarrage Web SnapManager est lancée.
+ a| 
+Vous devez également effacer le cache en procédant comme suit :
+
+. Démarrer la console.
+. Saisissez les informations suivantes : `*javaws -viewer*`
+. Dans l'écran du visualiseur de cache Java, cliquez avec le bouton droit de la souris sur l'application SnapManager et sélectionnez *Supprimer*.
+
+
+
+
+ a| 
+Lorsque vous redémarrez l'interface graphique et que vous essayez de vérifier les sauvegardes d'un profil spécifique, vous ne voyez que les noms des profils.
+ a| 
+SnapManager n'affiche aucune information relative à un profil tant que vous ne l'avez pas ouvert.
+ a| 
+Effectuez les opérations suivantes :
+
+. Cliquez avec le bouton droit de la souris sur le profil et sélectionnez *Ouvrir* dans le menu.
++
+SnapManager affiche la boîte de dialogue authentification du profil.
+
+. Entrez le nom d'utilisateur et le mot de passe de l'hôte.
++
+SnapManager affiche la liste des sauvegardes.
+
+
+
+
+NOTE: Vous n'avez besoin d'authentifier le profil qu'une fois que les informations d'identification sont valides et restent dans le cache.
+
+
+
+ a| 
+Lorsque vous ouvrez le premier référentiel dans l'interface utilisateur graphique, un message d'erreur similaire à ce qui suit s'affiche : `The Profile name XXXX clashes with previously loaded repository.`
+ a| 
+Les profils nommés de manière identique ne peuvent pas exister dans un référentiel. De plus, vous ne pouvez ouvrir qu'un seul référentiel à la fois.
+ a| 
+Faites référence aux profils en conflit de deux utilisateurs différents du système d'exploitation ou renommez le profil en émettant une instruction SQL pour le référentiel : `*UPDATE SMSAP_33_PROFILE SET NAME = 'NEW_NAME' WHERE NAME = 'OLD_NAME'*`
+
+
+
+ a| 
+Un message d'erreur similaire à ce qui suit s'affiche : SMSAP-01092 : `Unable to initialize repository repo1@ does not exist:repo1SMSAP-11006: Cannot resolve host does not exist`
+ a| 
+Le référentiel est inaccessible, peut-être parce qu'il n'existe plus. L'interface graphique initialise la liste des référentiels à partir du fichier d'informations d'identification.
+ a| 
+Le message d'erreur vous demande si vous souhaitez supprimer ce référentiel afin qu'aucune tentative ne soit faite pour le charger ultérieurement. Si vous n'avez pas besoin d'accéder à ce référentiel, cliquez sur *Supprimer* pour le supprimer de la vue GUI. Ceci supprime la référence au référentiel dans le fichier d'informations d'identification et l'interface graphique ne tente pas de charger à nouveau le référentiel.
+
+
+
+ a| 
+La création du profil échoue car les informations d'identification de l'hôte ne s'authentifient pas dans les plates-formes SUSE Linux Enterprise Server 10 et SUSE Linux Enterprise Server 11.
+ a| 
+SnapManager utilise le module d'authentification enfichable (PAM) pour authentifier les utilisateurs. Dans les plates-formes SUSE Linux Enterprise Server versions 10 et 11, il n'y a pas `snapmanager` fichier par défaut dans `/etc/pam.d` répertoire qui fournit les détails d'authentification requis. Par conséquent, les informations d'identification de l'hôte échouent.
+ a| 
+Pour vous connecter avec succès à l'hôte sur les plates-formes SUSE Linux Enterprise Server 10 et 11, effectuez les opérations suivantes :
+
+. Créer un `snapmanager` fichier dans ``/etc/pam.d/.``
+. Ajoutez le contenu suivant à la `snapmanager` dossier situé à ``/etc/pam.d/snapmanager:``
++
+[listing]
+----
+
+#%PAM-1.0
+auth     include   common-auth
+account  include   common-account
+password include   common-password
+session  include   common-session
+----
+. Enregistrez le fichier et relancez l'opération de création de profil.
+
+
+
+
+ a| 
+SnapManager prend plus de temps à charger l'arborescence de la base de données et affiche un message d'erreur de délai d'attente dans l'interface graphique de SnapManager.
+ a| 
+Lorsque vous essayez d'effectuer une opération de sauvegarde partielle à partir de l'interface utilisateur graphique SnapManager, SnapManager tente de charger les informations d'identification de tous les profils. En cas d'entrées non valides, SnapManager tente de valider l'entrée et un message d'erreur de délai d'attente s'affiche alors.
+ a| 
+Supprimez les informations d'identification de l'hôte, du référentiel et du profil inutilisés à l'aide du `credential delete` Commande à partir de l'interface de ligne de commandes SnapManager.
+
+
+
+ a| 
+SnapManager ne parvient pas à générer un nouveau profil après l'opération de fractionnement de clone et vous ne savez pas si le nouveau profil est créé.
+ a| 
+SnapManager ne parvient pas à vous demander si un nouveau profil n'est pas créé après le fractionnement du clone. Comme aucun message n'est affiché pour l'opération ayant échoué, vous pouvez supposer que le profil est créé.
+ a| 
+Pour savoir si un nouveau profil est créé pour l'opération de fractionnement de clone, effectuez les opérations suivantes :
+
+. Cliquez sur l'onglet *moniteur*, cliquez avec le bouton droit de la souris sur l'entrée de l'opération de fractionnement de clone et sélectionnez *Propriétés*.
+. Dans la fenêtre Propriétés du profil, cliquez sur l'onglet *Logs* pour afficher les journaux de création de profils et d'opération de fractionnement de clone.
+
+
+
+
+ a| 
+Les scripts personnalisés permettant l'activité de prétraitement ou de post-traitement avant ou après les opérations de sauvegarde, de restauration ou de clonage ne sont pas visibles depuis l'interface graphique de SnapManager.
+ a| 
+Lorsque vous ajoutez des scripts personnalisés à l'emplacement personnalisé de sauvegarde, de restauration ou de clonage du script après le démarrage de l'assistant correspondant, les scripts personnalisés ne s'affichent pas sous la liste scripts disponibles.
+ a| 
+Redémarrez le serveur hôte SnapManager, puis ouvrez l'interface graphique SnapManager.
+
+
+
+ a| 
+Vous ne pouvez pas utiliser le fichier XML de spécification clone créé dans SnapManager (version 3.1 ou antérieure) pour l'opération de clonage.
+ a| 
+Depuis SnapManager 3.2 pour SAP, la section de spécification de tâche (spécification de tâche) est fournie sous forme de fichier XML de spécification de tâche distinct.
+ a| 
+Si vous utilisez SnapManager 3.2 pour SAP, vous devez supprimer la section des spécifications de tâche du fichier XML de spécifications des clones ou créer un nouveau fichier XML de spécifications des clones.SnapManager 3.3 ou version ultérieure ne prend pas en charge le fichier XML de spécification des clones créé dans SnapManager 3.2 ou versions antérieures.
+
+
+
+ a| 
+L'opération SnapManager sur l'interface graphique ne se poursuit pas après avoir effacé les informations d'identification de l'utilisateur en utilisant le `smsap credential clear` À partir de l'interface de ligne de commande SnapManager ou en cliquant sur *Admin* > *Credentials* > *Clear* > *cache* dans l'interface graphique de SnapManager.
+ a| 
+Les informations d'identification définies pour les référentiels, les hôtes et les profils sont effacées. SnapManager vérifie les informations d'identification de l'utilisateur avant de démarrer toute opération.lorsque les informations d'identification de l'utilisateur sont incorrectes, SnapManager ne parvient pas à s'authentifier. Lorsqu'un hôte ou un profil est supprimé du référentiel, les informations d'identification de l'utilisateur sont toujours disponibles dans le cache. Ces entrées d'informations d'identification inutiles ralentissent les opérations SnapManager à partir de l'interface utilisateur graphique.
+ a| 
+Redémarrez l'interface graphique SnapManager en fonction de la manière dont le cache est effacé.
+
+[NOTE]
+====
+* Si vous avez effacé le cache des informations d'identification de l'interface graphique SnapManager, il n'est pas nécessaire de quitter l'interface graphique SnapManager.
+* Si vous avez effacé le cache des informations d'identification de l'interface de ligne de commande SnapManager, vous devez redémarrer l'interface graphique de SnapManager.
+* Si vous avez supprimé manuellement le fichier d'informations d'identification cryptées, vous devez redémarrer l'interface graphique de SnapManager.
+
+
+====
+Définissez les informations d'identification que vous avez fournies pour le référentiel, l'hôte de profil et le profil. À partir de l'interface graphique SnapManager, si aucun référentiel n'est mappé sous l'arborescence des référentiels, effectuez les opérations suivantes :
+
+. Cliquez sur *tâches* > *Ajouter un référentiel existant*
+. Cliquez avec le bouton droit de la souris sur le référentiel, cliquez sur *Ouvrir* et entrez les informations d'identification de l'utilisateur dans la fenêtre *authentification d'informations d'identification du référentiel*.
+. Cliquez avec le bouton droit de la souris sur l'hôte sous le référentiel, cliquez sur *Ouvrir* et entrez les informations d'identification de l'utilisateur dans *authentification d'informations d'identification de l'hôte*.
+. Cliquez avec le bouton droit de la souris sur le profil sous l'hôte, cliquez sur *Ouvrir* et entrez les informations d'identification de l'utilisateur dans *authentification des informations d'identification du profil*.
+
+
+
+
+ a| 
+Le message d'erreur `Unable to list the protection policies for the following reason: Protection Manager is temporarily unavailable` S'affiche lorsque vous sélectionnez *aucun* dans le menu déroulant *protection Manager protection Policy* de la fenêtre Propriétés du profil et la page des paramètres de stratégie de l'assistant création de profil.
+ a| 
+Protection Manager n'est pas configuré avec SnapManager ou protection Manager n'est pas en cours d'exécution.
+ a| 
+Aucune action n'est nécessaire.
+
+
+
+ a| 
+Vous ne pouvez pas ouvrir l'interface graphique SnapManager à l'aide de l'interface utilisateur Java Web Start en raison de la force de chiffrement SSL (Secure Sockets Layer) plus faible du navigateur.
+ a| 
+SnapManager ne prend pas en charge le chiffrement SSL moins élevé que 128 bits.
+ a| 
+Mettez à niveau la version du navigateur et vérifiez l'intensité du chiffrement.
+
+|===

@@ -1,0 +1,87 @@
+---
+permalink: unix-administration/concept-creating-task-specification-file-and-scripts-for-snapmanager-operations.html 
+sidebar: sidebar 
+keywords: snapmanager, sap, task, specification, extensible, markup, language, xml, pretask, backup, restore, clone, operation, creating, create, file, script, operation 
+summary: 'SnapManager for SAP utilise un fichier XML (extensible Markup Language) de spécification de tâches qui indique les prétâches et les post-tâches des opérations de sauvegarde, de restauration et de clonage. Vous pouvez ajouter les noms de script de prétâche et de post-tâche dans le fichier XML pour les tâches à effectuer avant ou après les opérations de sauvegarde, de restauration et de clonage.' 
+---
+= Création d'un fichier de spécification de tâche et de scripts pour les opérations SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager for SAP utilise un fichier XML (extensible Markup Language) de spécification de tâches qui indique les prétâches et les post-tâches des opérations de sauvegarde, de restauration et de clonage. Vous pouvez ajouter les noms de script de prétâche et de post-tâche dans le fichier XML pour les tâches à effectuer avant ou après les opérations de sauvegarde, de restauration et de clonage.
+
+Dans SnapManager (version 3.1 ou antérieure), vous pouvez exécuter les scripts de prétâche et de post-tâche uniquement pour l'opération de clonage. Dans SnapManager (3.2 ou version ultérieure) pour SAP, vous pouvez exécuter les scripts de prétâche et post-tâche pour les opérations de sauvegarde, de restauration et de clonage.
+
+Dans SnapManager (3.1 ou version antérieure), la section spécification de tâche fait partie du fichier XML de spécification clone. Depuis SnapManager 3.2 pour SAP, la section spécification de tâche est un fichier XML distinct.
+
+
+NOTE: SnapManager 3.3 ou version ultérieure ne prend pas en charge l'utilisation du fichier XML de spécification clone créé dans les versions antérieures à SnapManager 3.2.
+
+Dans SnapManager (3.2 ou version ultérieure) pour SAP, vous devez vous assurer que les conditions suivantes sont remplies pour que les opérations SnapManager fonctionnent correctement :
+
+* Pour les opérations de sauvegarde et de restauration, utilisez le fichier XML de spécification de tâche.
+* Pour l'opération de clonage, fournissez deux fichiers de spécification : un fichier XML de spécification de clone et un fichier XML de spécification de tâche.
++
+Si vous souhaitez activer l'activité de prétâche ou de post-tâche, vous pouvez éventuellement ajouter le fichier XML de spécification de tâche.
+
+
+
+Vous pouvez créer le fichier de spécification de tâche à l'aide de l'interface utilisateur graphique SnapManager, de l'interface de ligne de commande ou d'un éditeur de texte. Vous devez utiliser une extension .xml pour le fichier afin d'activer les fonctions d'édition appropriées. Vous pouvez enregistrer ce fichier afin que vous puissiez l'utiliser pour les opérations de sauvegarde, de restauration et de clonage ultérieures.
+
+Le fichier XML de spécification de tâche comprend deux sections :
+
+* La section prétâches comprend des scripts qui peuvent être exécutés avant les opérations de sauvegarde, de restauration et de clonage.
+* La section post-tâches comprend des scripts qui peuvent être exécutés après les opérations de sauvegarde, de restauration et de clonage.
+
+
+Les valeurs incluses dans les sections tâches préalables et tâches postérieures doivent respecter les directives suivantes :
+
+* Nom de la tâche : le nom de la tâche doit correspondre au nom du script qui s'affiche lorsque vous exécutez le `plugin.sh -describe` commande.
++
+
+NOTE: En cas de non-concordance, le message d'erreur suivant peut s'afficher : `the file not found`.
+
+* Nom du paramètre : le nom du paramètre doit être une chaîne pouvant être utilisée comme paramètre de variable d'environnement.
++
+La chaîne doit correspondre au nom du paramètre dans le script personnalisé, qui s'affiche lorsque vous exécutez le `plugin.sh -describe` commande.
+
+
+
+Vous pouvez créer le fichier de spécifications en fonction de la structure du fichier de spécifications de tâche d'exemple suivant :
+
+[listing]
+----
+
+<task-specification>
+  <pre-tasks>
+<task>
+      <name>name</name>
+      <parameter>
+          <name>name</name>
+          <value>value</value>
+       </parameter>
+    </task>
+  </pre-tasks>
+  <post-tasks>
+    <task>
+      <name>name</name>
+      <parameter>
+          <name>name</name>
+          <value>value</value>
+       </parameter>
+    </task>
+  </post-tasks>
+</task-specification>
+----
+
+NOTE: Le fichier XML de spécification de tâche ne doit pas contenir de stratégie.
+
+Dans l'interface graphique SnapManager, vous pouvez définir la valeur du paramètre et enregistrer le fichier XML. Vous pouvez utiliser la page activation des tâches de l'assistant de création de sauvegarde, de restauration ou de récupération et de l'assistant de création de clone pour charger le fichier XML de spécification de tâche existant, et utiliser le fichier sélectionné pour l'activité de prétâche ou de post-tâche.
+
+Une tâche peut être exécutée plusieurs fois, avec la même ou des combinaisons de paramètres et de valeurs différentes. Par exemple, vous pouvez utiliser une tâche Enregistrer pour enregistrer plusieurs fichiers.
+
+
+NOTE: SnapManager utilise les balises XML fournies dans le fichier de spécification de tâche pour l'activité de prétraitement ou de post-traitement pour les opérations de sauvegarde, de restauration et de clonage, quelle que soit l'extension de fichier du fichier de spécification de tâche.

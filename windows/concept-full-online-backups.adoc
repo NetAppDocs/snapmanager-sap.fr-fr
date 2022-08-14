@@ -1,0 +1,36 @@
+---
+permalink: windows/concept-full-online-backups.html 
+sidebar: sidebar 
+keywords: full, online, backup, snapmanager, back up, database, create, snapshot, copies, copy, volume, level, tablespace 
+summary: 'Au cours d"une sauvegarde en ligne complète, SnapManager sauvegarde l"ensemble de la base de données et crée des copies Snapshot au niveau du volume (et non au niveau de l"espace de noms).' 
+---
+= Sauvegardes complètes en ligne
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Au cours d'une sauvegarde en ligne complète, SnapManager sauvegarde l'ensemble de la base de données et crée des copies Snapshot au niveau du volume (et non au niveau de l'espace de noms).
+
+SnapManager crée deux copies Snapshot pour chaque sauvegarde. Si tous les fichiers requis par la base de données se trouvent dans un seul volume, les deux copies Snapshot apparaissent dans ce volume.
+
+Lorsque vous spécifiez une sauvegarde complète, SnapManager effectue les actions suivantes :
+
+.Étapes
+. Place la base de données entière en mode de sauvegarde en ligne
+. Crée des copies Snapshot de tous les volumes contenant des fichiers de base de données
+. Supprime la base de données du mode de sauvegarde en ligne
+. Force un changement de journal, puis archive les fichiers journaux
++
+Cela permet également de vider les informations de reprise sur le disque.
+
+. Génère des fichiers de contrôle de sauvegarde
+. Crée une copie Snapshot des fichiers journaux et des fichiers de contrôle de sauvegarde
+
+
+Lors d'une sauvegarde complète, SnapManager place l'ensemble de la base de données en mode de sauvegarde en ligne. Un espace table individuel (par exemple, `E:\data\system.data1`) est en mode de sauvegarde en ligne plus long que certains espaces de stockage ou fichiers de données spécifiés.
+
+Lorsqu'une base de données passe en mode de sauvegarde, Oracle écrit des blocs entiers dans les journaux et n'écrit pas uniquement les fichiers delta entre les sauvegardes. Comme les bases de données fonctionnent de plus en plus en mode de sauvegarde en ligne, le choix d'une sauvegarde complète impose une charge plus importante sur l'hôte.
+
+Bien que les sauvegardes complètes chargent davantage l'hôte, les sauvegardes complètes requièrent moins de copies Snapshot, les besoins en stockage étant réduits.

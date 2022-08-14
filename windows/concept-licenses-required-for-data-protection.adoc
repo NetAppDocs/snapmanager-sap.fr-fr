@@ -1,0 +1,32 @@
+---
+permalink: windows/concept-licenses-required-for-data-protection.html 
+sidebar: sidebar 
+keywords: ensure, license, require, data, protection, install, enable, primary, secondary, storage, system, snapmanager 
+summary: Vous devez vous assurer que les licences requises pour la protection des données sont installées et activées sur les systèmes de stockage primaire et secondaire. 
+---
+= Licences requises pour la protection des données dans SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez vous assurer que les licences requises pour la protection des données sont installées et activées sur les systèmes de stockage primaire et secondaire.
+
+Les systèmes de stockage primaires reçoivent les dernières mises à jour de transactions pour la base de données Oracle, stockent les données et assurent une protection de sauvegarde locale de la base de données. Le système de stockage principal gère également les fichiers de données de base de données, les fichiers journaux et les fichiers de contrôle. Les systèmes de stockage secondaire servent de stockage à distance pour les sauvegardes protégées.
+
+Pour la protection des données, les licences suivantes doivent être installées et activées sur les systèmes de stockage primaires :
+
+
+NOTE: Si vous souhaitez activer la protection des données sur les systèmes de stockage secondaires, vous devez également installer et activer ces licences sur les systèmes de stockage secondaires.
+
+* Data ONTAP 7-mode (7.3.1 ou version ultérieure) ou clustered Data ONTAP (8.2 ou version ultérieure)
+* SnapVault
+* SnapRestore
+* SnapMirror
+* FlexClone est requis pour le clonage.
++
+FlexClone est également requis pour le réseau de stockage SAN uniquement si SnapDrive est configuré pour utiliser FlexClone dans les environnements SAN.
+
+* Le protocole approprié, par exemple, Internet Small Computer System interface (iSCSI) ou Fibre Channel (FC)
+

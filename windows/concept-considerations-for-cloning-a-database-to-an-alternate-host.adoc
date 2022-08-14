@@ -1,0 +1,78 @@
+---
+permalink: windows/concept-considerations-for-cloning-a-database-to-an-alternate-host.html 
+sidebar: sidebar 
+keywords: clone, host, database, reside, requirement, consideration, clone, alternate 
+summary: Avant de cloner sur un hôte autre que celui sur lequel réside la base de données, certaines exigences doivent être respectées. 
+---
+= Considérations relatives au clonage d'une base de données vers un autre hôte
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de cloner sur un hôte autre que celui sur lequel réside la base de données, certaines exigences doivent être respectées.
+
+Le tableau suivant présente les conditions de configuration des hôtes source et cible :
+
+|===
+| Configuration requise | Conditions requises 
+
+
+ a| 
+Architecture
+ a| 
+Doit être identique sur les hôtes source et cible
+
+
+
+ a| 
+Système d'exploitation et version
+ a| 
+Doit être identique sur les hôtes source et cible
+
+
+
+ a| 
+SnapManager pour SAP
+ a| 
+Doit être installé et exécuté sur les hôtes source et cible
+
+
+
+ a| 
+Informations d'identification
+ a| 
+Doit être défini pour que l'utilisateur puisse accéder à l'hôte cible
+
+
+
+ a| 
+Oracle
+ a| 
+La même version logicielle doit être installée sur les hôtes source et cible.
+
+Oracle Listener doit être exécuté sur l'hôte cible.
+
+
+
+ a| 
+Pile de stockage compatible
+ a| 
+Doit être identique sur les hôtes source et cible
+
+
+
+ a| 
+Protocole utilisé pour accéder aux fichiers de données
+ a| 
+Doit être identique sur les hôtes source et cible
+
+
+
+ a| 
+Domaine
+ a| 
+L'hôte distant et l'hôte sur lequel réside la base de données doivent être dans le domaine et non dans le groupe de travail
+
+|===

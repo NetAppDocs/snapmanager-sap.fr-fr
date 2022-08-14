@@ -1,0 +1,67 @@
+---
+permalink: windows/task-create-task-scripts.html 
+sidebar: sidebar 
+keywords: pretask, post-task, policy, task, script, backup, restore, clone, operation, environment, variable, parameter, snapmanager, sample, create 
+summary: 'Vous pouvez créer les scripts de tâches de prétâche, de post-tâche et de stratégie pour les opérations de sauvegarde, de restauration et de clonage, écrire votre script et inclure les variables d"environnement prédéfinies dans vos paramètres. Vous pouvez créer un nouveau script ou modifier l"un des exemples de scripts SnapManager.' 
+---
+= Créer des scripts de tâches
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez créer les scripts de tâches de prétâche, de post-tâche et de stratégie pour les opérations de sauvegarde, de restauration et de clonage, écrire votre script et inclure les variables d'environnement prédéfinies dans vos paramètres. Vous pouvez créer un nouveau script ou modifier l'un des exemples de scripts SnapManager.
+
+
+
+== Ce dont vous aurez besoin
+
+Avant de commencer à créer le script, assurez-vous que :
+
+* Vous devez structurer le script d'une manière particulière pour qu'il soit exécuté dans le contexte d'une opération SnapManager.
+* Vous devez créer le script en fonction des opérations attendues, des paramètres d'entrée disponibles et des conventions de code retour.
+* Vous devez inclure des messages de journal et rediriger les messages vers des fichiers journaux définis par l'utilisateur.
+
+
+.Étapes
+. Créez le script de tâche en personnalisant l'exemple de script.
++
+Effectuez les opérations suivantes :
+
++
+.. Recherchez un exemple de script dans le répertoire d'installation suivant :
++
+`<default_install_directory>\plugins\examples\backup\create`
+
++
+`<default_install_directory>\plugins\examples\clone\create`
+
+.. Ouvrez le script dans votre éditeur de script.
+.. Enregistrez le script avec un autre nom.
+
+
+. Modifiez les fonctions, les variables et les paramètres selon les besoins.
+. Enregistrez le script dans l'un des répertoires suivants :
++
+*Scripts d'opérations de sauvegarde*
+
++
+** <Default_install_Directory>\plugins\backup\create\pre : exécute le script avant que la sauvegarde ne se produise. Vous pouvez l'utiliser si vous spécifiez la création de la sauvegarde.
+** <Default_install_Directory>\plugins\backup\create\post : exécute le script après l'opération de sauvegarde. Vous pouvez l'utiliser si vous spécifiez la création de la sauvegarde.
+** <Default_install_Directory>\plugins\backup\create\policy : exécute toujours le script avant que la sauvegarde ne se produise. SnapManager utilise toujours ce script pour toutes les sauvegardes du référentiel.
++
+*Restaurer les scripts d'opération*
+
+** <Default_install_Directory>\plugins\restore\create\pre : exécute le script avant la sauvegarde. Vous pouvez l'utiliser si vous spécifiez la création de la sauvegarde.
+** <Default_install_Directory>\plugins\restore\create\post : exécute le script après l'opération de sauvegarde. Vous pouvez l'utiliser si vous spécifiez la création de la sauvegarde.
+** <Default_install_Directory>\plugins\restore\create\policy : exécute toujours le script avant que la sauvegarde ne se produise. SnapManager utilise toujours ce script pour toutes les sauvegardes du référentiel.
++
+*Cloner les scripts d'opération*
+
+** <Default_install_Directory>\plugins\clone\create\pre : exécute le script avant que la sauvegarde ne se produise. Vous pouvez l'utiliser si vous spécifiez la création de la sauvegarde.
+** <Default_install_Directory>\plugins\clone\create\post : exécute le script après l'opération de sauvegarde. Vous pouvez l'utiliser si vous spécifiez la création de la sauvegarde.
+** <Default_install_Directory>\plugins\clone\create\policy : exécute toujours le script avant que la sauvegarde ne se produise. SnapManager utilise toujours ce script pour toutes les sauvegardes du référentiel.
+
+
+

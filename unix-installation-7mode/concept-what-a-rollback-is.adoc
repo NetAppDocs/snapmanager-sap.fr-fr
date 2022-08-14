@@ -1,0 +1,27 @@
+---
+permalink: unix-installation-7mode/concept-what-a-rollback-is.html 
+sidebar: sidebar 
+keywords: rollback, operation, enable, revert, version, snapmanager, perform, roll, upgrade 
+summary: 'L"opération de restauration vous permet de revenir à une version antérieure de SnapManager après une mise à niveau par roulement.' 
+---
+= Qu'est-ce qu'un retour arrière
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+L'opération de restauration vous permet de revenir à une version antérieure de SnapManager après une mise à niveau par roulement.
+
+
+NOTE: Avant d'effectuer une restauration, vous devez vous assurer que tous les hôtes sous la base de données du référentiel peuvent être résolus.
+
+Lorsque vous effectuez une restauration, les éléments suivants sont redéployés :
+
+* Les sauvegardes qui ont été créées, libérées et supprimées à l'aide de la version SnapManager à partir de laquelle vous revenez
+* Clones créés à partir d'une sauvegarde créée à l'aide de la version SnapManager à partir de laquelle vous revenez
+* Les informations d'identification du profil modifiées à l'aide de la version SnapManager à partir de laquelle vous revenez
+* L'état de protection de la sauvegarde a été modifié à l'aide de la version SnapManager à partir de laquelle vous revenez
+
+
+Les fonctionnalités disponibles dans la version SnapManager que vous utilisiez mais qui ne sont pas disponibles dans la version à laquelle vous êtes revenu ne sont pas prises en charge. Par exemple, lorsque vous effectuez une restauration de SnapManager 3.3 ou version ultérieure vers SnapManager 3.1, le jeu de configuration de l'historique pour les profils dans SnapManager 3.3 ou version ultérieure n'est pas restauré sur les profils dans SnapManager 3.1. Ceci est dû au fait que la fonctionnalité de configuration de l'historique n'était pas disponible dans SnapManager 3.1.

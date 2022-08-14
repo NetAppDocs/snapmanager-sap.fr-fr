@@ -1,0 +1,154 @@
+---
+permalink: unix-installation-7mode/concept-smsap-isg-defining-a-backup-strategy.html 
+sidebar: sidebar 
+keywords: define, defining, backup, strategy, creating, create, ensure, service, level, agreement, sla 
+summary: 'La définition d"une stratégie de sauvegarde avant la création de vos sauvegardes garantit que vous avez des sauvegardes pour restaurer correctement vos bases de données. SnapManager propose un programme de sauvegarde granulaire flexible adapté à vos contrats de niveau de service.' 
+---
+= Définition d'une stratégie de sauvegarde
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La définition d'une stratégie de sauvegarde avant la création de vos sauvegardes garantit que vous avez des sauvegardes pour restaurer correctement vos bases de données. SnapManager propose un programme de sauvegarde granulaire flexible adapté à vos contrats de niveau de service.
+
+
+NOTE: Pour connaître les meilleures pratiques SnapManager, consultez le document _TR 3761_.
+
+
+
+== Quel mode de sauvegarde SnapManager avez-vous besoin ?
+
+SnapManager prend en charge deux modes de sauvegarde :
+
+[cols="1a,3a"]
+|===
+| Mode de sauvegarde | Description 
+
+
+ a| 
+Sauvegarde en ligne
+ a| 
+Crée une sauvegarde de la base de données lorsque la base de données est en ligne. Ce mode de sauvegarde est également appelé sauvegarde à chaud.
+
+
+
+ a| 
+Sauvegarde hors ligne
+ a| 
+Crée une sauvegarde de la base de données lorsque la base de données est montée ou arrêtée. Ce mode de sauvegarde est également appelé sauvegarde à froid.
+
+|===
+
+
+== Quel type de sauvegarde SnapManager avez-vous besoin ?
+
+SnapManager prend en charge trois types de sauvegardes :
+
+[cols="1a,3a"]
+|===
+| Type de sauvegarde | Description 
+
+
+ a| 
+Sauvegarde complète
+ a| 
+Crée une sauvegarde de l'ensemble de la base de données, qui inclut tous les fichiers de données, les fichiers de contrôle et les fichiers journaux d'archivage.
+
+
+
+ a| 
+Sauvegarde partielle
+ a| 
+Crée une sauvegarde des fichiers de données sélectionnés, des fichiers de contrôle, des espaces de stockage et des fichiers journaux d'archivage
+
+
+
+ a| 
+Archiver la sauvegarde des journaux uniquement
+ a| 
+Crée une sauvegarde des fichiers journaux d'archive uniquement.vous devez sélectionner *Backup Archiveils séparément* lors de la création du profil.
+
+|===
+
+
+== Quel type de profil de base de données avez-vous besoin ?
+
+SnapManager crée des sauvegardes selon que le profil de base de données sépare les sauvegardes du journal d'archivage des sauvegardes des fichiers de données.
+
+[cols="2a,3a"]
+|===
+| Type de profil | Description 
+
+
+ a| 
+Un profil de base de données unique pour la sauvegarde combinée des fichiers de données et des journaux d'archivage
+ a| 
+Permet de créer :
+
+* Sauvegarde complète contenant tous les fichiers de données, les fichiers journaux d'archive et les fichiers de contrôle
+* Sauvegarde partielle contenant les fichiers de données sélectionnés, les espaces de stockage, les fichiers journaux d'archive et les fichiers de contrôle
+
+
+
+
+ a| 
+Profils de base de données séparés pour la sauvegarde des journaux d'archive et la sauvegarde des fichiers de données
+ a| 
+Permet de créer :
+
+* Sauvegarde combinée avec différentes étiquettes pour la sauvegarde des fichiers de données et le journal d'archivage
+* Sauvegarde des fichiers de données uniquement de tous les fichiers de données ainsi que des fichiers de contrôle
+* Sauvegarde partielle des fichiers de données uniquement des fichiers de données ou espaces de stockage sélectionnés avec les fichiers de contrôle
+* Sauvegarde des journaux d'archives uniquement
+
+
+|===
+
+
+== Quelles conventions de nom doivent être utilisées pour les copies Snapshot ?
+
+Les copies Snapshot créées par les sauvegardes peuvent respecter une convention de nom personnalisée. Des variables de texte personnalisées ou intégrées telles que le nom du profil, le nom de la base de données et le SID de la base de données fourni par SnapManager peuvent être utilisées pour créer la convention de nommage. Vous pouvez créer la convention de dénomination lors de la création de la règle.
+
+
+NOTE: Vous devez inclure la variable smid dans le format d'attribution de nom. La variable smid crée un identifiant de snapshot unique.
+
+La convention de nom de la copie Snapshot peut être modifiée pendant ou après la création d'un profil. La mise à jour s'applique uniquement aux copies Snapshot qui n'ont pas encore été créées. Les copies Snapshot existantes conservent le modèle précédent.
+
+
+
+== Combien de temps souhaitez-vous conserver des copies de sauvegarde sur le système de stockage primaire et le système de stockage secondaire ?
+
+Une stratégie de conservation des sauvegardes spécifie le nombre de sauvegardes réussies à conserver. Vous pouvez spécifier la stratégie de conservation lors de la création de la stratégie.
+
+Vous pouvez sélectionner horaire, quotidien, hebdomadaire, mensuel ou illimité comme classe de rétention. Pour chaque classe de rétention, vous pouvez spécifier le nombre de rétention et la durée de conservation, ensemble ou individuellement.
+
+* Le nombre de rétention détermine le nombre minimum de sauvegardes d'une classe de rétention particulière qui doit être conservée.
++
+Par exemple, si le programme de sauvegarde est _Daily_ et que le nombre de rétention est _10_, 10 sauvegardes quotidiennes sont conservées.
+
++
+
+NOTE: Le nombre maximal de copies Snapshot autorisé par Data ONTAP est de 255. Dès qu'elle atteint la limite maximale, la création de nouvelles copies Snapshot échoue par défaut. Vous pouvez cependant configurer la règle de rotation dans Data ONTAP pour supprimer d'anciennes copies Snapshot.
+
+* La durée de conservation détermine le nombre minimum de jours pendant lesquels la sauvegarde doit être conservée.
++
+Par exemple, si la planification de sauvegarde est _Daily_ et la durée de conservation est _10_, alors 10 jours de sauvegardes quotidiennes sont conservés.
+
+
+
+Si vous configurez la réplication SnapMirror, la règle de conservation est mise en miroir sur le volume de destination.
+
+
+NOTE: Pour la conservation à long terme des copies de sauvegarde, nous vous recommandons d'utiliser SnapVault.
+
+
+
+== Voulez-vous vérifier les copies de sauvegarde à l'aide du volume source ou du volume de destination ?
+
+Si vous utilisez SnapMirror ou SnapVault, vous pouvez vérifier les copies de sauvegarde à l'aide de la copie Snapshot sur le volume de destination SnapMirror ou SnapVault plutôt que la copie Snapshot sur le système de stockage primaire. L'utilisation d'un volume de destination pour la vérification réduit la charge sur le système de stockage primaire.
+
+*Informations connexes*
+
+http://www.netapp.com/us/media/tr-3761.pdf["Rapport technique de NetApp 3761 : SnapManager pour Oracle : meilleures pratiques"^]

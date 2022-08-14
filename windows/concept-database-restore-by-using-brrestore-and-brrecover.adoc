@@ -1,0 +1,25 @@
+---
+permalink: windows/concept-database-restore-by-using-brrestore-and-brrecover.html 
+sidebar: sidebar 
+keywords: brrestore, brrecover, command, work, backup, brbackup, database, restore 
+summary: 'Les commandes BRRESTORE et BRRECOVER fonctionnent uniquement avec les sauvegardes créées à l"aide de BRBACKUP.' 
+---
+= Restauration de la base de données à l'aide de BRRESTORE et BRRECOVER
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le `BRRESTORE` et `BRRECOVER` les commandes fonctionnent uniquement avec les sauvegardes créées à l'aide de `BRBACKUP`.
+
+Reportez-vous à la documentation SAP pour obtenir des instructions spécifiques et la syntaxe du `BRRESTORE` et `BRRECOVER` commandes.
+
+Si le nom du profil SnapManager est différent de l'identificateur du système de la base de données SAP, vous devez spécifier le nom du fichier de paramètres contenant le nom du profil SnapManager. Vous pouvez effectuer cette opération de l'une des manières suivantes :
+
+* Spécifiez le fichier de paramètres de l'utilitaire de sauvegarde (`initSID.utl`) à l'aide de l' `-r` dans le `BRBACKUP` commande.
+* Spécifiez le fichier de paramètres dans le fichier d'initialisation BR*Tools (`initSID.sap`).
+
+
+
+NOTE: Les sauvegardes (fichiers de données, fichiers de contrôle ou fichiers journaux de reprise en ligne) créées à l'aide de `BRBACKUP` restauration possible à partir de systèmes de stockage secondaires ou tertiaires à l'aide de l' `smsap` `restore` commande. Cependant, il est recommandé de sauvegarder les autres fichiers de configuration SAP, par exemple les fichiers journaux SAP, les fichiers de noyau et les demandes de transport à l'aide de `BRBACKUP` avec `SAP_DIR`, et restaurez à l'aide de `BRRESTORE`.

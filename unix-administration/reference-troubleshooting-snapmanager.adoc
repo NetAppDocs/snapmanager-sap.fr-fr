@@ -1,0 +1,302 @@
+---
+permalink: unix-administration/reference-troubleshooting-snapmanager.html 
+sidebar: sidebar 
+keywords: information, common, issue, resolve, troubleshooting, snapmanager 
+summary: Vous trouverez des informations sur certains des problèmes les plus courants qui peuvent survenir et sur la façon de les résoudre. 
+---
+= Dépannage de SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous trouverez des informations sur certains des problèmes les plus courants qui peuvent survenir et sur la façon de les résoudre.
+
+Le tableau suivant décrit les problèmes courants et les solutions possibles :
+
+[cols="1a,3a"]
+|===
+| Question axée sur les problèmes | Solution possible 
+
+
+ a| 
+La base de données cible et l'écouteur sont-ils en cours d'exécution ?
+ a| 
+Exécutez le `lsnrctl status` commande. Assurez-vous que l'instance de base de données est enregistrée avec l'écouteur.
+
+
+
+ a| 
+Le stockage est-il visible ?
+ a| 
+Exécutez le `snapdrive storage show -all` commande.
+
+
+
+ a| 
+Le stockage est-il inscriptible ?
+ a| 
+Modifiez un fichier dans le point de montage que vous venez de créer. Utilisez le `touch filename` commande. Si le fichier est créé, votre stockage est accessible en écriture. Vous devez vous assurer que le stockage est inscriptible par l'utilisateur sous lequel SnapManager s'exécute (par exemple, en tant que root sous UNIX).
+
+
+
+ a| 
+Le serveur SnapManager fonctionne-t-il ?
+ a| 
+Courez `smsap_server status` et essayez de démarrer le serveur à l'aide de `smsap_server start` commande.
+
+Avant de pouvoir utiliser l'interface utilisateur graphique ou l'interface de ligne de commande pour lancer des commandes SnapManager relatives aux profils, le serveur doit être en cours d'exécution. Vous pouvez créer ou mettre à jour des référentiels sans démarrer le serveur, mais pour exécuter toutes les autres opérations SnapManager, le serveur doit être en cours d'exécution.
+
+Pour démarrer le serveur SnapManager, saisissez la commande suivante : ``smsap_server start.``
+
+
+
+ a| 
+Est-ce que tous les composants sont nécessaires pour exécuter la configuration SnapManager correctement ?
+ a| 
+Exécutez le `smsap system verify` Pour vérifier que le SnapDrive est correctement configuré.
+
+
+
+ a| 
+Disposez-vous de la bonne version de SnapManager ?
+ a| 
+Utilisez le `smsap version` Commande pour vérifier la version de SnapManager.
+
+
+
+ a| 
+Avez-vous consulté les fichiers journaux de SnapManager pour déterminer si les messages d'erreur peuvent aider à isoler le problème ?
+ a| 
+SnapManager enregistre toutes les entrées de journal dans un ensemble de fichiers journaux rotatifs. Les fichiers journaux sont trouvés à l'adresse ``/var/log/smsap.``
+
+Les fichiers journaux sont trouvés à l'adresse ``C:\program_files\NetApp\SnapManager for SAP\logs.``
+
+Il peut également être utile d'examiner les journaux à l'emplacement suivant :
+
+``/usr_home/.netapp/smsap/3.3.0/log/``
+
+Chaque journal d'opération est écrit dans son propre fichier journal du formulaire `smsap_of_date_time.log.`
+
+
+
+ a| 
+Si vos journaux d'archivage sont stockés sur un système de stockage qui n'exécute pas Data ONTAP, êtes-vous exclu de l'envisager pour la sauvegarde avec SnapManager ?
+ a| 
+Le `smsap.config` fichier vous permet d'exclure certains fichiers journaux d'archives. Pour UNIX, les fichiers se trouvent à l'emplacement suivant : `/opt/NetApp/smsap/properties/smsap.config`
+
+Utilisez le format mentionné dans le fichier pour exclure les journaux d'archive locaux. Pour plus d'informations, reportez-vous à la rubrique "Définition des propriétés de configuration".
+
+Vous pouvez également exclure les destinations du journal d'archivage lors de la création d'une sauvegarde à partir de l'interface de ligne de commande SnapManager. Pour plus d'informations, consultez la rubrique « création de sauvegardes de bases de données ».
+
+Vous pouvez également exclure les destinations du journal d'archivage lors de la création d'une sauvegarde à partir de l'interface graphique de SnapManager.
+
+
+
+ a| 
+Possédez-vous une licence FlexClone si vous utilisez SnapManager avec des bases de données NFS ?
+ a| 
+Une licence FlexClone est nécessaire pour exploiter pleinement SnapManager avec des bases de données NFS. SnapManager utilise la fonctionnalité FlexClone pour réaliser les tâches suivantes :
+
+* Montez les sauvegardes des bases de données NFS
+* Vérifier les sauvegardes des bases de données NFS
+* Clonage des bases de données NFS
+
+
+
+
+ a| 
+Vous n'avez pas pu vous connecter au référentiel ?
+ a| 
+Si la connexion à un référentiel échoue, exécutez le `lsnrctl status` commande sur la base de données du référentiel et vérifier les noms de service actifs. Lorsque SnapManager se connecte à la base de données du référentiel, il utilise le nom de service de la base de données. Selon la configuration de l'écouteur, il peut s'agir du nom de service court ou du nom de service complet. Lorsque SnapManager se connecte à une base de données pour une opération de sauvegarde, de restauration ou autre, il utilise le nom d'hôte et le SID. Si le référentiel ne s'initialise pas correctement parce qu'il est actuellement inaccessible, vous recevez un message d'erreur vous demandant si vous souhaitez supprimer le référentiel. Vous pouvez supprimer le référentiel de votre vue actuelle afin que vous puissiez effectuer des opérations sur d'autres référentiels.
+
+Vérifiez également si l'instance de référentiel est en cours d'exécution en exécutant le `ps -eaf grep _instance - name_` commande.
+
+
+
+ a| 
+Le système peut-il résoudre le nom d'hôte ?
+ a| 
+Vérifiez si le nom d'hôte spécifié se trouve sur un sous-réseau différent. Si vous recevez un message d'erreur indiquant que SnapManager ne parvient pas à résoudre le nom d'hôte, ajoutez le nom d'hôte dans le fichier hôte.Ajoutez le nom d'hôte au fichier situé à `/etc/hosts:`
+
+`*xxx.xxx.xxx.xxx hostname IP address*`
+
+
+
+ a| 
+SnapDrive fonctionne-t-il ?
+ a| 
+Vérifiez si le démon SnapDrive est en cours d'exécution :
+
+`*-snapdrived status*`
+
+Si le démon n'est pas en cours d'exécution, un message s'affiche indiquant qu'il y a une erreur de connexion.
+
+
+
+ a| 
+Quels systèmes de stockage sont configurés pour être accessibles avec SnapDrive ?
+ a| 
+Lancer la commande :
+
+`*-snapdrive config list*`
+
+
+
+ a| 
+Comment améliorer les performances de l'interface graphique SnapManager ?
+ a| 
+* Assurez-vous que vous disposez d'informations d'identification valides pour le référentiel, l'hôte de profil et le profil.
++
+Si vos informations d'identification ne sont pas valides, effacez les informations d'identification de l'utilisateur pour le référentiel, l'hôte du profil et le profil. Réinitialisez les mêmes informations d'identification utilisateur que celles que vous avez définies avant pour le référentiel, l'hôte du profil et le profil. Pour plus d'informations sur la nouvelle définition des informations d'identification de l'utilisateur, reportez-vous à la section «Définition des informations d'identification après effacement du cache des informations d'identification».
+
+* Fermez les profils inutilisés.
++
+Si le nombre de profils que vous avez ouverts est plus élevé, les performances de l'interface graphique de SnapManager ralentissent.
+
+* Vérifiez si vous avez activé *Ouvrir au démarrage* dans la fenêtre Préférences utilisateur du menu *Admin*, dans l'interface utilisateur graphique de SnapManager.
++
+Si cette option est activée, la configuration utilisateur `(user.config) file available at /root/.netapp/smsap/3.3.0/gui/state is displayed as openOnStartup=PROFILE.`
+
++
+Comme *Ouvrir au démarrage* est activé, vous devez vérifier les profils ouverts récemment à partir de l'interface utilisateur graphique SnapManager, à l'aide de `lastOpenProfiles` dans la configuration utilisateur `(user.config)` fichier : `lastOpenProfiles=_PROFILE1,PROFILE2,PROFILE3,..._`
+
++
+Vous pouvez supprimer les noms de profil répertoriés et conserver toujours un nombre minimum de profils ouverts.
+
+* L'actualisation du profil protégé prend plus de temps que celle du profil non protégé.
++
+Le profil protégé est actualisé à un intervalle de temps, en fonction de la valeur spécifiée dans le `protectionStatusRefreshRate` paramètre de la configuration utilisateur `(user.config)` fichier.
+
++
+Vous pouvez augmenter la valeur par défaut (300 secondes) pour que les profils protégés soient actualisés uniquement après l'intervalle de temps spécifié.
+
+* Avant d'installer la nouvelle version de SnapManager sur l'environnement UNIX, supprimez les entrées côté client SnapManager disponibles à l'emplacement suivant :
++
+`/root/.netapp`
+
+
+
+
+
+ a| 
+L'interface graphique de SnapManager prend plus de temps lors de l'actualisation lorsque plusieurs opérations SnapManager sont démarrées et exécutées simultanément en arrière-plan. Lorsque vous cliquez avec le bouton droit de la souris sur la sauvegarde (qui est déjà supprimée mais s'affiche toujours dans l'interface graphique de SnapManager), les options de sauvegarde pour cette sauvegarde ne sont pas activées dans la fenêtre sauvegarde ou clonage.
+ a| 
+Vous devez patienter jusqu'à ce que l'interface graphique de SnapManager soit actualisée, puis vérifier l'état de la sauvegarde.
+
+
+
+ a| 
+Que feriez-vous lorsque la base de données Oracle n'est pas définie en anglais ?
+ a| 
+Les opérations SnapManager peuvent échouer si la langue d'une base de données Oracle n'est pas définie sur l'anglais. Définissez la langue de la base de données Oracle sur Anglais :
+
+. Ajoutez ce qui suit sous les commentaires initiaux dans `/etc/init.d/smsap_server`
++
+** NLS_LANG=American_America
+** Exporter NLS_LANG
+
+
+. Redémarrez le serveur SnapManager à l'aide de la commande suivante : `smsap_server restart`
+
+
+
+NOTE: Si les scripts de connexion tels que `.bash_profile, .bashrc,` et `.cshrc` Pour l'utilisateur Oracle est défini sur `*NLS_LANG*`, vous devez modifier le script pour qu'il ne soit pas remplacé `*NLS_LANG*`.
+
+
+
+ a| 
+Que faites-vous lorsque l'opération de planification de la sauvegarde échoue si la base de données du référentiel pointe vers plusieurs adresses IP et que chaque adresse IP possède un nom d'hôte différent ?
+ a| 
+. Arrêtez le serveur SnapManager.
+. Supprimez les fichiers de planification du répertoire de référentiel des hôtes sur lesquels vous souhaitez déclencher la planification de sauvegarde.
++
+Les noms des fichiers de planification peuvent être dans les formats suivants :
+
++
+** `repository#repo_username#repository_database_name#repository_host#repo_port`
+** `repository-repo_usernamerepository_database_name-repository_host-repo_port`
++
+
+NOTE: Vous devez vous assurer que vous supprimez le fichier de planification au format qui correspond aux détails du référentiel.
+
+
+
+. Redémarrez le serveur SnapManager.
+. Ouvrez d'autres profils sous le même référentiel à partir de l'interface graphique SnapManager pour vous assurer que vous ne manquez aucune information de planification de ces profils.
+
+
+
+
+ a| 
+Que feriez-vous lorsque l'opération SnapManager échoue avec une erreur de verrouillage des fichiers d'informations d'identification ?
+ a| 
+SnapManager verrouille le fichier d'informations d'identification avant sa mise à jour et le déverrouille après sa mise à jour.lorsque plusieurs opérations s'exécutent simultanément, l'une des opérations peut verrouiller le fichier d'informations d'identification pour le mettre à jour. Si une autre opération tente d'accéder au fichier d'informations d'identification verrouillé en même temps, l'opération échoue avec l'erreur de verrouillage de fichier.
+
+Configurez les paramètres suivants dans le fichier smsap.config en fonction de la fréquence des opérations simultanées :
+
+* `fileLock.retryInterval` = 100 millisecondes
+* `fileLock.timeout` = 5000 millisecondes
+
+
+
+NOTE: Les valeurs attribuées aux paramètres doivent être en millisecondes.
+
+
+
+ a| 
+Que faites-vous lorsque l'état intermédiaire de l'opération de vérification de sauvegarde indique échec dans l'onglet moniteur même si l'opération de vérification de sauvegarde est toujours en cours d'exécution ?
+ a| 
+Le message d'erreur est consigné dans le fichier sm_gui.log. Vous devez consulter le fichier journal pour déterminer les nouvelles valeurs de l'opération.hearbeatInterval et opération.hearbeatThreshold paramètres qui résoudront ce problème.
+
+. Ajoutez les paramètres suivants dans le fichier smsap.config :
++
+** `operation.heartbeatInterval` = 5000
+** `operation.heartbeatThreshold` = 5000 la valeur par défaut attribuée par SnapManager est 5000.
+
+
+. Attribuez les nouvelles valeurs à ces paramètres.
++
+
+NOTE: Les valeurs attribuées aux paramètres doivent être en millisecondes.
+
+. Redémarrez le serveur SnapManager et effectuez de nouveau l'opération.
+
+
+
+
+ a| 
+Que faire lorsque vous rencontrez un problème d'espace de tas ?
+ a| 
+Lorsque vous rencontrez un problème d'espace mémoire lors des opérations SnapManager pour SAP, vous devez effectuer les opérations suivantes :
+
+. Accédez au répertoire d'installation de SnapManager pour SAP.
+. Ouvrez le `launchjava` fichier du `_installationdirectory_/bin/launchjava` chemin.
+. Augmenter la valeur de `java -Xmx160m` Paramètre d'espace mémoire Java.
++
+Par exemple, vous pouvez augmenter la valeur par défaut de 160m à 200m.
+
++
+
+NOTE: Si vous avez augmenté la valeur du paramètre Java Heap-space dans les versions antérieures de SnapManager pour SAP, vous devez conserver cette valeur.
+
+
+
+
+
+ a| 
+Que feriez-vous si vous ne pouvez pas utiliser les sauvegardes protégées pour la restauration ou le clonage ?
+ a| 
+Ce problème est observé si vous utilisiez SnapManager 3.3.1 avec clustered Data ONTAP et que vous avez effectué la mise à niveau vers SnapManager 3.4. Les sauvegardes étaient protégées par des scripts post dans SnapManager 3.3.1. À partir de SnapManager 3.4, les sauvegardes sont protégées via des stratégies _SnapManager_cdot_Mirror_ ou _SnapManager_cdot_Vault_ sélectionnées lors de la création d'un profil.après la mise à niveau vers SnapManager 3.4, il est possible que vous utilisiez les anciens profils et que les sauvegardes soient protégées par des scripts de sauvegarde, Toutefois, vous ne pouvez pas les utiliser pour la restauration ou le clonage via SnapManager.
+
+Vous devez mettre à jour le profil et sélectionner la stratégie _SnapManager_cdot_Mirror_ ou _SnapManager_cdot_Vault_ et supprimer le post-script utilisé pour la protection des données dans SnapManager 3.3.1.
+
+
+
+ a| 
+Que feriez-vous si les sauvegardes planifiées ne sont pas protégées par la technologie SnapVault ?
+ a| 
+Après la mise à niveau vers SnapManager 3.4 et la mise à jour du profil pour utiliser la stratégie de protection _SnapManager_cdot_Vault_ policy, vous devez supprimer les anciens calendriers de sauvegarde et créer de nouvelles planifications afin de spécifier l'étiquette SnapVault lors de la création de la planification.
+
+|===

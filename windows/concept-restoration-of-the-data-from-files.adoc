@@ -1,0 +1,18 @@
+---
+permalink: windows/concept-restoration-of-the-data-from-files.html 
+sidebar: sidebar 
+keywords: restore, alternate, location, file, storage, media, application, snapvault, snapmirror, system, local, host 
+summary: 'Avant de procéder à la restauration à partir d"un autre emplacement, vous devez restaurer les fichiers nécessaires à partir de n"importe quel support de stockage et restaurer les fichiers à partir d"applications telles que SnapVault ou SnapMirror vers un système de fichiers monté sur l"hôte local.' 
+---
+= Restauration des données à partir des fichiers
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de procéder à la restauration à partir d'un autre emplacement, vous devez restaurer les fichiers nécessaires à partir de n'importe quel support de stockage et restaurer les fichiers à partir d'applications telles que SnapVault ou SnapMirror vers un système de fichiers monté sur l'hôte local.
+
+Vous pouvez utiliser l'opération de restauration à partir d'un autre emplacement pour copier les fichiers d'un autre système de fichiers vers un système de fichiers actif.
+
+Vous devez spécifier les autres emplacements à partir desquels restaurer les fichiers d'origine en créant une spécification de restauration.

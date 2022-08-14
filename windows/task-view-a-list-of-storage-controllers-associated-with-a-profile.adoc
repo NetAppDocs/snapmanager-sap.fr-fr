@@ -1,0 +1,46 @@
+---
+permalink: windows/task-view-a-list-of-storage-controllers-associated-with-a-profile.html 
+sidebar: sidebar 
+keywords: view, list, storage, system, associate, particular, profile 
+summary: Vous pouvez afficher la liste des systèmes de stockage associés à un profil particulier. 
+---
+= Afficher la liste des systèmes de stockage associés à un profil
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez afficher la liste des systèmes de stockage associés à un profil particulier.
+
+
+
+== Description de la tâche
+
+La liste affiche les noms du système de stockage associés au profil particulier.
+
+
+NOTE: Si aucune sauvegarde n'est disponible pour le profil, vous ne pouvez pas afficher le nom du système de stockage associé au profil.
+
+.Étape
+. Pour afficher des informations sur les systèmes de stockage associés à un profil particulier, entrez la commande suivante :
++
+`*smsap storage list -profile _profile_ [-quiet | -verbose]*`
+
+
+
+
+
+== Exemple
+
+[listing]
+----
+smsap storage list -profile mjubllian
+----
+[listing]
+----
+Sample Output:
+Storage Controllers
+--------------------
+STCO1110-RTP07OLD
+----

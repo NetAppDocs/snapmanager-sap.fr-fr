@@ -1,0 +1,62 @@
+---
+permalink: windows/concept-integration-with-other-netapp-applications-and-technologies.html 
+sidebar: sidebar 
+keywords: snapmanager, sap, stand-alone, product, integrate, feature, netapp, enable, backup, amount, space, integration, application, technology, technologies 
+summary: 'SnapManager for SAP est un produit autonome qui intègre les fonctionnalités des autres produits NetApp afin de permettre des sauvegardes rapides dont l"espace requis est minime.' 
+---
+= Intégration aux autres applications et technologies NetApp
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager for SAP est un produit autonome qui intègre les fonctionnalités des autres produits NetApp afin de permettre des sauvegardes rapides dont l'espace requis est minime.
+
+SnapManager s'intègre avec les technologies et les applications suivantes :
+
+|===
+| Applications et technologies | Description 
+
+
+ a| 
+SnapDrive
+ a| 
+SnapManager utilise SnapDrive pour créer des copies Snapshot du stockage. Les copies Snapshot garantissent que les sauvegardes sont compactes et rapides à créer, par rapport aux sauvegardes disque à disque.
+
+
+
+ a| 
+FlexClone (fonction sous licence de Data ONTAP)
+ a| 
+SnapManager utilise la fonctionnalité FlexClone pour créer des clones de sauvegardes rapides et compacts.
+
+
+
+ a| 
+Snapshot (une fonctionnalité de Data ONTAP)
+ a| 
+La technologie Snapshot crée des copies instantanées de la base de données.
+
+
+
+ a| 
+SnapRestore (une fonctionnalité sous licence de Data ONTAP)
+ a| 
+SnapManager réduit le délai moyen de restauration d'une base de données grâce à SnapRestore. SnapRestore peut restaurer des fichiers individuels sur un volume de plusieurs téraoctets afin que les opérations puissent reprendre rapidement.
+
+
+
+ a| 
+SnapVault (une fonctionnalité sous licence de Data ONTAP)
+ a| 
+SnapVault tire parti des sauvegardes sur disque pour réaliser des sauvegardes et des restaurations fiables et sans surcharge des bases de données.
+
+
+
+ a| 
+SnapMirror (une fonctionnalité sous licence de Data ONTAP)
+ a| 
+SnapMirror réplique rapidement les données de base de données sur un réseau global. La solution est simple, fiable et économique.
+
+|===

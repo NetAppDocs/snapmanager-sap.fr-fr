@@ -1,0 +1,70 @@
+---
+permalink: unix-administration/concept-database-backup-management.html 
+sidebar: sidebar 
+keywords: snapmanager, enable, data, local, storage, resource, post-processing, script, protect, secondary, tertiary, additional, layer, disaster, back, up, database 
+summary: 'NapManager permet de sauvegarder des données sur des ressources de stockage locales à l"aide de scripts de post-traitement ou en protégeant les sauvegardes sur des ressources de stockage secondaires ou tertiaires. La possibilité de sauvegarder vers un stockage secondaire est d"autant plus possible qu"une couche supplémentaire qui préserve les données en cas d"incident.' 
+---
+= Sauvegarde des bases de données
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager permet de sauvegarder les données sur des ressources de stockage locales à l'aide de scriptlet post-traitement, en protégeant les sauvegardes sur les ressources de stockage secondaires ou tertiaires. La possibilité de sauvegarder vers un stockage secondaire est d'autant plus possible qu'une couche supplémentaire qui préserve les données en cas d'incident.
+
+SnapManager permet également aux administrateurs du stockage de configurer leurs sauvegardes en fonction de plans de stratégie. SnapManager permet aux administrateurs d'identifier les sauvegardes qui ne respectent pas les exigences stratégiques et de rectifier immédiatement celles-ci.
+
+SnapManager propose les options suivantes pour sauvegarder, restaurer et restaurer les données de votre base de données :
+
+* Sauvegardez toute la base de données ou une partie de celle-ci.
++
+Si vous sauvegardez une partie de cette sauvegarde, spécifiez un groupe d'espaces de stockage ou un groupe de fichiers de données.
+
+* Sauvegardez les fichiers de données et les fichiers journaux séparément.
+* Sauvegarder les bases de données sur un stockage primaire (également appelé stockage local) et les protéger en les sauvegardant sur des systèmes de stockage secondaires ou tertiaires (également appelés stockage distant).
+* Planifiez des sauvegardes de routine.
+
+
+*La façon dont SnapManager (3.2 ou version ultérieure) diffère des versions antérieures de SnapManager*
+
+SnapManager (version 3.1 ou antérieure) vous permet de créer des sauvegardes complètes de bases de données contenant des fichiers de données, des fichiers de contrôle et des fichiers journaux d'archivage.
+
+SnapManager (version 3.1 ou antérieure) gère uniquement les fichiers de données. Les fichiers journaux d'archives sont gérés à l'aide de solutions externes à SnapManager.
+
+SnapManager (3.1 ou version antérieure) impose les contraintes suivantes de gestion des sauvegardes de bases de données :
+
+* Impact sur les performances
++
+Lorsque vous effectuez une sauvegarde complète de la base de données en ligne (lorsque la base de données est en mode de sauvegarde), les performances de la base de données diminuent pendant le temps jusqu'à ce que la sauvegarde soit créée. Dans SnapManager (3.2 ou version ultérieure), il est possible de réaliser des sauvegardes limitées des bases de données et des journaux d'archivage fréquents. L'utilisation de sauvegardes fréquentes des journaux d'archivage permet d'éviter que la base de données ne soit placée en mode de sauvegarde.
+
+* Restauration et récupération manuelles
++
+Lorsque les fichiers journaux d'archives requis n'existent pas dans le système de fichiers actif, les administrateurs de bases de données doivent identifier quelle sauvegarde contient les fichiers journaux d'archives, monter les sauvegardes de la base de données et récupérer la base de données restaurée. Ce processus prend beaucoup de temps.
+
+* Contraintes d'espace
++
+Lorsqu'une sauvegarde de base de données est créée, les destinations du journal d'archivage deviennent pleines et la base de données ne répond pas tant que l'espace disponible n'est pas suffisant. Dans SnapManager (3.2 ou version ultérieure), les fichiers journaux d'archives peuvent être élagués à partir du système de fichiers actif pour libérer de l'espace périodiquement.
+
+
+
+*Pourquoi les sauvegardes des journaux d'archives sont importantes*
+
+Les fichiers journaux d'archive sont nécessaires pour faire avancer la base de données après une opération de restauration. Chaque transaction d'une base de données Oracle est capturée dans les fichiers journaux d'archives (si la base de données est en mode de journal d'archivage). Les administrateurs de bases de données peuvent restaurer les sauvegardes de bases de données à l'aide des fichiers journaux d'archive.
+
+*Avantages des sauvegardes archivelog*
+
+* Offre une durée de conservation distincte pour les sauvegardes archiveelog uniquement
++
+Vous pouvez avoir une durée de rétention moindre pour les sauvegardes archivelog uniquement requises pour la restauration.
+
+* Protège les sauvegardes archivelog uniquement en fonction des règles de protection des journaux d'archives
++
+Vous pouvez sélectionner différentes stratégies de protection pour les sauvegardes archiveelog uniquement en fonction de leurs besoins.
+
+* Améliore les performances de la base de données
+* Consolidation des sauvegardes des journaux d'archivage
++
+SnapManager consolide les sauvegardes des journaux d'archive à chaque fois que vous effectuez une sauvegarde en libérant les doublons de sauvegardes de journaux d'archive.
+
+

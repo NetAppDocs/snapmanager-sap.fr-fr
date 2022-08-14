@@ -1,0 +1,19 @@
+---
+permalink: windows/concept-snapmanager-repository.html 
+sidebar: sidebar 
+keywords: repository, store, information, snapmanager, operation, time, backup, tablespace, data, data, file, storage, system, clone, snapshot, copies, copy, create 
+summary: Le référentiel stocke les informations relatives aux différentes opérations SnapManager, par exemple la durée des sauvegardes, des espaces de stockage et des fichiers de données sauvegardés, les systèmes de stockage utilisés, les clones et les copies Snapshot créées. 
+---
+= Référentiel SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le référentiel stocke les informations relatives aux différentes opérations SnapManager, par exemple la durée des sauvegardes, des espaces de stockage et des fichiers de données sauvegardés, les systèmes de stockage utilisés, les clones et les copies Snapshot créées.
+
+La base de données de référentiel ne peut pas exister dans la même base de données et ne peut pas faire partie de la même base de données que SnapManager sauvegarde. En effet, le référentiel stocke les noms des copies Snapshot de base de données créées au cours des opérations de sauvegarde. Le référentiel doit être créé dans une base de données différente de la base de données en cours de sauvegarde. Cela signifie que vous devez avoir au moins deux bases de données : la base de données du référentiel SnapManager et la base de données cible gérée par SnapManager. Lorsque vous exécutez les services SnapManager, les bases de données doivent toutes deux être opérationnelles.
+
+
+NOTE: Vous ne devez pas effectuer d'opérations SnapManager à l'aide de l'interface graphique ou de l'interface de ligne de commande lorsque la base de données du référentiel est en panne.

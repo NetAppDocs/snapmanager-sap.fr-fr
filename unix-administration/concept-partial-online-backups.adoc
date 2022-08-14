@@ -1,0 +1,34 @@
+---
+permalink: unix-administration/concept-partial-online-backups.html 
+sidebar: sidebar 
+keywords: full, backup, perform, partial, backup, tablespace, database, snapmanager, online 
+summary: 'Au lieu d"effectuer une sauvegarde complète, vous pouvez effectuer une sauvegarde partielle des espaces de stockage d"une base de données. Tandis que SnapManager effectue une copie Snapshot de volumes pour les sauvegardes complètes, SnapManager effectue une copie Snapshot de chaque espace de stockage spécifié pour des sauvegardes partielles.' 
+---
+= Sauvegardes partielles en ligne
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Au lieu d'effectuer une sauvegarde complète, vous pouvez effectuer une sauvegarde partielle des espaces de stockage d'une base de données. Alors que SnapManager effectue une copie Snapshot des volumes pour les _sauvegardes complètes_, SnapManager effectue une copie Snapshot de chaque espace de stockage spécifié pour les _sauvegardes partielles_.
+
+Étant donné que le niveau de l'espace de table est le niveau le plus bas qu'Oracle autorise en mode sauvegarde, SnapManager traite les sauvegardes au niveau de l'espace de table, même si vous spécifiez un fichier de données dans un espace de table.
+
+Avec une sauvegarde partielle, chaque espace table existe en mode de sauvegarde pendant une durée plus courte que celle d'une sauvegarde complète. Lors d'une sauvegarde en ligne, la base de données est toujours accessible aux utilisateurs. Toutefois, elle doit effectuer davantage d'opérations et l'hôte doit effectuer davantage d'E/S physiques Par ailleurs, étant donné qu'il effectue des copies Snapshot de chaque espace de stockage spécifié ou de chaque espace contenant un fichier de données spécifié au lieu d'un volume entier, SnapManager peut effectuer davantage de copies Snapshot.
+
+SnapManager prend des copies Snapshot de tablespaces ou de fichiers de données spécifiques. L'algorithme de sauvegarde partielle est une boucle que SnapManager répète jusqu'à ce qu'il ait pris une copie Snapshot de chaque espace de table ou fichier de données spécifié.
+
+
+NOTE: Bien que vous puissiez effectuer une sauvegarde partielle, il est recommandé de toujours effectuer une sauvegarde complète de la base de données entière.
+
+Au cours d'une sauvegarde partielle, SnapManager effectue les actions suivantes :
+
+. Place l'espace table contenant les fichiers de données en mode de sauvegarde.
+. Prend une copie Snapshot de tous les volumes utilisés par l'espace de table.
+. Supprime le tablespace du mode de sauvegarde.
+. Ce processus se poursuit jusqu'à ce qu'une copie Snapshot de tous les espaces de stockage ou fichiers ait été effectuée.
+. Force un changement de journal, puis archive les fichiers journaux.
+. Génère des fichiers de contrôle de sauvegarde.
+. Prend une copie Snapshot des fichiers journaux et des fichiers de contrôle de sauvegarde.
+

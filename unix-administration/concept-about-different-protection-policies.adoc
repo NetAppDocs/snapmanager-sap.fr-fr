@@ -1,0 +1,111 @@
+---
+permalink: unix-administration/concept-about-different-protection-policies.html 
+sidebar: sidebar 
+keywords: policies, policy, protect, backup, secondary, tertiary, storage, system, protection 
+summary: Vous pouvez sélectionner différentes règles pour protéger les sauvegardes sur les systèmes de stockage secondaire ou tertiaire. 
+---
+= Environ les différentes règles de protection
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez sélectionner différentes règles pour protéger les sauvegardes sur les systèmes de stockage secondaire ou tertiaire.
+
+Si vous utilisez Data ONTAP 7-mode et que SnapManager est intégré à protection Manager, vous devez sélectionner l'une des règles de protection suivantes lors de la création du profil. La console de gestion de protection Manager fournit des modèles permettant de configurer les règles de protection des jeux de données. Même si les politiques de protection de reprise après incident sont répertoriées dans l'interface utilisateur SnapManager, ces règles ne sont pas prises en charge.
+
+[cols="1a,3a"]
+|===
+| Politique | Description 
+
+
+ a| 
+Sauvegarde
+ a| 
+À l'aide de SnapVault ou de SnapMirror, un jeu de données est sauvegardé localement et depuis le stockage primaire vers le stockage secondaire.
+
+
+
+ a| 
+Sauvegarder, puis mettre en miroir
+ a| 
+Un jeu de données est sauvegardé depuis le stockage principal vers le stockage secondaire à l'aide d'SnapVault ou de SnapMirror, puis est mis en miroir sur un partenaire SnapMirror.
+
+
+
+ a| 
+Copies Snapshot locales uniquement
+ a| 
+Un jeu de données utilise uniquement des copies Snapshot locales dans le système de stockage primaire.
+
+
+
+ a| 
+Miroir
+ a| 
+À l'aide de SnapMirror, un jeu de données est mis en miroir du stockage primaire vers le stockage secondaire.
+
+
+
+ a| 
+Miroir et recul
+ a| 
+Avec SnapMirror, un jeu de données est mis en miroir à partir du stockage primaire vers le stockage secondaire, puis sauvegardé sur le stockage secondaire à l'aide de SnapVault ou de SnapMirror.
+
+
+
+ a| 
+Miroir et miroir
+ a| 
+Un jeu de données est mis en miroir du stockage principal vers le stockage secondaire sur deux partenaires SnapMirror différents.
+
+
+
+ a| 
+Miroir, puis recul
+ a| 
+Avec SnapMirror, un jeu de données est mis en miroir à partir du stockage primaire vers le stockage secondaire, puis sauvegardé sur l'infrastructure de stockage tertiaire à l'aide de SnapVault ou de SnapMirror.
+
+
+
+ a| 
+Miroir, puis miroir
+ a| 
+À l'aide de SnapMirror, un jeu de données est mis en miroir du stockage principal vers le stockage secondaire, puis sur un partenaire SnapMirror supplémentaire.
+
+
+
+ a| 
+Aucune protection
+ a| 
+Un jeu de données ne possède ni copie Snapshot, ni sauvegarde, ni protection contre les copies en miroir.
+
+
+
+ a| 
+Sauvegarde à distance uniquement
+ a| 
+Les données d'un système de stockage sont sauvegardées à distance sur un stockage secondaire à l'aide de SnapVault ou SnapMirror. L'application sous licence ne effectue aucune sauvegarde locale sur le stockage primaire. Cette règle de protection peut être appliquée aux systèmes tiers sur lesquels Open Systems SnapVault est installé.
+
+|===
+Si vous utilisez clustered Data ONTAP, vous devez sélectionner l'une des règles de protection suivantes lors de la création du profil.
+
+[cols="1a,1a"]
+|===
+| Politique | Description 
+
+
+ a| 
+SnapManager_cdot_Mirror
+ a| 
+Met en miroir le système de sauvegarde.
+
+
+
+ a| 
+SnapManager_cdot_Vault
+ a| 
+Conserve la sauvegarde.
+
+|===

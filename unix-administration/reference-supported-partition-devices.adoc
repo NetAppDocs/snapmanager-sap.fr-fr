@@ -1,0 +1,104 @@
+---
+permalink: unix-administration/reference-supported-partition-devices.html 
+sidebar: sidebar 
+keywords: partition, device, support, snapmanager 
+summary: Vous devez connaître les différents périphériques de partition pris en charge par SnapManager. 
+---
+= Périphériques de partition pris en charge
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez connaître les différents périphériques de partition pris en charge par SnapManager.
+
+Le tableau suivant fournit des informations sur les partitions et indique comment elles peuvent être activées pour différents systèmes d'exploitation :
+
+[cols="3a,1a,1a,1a,1a"]
+|===
+| Système d'exploitation | Partition unique | Partition multiple | Périphériques sans partition | Système de fichiers ou périphériques RAW 
+
+
+ a| 
+Red Hat Enterprise Linux 5x
+
+ou
+
+Oracle Enterprise Linux 5 fois
+ a| 
+Oui.
+ a| 
+Non
+ a| 
+Non
+ a| 
+ext3*
+
+
+
+ a| 
+Red Hat Enterprise Linux 6x
+
+ou
+
+Oracle Enterprise Linux 6x
+ a| 
+Oui.
+ a| 
+Non
+ a| 
+Non
+ a| 
+ext3 ou ext4*
+
+
+
+ a| 
+SUSE Linux Enterprise Server 11
+ a| 
+Oui.
+ a| 
+Non
+ a| 
+Non
+ a| 
+ext3*
+
+
+
+ a| 
+SUSE Linux Enterprise Server 10
+ a| 
+Non
+ a| 
+Non
+ a| 
+Oui.
+ a| 
+ext3***
+
+
+
+ a| 
+*
+
+Pour un environnement non MPIO, saisissez la commande suivante :
+
+`sfdisk -uS -f -L -q /dev/ device_name`
+
+Pour un environnement MPIO, entrez les commandes suivantes :
+
+* `sfdisk -uS -f -L -q /dev/ device_name`
+* `kpartx -a -p p /dev/mapper/ device_name`
+
+
+
+
+ a| 
+*_*_* *_* *_* *_*
+
+Sans objet
+
+|===
+Pour plus d'informations sur les versions de système d'exploitation prises en charge, reportez-vous à la matrice d'interopérabilité.

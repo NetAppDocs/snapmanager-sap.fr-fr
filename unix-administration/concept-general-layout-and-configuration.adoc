@@ -1,0 +1,70 @@
+---
+permalink: unix-administration/concept-general-layout-and-configuration.html 
+sidebar: sidebar 
+keywords: recommend, general, database, layout, storage, configuration, help, avoid, issue, relate, disk, group, file, type, tablespace 
+summary: Connaître les configurations générales et de stockage recommandées pour les bases de données peut vous aider à éviter les problèmes liés aux groupes de disques, aux types de fichiers et aux espaces de stockage. 
+---
+= Configurations générales recommandées pour les bases de données et les configurations de stockage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Connaître les configurations générales et de stockage recommandées pour les bases de données peut vous aider à éviter les problèmes liés aux groupes de disques, aux types de fichiers et aux espaces de stockage.
+
+* N'incluez pas de fichiers provenant de plusieurs types de système de fichiers SAN ou de gestionnaire de volumes dans votre base de données.
++
+Tous les fichiers qui font partie d'une base de données doivent résider sur le même type de système de fichiers.
+
+* La baie SnapManager requiert un grand nombre de blocs de 4 Ko.
+* Inclure l'identificateur du système de base de données dans le `oratab` fichier.
++
+Inclure une entrée dans le `oratab` fichier pour chaque base de données à gérer. SnapManager compte sur le `oratab` Fichier pour déterminer quel domicile Oracle utiliser.
+
+
+
+Si vous souhaitez exploiter la nouvelle restauration basée sur les volumes ou la restauration de groupes de disques complets, prenez en compte les consignes suivantes concernant les systèmes de fichiers et les groupes de disques :
+
+* Un groupe de disques contenant des fichiers de données ne peut pas contenir d'autres types de fichiers.
+* Le numéro d'unité logique (LUN) du groupe de disques de fichiers de données doit être le seul objet du volume de stockage.
+
+
+Voici quelques consignes pour la séparation des volumes :
+
+* Les fichiers de données d'une seule base de données doivent se trouver dans le volume.
+* Vous devez utiliser des volumes distincts pour chacune des classifications de fichiers suivantes : fichiers binaires de base de données, fichiers de données, fichiers journaux de reprise en ligne, fichiers journaux de reprise archivés et fichiers de contrôle.
+* Il n'est pas nécessaire de créer un volume distinct pour les fichiers de base de données temporaires, car SnapManager ne sauvegarde pas les fichiers de base de données temporaires.
+
+
+SAP utilise une disposition standard pour les installations de bases de données Oracle. Dans cette disposition, SAP place des copies du fichier de contrôle Oracle dans `E:\oracle\SID\origlogA, E:\oracle\SID\origlogB`, et `E:\oracle\SID\sapdata1 file systems`.
+
+Le fichier de contrôle du système de fichiers sapdata1 entre en conflit avec les exigences SnapManager pour la séparation des fichiers de contrôle et des fichiers de données en volumes distincts et doit être ajusté pour permettre une restauration rapide.
+
+
+NOTE: Les sauvegardes BR*Tools incluent les profils Oracle et SAP situés dans le sous-répertoire dbs de l'installation Oracle, l'installation Oracle doit se trouver sur le stockage.
+
+Dans le cas d'une nouvelle installation, vous pouvez modifier l'emplacement des fichiers de contrôle à l'aide de SAPINST et déplacer le fichier de contrôle normalement placé dans le système de fichiers sapdata1 vers un système de fichiers qui ne se trouve pas dans le même volume que les fichiers de données. (SAPINST est l'outil fourni par SAP pour l'installation des systèmes SAP.)
+
+Toutefois, dans le cas d'un système déjà installé, vous devez déplacer le fichier de contrôle du système de fichiers pour permettre une restauration rapide à l'aide de SnapManager. Pour ce faire, vous pouvez créer un nouveau système de fichiers dans un volume qui ne contient pas de fichiers de données, déplacer le fichier de contrôle vers ce système de fichiers, puis créer un lien symbolique du système de fichiers précédent vers le répertoire du nouveau système de fichiers. Il est nécessaire d'arrêter SAP et la base de données Oracle lors du déplacement du fichier de contrôle pour éviter les erreurs de base de données.
+
+Avant toute modification, la liste des fichiers du répertoire sapdata1 contenant le fichier de contrôle peut ressembler à ceci :
+
+[listing]
+----
+hostname:/
+#  ls -l /oracle/SID/sapdata1/cntrl
+-rw-r----- 1 orasid  dba  9388032 Jun 19 01:51 cntrlSID.dbf
+----
+Après la modification, la liste peut ressembler à ceci :
+
+[listing]
+----
+hostname:/
+# ls -sl /oracle/SID/sapdata1
+0 lrwxrwxrwx 1 root root 19 2008-08-06 14:55 cntrl -> /oracle/SID/control
+0 -rw-r--r-- 1 root root 0 2008-08-06 14:57 data01.dbf
+
+# ls -sl /oracle/SID/control
+0 -rw-r--r-- 1 root root 0 2008-08-06 14:56 cntrlSID.dbf
+----

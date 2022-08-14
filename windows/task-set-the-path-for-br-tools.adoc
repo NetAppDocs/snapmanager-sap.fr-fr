@@ -1,0 +1,26 @@
+---
+permalink: windows/task-set-the-path-for-br-tools.html 
+sidebar: sidebar 
+keywords: set, path, br, tools, command 
+summary: 'Vous devez définir le chemin pour BR*Tools afin d"utiliser la commande BR*Tools.' 
+---
+= Définissez le chemin d'accès pour BR*Tools
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez définir le chemin pour BR*Tools afin d'utiliser la commande BR*Tools.
+
+
+
+== Description de la tâche
+
+Si le chemin n'est pas défini et que vous essayez d'effectuer l'opération de vidage du système en utilisant BR*Tools, le message d'erreur suivant est connecté `config_summary.txt: 'brtools' is not recognized as an internal or external command, operable program or batch file`
+
+.Étapes
+. Cliquez sur *Démarrer* > *mon ordinateur*, puis cliquez avec le bouton droit de la souris sur *Propriétés* > *Avancé* > *variables d'environnement*.
+. Dans la fenêtre *variables d'environnement*, cliquez sur *Nouveau* pour ajouter un nouveau chemin BR*Tools ou sur *Modifier* pour modifier le chemin BR*Tools existant pour les variables système et les variables utilisateur.
+. Cliquez sur *OK* pour enregistrer vos modifications.
+

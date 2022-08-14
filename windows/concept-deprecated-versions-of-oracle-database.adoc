@@ -1,0 +1,32 @@
+---
+permalink: windows/concept-deprecated-versions-of-oracle-database.html 
+sidebar: sidebar 
+keywords: oracle, database, 9i, support, snapmanager, 10gr2, deprecate, version 
+summary: 'La base de données Oracle 9i n"est pas prise en charge par SnapManager 3.2 ou version ultérieure et la base de données Oracle 10gR2 (antérieure à 10.2.0.4) n"est pas prise en charge par SnapManager 3.3.1 ou version ultérieure.' 
+---
+= Versions obsolètes de la base de données Oracle
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+La base de données Oracle 9i n'est pas prise en charge par SnapManager 3.2 ou version ultérieure et la base de données Oracle 10gR2 (antérieure à 10.2.0.4) n'est pas prise en charge par SnapManager 3.3.1 ou version ultérieure.
+
+Si vous utilisez des bases de données Oracle 9i ou 10gR2 (antérieures à 10.2.0.4) et que vous souhaitez effectuer une mise à niveau vers SnapManager 3.2 ou version ultérieure, vous ne pouvez pas créer de nouveaux profils ; un message d'avertissement s'affiche.
+
+Si vous utilisez des bases de données Oracle 9i ou 10gR2 (antérieures à 10.2.0.4) et que vous souhaitez effectuer une mise à niveau vers SnapManager 3.2 ou une version ultérieure, vous devez effectuer l'une des opérations suivantes :
+
+* Mettez à niveau les bases de données Oracle 9i ou 10gR2 (antérieures à 10.2.0.4) vers Oracle 10gR2 (10.2.0.5), 11gR1 ou 11gR2, puis effectuez une mise à niveau vers SnapManager 3.2 ou 3.3.
++
+Si vous effectuez une mise à niveau vers Oracle 12__c__, vous devez effectuer une mise à niveau vers SnapManager 3.3.1 ou version ultérieure.
+
++
+
+NOTE: La base de données Oracle 12__c__ est uniquement prise en charge par SnapManager 3.3.1.
+
+* Gérez les bases de données Oracle 9i à l'aide d'une version correctif de SnapManager 3.1.
++
+Vous pouvez utiliser SnapManager 3.2 ou 3.3 si vous souhaitez gérer des bases de données Oracle 10gR2, 11gR1 ou 11gR2 et utiliser SnapManager 3.3.1 ou version ultérieure si vous souhaitez gérer des bases de données Oracle 12__c__ avec les autres bases de données prises en charge.
+
+

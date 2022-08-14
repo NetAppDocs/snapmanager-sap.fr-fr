@@ -1,0 +1,52 @@
+---
+permalink: windows/reference-the-smo-smsap-history-show-command.html 
+sidebar: sidebar 
+keywords: command, enable, detail, history, information, profile, smsap, show 
+summary: 'Cette commande vous permet d"afficher des informations d"historique détaillées pour un profil spécifique.' 
+---
+= La commande smsap history show
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Cette commande vous permet d'afficher des informations d'historique détaillées pour un profil spécifique.
+
+
+
+== Syntaxe
+
+[listing]
+----
+
+smsap history show
+-profile profile
+----
+
+
+== Paramètres
+
+* *`-profile _profile_`*
++
+Spécifie le nom du profil. Ce nom peut comporter jusqu'à 30 caractères et doit être unique au sein de l'hôte.
+
+* *`-quiet`*
++
+Affiche uniquement les messages d'erreur sur la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* *`-verbose`*
++
+Affiche des messages d'erreur, d'avertissement et d'information sur la console.
+
+
+
+
+
+== Exemple de commande
+
+[listing]
+----
+ smsap history show -profile -name PROFILE1
+ -verbose
+----

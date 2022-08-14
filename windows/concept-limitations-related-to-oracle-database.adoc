@@ -1,0 +1,29 @@
+---
+permalink: windows/concept-limitations-related-to-oracle-database.html 
+sidebar: sidebar 
+keywords: start, work, snapmanager, limitation, relate, oracle, database 
+summary: Avant de commencer à travailler avec SnapManager, vous devez connaître les limites associées à la base de données Oracle. 
+---
+= Limites relatives à la base de données Oracle
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de commencer à travailler avec SnapManager, vous devez connaître les limites associées à la base de données Oracle.
+
+Les limites sont les suivantes :
+
+* SnapManager prend en charge Oracle version 10gR2 et ne prend pas en charge Oracle 10gR1 comme référentiel ou base de données cible.
+* SnapManager ne prend pas en charge Oracle Cluster File System (OCFS).
+* La prise en charge d'Oracle Database 9i est obsolète par rapport à SnapManager 3.2.
+* La prise en charge d'Oracle Database 10gR2 (antérieure à 10.2.0.5) est obsolète par rapport à SnapManager 3.3.1.
+
+
+
+NOTE: Identifier les différentes versions des bases de données Oracle prises en charge en faisant référence à la matrice d'interopérabilité.
+
+*Informations connexes*
+
+http://support.netapp.com/NOW/products/interoperability/["Matrice d'interopérabilité"^]

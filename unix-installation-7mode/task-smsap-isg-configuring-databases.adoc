@@ -1,0 +1,14 @@
+---
+permalink: unix-installation-7mode/task-smsap-isg-configure-databases.html 
+sidebar: sidebar 
+keywords: configure, database, target, back, up, snapmanager, repository, store, metadata, configuring 
+summary: 'Vous devez configurer au moins deux bases de données. Base de données cible à sauvegarder à l"aide de SnapManager et d"une base de données de référentiel pour stocker les métadonnées de la base de données cible. La base de données cible et la base de données de référentiel SnapManager doivent être configurées et en ligne avant d"effectuer des opérations SnapManager.' 
+---
+= Configurer les bases de données
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez configurer au moins deux bases de données : une base de données cible à sauvegarder à l'aide de SnapManager et une base de données de référentiel pour stocker les métadonnées de la base de données cible. La base de données cible et la base de données de référentiel SnapManager doivent être configurées et en ligne avant d'effectuer des opérations SnapManager.

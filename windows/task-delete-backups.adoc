@@ -1,0 +1,45 @@
+---
+permalink: windows/task-delete-backups.html 
+sidebar: sidebar 
+keywords: delete, backup, free, space, occupy, remove, snapshot, copies, copy, volume 
+summary: 'Vous devez supprimer les sauvegardes lorsque vous n"en avez plus besoin, ce qui libère l"espace occupé par ces sauvegardes. Si vous supprimez des sauvegardes, vous réduisez la probabilité d"atteindre la limite de 255 copies Snapshot par volume.' 
+---
+= Supprimer les sauvegardes
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez supprimer les sauvegardes lorsque vous n'en avez plus besoin, ce qui libère l'espace occupé par ces sauvegardes. Si vous supprimez des sauvegardes, vous réduisez la probabilité d'atteindre la limite de 255 copies Snapshot par volume.
+
+
+
+== Ce dont vous aurez besoin
+
+* Vous devez vous assurer que la sauvegarde n'a pas été utilisée pour créer un clone.
+
+
+
+
+== Description de la tâche
+
+Vous pouvez supprimer les sauvegardes conservées sans limite de temps sans modifier la classe de rétention.
+
+Vous pouvez éventuellement collecter les fichiers de vidage après l'opération de suppression de sauvegarde réussie ou ayant échoué.
+
+Si vous souhaitez supprimer les sauvegardes du journal d'archivage, vous devez vérifier la durée de conservation définie pour la sauvegarde du journal d'archivage. Si la sauvegarde du journal d'archivage est dans la durée de conservation et que les fichiers journaux d'archive sont nécessaires pour la récupération d'une base de données restaurée, vous ne pouvez pas supprimer la sauvegarde du journal d'archivage.
+
+.Étapes
+. Vérifiez que les opérations sont terminées en entrant la commande suivante :
++
+`*smsap operation list -profile _profile_name_-dump -quiet -verbose*`
+
+. Pour supprimer une sauvegarde, entrez la commande suivante :
++
+`*smsap backup delete -profile _profile_name_ [-label _label_ [data | -archivelogs] | -id _id_ | -all] [-force] [ -dump] [-quiet | -verbose]*`
+
++
+Utilisez le `-force` option pour forcer la suppression de la sauvegarde. Le fait de forcer la suppression d'une sauvegarde dont les opérations sont incomplètes peut laisser la sauvegarde dans un état incohérent.
+
+

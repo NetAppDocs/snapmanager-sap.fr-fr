@@ -1,0 +1,226 @@
+---
+permalink: windows/concept-variables-available-in-custom-script-for-restore-operation.html 
+sidebar: sidebar 
+keywords: snapmanager, context, information, form, environment, variable, restore, operation, perform, script, original, host, backup, restore 
+summary: 'SnapManager fournit des informations contextuelles sous forme de variables d"environnement associées à l"opération de restauration en cours. Par exemple, votre script peut récupérer le nom de l"hôte d"origine et le libellé de la sauvegarde restaurée.' 
+---
+= Variables disponibles dans les scripts de tâches pour l'opération de restauration
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager fournit des informations contextuelles sous forme de variables d'environnement associées à l'opération de restauration en cours. Par exemple, votre script peut récupérer le nom de l'hôte d'origine et le libellé de la sauvegarde restaurée.
+
+Le tableau suivant répertorie les variables d'environnement que vous pouvez utiliser dans vos scripts :
+
+|===
+| Variables | Description | Format 
+
+
+ a| 
+`_SM_OPERATION_ID_`
+ a| 
+Spécifie l'ID de l'opération en cours
+ a| 
+chaîne
+
+
+
+ a| 
+`_SM_PROFILE_NAME_`
+ a| 
+Spécifie le nom du profil utilisé
+ a| 
+chaîne
+
+
+
+ a| 
+`_SM_HOST_`
+ a| 
+Spécifie le nom d'hôte de la base de données
+ a| 
+chaîne
+
+
+
+ a| 
+`_SM_OS_USER_`
+ a| 
+Indique le propriétaire du système d'exploitation de la base de données
+ a| 
+chaîne
+
+
+
+ a| 
+`_SM_OS_GROUP_`
+ a| 
+Spécifie le groupe OS de la base de données
+ a| 
+chaîne
+
+
+
+ a| 
+`_SM_BACKUP_TYPE_`
+ a| 
+Spécifie le type de sauvegarde (en ligne, hors ligne ou auto)
+ a| 
+chaîne
+
+
+
+ a| 
+`_SM_BACKUP_LABEL_`
+ a| 
+Spécifie l'étiquette de sauvegarde
+ a| 
+chaîne
+
+
+
+ a| 
+`_SM_BACKUP_ID_`
+ a| 
+Spécifie l'ID de sauvegarde
+ a| 
+chaîne
+
+
+
+ a| 
+`_SM_BACKUP_PROFILE_`
+ a| 
+Spécifie le profil utilisé pour la sauvegarde
+ a| 
+chaîne
+
+
+
+ a| 
+`_SM_RECOVERY_TYPE_`
+ a| 
+Spécifie les informations sur la configuration de la récupération
+ a| 
+chaîne
+
+
+
+ a| 
+`_SM_VOLUME_RESTORE_MODE_`
+ a| 
+Spécifie la configuration de restauration de volume
+ a| 
+chaîne
+
+
+
+ a| 
+`_SM_TARGET_FILER_NAME_`
+ a| 
+Spécifie le nom du système de stockage cible
+
+[NOTE]
+====
+Si plusieurs systèmes de stockage sont utilisés, les noms des systèmes de stockage doivent être séparés par des virgules.
+
+==== a| 
+chaîne
+
+
+
+ a| 
+`_SM_TARGET_VOLUME_NAME_`
+ a| 
+Spécifie le nom du volume cible
+
+[NOTE]
+====
+Le nom du volume cible doit être préfixé avec le nom du périphérique de stockage, par exemple SM_TARGET_FILER_NAME/SM_TARGET_VOLUME_NAME.
+
+==== a| 
+chaîne
+
+
+
+ a| 
+`_SM_HOST_FILE_SYSTEM_`
+ a| 
+Spécifie le système de fichiers hôte
+ a| 
+chaîne
+
+
+
+ a| 
+`_SM_SNAPSHOT_NAMES_`
+ a| 
+Spécifie la liste Snapshot
+
+[NOTE]
+====
+Le nom des copies Snapshot doit être préfixé avec le nom du système de stockage et le nom du volume. Les noms des copies Snapshot sont séparés par une virgule.
+
+==== a| 
+tableau de chaînes
+
+
+
+ a| 
+`_SM_ARCHIVE_LOGS_DIRECTORY_`
+ a| 
+Spécifie le répertoire des journaux d'archive
+
+[NOTE]
+====
+Si les journaux d'archive se trouvent dans plusieurs répertoires, les noms de ces répertoires sont séparés par des virgules.
+
+==== a| 
+tableau de chaînes
+
+
+
+ a| 
+`_SM_REDO_LOGS_DIRECTORY_`
+ a| 
+Spécifie le répertoire des journaux de reprise
+
+[NOTE]
+====
+Si les journaux de reprise se trouvent dans plusieurs répertoires, les noms de ces répertoires sont séparés par des virgules.
+
+==== a| 
+tableau de chaînes
+
+
+
+ a| 
+`_SM_CONTROL_FILES_DIRECTORY_`
+ a| 
+Spécifie le répertoire des fichiers de contrôle
+
+[NOTE]
+====
+Si les fichiers de contrôle se trouvent dans plusieurs répertoires, les noms de ces répertoires sont séparés par des virgules.
+
+==== a| 
+tableau de chaînes
+
+
+
+ a| 
+`_SM_DATA_FILES_DIRECTORY_`
+ a| 
+Spécifie le répertoire des fichiers de données
+
+[NOTE]
+====
+Si les fichiers de données se trouvent dans plusieurs répertoires, les noms de ces répertoires sont séparés par des virgules.
+
+==== a| 
+tableau de chaînes
+
+|===

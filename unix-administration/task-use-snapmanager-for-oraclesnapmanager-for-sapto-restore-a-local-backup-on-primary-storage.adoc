@@ -1,0 +1,54 @@
+---
+permalink: unix-administration/task-use-snapmanager-for-oraclesnapmanager-for-sapto-restore-a-local-backup-on-primary-storage.html 
+sidebar: sidebar 
+keywords: restore, local, backup, exist, primary, storage, entire, process, perform, snapmanager, sap 
+summary: 'Vous pouvez restaurer les sauvegardes locales qui existent sur le stockage primaire. L"ensemble du processus est effectué à l"aide de SnapManager pour SAP.' 
+---
+= SnapManager for SAP permet de restaurer une sauvegarde locale sur le stockage primaire
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez restaurer les sauvegardes locales qui existent sur le stockage primaire. L'ensemble du processus est effectué à l'aide de SnapManager pour SAP.
+
+*À propos de cette tâche*
+
+Vous pouvez également afficher un aperçu des informations relatives à un processus de restauration de sauvegarde. Pour afficher des informations sur l'éligibilité à la restauration d'une sauvegarde, vous pouvez le faire. SnapManager analyse les données sauvegardées afin de déterminer si le processus de restauration peut être terminé à l'aide de la restauration basée sur les volumes ou de la méthode de restauration basée sur les fichiers.
+
+L'aperçu de restauration affiche les informations suivantes :
+
+* Quel mécanisme de restauration (restauration rapide, restauration du système de fichiers côté stockage, restauration de fichiers côté stockage ou restauration de copie de fichiers côté hôte) sera utilisé pour restaurer chaque fichier.
+* Pourquoi des mécanismes plus efficaces n'ont pas été utilisés pour restaurer chaque fichier.
+
+
+Dans l'aperçu du plan de restauration, SnapManager ne restaure rien. L'aperçu affiche des informations pouvant contenir jusqu'à 20 fichiers.
+
+Si vous souhaitez prévisualiser une restauration des fichiers de données mais que la base de données n'est pas montée, SnapManager monte la base de données. Si la base de données ne peut pas être montée, l'opération échoue et SnapManager retourne la base de données à son état d'origine.
+
+.Étapes
+. Dans l'arborescence *Repository*, cliquez avec le bouton droit de la souris sur la sauvegarde à restaurer et sélectionnez *Restore*.
+. Sur la page d'accueil de l'Assistant de restauration et de récupération, cliquez sur *Suivant*.
+. Sur la page *Restore Configuration information*, sélectionnez *Complete Datafile/Tablespace Restore with Control Files*.
+. Cliquez sur *Autoriser l'arrêt de la base de données si nécessaire*.
++
+SnapManager modifie l'état de la base de données si nécessaire. Par exemple, si la base de données est hors ligne et doit être en ligne, SnapManager la force en ligne.
+
+. Sur la page *Recovery Configuration information*, cliquez sur *All Logs*.
++
+SnapManager restaure et restaure la base de données vers la dernière transaction et applique tous les journaux requis.
+
+. Sur la page *Restore Source Location Configuration*, affichez les informations relatives à la sauvegarde sur primaire et cliquez sur *Next*.
++
+Si la sauvegarde n'existe que sur le stockage primaire, SnapManager restaure la sauvegarde à partir du stockage primaire.
+
+. Sur la page *Volume Restore Configuration information*, sélectionnez *tentative de restauration de volume* pour tenter la méthode de restauration de volume.
+. Cliquez sur *Retour à la restauration basée sur les fichiers*.
++
+Ceci permet à SnapManager d'utiliser la méthode de restauration basée sur les fichiers si la méthode de restauration de volume ne peut pas être utilisée.
+
+. Cliquez sur *Preview* pour voir les vérifications d'éligibilité pour une restauration rapide et les informations sur les vérifications obligatoires et superflus.
+. Sur la page *Perform Operation*, vérifiez les informations que vous avez saisies, puis cliquez sur *Restore*.
+. Pour afficher les détails du processus, cliquez sur *Détails de l'opération*.
+

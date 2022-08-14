@@ -1,0 +1,39 @@
+---
+permalink: windows/task-configure-e-mail-notification-for-an-existing-profile.html 
+sidebar: sidebar 
+keywords: update, profile, configure, receive, email, notification, completion, database, operation, exist 
+summary: 'Lorsque vous mettez à jour un profil, vous pouvez configurer pour recevoir une notification par e-mail à la fin de l"opération de base de données.' 
+---
+= Configurez la notification par e-mail pour un profil existant
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lorsque vous mettez à jour un profil, vous pouvez configurer pour recevoir une notification par e-mail à la fin de l'opération de base de données.
+
+
+
+== Ce dont vous aurez besoin
+
+* Vous devez configurer l'adresse e-mail à partir de laquelle les alertes sont envoyées.
+* Vous devez entrer une ou plusieurs adresses e-mail auxquelles les alertes seront envoyées.
++
+Vous pouvez utiliser une liste séparée par des virgules pour plusieurs adresses. Vous devez vous assurer qu'il n'y a pas d'espace entre la virgule et l'adresse e-mail suivante. Vous pouvez également ajouter un objet à l'e-mail.
+
++
+
+NOTE: Vous devez vous assurer que vous entrez l'ensemble de plusieurs adresses e-mail entre guillemets.
+
+
+
+.Étape
+. Saisissez la commande suivante :
++
+`*smsap profile update -profile _profile_ [-profile-password _profile_password_][-database -dbname _db_dbname_ -host _db_host_ [-sid _db_sid_] [-login -username _db_username_ -password _db_password_ -port _db_port_]] [{-rman{-controlfile | {-login  -username _rman_username_ -password  _rman_password_ -tnsname  _rman_tnsname_}}} | -remove-rman] [-retain [-hourly [-count _n_] [-duration _m_]] [-daily [-count _n_] [-duration _m_]] [-weekly [-count _n_] [-duration _m_]] [-monthly [-count _n_] [-duration _m_]]] [-comment _comment_][-snapname-pattern _pattern_][[ [ ]]| [[]] [-notification [-success -email _email_address1_,_email_address2_ -subject _subject_pattern_] [-failure -email _email_address1_,_email_address2_ -subject _subject_pattern_]]*`
+
++
+Vous pouvez utiliser le `success` option permettant de recevoir une notification uniquement pour les opérations de base de données réussies et le `failure` option permettant de recevoir une notification uniquement pour les opérations de base de données ayant échoué.
+
+

@@ -1,0 +1,21 @@
+---
+permalink: unix-administration/concept-restoration-of-the-data-from-file-systems.html 
+sidebar: sidebar 
+keywords: restore, data, alternate, location, necessary, file, system, local, host, restoration 
+summary: 'Avant de restaurer les données à partir d"un autre emplacement, vous devez restaurer le système de fichiers nécessaire et le monter sur l"hôte local.' 
+---
+= Restauration des données à partir du système de fichiers
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Avant de restaurer les données à partir d'un autre emplacement, vous devez restaurer le système de fichiers nécessaire et le monter sur l'hôte local.
+
+Vous pouvez appeler l'opération de restauration à partir d'un autre emplacement pour copier les fichiers d'autres systèmes de fichiers vers des systèmes de fichiers actifs.
+
+Pour effectuer cette opération, vous devez spécifier les autres points de montage à partir desquels restaurer les points de montage d'origine et les noms de copie Snapshot d'origine en créant un fichier de spécification de restauration.
+
+
+NOTE: Le nom de la copie Snapshot est un composant nécessaire car le même système de fichiers peut être aimanté plusieurs fois dans une seule opération de sauvegarde (par exemple, une fois pour les fichiers de données et une fois pour le fichier journal).

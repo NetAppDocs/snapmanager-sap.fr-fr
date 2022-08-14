@@ -1,0 +1,35 @@
+---
+permalink: windows/task-freeing-backups.html 
+sidebar: sidebar 
+keywords: free, backup, delete, snapshot, copies, copy, deleting, metadata, function, space, smsap 
+summary: 'Vous pouvez libérer des sauvegardes, qui suppriment les copies Snapshot sans supprimer les métadonnées de sauvegarde. Cette fonction libère l"espace occupé par la sauvegarde. Vous pouvez utiliser la commande smsap backup free pour libérer les sauvegardes.' 
+---
+= Sauvegardes libérées
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez libérer des sauvegardes, qui suppriment les copies Snapshot sans supprimer les métadonnées de sauvegarde. Cette fonction libère l'espace occupé par la sauvegarde. Vous pouvez utiliser la commande smsap backup free pour libérer les sauvegardes.
+
+Pour qu'une sauvegarde puisse être déautorisée, vous devez vous assurer que :
+
+* La sauvegarde a réussi
+* La sauvegarde ne doit pas être montée
+* La sauvegarde ne contient pas de clones
+* La sauvegarde ne doit pas être conservée au moyen d'une stratégie de conservation illimitée
+* La sauvegarde n'est pas déjà libérée
+
+
+Vous pouvez spécifier l'option -dump en tant que paramètre facultatif pour collecter les fichiers de vidage après l'opération de sauvegarde libre réussie ou échoué.
+
+. Saisissez la commande suivante :
++
+`smsap backup free -profile profile_name {-label label [data | -archivelogs] | -id id | -all} -force[-dump] [-quiet] [-force]`
+
+
+
+*Informations connexes*
+
+xref:reference-the-smosmsapbackup-free-command.adoc[La commande smsap sauvegarde libre]

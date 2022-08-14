@@ -1,0 +1,25 @@
+---
+permalink: windows/task-viewing-a-list-of-backups.html 
+sidebar: sidebar 
+keywords: check, backup, create, profile, state, smsap, backup, command, display, information, view, list 
+summary: 'Vous pouvez vérifier quelles sauvegardes ont été créées pour un profil et l"état de sauvegarde à l"aide de la commande smsap backup list. Pour chaque profil, la commande affiche d"abord les informations relatives à la sauvegarde la plus récente, puis continue jusqu"à ce que les informations de toutes les sauvegardes soient affichées.' 
+---
+= Affichage d'une liste de sauvegardes
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez vérifier quelles sauvegardes ont été créées pour un profil et l'état de sauvegarde à l'aide de la commande smsap backup list. Pour chaque profil, la commande affiche d'abord les informations relatives à la sauvegarde la plus récente, puis continue jusqu'à ce que les informations de toutes les sauvegardes soient affichées.
+
+.Étape
+. Saisissez la commande suivante :
++
+`smsap backup list -profile profile_name [-delimitercharacter] [data | -archivelogs] [-quiet | -verbose]`
+
+
+
+*Informations connexes*
+
+xref:reference-the-smosmsapbackup-list-command.adoc[La commande smsap backup list]

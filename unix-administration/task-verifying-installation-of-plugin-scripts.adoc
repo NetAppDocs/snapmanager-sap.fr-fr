@@ -1,0 +1,47 @@
+---
+permalink: unix-administration/task-verify-installation-of-plugin-scripts.html 
+sidebar: sidebar 
+keywords: snapmanager, enable, install, custom, script, various, operation, snapmanager, plugin, backup, restore, clone, operation, automate, custom, script, plug-in 
+summary: 'SnapManager vous permet d"installer et d"utiliser des scripts personnalisés pour effectuer diverses opérations. SnapManager propose des plug-ins pour les opérations de sauvegarde, de restauration et de clonage. Ces plug-ins permettent d"automatiser les scripts personnalisés avant et après les opérations de sauvegarde, de restauration et de clonage.' 
+---
+= Vérifiez l'installation des scripts du plug-in
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager vous permet d'installer et d'utiliser des scripts personnalisés pour effectuer diverses opérations. SnapManager propose des plug-ins pour les opérations de sauvegarde, de restauration et de clonage. Ces plug-ins permettent d'automatiser les scripts personnalisés avant et après les opérations de sauvegarde, de restauration et de clonage.
+
+.Étape
+. Saisissez la commande suivante :
++
+`*smsap plugin check -osaccount _os db user name_*`
+
++
+Si vous ne fournissez pas le `-osaccount` option, la vérification de l'installation du script du plug-in se produit pour l'utilisateur root plutôt que pour un utilisateur spécifié.
+
++
+*Exemple*
+
++
+Le résultat suivant indique que les scripts politie1, pré-plugin1 et pré-plugin2 ont été installés avec succès. Cependant, le script post-plugin1 n'est pas opérationnel.
+
++
+[listing]
+----
+
+            smsap plugin check
+Checking plugin directory structure ...
+<installdir>/plugins/clone/policy
+   OK: 'policy1' is executable
+
+<installdir>/plugins/clone/pre
+   OK: 'pre-plugin1' is executable and returned status 0
+   OK: 'pre-plugin2' is executable and returned status 0
+
+<installdir>/plugins/clone/post
+   ERROR: 'post-plugin1' is executable and returned status 3
+Command complete.
+----
+

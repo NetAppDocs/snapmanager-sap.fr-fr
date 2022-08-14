@@ -1,0 +1,28 @@
+---
+permalink: windows/task-viewing-snapmanger-history-operation-details.html 
+sidebar: sidebar 
+keywords: view, history, setting, single, profile, snapmanager, configuration, detail 
+summary: 'Vous pouvez afficher les paramètres d"historique d"un profil unique.' 
+---
+= Affichage des détails de configuration de l'historique SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez afficher les paramètres d'historique d'un profil unique.
+
+L'opération d'historique SnapManager affiche les informations suivantes pour chaque profil :
+
+* Nom de l'opération
+* Classe de conservation
+* Nombre de conservation
++
+.. Pour afficher des informations concernant l'opération d'historique SnapManager pour un profil spécifique, entrez la commande suivante :
++
+`smsap history show -profile profile_name`
+
+
+
+

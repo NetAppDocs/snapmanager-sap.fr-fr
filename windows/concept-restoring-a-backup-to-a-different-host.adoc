@@ -1,0 +1,33 @@
+---
+permalink: windows/concept-restoring-a-backup-to-a-different-host.html 
+sidebar: sidebar 
+keywords: brrestore, smsap, restore, command, backup, brbackup, host, run, snapmanager, sap 
+summary: Vous pouvez utiliser la commande BRRESTORE ou smsap restore pour restaurer une sauvegarde que vous avez effectuée avec BRBACKUP sur un hôte différent. Le nouvel hôte doit également exécuter SnapManager pour SAP. 
+---
+= Restauration d'une sauvegarde sur un hôte différent
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez utiliser le BRRESTORE ou `smsap restore` Commande pour restaurer une sauvegarde effectuée avec BRBACKUP sur un hôte différent. Le nouvel hôte doit également exécuter SnapManager pour SAP.
+
+
+
+== Rendre le profil SnapManager disponible
+
+Avant de pouvoir exécuter BRRESTORE, vous devez mettre à la disposition du nouvel hôte le profil SnapManager de l’hôte d’origine. Procédez comme suit :
+
+* Définir les informations d'identification pour le référentiel : utiliser le `smsap credential set` Commande permettant au nouvel hôte d'accéder au référentiel SnapManager utilisé pour la sauvegarde d'origine.
+* Définir les informations d'identification pour le profil : utiliser le `smsap credential set` Commande permettant au nouvel hôte d'accéder au profil SnapManager utilisé pour la sauvegarde d'origine.
+* Chargez le profil sur le nouvel hôte : utilisez le `smsap profile sync` Commande permettant de charger les informations de profil SnapManager sur le nouvel hôte.
+
+
+
+
+== Exécutez BRRESTORE
+
+Configurez le nouveau stockage sur le nouvel hôte avec les mêmes chemins que le stockage d'origine sur l'hôte d'origine.
+
+Utilisez le `BRRESTORE` commande permettant de restaurer la sauvegarde sur le nouvel hôte. Par défaut, les fichiers sont restaurés aux emplacements de chemin d'origine. Vous pouvez spécifier un chemin alternatif pour les fichiers restaurés à l'aide de l' `-m` de la `BRRESTORE` commande. Consultez la documentation SAP pour plus d'informations sur `BRRESTORE`.

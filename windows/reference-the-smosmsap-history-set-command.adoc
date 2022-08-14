@@ -1,0 +1,96 @@
+---
+permalink: windows/reference-the-smosmsap-history-set-command.html 
+sidebar: sidebar 
+keywords: run, history, set, command, configure, operation, smsap 
+summary: 'Vous pouvez exécuter la commande jeu d"historiques pour configurer les opérations pour lesquelles vous souhaitez afficher l"historique.' 
+---
+= La commande smsap history set
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez exécuter le `history set` commande pour configurer les opérations pour lesquelles vous souhaitez afficher l'historique.
+
+
+
+== Syntaxe
+
+[listing]
+----
+
+smsap history set
+-profile {-name profile_name [profile_name1, profile_name2] | -all
+-repository
+-login [password repo_password]
+-username repo_username
+-host repo_host
+-dbname repo_dbname
+-port repo_port}
+-operation {-operations operation_name [operation_name1, operation_name2] | -all}
+-retain
+{-count retain_count | -daily daily_count | -monthly monthly_count | -weekly weekly_count}
+[-quiet | -verbose]
+----
+
+
+== Paramètres
+
+* *`-profile _profile_`*
++
+Spécifie le nom du profil. Le nom peut comporter jusqu'à 30 caractères et doit être unique au sein de l'hôte.
+
+* *`-repository`*
++
+Spécifie les détails de la base de données qui stocke le profil.
+
+* *`-dbname _repo_dbname_`*
++
+Indique le nom de la base de données qui stocke le profil. Vous pouvez utiliser le nom global ou l'identifiant système.
+
+* *`-host _repo_host_`*
++
+Indique le nom ou l'adresse IP de l'hôte sur lequel réside la base de données du référentiel.
+
+* *`-login`*
++
+Spécifie les détails de connexion au référentiel.
+
+* *`-username _repo_username_`*
++
+Indique le nom d'utilisateur requis pour accéder à la base de données du référentiel.
+
+* *`-port _repo_port_`*
++
+Spécifie le numéro de port TCP (transmission Control Protocol) utilisé pour accéder à la base de données du référentiel.
+
+* *`-operation {-operations _operation_name_ [operation_name1, operation_name2] | -all`*
++
+Spécifie les opérations SnapManager pour lesquelles vous souhaitez configurer l'historique.
+
+* *`-retain {-countretain_count | -dailydaily_count | -monthly-monthly_count | -weeklyweekly_count}`*
++
+Spécifie la classe de conservation des opérations de création de sauvegarde, de vérification des sauvegardes, de restauration et de restauration, et de création de clones. La classe de rétention est définie en fonction du nombre d'opérations, du nombre de jours, de semaines ou de mois.
+
+* *`-quiet`*
++
+Affiche uniquement les messages d'erreur dans la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* *`-verbose`*
++
+Affiche les messages d'erreur, d'avertissement et d'information dans la console.
+
+
+
+
+
+== Exemple de commande
+
+L'exemple suivant affiche des informations sur l'opération de sauvegarde :
+
+[listing]
+----
+smsap history set -profile -name PROFILE1 -operation -operations backup -retain -daily 6
+-verbose
+----

@@ -1,0 +1,39 @@
+---
+permalink: unix-administration/concept-cloning-methods.html 
+sidebar: sidebar 
+keywords: clone, database, crate, operation, cloning, method 
+summary: 'Vous pouvez cloner une base de données en suivant l"une des deux méthodes suivantes : La méthode que vous choisissez affecte l"opération de création de clone.' 
+---
+= Méthodes de clonage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez cloner une base de données en suivant l'une des deux méthodes suivantes : La méthode que vous choisissez affecte le `clone create` fonctionnement.
+
+Le tableau suivant décrit les méthodes de clonage et leur impact sur le `clone create` fonctionnement et its `-reserve` option. Une LUN peut être clonée à l'aide de l'une ou l'autre méthode.
+
+[cols="1a,1a,2a"]
+|===
+| Méthode de clonage | Description | clone create -reserve 
+
+
+ a| 
+Clonage de LUN
+ a| 
+Un nouveau clone de LUN est créé au sein du même volume.
+ a| 
+Quand `-reserve` Pour une LUN est définie sur `yes`, L'espace est réservé à la taille de LUN complète dans le volume.
+
+
+
+ a| 
+Clonage de volumes
+ a| 
+Une nouvelle copie FlexClone est créée et une LUN clone existe dans le nouveau volume clone. Utilise la technologie FlexClone.
+ a| 
+Quand `-reserve` pour un volume est défini sur `yes`, l'espace est réservé à la taille du volume complet de l'agrégat.
+
+|===

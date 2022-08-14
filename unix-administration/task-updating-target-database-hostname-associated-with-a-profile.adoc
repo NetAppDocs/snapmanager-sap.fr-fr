@@ -1,0 +1,76 @@
+---
+permalink: unix-administration/task-update-target-database-hostname-associated-with-a-profile.html 
+sidebar: sidebar 
+keywords: snapmanager, sap, ability, update, host, name, target, database, profile 
+summary: 'SnapManager (3.2 ou version ultérieure) pour SAP permet de mettre à jour le nom d"hôte de la base de données cible dans le profil SnapManager.' 
+---
+= Mettez à jour le nom d'hôte de la base de données cible associé à un profil
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager (3.2 ou version ultérieure) pour SAP permet de mettre à jour le nom d'hôte de la base de données cible dans le profil SnapManager.
+
+*Ce dont vous aurez besoin*
+
+* Le répertoire personnel de l'utilisateur local doit connaître les mappages de profil à référentiel.
+* Les sessions de l'interface utilisateur graphique de SnapManager doivent être fermées.
+* Dans un environnement RAC (Real application clusters), les clones ou les sauvegardes montées disponibles sur l'hôte spécifié dans le profil doivent être supprimés et démontés.
+
+
+*À propos de cette tâche*
+
+Vous pouvez mettre à jour le profil avec le nouveau nom d'hôte en utilisant uniquement l'interface de ligne de commande.
+
+*Les scénarios ne sont pas pris en charge pour modifier le nom d'hôte de la base de données cible dans le profil*
+
+Les scénarios suivants ne sont pas pris en charge pour la modification du nom d'hôte de la base de données cible dans le profil :
+
+* Modification du nom d'hôte de la base de données cible à l'aide de l'interface graphique SnapManager
+* Reprise de la base de données du référentiel après la mise à jour du nom d'hôte de la base de données cible du profil
+* Mise à jour de plusieurs profils pour un nouveau nom d'hôte de base de données cible en exécutant une seule commande
+* Modification du nom d'hôte de la base de données cible lors de l'exécution d'une opération SnapManager
+* Modification du nom d'hôte de la base de données cible si SnapManager est installé sur Solaris et si les LUN (Logical Unit Numbers) de la base de données sont créées à l'aide d'un système de fichiers monté sur l'hôte avec la pile SVM.
+
+
+
+NOTE: Après avoir mis à jour le nom d'hôte de la base de données cible dans le profil, seul le nom d'hôte de la base de données cible est modifié. Tous les autres paramètres de configuration définis sur le profil sont conservés.
+
+Après avoir mis à jour le nouveau nom d'hôte de la base de données cible dans un profil activé pour la protection, les mêmes règles de jeu de données et de protection sont conservées pour le profil mis à jour.
+
+Après avoir modifié le nom d'hôte de l'hôte cible, vous devez vous assurer que vous mettez à jour le nom d'hôte de tous les profils protégés existants avant de créer les nouveaux profils protégés. Pour mettre à jour le nom d'hôte d'un profil, exécutez le `smsap profile update` commande.
+
+Une fois que vous avez mis à jour le nom d'hôte de la base de données cible, vous ne pouvez pas supprimer ou fractionner le clone ou démonter la sauvegarde si le clone ou la sauvegarde montée n'est pas disponible dans le nouvel hôte. Dans de tels cas, l'exécution des opérations SnapManager depuis le nouvel hôte entraîne une défaillance, ainsi que des entrées obsolètes dans l'hôte précédent. Pour effectuer des opérations SnapManager, vous devez revenir au nom d'hôte précédent en utilisant `profile update`.
+
+. Saisissez la commande suivante :
++
+`*smsap profile update -profile _profile_ [-profile-password _profile_password_][-database-dbname _db_dbname_ -host _db_host_ [-sid _db_sid_] [-login-username _db_username_ -password _db_password_ -port _db_port_]] [{-rman{-controlfile | {-login-username _rman_username_ -password _rman_password_ -tnsname _rman_tnsname_}}} | -remove-rman]-osaccount _osaccount_ -osgroup _osgroup_ [-retain [-hourly [-count _n_] [-duration _m_]] [-daily [-count _n_] [-duration _m_]] [-weekly [-count _n_] [-duration _m_]] [-monthly [-count _n_] [-duration _m_]]] [-comment _comment_][-snapname-pattern _pattern_][[-protect [-protection-policy _policy_name_]]| [[-noprotect]] [-summary-notification] [-notification [-success -email _email_address1, email_address2_ -subject _subject_pattern_] [-failure -email _email_address1, email_address2_ -subject _subject_pattern_]] [-separate-archivelog-backups-retain-archivelog-backups -hours _hours_ | -days _days_ | -weeks _weeks_ | -months _months_ [-protect [-protection-policy _policy_name_] | -noprotect] [-include-with-online-backups | -no-include-with-online-backups]] [-dump]*`
+
++
+Les autres options de cette commande sont les suivantes :
+
++
+``[-force] [-noprompt]``
+
++
+``[-quiet | -verbose]``
+
++
+[cols="1a,2a"]
+|===
+| Les fonctions que vous recherchez... | Alors... 
+
+
+ a| 
+*Changer le nom d'hôte de la base de données cible*
+ a| 
+`Specify -host _new_db_host_`
+
+|===
+. Pour afficher le nom d'hôte de la base de données cible du profil, entrez la commande suivante :
++
+`*smsap profile show*`
+
+

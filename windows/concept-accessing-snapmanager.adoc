@@ -1,0 +1,30 @@
+---
+permalink: windows/concept-accessing-snapmanager.html 
+sidebar: sidebar 
+keywords: access, snapmanager, command-line, interface, cli, graphical, user, interface, gui 
+summary: 'Pour accéder à SnapManager, vous pouvez utiliser l"interface de ligne de commandes ou l"interface graphique.' 
+---
+= Accès à SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Pour accéder à SnapManager, vous pouvez utiliser l'interface de ligne de commandes ou l'interface graphique.
+
+Vous pouvez effectuer différentes opérations SnapManager de l'une des manières suivantes :
+
+* En entrant des commandes dans l'interface de ligne de commande sur un hôte qui se trouve dans le même réseau que l'hôte de base de données.
++
+Pour obtenir une liste de toutes les commandes et une explication de leurs options et arguments, reportez-vous au chapitre référence des commandes.
+
++
+Pour accéder à l'interface de ligne de commandes, cliquez sur *Démarrer* > *tous les programmes* > *NetApp* > *SnapManager pour SAP* > *Démarrer l'interface de ligne de commandes SMSAP*.
+
+* En accédant à l'interface graphique sur un hôte du même réseau que l'hôte de base de données.
++
+L'interface utilisateur graphique propose des assistants simples d'utilisation pour vous aider à effectuer différentes opérations.
+
+* En utilisant les commandes BR*Tools de SAP.
+

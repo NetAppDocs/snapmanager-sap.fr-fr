@@ -1,0 +1,87 @@
+---
+permalink: unix-administration/reference-the-smosmsapbackup-delete-command.html 
+sidebar: sidebar 
+keywords: run, backup, delete, command, remove, clone, fail, unlimited, basis, retention, class, smsap 
+summary: Vous pouvez exécuter la commande backup delete pour supprimer des sauvegardes qui ne sont pas automatiquement supprimées, comme les sauvegardes utilisées pour créer un clone ou des sauvegardes en panne. Vous pouvez supprimer les sauvegardes conservées sans limite de temps sans modifier la classe de rétention. 
+---
+= La commande smsap backup delete
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez exécuter le `backup delete` commande de suppression des sauvegardes qui ne sont pas automatiquement supprimées, comme les sauvegardes qui ont été utilisées pour créer un clone ou des sauvegardes en panne. Vous pouvez supprimer les sauvegardes conservées sans limite de temps sans modifier la classe de rétention.
+
+
+
+== Syntaxe
+
+[listing, subs="+macros"]
+----
+pass:quotes[smsap backup delete
+-profile _profile_name_
+[-label _label_ [-data | -archivelogs\] | [-id _guid_ | -all\]
+-force
+[-dump\]
+[-quiet | -verbose\]]
+----
+
+
+== Paramètres
+
+* `*-profile _profile_name_*`
++
+Spécifie la base de données associée à la sauvegarde que vous souhaitez supprimer. Le profil contient l'identifiant de la base de données et d'autres informations sur la base de données.
+
+* `*-id _guid_*`
++
+Spécifie la sauvegarde avec le GUID spécifié. Le GUID est généré par SnapManager lors de la création d'une sauvegarde. Vous pouvez utiliser le `smsap backup list` Commande pour afficher le GUID de chaque sauvegarde.
+
+* `*-label _label_*`
++
+Spécifie la sauvegarde avec l'étiquette spécifiée. Vous pouvez également spécifier l'étendue de la sauvegarde sous forme de fichier de données ou de journal d'archivage.
+
+* `*-data*`
++
+Spécifie les fichiers de données.
+
+* `*-archivelogs*`
++
+Spécifie les fichiers journaux d'archive.
+
+* `*-all*`
++
+Spécifie toutes les sauvegardes. Pour supprimer uniquement les sauvegardes spécifiées, utilisez le `-id` ou `-label` option.
+
+* `*-dump*`
++
+Collecte les fichiers de vidage après une opération de suppression de sauvegarde réussie ou ayant échoué.
+
+* `*-force*`
++
+Force la dépose de la sauvegarde. SnapManager supprime la sauvegarde même en cas de problème pour libérer les ressources associées à la sauvegarde. Par exemple, si la sauvegarde a été cataloguée avec Oracle Recovery Manager (RMAN), mais que la base de données RMAN n'existe plus, y compris `-force` Supprime la sauvegarde même si elle ne peut pas se connecter à RMAN.
+
+* `*-quiet*`
++
+Affiche uniquement les messages d'erreur dans la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* `*-verbose*`
++
+Affiche les messages d'erreur, d'avertissement et d'information dans la console.
+
+
+
+'''
+
+
+== Exemple
+
+L'exemple suivant illustre la suppression de la sauvegarde :
+
+[listing]
+----
+smsap backup delete -profile SALES1 -label full_backup_sales_May
+Operation Id [8abc01ec0e79004b010e79006da60001] succeeded.
+----
+'''

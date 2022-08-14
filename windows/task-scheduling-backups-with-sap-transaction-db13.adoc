@@ -1,0 +1,30 @@
+---
+permalink: windows/task-scheduling-backups-with-sap-transaction-db13.html 
+sidebar: sidebar 
+keywords: enable, backup, snapmanager, sap, dba, plan, calendar, transaction, db13, scheduling, schedule 
+summary: 'Il existe plusieurs étapes requises pour permettre à SnapManager for SAP de travailler à partir de la transaction DB13 du calendrier de planification de l"administrateur de bases de données.' 
+---
+= Planification de sauvegardes avec la transaction SAP DB13
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Il existe plusieurs étapes requises pour permettre à SnapManager for SAP de travailler à partir de la transaction DB13 du calendrier de planification de l'administrateur de bases de données.
+
+. Modifiez les autorisations du répertoire /oracle/SID/sapbackup pour autoriser l'accès en écriture par l'identifiant utilisateur sidadm.
++
+Utiliser la commande suivante comme orasID : `chmod 775 /oracle/SID/sapbackup`
+
++
+Cela permettra aux membres de dbagroup d'écrire dans ce répertoire. L'identifiant utilisateur sidadm est membre du groupe dba.
+
+. Modifiez les autorisations du fichier d'informations d'identification SnapManager pour SAP pour orasID afin d'autoriser l'accès sidadm. Utiliser la commande suivante exécutée par orasID :
++
+Utiliser la commande suivante exécutée par orasID : `chmod 660 /oracle/SID/.netapp/smsap/credentials`
+
++
+Suivez les instructions de la section 3.3, « enregistrement des systèmes dans le référentiel » du document TR-3582 « meilleures pratiques de SnapManager pour SAP » pour enregistrer l'identifiant utilisateur sidadm dans le référentiel SnapManager pour SAP.
+
+

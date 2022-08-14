@@ -1,0 +1,88 @@
+---
+permalink: unix-administration/concept-understanding-enabling-or-disabling-of-data-protection-in-profile.html 
+sidebar: sidebar 
+keywords: enable, disable, data, protection, creating, create, update, updating, database, profile, understand, enabling, disabling 
+summary: 'Vous pouvez activer ou désactiver la protection des données lors de la création ou de la mise à jour d"un profil de base de données.' 
+---
+= Présentation de l'activation ou de la désactivation de la protection des données dans le profil
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez activer ou désactiver la protection des données lors de la création ou de la mise à jour d'un profil de base de données.
+
+Pour créer une sauvegarde protégée d'une base de données sur les ressources de stockage secondaires, les administrateurs de base de données et les administrateurs du stockage effectuent les actions suivantes.
+
+[cols="1a,2a"]
+|===
+| Les fonctions que vous recherchez... | Alors... 
+
+
+ a| 
+Créez ou modifiez un profil
+ a| 
+Pour créer ou modifier un profil, procédez comme suit :
+
+* Protection des sauvegardes sur le système de stockage secondaire
+* Si vous utilisez Data ONTAP sous 7-mode et que vous avez installé protection Manager, vous pouvez sélectionner les règles créées par l'administrateur du stockage ou des sauvegardes dans protection Manager.
++
+Si vous utilisez Data ONTAP sous 7-mode et que la protection est activée, SnapManager crée un jeu de données pour la base de données. Un jeu de données se compose d'un ensemble de jeux de données de stockage, ainsi que d'informations de configuration associées à leurs données. Les jeux de données associés à un jeu de données incluent un jeu de stockage principal utilisé pour exporter les données vers les clients, ainsi que l'ensemble des répliques et des archives qui existent sur d'autres jeux de stockage. Les jeux de données représentent des données utilisateur exportables. Si l'administrateur désactive la protection d'une base de données, SnapManager supprime le jeu de données.
+
+* Si vous utilisez ONTAP, vous devez sélectionner la stratégie _SnapManager_cdot_Mirror_ ou _SnapManager_cdot_Vault_ en fonction de la relation SnapMirror ou SnapVault créée.
+
+
+Lorsque vous désactivez la protection de sauvegarde, un message d'avertissement s'affiche indiquant que le jeu de données sera supprimé et que la restauration ou le clonage des sauvegardes de ce profil ne sera pas possible.
+
+
+
+ a| 
+Afficher le profil
+ a| 
+Comme l'administrateur du stockage n'a pas encore affecté de ressources de stockage pour mettre en œuvre la règle de protection, le profil apparaît comme un non-confortant dans l'interface graphique de SnapManager que dans le `profile show` sortie de la commande.
+
+
+
+ a| 
+Attribuez des ressources de stockage dans la console de gestion de protection Manager
+ a| 
+Dans la console de gestion de protection Manager, l'administrateur du stockage affiche le jeu de données non protégé et attribue un pool de ressources à chaque nœud du jeu de données associé au profil. L'administrateur du stockage s'assure ensuite que les volumes secondaires sont provisionnés et que les relations de protection sont initialisées.
+
+
+
+ a| 
+Consultez le profil du répondant dans SnapManager
+ a| 
+Dans SnapManager, l'administrateur de base de données voit que le profil a changé à l'état de l'informateur tant dans l'interface graphique que dans le `profile show` sortie de commande, indiquant que des ressources ont été affectées.
+
+
+
+ a| 
+Créez la sauvegarde
+ a| 
+* Sélectionnez sauvegarde complète.
+* Indiquez également si la sauvegarde doit être protégée et sélectionnez la classe de rétention principale (par exemple, horaire ou quotidien).
+* Si vous utilisez Data ONTAP sous 7-mode et que vous souhaitez protéger immédiatement la sauvegarde sur un système de stockage secondaire, en ignorant la planification de protection de protection de protection Manager, spécifiez le `-protectnow` option.
+* Si vous utilisez ONTAP et que vous souhaitez protéger immédiatement la sauvegarde sur le stockage secondaire, spécifiez le `protect` option.
++
+
+NOTE: Le `protectnow` Cette option n'est pas applicable dans clustered Data ONTAP.
+
+
+
+
+
+ a| 
+Afficher la sauvegarde
+ a| 
+La nouvelle sauvegarde est indiquée comme programmée pour la protection, mais pas encore protégée (dans l'interface SnapManager et dans le `backup show` sortie de la commande). L'État de protection est indiqué comme « non protégé ».
+
+
+
+ a| 
+Afficher la liste des sauvegardes
+ a| 
+Une fois que l'administrateur du stockage a vérifié que la sauvegarde a été copiée sur le stockage secondaire, SnapManager modifie l'état de protection de sauvegarde de « non protégé » à « protégé ».
+
+|===

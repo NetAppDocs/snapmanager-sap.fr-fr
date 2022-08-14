@@ -1,0 +1,71 @@
+---
+permalink: unix-administration/reference-the-smo-notification-removesummarynotification-command.html 
+sidebar: sidebar 
+keywords: command, disable, summary, notification, profile, repository, database, smsap, remove-summary-notification 
+summary: Cette commande désactive la notification récapitulative pour plusieurs profils sur une base de données de référentiel. 
+---
+= La commande smsap notification remove-summary-notification
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Cette commande désactive la notification récapitulative pour plusieurs profils sur une base de données de référentiel.
+
+
+
+== Syntaxe
+
+[listing, subs="+macros"]
+----
+pass:quotes[smsap notification remove-summary-notification
+-repository
+-dbname _repo_service_name_
+-port _repo_port_
+-host _repo_host_
+-login -username _repo_username_
+[-quiet | -verbose]]
+----
+
+
+== Paramètres
+
+* `*-repository*`
++
+Les options suivantes `-repository` spécifiez les détails de la base de données pour le référentiel.
+
+* `*-port _repo_port_*`
++
+Spécifie le numéro de port TCP utilisé pour accéder à la base de données qui stocke le référentiel.
+
+* `*-dbname _repo_service_name_*`
++
+Indique le nom de la base de données qui stocke le référentiel. Utilisez le nom global ou le SID.
+
+* `*-host _repo_host_*`
++
+Indique le nom ou l'adresse IP de l'ordinateur hôte sur lequel s'exécute la base de données de référentiel.
+
+* `*-login _repo_username_*`
++
+Spécifie le nom de connexion nécessaire pour accéder à la base de données qui stocke le référentiel.
+
+* `*-quiet*`
++
+Affiche uniquement les messages d'erreur sur la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* `*-verbose*`
++
+Affiche des messages d'erreur, d'avertissement et d'information sur la console.
+
+
+
+'''
+L'exemple suivant désactive la notification de synthèse pour plusieurs profils d'une base de données de référentiel.
+
+[listing, subs="+macros"]
+----
+pass:quotes[smsap notification remove-summary-notification –repository –port 1521 –dbname repo2 –host 10.72.197.133 –login -username oba5]
+----
+'''

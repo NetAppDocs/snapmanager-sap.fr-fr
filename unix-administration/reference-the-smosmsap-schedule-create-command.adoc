@@ -1,0 +1,201 @@
+---
+permalink: unix-administration/reference-the-smosmsap-schedule-create-command.html 
+sidebar: sidebar 
+keywords: schedule, create, command, schedule, backup, smsap 
+summary: 'Vous pouvez utiliser la commande schedule create pour planifier la création d"une sauvegarde à un moment donné.' 
+---
+= La commande smsap schedule create
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez utiliser la commande schedule create pour planifier la création d'une sauvegarde à un moment donné.
+
+
+
+== Syntaxe
+
+[listing, subs="+macros"]
+----
+pass:quotes[smsap schedule create -profile _profile_name_
+[-full{-auto | -online | -offline}
+[-retain _-hourly_| _-daily_ | _-weekly_ | _-monthly_ | _-unlimited_] [-verify]] |
+pass:quotes[-data [[-files _files_ [_files_]] |
+pass:quotes[-tablespaces _tablespaces_ [_tablespaces_]] {-auto | -online | -offline}
+pass:quotes[[-retain _-hourly_ | -daily | _-weekly_ | _-monthly_ | _-unlimited_]] [-verify]] |
+[-archivelogs]}
+pass:quotes[[-label _label_]]
+pass:quotes[[-comment _comment_]]
+[-protect | -noprotect | -protectnow] pass:quotes[[-backup-dest _path1_ [ , _path2_]]
+pass:quotes[[-exclude-dest _path1_ [ , _path2_]]] pass:quotes[[-prunelogs {-all | -until-scn _until-scn_ | -until -date  _yyyy-MM-dd:HH:mm:ss_\] | -before {-months | -days | -weeks | -hours}}
+-prune-dest _prune_dest1_, [_prune_dest2_\]\]-schedule-name _schedule_name_
+[-schedule-comment _schedule_comment_\] -interval {_-hourly_ | _-daily_ | _-weekly_ | _-monthly_ | _-onetimeonly_}
+-cronstring _cron_string_-start-time {_start_time < yyyy-MM-dd HH:mm_>}
+-runasuser _runasuser_
+[-taskspec _taskspec_]]-force
+[-quiet | -verbose]
+----
+
+
+== Paramètres
+
+* `*-profile _profile_name_*`
++
+Indique le nom du profil associé à la base de données pour lequel vous souhaitez planifier la sauvegarde. Le profil contient l'identifiant de la base de données et d'autres informations sur la base de données.
+
+* `*-auto`* *option*
++
+Si la base de données est dans un état monté ou hors ligne, SnapManager effectue une sauvegarde hors ligne. Si la base de données est à l'état ouvert ou en ligne, SnapManager effectue une sauvegarde en ligne. Si vous utilisez le `-force` avec le `-offline` Option, SnapManager force une sauvegarde hors ligne, même si la base de données est actuellement en ligne.
+
+* `*-online*` *option*
++
+Spécifie une sauvegarde de base de données en ligne.
+
++
+Vous pouvez créer une sauvegarde en ligne d'une base de données RAC (Real application clusters), tant que le système primaire est à l'état ouvert ou monté et qu'une instance est à l'état ouvert. Vous pouvez utiliser le `-force` option pour les sauvegardes en ligne si l'instance locale est à l'état d'arrêt ou si aucune instance n'est ouverte.
+
++
+** Si l'instance locale est à l'état d'arrêt et qu'au moins une instance est ouverte, vous pouvez utiliser l'option -force pour modifier l'instance locale sur montée.
+** Si aucune instance n'est à l'état ouvert, vous pouvez utiliser le `-force` option permettant de changer l'instance locale pour l'ouvrir.
+
+
+* `*-offline`* *option*
++
+Spécifie une sauvegarde hors ligne lorsque la base de données est à l'état d'arrêt. Si la base de données est à l'état ouvert ou monté, la sauvegarde échoue. Si le `-force` Cette option est utilisée. SnapManager tente de modifier l'état de la base de données pour arrêter la base de données pour une sauvegarde hors ligne.
+
+* `*-full*` *option*
++
+Sauvegarde l'intégralité de la base de données. Cela inclut toutes les données, le journal archivé et les fichiers de contrôle. Les journaux de reprise archivés et les fichiers de contrôle sont sauvegardés quel que soit le type de sauvegarde que vous effectuez. Si vous souhaitez sauvegarder uniquement une partie de la base de données, utilisez le `-files` option ou `-tablespaces` option.
+
+* `*-files _list_*`
++
+Sauvegarde uniquement les fichiers de données spécifiés, ainsi que les fichiers de journal et de contrôle archivés. Séparez la liste des noms de fichiers par des espaces. Si la base de données est à l'état ouvert, SnapManager vérifie que les tablespaces appropriés sont en mode de sauvegarde en ligne.
+
+* `*-tablespaces _tablespaces_*`
++
+Sauvegarde uniquement les espaces de stockage de base de données spécifiés ainsi que les fichiers de journal et de contrôle archivés. Séparez les noms des espaces de table. Si la base de données est à l'état ouvert, SnapManager vérifie que les tablespaces appropriés sont en mode de sauvegarde en ligne.
+
+* `*-label _name_*`
++
+Spécifie un nom facultatif pour cette sauvegarde. Ce nom doit être unique dans le profil. Le nom peut contenir des lettres, des chiffres, des traits de soulignement (_) et un trait d'Union (-). Il ne peut pas commencer par un tiret.
+
++
+Si vous ne spécifiez pas d'étiquette, SnapManager crée une étiquette par défaut au format Scope_type_date :
+
++
+** La portée est soit F pour indiquer une sauvegarde complète, soit P pour indiquer une sauvegarde partielle.
+** Le type est C pour indiquer une sauvegarde hors ligne (à froid), H pour indiquer une sauvegarde en ligne (à chaud) ou A pour indiquer une sauvegarde automatique, par exemple P_A_20081010060037IST.
+** Date correspond à l'année, au mois, au jour et à l'heure de la sauvegarde.
++
+SnapManager utilise une horloge de 24 heures.
+
+
+
++
+Par exemple, si vous avez effectué une sauvegarde complète avec la base de données hors ligne le 16 janvier 2007 16, à 5 h 45 Heure normale de l'est, SnapManager créerait l'étiquette F_C_20070116174516EST.
+
+* `*-comment _string_*`
++
+Spécifie un commentaire facultatif décrivant cette sauvegarde. Placez la chaîne entre guillemets simples (').
+
++
+
+NOTE: Certains guillemets de bande de coques sont désactivés. Si c'est vrai pour votre shell, vous devez inclure le guillemets avec une barre oblique inverse (\). Par exemple, vous devrez peut-être entrer : `\' this is a comment\'`.
+
+* `*-verify*` *option*
++
+Vérifie que les fichiers de la sauvegarde ne sont pas corrompus en exécutant l'utilitaire dbv d'Oracle.
+
++
+
+NOTE: Si vous spécifiez le `-verify` option : l'opération de sauvegarde n'est pas terminée tant que l'opération de vérification n'est pas terminée.
+
+* `*-force`* *option*
++
+Force un changement d'état si la base de données n'est pas à l'état correct. Par exemple, SnapManager peut passer de l'état en ligne de la base de données à l'état hors ligne, en fonction du type de sauvegarde que vous spécifiez et de l'état dans lequel la base de données est.
+
++
+Avec une sauvegarde de base de données RAC en ligne, utilisez le `-force` option si l'instance locale est à l'état d'arrêt ou si aucune instance n'est ouverte.
+
++
+
+NOTE: La version d'Oracle doit être 10.2.0.5 ; sinon, la base de données sera suspendue si une instance du RAC est montée.
+
++
+** Si l'instance locale est à l'état d'arrêt et qu'au moins une instance est ouverte, vous pouvez modifier l'instance locale pour qu'elle soit montée à l'aide de `-force` option.
+** Si aucune instance n'est ouverte, vous pouvez modifier l'instance locale pour l'ouvrir à l'aide de `-force` option.
+
+
+* `*-protect | -noprotect | -protectnow*`
++
+Indique si la sauvegarde doit être protégée sur le stockage secondaire. Le `-noprotect` indique que la sauvegarde ne doit pas être protégée sur le stockage secondaire. Seules les sauvegardes complètes sont protégées. Si aucune option n'est spécifiée, SnapManager protège la sauvegarde comme option par défaut si la sauvegarde est une sauvegarde complète et que le profil spécifie une stratégie de protection. Le `-protectnow` Cette option n'est applicable que pour les environnements Data ONTAP 7-mode. L'option indique que la sauvegarde est immédiatement protégée sur un stockage secondaire.
+
+* `*-retain { -hourly | -daily | -weekly | -monthly | -unlimited}*`
++
+Indique si la sauvegarde doit être conservée toutes les heures, tous les jours, toutes les semaines, tous les mois ou sans limite. Si `-retain` l'option n'est pas spécifiée, la classe de rétention est par défaut définie sur `-hourly`. Pour conserver des sauvegardes permanentes, utilisez le `-unlimited` option. Le `-unlimited` cette option rend la sauvegarde non éligible à la suppression par la politique de conservation.
+
+* `*-archivelogs*`
++
+Spécifie la création d'une sauvegarde du journal d'archives.
+
+* `*-backup-dest _path1_, [, _[path2]_]*`
++
+Spécifie les destinations du journal d'archivage pour la sauvegarde du journal d'archivage.
+
+* `*-exclude-dest _path1_, [, _[path2]_]*`
++
+Spécifie les destinations du journal d'archivage à exclure de la sauvegarde.
+
+* `*-prunelogs {-all | -until-scnuntil-scn | -until-dateyyyy-MM-dd:HH:mm:ss | -before {-months | -days | -weeks | -hours}*`
++
+Indique si les fichiers journaux d'archives doivent être supprimés des destinations du journal d'archivage en fonction des options fournies lors de la création d'une sauvegarde. Le `-all option` supprime tous les fichiers journaux d'archive des destinations du journal d'archivage. Le `-until-scn` Option supprime les fichiers journaux d'archive jusqu'à ce qu'un numéro de modification du système (SCN) spécifié soit supprimé. Le `-until-date` permet de supprimer les fichiers journaux d'archives jusqu'à la période spécifiée. Le `-before` option supprime les fichiers journaux d'archive avant la période spécifiée (jours, mois, semaines, heures).
+
+* `*-schedule-name _schedule_name_*`
++
+Spécifie le nom que vous fournissez pour le planning.
+
+* `*-schedule-comment _schedule_comment_*`
++
+Spécifie un commentaire facultatif décrivant la planification de la sauvegarde.
+
+* `*-interval { -hourly | -daily | -weekly | -monthly | -onetimeonly}*`
++
+Spécifie l'intervalle de temps par lequel les sauvegardes sont créées. Vous pouvez planifier la sauvegarde toutes les heures, tous les jours, toutes les semaines, tous les mois ou une seule fois.
+
+* `*-cronstring _cron_string_*`
++
+Spécifie la planification de la sauvegarde à l'aide de cronstring. Les expressions cron sont utilisées pour configurer des instances de CronTrigger. Les expressions cron sont des chaînes qui sont constitués des sous-expressions suivantes :
+
++
+** 1 correspond aux secondes.
+** 2 correspond aux minutes.
+** 3 correspond aux heures.
+** 4 correspond à un jour dans un mois.
+** 5 correspond au mois.
+** 6 correspond à un jour dans une semaine.
+** 7 correspond à l'année (facultatif).
+
+
+* `*-start-time _yyyy-MM-dd HH:mm_*`
++
+Spécifie l'heure de début de l'opération planifiée. L'heure de début de l'horaire doit être incluse au format aaaa-MM-jj HH:mm.
+
+* `*-runasuser _runasuser_*`
++
+Spécifie la modification de l'utilisateur (utilisateur root ou utilisateur Oracle) de l'opération de sauvegarde planifiée pendant la planification de la sauvegarde.
+
+* `*-taskspec _taskspec_*`
++
+Spécifie le fichier XML de spécification de tâche qui peut être utilisé pour l'activité de prétraitement ou de post-traitement de l'opération de sauvegarde. Le chemin complet du fichier XML doit être fourni avec le `-taskspec` option.
+
+* `*-quiet*`
++
+Affiche uniquement les messages d'erreur dans la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* `*-verbose*`
++
+Affiche les messages d'erreur, d'avertissement et d'information dans la console.
+
+

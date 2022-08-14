@@ -1,0 +1,29 @@
+---
+permalink: windows/task-creating-profile-level-dump-files.html 
+sidebar: sidebar 
+keywords: find, log, information, particular, profile, smsap, dump, command, name, profile-level, creating, create 
+summary: Vous pouvez trouver des informations de journal sur un profil particulier en utilisant la commande smsap profile dump avec le nom du profil. 
+---
+= Création de fichiers de vidage au niveau du profil
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez trouver des informations de journal sur un profil particulier en utilisant la commande smsap profile dump avec le nom du profil.
+
+. Saisissez la commande suivante : `smsap profile dump -profileprofile_name`
++
+Emplacement du fichier de vidage :
+
++
+[listing]
+----
+Path:\<user-home>\Application Data\NetApp\smsap\3.3.0\smsap_dump_8abc01c814649ebd0114649ec69d0001.jar
+----
++
+
+NOTE: Si vous rencontrez une erreur lors de la création d'un profil, utilisez la commande smsapsystem dump. Une fois que vous avez créé un profil, utilisez les commandes smsapoperation dump et smsapprofile dump.
+
+

@@ -1,0 +1,16 @@
+---
+permalink: windows/concept-preparing-to-install-snapmanager-for-oraclesnapmanager-for-sap.html 
+sidebar: sidebar 
+keywords: environment, install, snapmanager, sap, software, hardware, browser, database, operate, system, requirement, information, interoperability, matrix, prepare 
+summary: 'L"environnement dans lequel vous installez SnapManager pour SAP doit répondre à certaines exigences en matière de logiciels, de matériel, de navigateur, de base de données et de système d"exploitation. Pour obtenir les dernières informations sur la configuration requise, consultez la matrice d"interopérabilité.' 
+---
+= Préparation de l'installation de SnapManager pour SAP
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+L'environnement dans lequel vous installez SnapManager pour SAP doit répondre à certaines exigences en matière de logiciels, de matériel, de navigateur, de base de données et de système d'exploitation. Pour obtenir les dernières informations sur la configuration requise, consultez la matrice d'interopérabilité.
+
+http://support.netapp.com/NOW/products/interoperability/["Matrice d'interopérabilité"^]

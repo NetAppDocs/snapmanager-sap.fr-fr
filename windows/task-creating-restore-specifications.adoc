@@ -1,0 +1,51 @@
+---
+permalink: windows/task-creating-restore-specifications.html 
+sidebar: sidebar 
+keywords: restore, specification, file, sml, contain, original, alternate, location, snapmanager, location, creating, create 
+summary: 'Le fichier de spécification de restauration est un fichier XML qui contient les emplacements d"origine et de remplacement à partir desquels le fichier peut être restauré. SnapManager utilise ce fichier de spécifications pour restaurer des fichiers à partir de l"emplacement spécifié.' 
+---
+= Création de spécifications de restauration
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le fichier de spécification de restauration est un fichier XML qui contient les emplacements d'origine et de remplacement à partir desquels le fichier peut être restauré. SnapManager utilise ce fichier de spécifications pour restaurer des fichiers à partir de l'emplacement spécifié.
+
+Vous pouvez créer le fichier de spécifications de restauration à l'aide de n'importe quel éditeur de texte. Vous devez utiliser une extension .xml pour le fichier.
+
+. Ouvrez un fichier texte.
+. Saisissez les informations suivantes : `+<restore-specification xmlns="http://www.netapp.com">+`
+. Entrez les informations de mappage de fichiers au format indiqué dans l'exemple suivant :
++
+[listing]
+----
+<file-mapping>
+    <original-location>E:\disks\sysaux.dbf</original-location>
+    <alternate-location>E:\disks\sysaux.dbf</alternate-location>
+</file-mapping>
+----
++
+Le mappage de fichiers spécifie l'emplacement de restauration d'un fichier. L'emplacement d'origine correspond à l'emplacement du fichier sur le système de fichiers actif au moment de la sauvegarde. L'autre emplacement est l'emplacement à partir duquel le fichier est restauré.
+
+. Entrez les informations de mappage du système de fichiers monté en utilisant le format indiqué dans l'exemple :
++
+[listing]
+----
+<mountpoint-mapping>
+     <original-location>E:\disks\sysaux.dbf</original-location>
+     <snapname>snapname</snapname>
+     <alternate-location>E:\disks\sysaux.dbf</alternate-location>
+</mountpoint-mapping>
+----
++
+Le point de montage fait référence au chemin d'accès du répertoire C:\myfs. Le mappage de point de montage spécifie le point de montage à partir duquel les fichiers sont restaurés. L'emplacement d'origine est l'emplacement du point de montage dans le système de fichiers actif au moment de la sauvegarde. L'autre emplacement est le point de montage à partir duquel les fichiers à l'emplacement d'origine sont restaurés. Le nom du snapshot est le nom de la copie snapshot dans laquelle les fichiers d'origine ont été sauvegardés.
+
++
+
+NOTE: Le nom de la copie Snapshot est un composant nécessaire. En effet, le même système de fichiers peut être utilisé plusieurs fois au cours d'une seule opération de sauvegarde (par exemple, une fois pour les fichiers de données et une fois pour les journaux).
+
+. Saisissez les informations suivantes : `</restore-specification>`
+. Enregistrez le fichier en tant que fichier .xml et fermez la spécification.
+

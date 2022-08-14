@@ -1,0 +1,118 @@
+---
+permalink: windows/concept-what-database-backup-scheduling-is.html 
+sidebar: sidebar 
+keywords: schedule, update, monitor, backup, database, graphical, user, interface 
+summary: 'Vous pouvez planifier, mettre à jour et contrôler les sauvegardes des bases de données à l"aide de l"onglet Schedule de l"interface utilisateur graphique.' 
+---
+= La planification des sauvegardes de la base de données
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez planifier, mettre à jour et contrôler les sauvegardes des bases de données à l'aide de l'onglet Schedule de l'interface utilisateur graphique.
+
+Le tableau suivant répond à certaines questions courantes de planification :
+
+|===
+| Question | Réponse 
+
+
+ a| 
+Que se passe-t-il des sauvegardes planifiées lorsque le serveur SnapManager redémarre ?
+ a| 
+Lorsque le serveur SnapManager redémarre, il redémarre automatiquement toutes les planifications. Toutefois, SnapManager ne fait aucun suivi des occurrences manquées.
+
+
+
+ a| 
+Que se passe-t-il lorsque deux sauvegardes sont planifiées sur deux bases de données en même temps ?
+ a| 
+SnapManager lance les opérations de sauvegarde une par une, puis permet leur exécution en parallèle. Par exemple, si un administrateur de base de données crée six planifications de sauvegarde quotidiennes pour six profils de base de données différents à 1:00, les six sauvegardes s'exécutent en parallèle.
+
+Si plusieurs sauvegardes sont planifiées sur un profil de base de données unique pendant une courte période, le serveur SnapManager n'exécute que l'opération de sauvegarde ayant la durée de conservation la plus longue.
+
+Avant de démarrer une opération de sauvegarde, SnapManager détermine d'abord ce qui suit :
+
+* Au cours des 30 dernières minutes, un autre programme a-t-il réussi à créer une sauvegarde, avec une meilleure rétention, pour le même profil ?
+* Dans les 30 minutes qui suivent, un autre programme tente-t-il de créer une sauvegarde, avec une rétention plus importante, pour le même profil ?
+
+
+Si la réponse à l'une ou l'autre des questions est oui, SnapManager ignore la sauvegarde.
+
+Par exemple, un administrateur de base de données peut créer un planning quotidien, hebdomadaire et mensuel pour un profil de base de données. Tous ces administrateurs sont planifiés pour effectuer des sauvegardes à 1:00 du matin Lorsqu'un jour du mois où trois sauvegardes sont planifiées simultanément à 13 h 00, SnapManager n'exécute que l'opération de sauvegarde basée sur le planning mensuel.
+
+La fenêtre de temps de 30 minutes peut être modifiée dans un fichier de propriétés SnapManager.
+
+
+
+ a| 
+Sous quel utilisateur l'opération de sauvegarde s'exécute-t-elle ?
+ a| 
+L'opération s'exécute sous l'utilisateur qui a créé le planning. Toutefois, vous pouvez le modifier en votre propre ID utilisateur, si vous disposez d'informations d'identification valides pour le profil de base de données et l'hôte. Par exemple, en lançant des propriétés de sauvegarde planifiées pour le programme de sauvegarde créé par Avida Davis, Stella Morrow peut sélectionner son ID utilisateur dans effectuer cette opération en tant qu'utilisateur pour exécuter la sauvegarde planifiée.
+
+
+
+ a| 
+Comment le planificateur SnapManager interagit-il avec le planificateur natif du système d'exploitation ?
+ a| 
+Sur le serveur SnapManager, vous ne pouvez pas afficher les sauvegardes planifiées via le planificateur natif du système d'exploitation. Par exemple, après avoir créé une sauvegarde planifiée, vous ne voyez pas d'entrée dans la fenêtre tâches planifiées.
+
+
+
+ a| 
+Que se passe-t-il si les horloges de l'interface utilisateur graphique et du serveur ne sont pas synchronisées ?
+ a| 
+Les horloges sur le client et le serveur ne sont pas synchronisées. Par conséquent, vous pouvez planifier une sauvegarde dans laquelle l'heure de début est à l'avenir sur le client, mais dans le passé sur le serveur.
+
+Pour les sauvegardes récurrentes, le serveur remplit toujours la demande. Par exemple, si le serveur reçoit une demande d'exécution de sauvegardes toutes les heures commençant par 01/30/08 à 3:00 mais l'heure actuelle est 3:30 ce jour-là, le serveur exécute sa première sauvegarde à 4:00 et continue d'effectuer des sauvegardes toutes les heures.
+
+Cependant, pour les sauvegardes à une seule fois, le serveur traite la demande comme suit :
+
+* Si l'heure de début se situe au cours des cinq dernières minutes de l'heure actuelle du serveur, SnapManager commence immédiatement la sauvegarde.
+* Si l'heure de début est supérieure à cinq minutes, SnapManager n'initie pas la sauvegarde.
+
+
+Prenons par exemple le scénario suivant :
+
+* L'horloge de l'hôte de l'interface graphique est de trois minutes en arrière de l'heure réelle.
+* L'heure actuelle sur le client est 8:58
+* Vous planifiez une sauvegarde ponctuelle à 9 h 00
+* Vous planifiez une autre sauvegarde ponctuelle à 8 h 30
+
+
+Lorsque le serveur reçoit la première demande, l'heure sur le serveur est de 9 h 01 Bien que l'heure de début de la sauvegarde soit passée, SnapManager effectue immédiatement la sauvegarde.
+
+Lorsque le serveur reçoit la seconde demande, l'heure de début de la sauvegarde est supérieure à cinq minutes dans le passé. Vous recevrez un message indiquant que la demande d'horaire a échoué car l'heure de début est passée.
+
+Vous pouvez modifier la durée de cinq minutes dans un fichier de propriétés SnapManager.
+
+
+
+ a| 
+Qu'arrive-t-il aux sauvegardes planifiées d'un profil lorsque celui-ci est supprimé ?
+ a| 
+Lorsqu'un profil de base de données est supprimé, le serveur SnapManager supprime les sauvegardes planifiées définies pour ce profil.
+
+
+
+ a| 
+Comment les sauvegardes planifiées se comportent-elles pendant l'heure d'été ou lorsque vous modifiez l'heure du serveur SnapManager ?
+ a| 
+Les programmes de sauvegarde SnapManager sont affectés en raison de l'heure d'été ou lorsque vous modifiez l'heure du serveur SnapManager.
+
+Prenez en compte les conséquences suivantes lorsque le temps du serveur SnapManager est modifié :
+
+* Une fois le programme de sauvegarde déclenché, si le temps du serveur SnapManager revient, le planning de sauvegarde ne se déclenche pas à nouveau.
+* Si l'heure d'été commence avant l'heure de début planifiée, les programmes de sauvegarde sont déclenchés automatiquement.
+* Par exemple, si vous êtes aux États-Unis et que vous planifiez des sauvegardes toutes les heures à 4 h Cette opération doit avoir lieu toutes les 4 heures, les sauvegardes seront effectuées à 4 h, 8 h, 12 h, 4 h, 8 h et minuit les jours avant et après les ajustements de l'heure d'été en mars et novembre.
+* Notez que si les sauvegardes sont prévues pour 2 h 30 tous les soirs :
++
+** Lorsque les horloges sont de retour une heure, comme la sauvegarde est déjà déclenchée, la sauvegarde ne se déclenche pas à nouveau.
+** Lorsque les horloges se déclenchent à l'avance d'une heure, la sauvegarde se déclenche immédiatement. Si vous êtes aux États-Unis et souhaitez éviter ce problème, vous devez programmer vos sauvegardes pour qu'elles commencent à partir de 2 h 00 à 3 h 00 intervalle.
+
+
+
+
+|===

@@ -1,0 +1,36 @@
+---
+permalink: unix-installation-7mode/task-smsap-isg-start-the-snapmanager-server.html 
+sidebar: sidebar 
+keywords: start, snapmanager, server, target, database, host 
+summary: 'Vous devez démarrer le serveur SnapManager à partir de l"hôte de base de données cible.' 
+---
+= Démarrez le serveur SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez démarrer le serveur SnapManager à partir de l'hôte de base de données cible.
+
+.Étape
+. Connectez-vous à l'hôte de la base de données cible et démarrez le serveur SnapManager :
++
+`*smsap_server start*`
+
++
+Le message suivant s'affiche : `SnapManager Server started on secure port _port_number with PID PID_number_`.
+
++
+
+NOTE: Le port par défaut est _27214_.
+
+
+
+*Après la fin*
+
+Vous pouvez vérifier que SnapManager fonctionne correctement :
+
+`*smsap_server verify*`
+
+Le message suivant s'affiche : `Operation Id _operation_ID_number_ succeeded`.

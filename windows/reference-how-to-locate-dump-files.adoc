@@ -1,0 +1,73 @@
+---
+permalink: windows/reference-how-to-locate-dump-files.html 
+sidebar: sidebar 
+keywords: dump, file, locate, client, system, access, troubleshoot, problem, profile, operation 
+summary: Le fichier dump est situé sur le système client pour un accès facile. Ces fichiers sont utiles si vous devez résoudre un problème lié au profil, au système ou à toute opération. 
+---
+= Comment localiser les fichiers de vidage
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Le fichier dump est situé sur le système client pour un accès facile. Ces fichiers sont utiles si vous devez résoudre un problème lié au profil, au système ou à toute opération.
+
+Le fichier dump se trouve dans le répertoire home de l'utilisateur sur le système client.
+
+* Si vous utilisez l'interface utilisateur graphique, le fichier dump se trouve à l'adresse suivante :
++
+[listing]
+----
+user_home\Application Data\NetApp\smsap\3.3.0\smsap_dump dump_file_type_name
+server_host.jar
+----
+* Si vous utilisez l'interface de ligne de commande, le fichier dump est situé à l'adresse :
++
+[listing]
+----
+user_home\.netapp\smsap\3.3.0\smsap_dump_dump_file_type_name server_host.jar
+----
+
+
+Le fichier dump contient la sortie de la commande dump. Le nom du fichier dépend des informations fournies. Le tableau suivant présente les types d'opérations de vidage et les noms de fichiers obtenus :
+
+|===
+| Type d'opération de vidage | Nom de fichier résultant 
+
+
+ a| 
+Opération dump commande avec l'ID d'opération
+ a| 
+`smsap_dump_operation-id.jar`
+
+
+
+ a| 
+Opération dump commande sans ID d'opération
+ a| 
+`smsap operation dump -profile VH1 -verbose` Les valeurs de sortie suivantes sont affichées :
+
+[listing]
+----
+smsap operation dump -profile VH1 -verbose
+[ INFO] SMSAP-13048: Dump Operation Status: SUCCESS
+[ INFO] SMSAP-13049: Elapsed Time: 0:00:01.404
+Dump file created.
+Path: user_home\Application Data\ontap\smsap\3.3.0\smsap_dump_VH1_kaw.rtp.foo.com.jar
+----
+
+
+ a| 
+Commande System dump
+ a| 
+`smsap_dump_host-name.jar`
+
+
+
+ a| 
+Commande de vidage de profil
+ a| 
+`smsap_dump_profile-name_host-name.jar`
+
+|===

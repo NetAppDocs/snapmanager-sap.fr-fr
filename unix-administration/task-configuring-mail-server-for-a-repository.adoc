@@ -1,0 +1,75 @@
+---
+permalink: unix-administration/task-configure-mail-server-for-a-repository.html 
+sidebar: sidebar 
+keywords: snapmanager, enable, specify, mail, server, details, email, alert, sent, repository, configuring, configure 
+summary: SnapManager vous permet de spécifier les détails du serveur de messagerie à partir duquel les alertes par e-mail sont envoyées. 
+---
+= Configurer un serveur de messagerie pour un référentiel
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager vous permet de spécifier les détails du serveur de messagerie à partir duquel les alertes par e-mail sont envoyées.
+
+*À propos de cette tâche*
+
+SnapManager vous permet de spécifier le nom d'hôte ou l'adresse IP du serveur de messagerie de l'expéditeur, ainsi que le numéro de port du serveur de messagerie pour un nom de base de données de référentiel nécessitant une notification par e-mail. Vous pouvez configurer le numéro de port du serveur de messagerie dans une plage comprise entre 0 et 65535 ; la valeur par défaut est 25. Si vous avez besoin d'une authentification pour l'adresse e-mail, vous pouvez spécifier le nom d'utilisateur et le mot de passe.
+
+Vous devez spécifier le nom ou l'adresse IP du serveur hôte qui gère la notification par e-mail.
+
+.Étape
+. Pour configurer le serveur de messagerie pour envoyer des alertes par e-mail, entrez la commande suivante : `smsap notification set -sender-emailemail_address-mailhostmailhost-mailportmailport [-authentication-usernameusername-passwordpassword] -repository-portrepo_port-dbnamerepo_service_name-hostrepo_host-login-usernamerepo_username`
++
+Les autres options de cette commande sont les suivantes :
+
++
+``[-force]``
+
++
+``[-quiet | -verbose]``
+
++
+[cols="2a,4a"]
+|===
+| Pour effectuer les opérations suivantes... | Alors... 
+
+
+ a| 
+*Pour spécifier l'adresse électronique de l'expéditeur.*
+ a| 
+Spécifiez le `-sender-email` option. À partir de SnapManager 3.2 pour SAP, vous pouvez inclure le tiret (-) tout en spécifiant le nom de domaine de l'adresse e-mail. Par exemple, vous pouvez indiquer l'adresse e-mail de l'expéditeur comme `-sender-email _user@org-corp.com_.`
+
+
+
+ a| 
+*Pour spécifier le nom d'hôte ou l'adresse IP du serveur de messagerie de l'expéditeur.*
+ a| 
+Spécifiez le `-mailhost` option.
+
+
+
+ a| 
+*Pour spécifier le numéro de port du serveur de messagerie pour un nom de base de données de référentiel qui nécessite une notification par e-mail. Vous pouvez configurer le numéro de port du serveur de messagerie entre zéro et 65535 ; la valeur par défaut est 25.*
+ a| 
+Spécifiez le `-mailport` option.
+
+
+
+ a| 
+*Spécifiez le nom d'utilisateur et le mot de passe si vous avez besoin d'une authentification pour l'adresse e-mail.*
+ a| 
+Spécifiez `-authentication` suivi du nom d'utilisateur et du mot de passe.
+
+|===
+
+
+'''
+L'exemple suivant configure le serveur de messagerie.
+
+[listing]
+----
+smsap notification set -sender-email admin1@org.com -mailhost hostname.org.com -mailport 25 authentication -username admin1 -password admin1 -repository -port 1521 -dbname SMSAPREPO -host hotspur -login -username grabal21 -verbose
+----
+'''

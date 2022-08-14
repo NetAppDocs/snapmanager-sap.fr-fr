@@ -1,0 +1,135 @@
+---
+permalink: unix-administration/concept-what-database-restore-is.html 
+sidebar: sidebar 
+keywords: snapmanager, enable, volume-based, file-based, backup, restore, operation, database, restore 
+summary: 'SnapManager vous permet d"effectuer des opérations de sauvegarde et de restauration basées sur des volumes ou des fichiers.' 
+---
+= Quelle est la restauration de la base de données
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager vous permet d'effectuer des opérations de sauvegarde et de restauration basées sur des volumes ou des fichiers.
+
+Le tableau suivant décrit les méthodes de restauration :
+
+[cols="1a,3a"]
+|===
+| Processus de restauration | Détails 
+
+
+ a| 
+Restaurations rapides basées sur les volumes (à partir du stockage primaire)
+ a| 
+SnapManager restaure les fichiers de données d'une base de données en restaurant un volume complet. Ce processus par défaut est la méthode la plus rapide pour restaurer votre base de données.
+
+
+
+ a| 
+Restaurations basées sur des fichiers
+ a| 
+Restauration complète du système de fichiers côté stockage (primaire ou secondaire) : SnapManager effectue une restauration complète du numéro d'unité logique (LUN).
+
+
+
+ a| 
+Restauration de fichiers côté stockage : SnapManager effectue une restauration SFSR (Single File Snap Restore) dans un environnement NAS. Dans une SFSR, chaque fichier ou LUN représentant les objets protégés est restauré.
+
+
+
+ a| 
+Restauration de copie de fichiers côté hôte (primaire ou secondaire) : SnapManager clone la sauvegarde locale via une LUN ou un FlexClone. Le clone est monté, puis SnapManager copie les fichiers hôte du clone dans le système de fichiers actif.
+
+|===
+
+NOTE: Vous ne pouvez pas restaurer une sauvegarde à partir du stockage secondaire, si la sauvegarde existe également sur le stockage principal.
+
+Une fois l'opération de restauration rapide terminée, SnapManager effectue les tâches suivantes :
+
+* Libération des sauvegardes les plus récentes (effectuées après la restauration de la sauvegarde) dans le même profil, car leurs copies Snapshot n'existent plus sur le stockage primaire.
+* Supprime toutes les copies Snapshot pour les sauvegardes du profil où des copies Snapshot ont été automatiquement supprimées par le processus de restauration rapide.
++
+Cela empêche que les sauvegardes ne soient partiellement libérées. Par exemple, Backup_A a été créé en premier puis Backup_B a été créé. Chacun dispose d'une copie Snapshot pour les fichiers de données et d'une autre pour les journaux d'archivage. Une fois que SnapManager a restauré Backup_A à l'aide du processus de restauration rapide, SnapManager supprime automatiquement la copie Snapshot du fichier de données de Backup_B. Comme le journal d'archivage n'est pas restauré au cours du processus de restauration rapide, SnapManager doit supprimer la copie Snapshot de Backup_B des journaux d'archivage une fois le processus de restauration rapide terminé.
+
+
+
+
+
+== Restauration rapide
+
+La restauration rapide ou basée sur le volume est ainsi nommée parce qu'il s'agit de la méthode de restauration la plus rapide possible. L'intégralité du volume du système de stockage est rétablie dans une copie Snapshot. Au niveau du stockage, cette restauration est quasiment instantanée. Cependant, l'exécution d'une restauration de volume peut avoir les conséquences négatives suivantes et doit donc être utilisée avec précaution :
+
+* L'intégralité du volume côté stockage est rétablie, notamment les valeurs suivantes :
++
+** Fichiers qui n'ont pas été pris en compte dans le cadre de la sauvegarde
+** Autres fichiers, systèmes de fichiers ou LUN sur le volume
+
+
+* Toutes les copies Snapshot créées après la copie Snapshot vers laquelle le volume est restauré sont supprimées.
++
+Par exemple, vous ne pouvez plus restaurer la sauvegarde de mardi si vous avez restauré le volume de sauvegarde lundi.
+
+* Les relations avec les systèmes de stockage secondaires sont rompues si la copie Snapshot restaurée est plus ancienne que la copie Snapshot de référence dans la relation.
+
+
+
+
+== Restauration du système de fichiers complet côté stockage
+
+Une restauration complète du système de fichiers côté stockage est effectuée lorsqu'une restauration de volume ne peut pas être effectuée, mais l'intégralité du système de fichiers peut être restaurée sur le système de stockage.
+
+Lorsqu'une restauration du système de fichiers côté stockage est effectuée, les opérations suivantes se produisent :
+
+* Dans un environnement SAN, toutes les LUN utilisées par le système de fichiers (et le groupe de volumes sous-jacent le cas échéant) sont restaurées sur le système de stockage.
+* Dans un environnement NAS, chaque fichier du système de fichiers est restauré sur le système de stockage.
++
+Dans le cas d'environnements NAS, ce mécanisme de restauration n'offre pas d'avantage supplémentaire par rapport à la restauration des fichiers côté stockage.
+
+
+
+Lorsqu'une restauration du système de fichiers côté stockage est effectuée, les opérations suivantes se produisent, selon l'emplacement de stockage :
+
+* Lors de la restauration de SnapManager à partir des systèmes de stockage primaires, les LUN (SAN) ou les fichiers (NAS) sont restaurés via SFSR.
+* Lorsque les restaurations SnapManager sont réalisées à partir de systèmes de stockage secondaires, les LUN (SAN) ou les fichiers (NAS) sont copiées à partir des systèmes de stockage secondaires vers le système de stockage primaire sur le réseau.
+
+
+Comme le système de fichiers est entièrement restauré, les fichiers qui ne font pas partie de la sauvegarde sont également restaurés. Un remplacement est nécessaire si des fichiers, qui ne font pas partie de la restauration, existent dans le système de fichiers en cours de restauration.
+
+
+
+== Restauration de fichiers côté stockage
+
+La restauration d'un fichier côté stockage est parfois effectuée lorsqu'une restauration du système de fichiers côté stockage ne peut pas être effectuée. Dans le cadre d'une restauration de fichiers côté stockage, les fichiers individuels d'un système de fichiers sont restaurés directement sur les systèmes de stockage.
+
+Ce type de restauration peut uniquement être effectué dans les environnements NFS ou dans certains cas dans les environnements ASM.
+
+Lors de la restauration d'un fichier côté stockage, les opérations suivantes se produisent :
+
+* Lorsque SnapManager restaure les fichiers NFS à partir des systèmes de stockage primaires, les fichiers individuels sont restaurés à l'aide de SFSR.
+* Lorsque SnapManager restaure des fichiers NFS à partir de systèmes de stockage secondaires, les fichiers individuels sont recopiés sur le système de stockage primaire via le réseau de stockage.
+
+
+
+
+== Restauration de fichiers côté hôte
+
+La restauration de copies de fichiers côté hôte est utilisée pour la dernière utilisation dans les environnements SAN lorsque restauration rapide, restauration du système de fichiers côté stockage et restauration du fichier côté stockage ne peuvent pas être effectuées.
+
+La restauration d'une copie de fichier côté hôte implique les tâches suivantes :
+
+* Clonage du stockage
+* Connexion du stockage cloné à l'hôte
+* Copie des fichiers hors des systèmes de fichiers clones dans les systèmes de fichiers actifs
+* Déconnexion du stockage clone de l'hôte
+* Suppression du stockage clone
+
+
+Lors d'une restauration à partir du stockage secondaire, SnapManager procède d'abord à une restauration des données directement depuis le système de stockage secondaire vers le système de stockage primaire (sans impliquer l'hôte). Si SnapManager ne peut pas effectuer ce type de restauration (par exemple, si des fichiers ne faisant pas partie de la restauration existent dans un système de fichiers), SnapManager effectue alors la restauration de copie de fichiers côté hôte. SnapManager propose deux méthodes pour effectuer une restauration de copie de fichiers côté hôte à partir du stockage secondaire. La méthode sélectionnée par SnapManager est configurée dans `smsap.config` fichier.
+
+* Direct : SnapManager clone les données sur le stockage secondaire, monte les données clonées du système de stockage secondaire sur l'hôte, puis copie les données hors du clone dans l'environnement actif. Il s'agit de la stratégie d'accès secondaire par défaut.
+* Indirect : SnapManager copie d'abord les données sur un volume temporaire du stockage primaire, puis monte les données du volume temporaire sur l'hôte et copie ensuite les données hors du volume temporaire dans l'environnement actif. Cette stratégie d'accès secondaire doit être utilisée uniquement si l'hôte ne dispose pas d'un accès direct au système de stockage secondaire. Les restaurations à l'aide de cette méthode prennent deux fois plus de temps que la règle d'accès secondaire direct, car deux copies des données sont créées.
+
+
+La décision d'utiliser la méthode directe ou indirecte est contrôlée par la valeur du `restore.secondaryAccessPolicy` paramètre dans le `smsap.config` fichier de configuration. La valeur par défaut est directe.

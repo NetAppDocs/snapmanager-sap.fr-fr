@@ -1,0 +1,14 @@
+---
+permalink: unix-administration/task-protected-backup-configuration-and-execution.html 
+sidebar: sidebar 
+keywords: configure, snapmanager, protection, manager, support, database, backup, secondary, administrator, coordinate, action, protect, configuration, execution 
+summary: 'Vous devez configurer SnapManager et protection Manager pour prendre en charge la sauvegarde de base de données sur le stockage secondaire. L"administrateur de la base de données et l"administrateur du stockage doivent coordonner leurs actions.' 
+---
+= Configuration et exécution de la sauvegarde protégées
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez configurer SnapManager et protection Manager pour prendre en charge la sauvegarde de base de données sur le stockage secondaire. L'administrateur de la base de données et l'administrateur du stockage doivent coordonner leurs actions.

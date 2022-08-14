@@ -1,0 +1,201 @@
+---
+permalink: unix-administration/reference-error-message-classifications.html 
+sidebar: sidebar 
+keywords: determine, cause, error, message, classification 
+summary: 'Vous pouvez déterminer la cause d"une erreur si vous connaissez les classifications de messages.' 
+---
+= Classification des messages d'erreur
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez déterminer la cause d'une erreur si vous connaissez les classifications de messages.
+
+Le tableau suivant fournit des informations sur les plages numériques des différents types de messages que vous pouvez voir avec SnapManager :
+
+[cols="2a,1a,3a"]
+|===
+| Groupe | Gamme | Du stockage 
+
+
+ a| 
+DE PRODUCTION
+ a| 
+1000-1999
+ a| 
+Permet de consigner l'état ou les problèmes liés à l'environnement d'exploitation de SnapManager. Ce groupe comprend des messages sur les systèmes avec lesquels SnapManager interagit, tels que l'hôte, le système de stockage, la base de données, etc.
+
+
+
+ a| 
+SAUVEGARDE
+ a| 
+2000-2999
+ a| 
+Associé au processus de sauvegarde de base de données.
+
+
+
+ a| 
+RESTAURER
+ a| 
+3000-3999
+ a| 
+Associé au processus de restauration de la base de données.
+
+
+
+ a| 
+CLONAGE
+ a| 
+4000-4999
+ a| 
+Associé au processus de clonage de base de données.
+
+
+
+ a| 
+PROFIL
+ a| 
+5000-5999
+ a| 
+Utilisé pour la gestion des profils.
+
+
+
+ a| 
+GÉREZ
+ a| 
+6000-6999
+ a| 
+Utilisé pour la gestion des sauvegardes.
+
+
+
+ a| 
+INTERFACE DE BASE DE DONNÉES VIRTUELLE
+ a| 
+7000-7999
+ a| 
+Associé à l'interface de base de données virtuelle.
+
+
+
+ a| 
+INTERFACE DE STOCKAGE VIRTUEL
+ a| 
+8000-8999
+ a| 
+Associé à l'interface de stockage virtuel.
+
+
+
+ a| 
+RÉFÉRENTIEL
+ a| 
+9000-9999
+ a| 
+Associé à l'interface référentiel.
+
+
+
+ a| 
+MÉTRIQUES
+ a| 
+10000-10999
+ a| 
+Associée à la taille de la sauvegarde de la base de données, au temps écoulé pour effectuer la sauvegarde, à la restauration de la base de données, au nombre de fois qu'une base de données a été clonée, etc.
+
+
+
+ a| 
+INTERFACE HÔTE VIRTUELLE
+ a| 
+11000-11999
+ a| 
+Associé à l'interface hôte virtuelle. Il s'agit de l'interface avec le système d'exploitation hôte.
+
+
+
+ a| 
+EXÉCUTION
+ a| 
+12000-12999
+ a| 
+Associé au paquet d'exécution, y compris les appels de frai et de traitement du système d'exploitation.
+
+
+
+ a| 
+PROCESSUS
+ a| 
+13000-13999
+ a| 
+Associé au composant processus de SnapManager.
+
+
+
+ a| 
+UTILITAIRES
+ a| 
+14000-14999
+ a| 
+Associé aux utilitaires SnapManager, au contexte global, etc.
+
+
+
+ a| 
+VIDAGE/DIAGNOSTIC
+ a| 
+15000-15999
+ a| 
+Associé aux opérations de vidage ou de diagnostic.
+
+
+
+ a| 
+AIDE
+ a| 
+16000-16999
+ a| 
+Associé à l'aide.
+
+
+
+ a| 
+SERVEUR
+ a| 
+17000-17999
+ a| 
+Utilisé dans l'administration du serveur SnapManager.
+
+
+
+ a| 
+API
+ a| 
+18000-18999
+ a| 
+Associé à l'API.
+
+
+
+ a| 
+BACKINT
+ a| 
+19000-19999
+ a| 
+Associé à BACKINT.
+
+
+
+ a| 
+AUTH
+ a| 
+20000-20999
+ a| 
+Associé à l'autorisation d'informations d'identification.
+
+|===

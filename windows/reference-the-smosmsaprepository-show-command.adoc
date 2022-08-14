@@ -1,0 +1,92 @@
+---
+permalink: windows/reference-the-smosmsaprepository-show-command.html 
+sidebar: sidebar 
+keywords: command, display, information, repository, smsap 
+summary: Cette commande affiche des informations sur le référentiel. 
+---
+= La commande smsap repository show
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Cette commande affiche des informations sur le référentiel.
+
+
+
+== Syntaxe
+
+[listing]
+----
+
+smsap repository show
+-repository
+-dbname repo_service_name
+-host repo_host
+-port repo_port
+-login -username repo_username
+[-quiet | -verbose]
+----
+
+
+== Paramètres
+
+* *`-repository`*
++
+Les options suivantes `-repository` spécifiez les détails de la base de données pour le référentiel.
+
+* *`-dbname _repo_service_name_`*
++
+Indique le nom de la base de données qui stocke le référentiel. Utilisez le nom global ou le SID.
+
+* *`-host _repo_host_`*
++
+Indique le nom ou l'adresse IP de l'ordinateur hôte sur lequel s'exécute la base de données de référentiel.
+
+* *`-login`*
++
+Démarre les détails de connexion au référentiel.
+
+* *`-username _repo_username_`*
++
+Indique le nom d'utilisateur nécessaire pour accéder à la base de données qui stocke le référentiel.
+
+* *`-port _repo_port_`*
++
+Spécifie le numéro de port TCP utilisé pour accéder à la base de données qui stocke le référentiel.
+
+* *`-quiet`*
++
+Affiche uniquement les messages d'erreur sur la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* *`-verbose`*
++
+Affiche des messages d'erreur, d'avertissement et d'information sur la console.
+
+
+
+
+
+== Exemple de commande
+
+L'exemple suivant présente des détails sur le référentiel dans la base de données SALESDB.
+
+[listing]
+----
+smsap repository show -repository -dbname SALESDB  -host server1
+-port 1521 -login -username admin
+Repository Definition:
+User Name: admin
+Host Name: server1
+Database Name: SALESDB
+Database Port: 1521
+Version: 28
+Hosts that have run operations using this repository: 2
+server2
+server3
+Profiles defined in this repository: 2
+GSF5A
+GSF3A
+Incomplete Operations: 0
+----

@@ -1,0 +1,27 @@
+---
+permalink: windows/task-suspend-backup-schedules.html 
+sidebar: sidebar 
+keywords: snapmanager, enable, suspend, backup, schedule, resume 
+summary: 'SnapManager vous permet de suspendre un programme de sauvegarde jusqu"à ce que la planification des sauvegardes reprend.' 
+---
+= Suspendre les planifications de sauvegarde
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager vous permet de suspendre un programme de sauvegarde jusqu'à ce que la planification des sauvegardes reprend.
+
+
+
+== Description de la tâche
+
+Vous pouvez suspendre les horaires actifs. Si vous essayez de suspendre le programme de sauvegarde qui est déjà suspendu, il se peut que vous rencontriez un message d'erreur `"Cannot suspend: schedule <schedulename> already in suspend state"`.
+
+.Étape
+. Pour suspendre temporairement le planning de sauvegarde, entrez la commande suivante :
++
+`*smsap schedule suspend -profile _profile_name_ -schedule-name _schedulename_ [-quiet | -verbose]*`
+
+

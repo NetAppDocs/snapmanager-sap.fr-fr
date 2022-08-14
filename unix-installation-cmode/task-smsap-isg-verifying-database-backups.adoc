@@ -1,0 +1,42 @@
+---
+permalink: unix-installation-cmode/task-smsap-isg-verify-database-backups.html 
+sidebar: sidebar 
+keywords: verify, backup, database, ensure, backed-up, file, corrupt 
+summary: Vous pouvez vérifier la sauvegarde de votre base de données pour vous assurer que les fichiers sauvegardés ne sont pas corrompus. 
+---
+= Vérifier les sauvegardes de base de données
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez vérifier la sauvegarde de votre base de données pour vous assurer que les fichiers sauvegardés ne sont pas corrompus.
+
+
+
+== Description de la tâche
+
+Si vous n'avez pas sélectionné la case à cocher *vérifier la sauvegarde à l'aide de l'utilitaire Oracle DBVERIFY* lors de la création d'une sauvegarde, vous devez effectuer ces étapes manuellement pour vérifier la sauvegarde. Toutefois, si vous avez coché la case, SnapManager vérifie automatiquement la sauvegarde.
+
+.Étapes
+. Dans l'arborescence *référentiels*, sélectionnez le profil.
+. Cliquez avec le bouton droit de la souris sur la sauvegarde à vérifier et sélectionnez *Verify*.
+. Cliquez sur *Terminer*.
++
+Si l'opération échoue, cliquez sur *Détails de l'opération* pour voir ce qui a provoqué l'échec de l'opération.
+
++
+Dans l'arborescence *Repository*, cliquez avec le bouton droit de la souris sur la sauvegarde, puis cliquez sur *Propriétés* pour afficher les résultats de l'opération de vérification.
+
+
+
+
+
+== Une fois que vous avez terminé
+
+Vous pouvez utiliser des fichiers sauvegardés pour effectuer des opérations de restauration. Pour plus d'informations sur la procédure de restauration à l'aide de l'interface utilisateur SnapManager, reportez-vous à l'aide en ligne _Help_. Si vous souhaitez utiliser l'interface de ligne de commande (CLI) pour effectuer des opérations de restauration, reportez-vous au document _SnapManager for SAP Administration Guide for UNIX_.
+
+*Informations connexes*
+
+https://library.netapp.com/ecm/ecm_download_file/ECMP12481453["Guide d'administration SnapManager 3.4.1 pour SAP pour UNIX"^]

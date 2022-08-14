@@ -1,0 +1,136 @@
+---
+permalink: windows/task-create-profiles.html 
+sidebar: sidebar 
+keywords: create, profile, assign, oracle, database, policy, set, retention, count, class 
+summary: Lors de la création de profils, vous pouvez attribuer un compte utilisateur de base de données Oracle particulier au profil. Vous pouvez définir la stratégie de conservation pour le profil et définir le nombre et la durée de conservation pour chaque classe de rétention. 
+---
+= Créer des profils
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Lors de la création de profils, vous pouvez attribuer un compte utilisateur de base de données Oracle particulier au profil. Vous pouvez définir la stratégie de conservation pour le profil et définir le nombre et la durée de conservation pour chaque classe de rétention.
+
+
+
+== Description de la tâche
+
+Si vous ne fournissez pas les valeurs de l' `-login`, `-password`, et `-port` Paramètres de la base de données, le mode d'authentification du système d'exploitation utilise les informations d'identification par défaut.
+
+Lors de la création d'un profil, SnapManager effectue une vérification d'éligibilité pour la restauration afin de déterminer le mécanisme de restauration qui peut être utilisé pour restaurer la base de données.
+
+SnapManager (3.2 ou version ultérieure) vous permet de séparer les fichiers journaux d'archives des fichiers de données tout en créant un nouveau profil ou en mettant à jour un profil existant. Après avoir séparé la sauvegarde à l'aide du profil, vous pouvez créer uniquement la sauvegarde des fichiers de données uniquement ou la sauvegarde du journal d'archivage de la base de données uniquement. Vous pouvez utiliser le nouveau profil ou le profil mis à jour pour créer la sauvegarde contenant à la fois les fichiers de données et les fichiers journaux d'archivage. Cependant, vous ne pouvez pas utiliser le profil pour créer la sauvegarde complète ou rétablir les paramètres.
+
+*Profils pour la création de sauvegardes complètes et partielles*
+
+Vous pouvez créer des profils pour créer la sauvegarde complète de la base de données contenant les fichiers de données, les fichiers de contrôle, les fichiers journaux d'archivage et la sauvegarde partielle de la base de données contenant des fichiers de données ou des espaces de stockage spécifiés, tous les fichiers de contrôle et tous les fichiers journaux d'archive. SnapManager ne vous permet pas de créer des sauvegardes de journaux d'archive distinctes en utilisant les profils créés pour les sauvegardes complètes et partielles.
+
+*Profils pour la création de sauvegardes de fichiers de données uniquement et de sauvegardes archiveils-only*
+
+Lorsque vous créez un nouveau profil, vous pouvez inclure `-separate-archivelog-backups` pour séparer la sauvegarde du journal d'archivage de la sauvegarde du fichier de données. Vous pouvez également mettre à jour le profil existant pour séparer la sauvegarde du journal d'archivage de la sauvegarde du fichier de données.
+
+En utilisant les nouvelles options de profil pour séparer les sauvegardes du journal d'archivage, vous pouvez effectuer les opérations SnapManager suivantes :
+
+* Créez une sauvegarde du journal d'archivage
+* Supprimer une sauvegarde du journal d'archivage
+* Montez une sauvegarde du journal d'archivage
+* Libérer une sauvegarde du journal d'archivage
+
+
+Lors de la création du profil pour séparer les sauvegardes du journal d'archivage de la sauvegarde des fichiers de données, si les fichiers journaux d'archive n'existent pas dans la base de données pour laquelle le profil est créé, un message d'avertissement s'affiche.
+
+
+WARNING: `Archived log file does not exist in the active file system. The archived log file versions earlier than the <archive log thread version> log file will not be included in the backup`
+
+Même si vous créez des sauvegardes pour cette base de données, les fichiers journaux d'archive ne sont pas disponibles dans les sauvegardes de la base de données.
+
+
+NOTE: Si vous rencontrez une erreur lors de la création d'un profil, utilisez le `smsap system dump` commande. Après avoir créé un profil, si vous rencontrez une erreur, utilisez le `smsap operation dump` et `smsap profile dump` commandes.
+
+.Étape
+. Pour créer un profil avec un nom d'utilisateur, un mot de passe et un port (authentification Oracle), entrez la commande suivante :
++
+`*smsap profile create -profileprofile [-profile-passwordprofile_password] -repository-dbnamerepo_dbname-hostrepo_host-portrepo_port-login-usernamerepo_username-database-dbnamedb_dbname-hostdb_host [-siddb_sid] [-login-usernamedb_username-passworddb_password-portdb_port] [-rman {-controlfile | {-login-usernamerman_username-passwordrman_password-tnsnamerman_tnsname} } ] [-retain [-hourly [-countn] [-durationm]] [-daily [-countn] [-durationm]] [-weekly [-countn] [-durationm]] [-monthly [-countn] [-durationm]]] [-commentcomment][-snapname-patternpattern][-summary-notification] [-notification [-success-emailemail_address1, email_address2-subjectsubject_pattern] [-failure-emailemail_address1, email_address2-subjectsubject_pattern]][-separate-archivelog-backups-retain-archivelog-backups-hourshours | -daysdays | -weeksweeks| -monthsmonths [-include-with-online-backups | -no-include-with-online-backups]] [-dump]*`
+
++
+Les autres options de cette commande sont les suivantes :
+
++
+[`-force`] [`-noprompt`]
+
++
+[`quiet` | `verbose`]
+
++
+Vous pouvez également inclure d'autres options lors de la création de profils, selon la manière dont vous souhaitez accéder à la base de données.
+
++
+|===
+| Si... | Alors... 
+
+
+ a| 
+*Vous voulez utiliser l'authentification de base de données pour créer un profil*
+ a| 
+Spécifiez les détails de connexion à la base de données.
+
+
+
+ a| 
+*Vous voulez spécifier une stratégie de conservation de sauvegarde pour les sauvegardes*
+ a| 
+Spécifiez soit le nombre de rétention, soit la durée d'une classe de rétention, soit les deux. La durée est exprimée en unités de la classe (par exemple, heures pour l'heure, jours pour la journée).
+
+** `-hourly` est la classe de rétention horaire, pour laquelle [`-count n`] [`-duration m`] sont respectivement le nombre de rétention et la durée de rétention.
+** `-daily` est la classe de rétention quotidienne, pour laquelle [`-count n`] [`-duration m`] sont respectivement le nombre de rétention et la durée de rétention.
+** `-weekly` est la classe de conservation hebdomadaire, pour laquelle [`-count n`] [`-duration m`] sont respectivement le nombre de rétention et la durée de rétention.
+** `-monthly` est la classe de rétention mensuelle, pour laquelle [`-count n`] [`-duration m`] sont respectivement le nombre de rétention et la durée de rétention.
+
+
+
+
+ a| 
+*Vous voulez activer la notification par e-mail pour l'état d'achèvement des opérations de la base de données*
+ a| 
+Spécifiez les options et variables suivantes :
+
+** `-summary-notification` permet de configurer une notification par e-mail de synthèse pour plusieurs profils sous une base de données de référentiel.
+** `-notification` vous permet de recevoir une notification par e-mail pour l'état d'achèvement de l'opération de base de données pour un profil.
+** `-success-emailemail_address2` vous permet de recevoir une notification par e-mail sur l'opération de base de données réussie effectuée à l'aide d'un profil nouveau ou existant.
+** `-failure-emailemail_address2` vous permet de recevoir une notification par e-mail sur l'opération de base de données ayant échoué effectuée à l'aide d'un nouveau profil ou d'un profil existant.
+** `-subjectsubject_text` spécifie le texte de l'objet de la notification par e-mail lors de la création d'un profil ou d'un profil existant. Si les paramètres de notification ne sont pas configurés pour le référentiel et que vous essayez de configurer des notifications de profil ou de résumé à l'aide de l'interface de ligne de commande, le message suivant est consigné dans le journal de la console : `SMSAP-14577: Notification Settings not configured`.
++
+Si vous avez configuré les paramètres de notification et que vous tentez de configurer la notification récapitulative à l'aide de l'interface de ligne de commande sans activer la notification récapitulative pour le référentiel, le message suivant s'affiche dans le journal de la console : `SMSAP-14575: Summary notification configuration not available for this repository`
+
+
+
+
+
+ a| 
+*Vous voulez sauvegarder les fichiers journaux d'archive séparément des fichiers de données*
+ a| 
+Spécifiez les options et variables suivantes :
+
+** `-separate-archivelog-backups` vous permet de séparer la sauvegarde du journal d'archivage de la sauvegarde du fichier de données.
+** `-retain-archivelog-backups` définit la durée de conservation des sauvegardes des journaux d'archives. Vous devez spécifier une durée de rétention positive.
++
+Les sauvegardes du journal d'archivage sont conservées en fonction de la durée de conservation du journal d'archivage. Les fichiers de données sont conservés selon les règles de conservation existantes.
+
+** `-include-with-online-backups` inclut la sauvegarde du journal d'archivage et la sauvegarde de base de données en ligne.
++
+Cette option vous permet de créer une sauvegarde des fichiers de données en ligne et d'archiver les journaux à des fins de clonage. Lorsque cette option est définie, chaque fois que vous créez une sauvegarde de fichiers de données en ligne, les sauvegardes des journaux d'archive sont créées avec les fichiers de données immédiatement.
+
+** `-no-include-with-online-backups` n'inclut pas la sauvegarde du journal d'archivage avec la sauvegarde de base de données.
+
+
+
+
+ a| 
+*Vous pouvez collecter les fichiers de vidage après l'opération de création de profil réussie*
+ a| 
+Spécifiez le `-dump` à la fin du `profile create` commande.
+
+|===
+

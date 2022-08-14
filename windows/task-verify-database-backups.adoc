@@ -1,0 +1,33 @@
+---
+permalink: windows/task-verify-database-backups.html 
+sidebar: sidebar 
+keywords: backup, verify, command, block, database, corrupt, operation, invoke, oracle, utility, data, file, backup 
+summary: 'Vous pouvez utiliser la commande backup verify pour vérifier que les blocs de la sauvegarde de base de données ne sont pas corrompus. L"opération de vérification appelle l"utilitaire Oracle Database Verify pour chaque fichier de données de la sauvegarde.' 
+---
+= Vérifier les sauvegardes de base de données
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez utiliser le `backup verify` commande pour vérifier que les blocs de la sauvegarde de la base de données ne sont pas corrompus. L'opération de vérification appelle l'utilitaire Oracle Database Verify pour chaque fichier de données de la sauvegarde.
+
+
+
+== Description de la tâche
+
+SnapManager vous permet d'effectuer la vérification à tout moment qui vous convient et aux utilisateurs de votre système. Vous pouvez effectuer la vérification immédiatement après avoir créé la sauvegarde. Vous devez spécifier le profil contenant la sauvegarde et le libellé ou l'ID de la sauvegarde que vous avez créée.
+
+
+NOTE: L'opération de vérification de la sauvegarde échoue dans un environnement Windows si vous utilisez SnapManager 3.0 et Oracle Database 11.1.0.7. Vous devez utiliser Oracle Database 11.2.0.1 ou version ultérieure.
+
+
+NOTE: Vous pouvez spécifier -dump pour collecter les fichiers de vidage après l'opération de vérification de sauvegarde.
+
+.Étape
+. Saisissez la commande suivante :
++
+`*smsap backup verify -profile _profile_name_ [-label _label_ | -id _id_] [-force] [ -dump] [-quiet | -verbose]*`
+
+

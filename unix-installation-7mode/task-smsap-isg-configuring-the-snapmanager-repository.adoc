@@ -1,0 +1,83 @@
+---
+permalink: unix-installation-7mode/task-smsap-isg-configure-the-snapmanager-repository.html 
+sidebar: sidebar 
+keywords: configure, snapmanager, repository, database, instance, store, manage, configuring 
+summary: 'Vous devez configurer le référentiel SnapManager dans l"instance de base de données du référentiel. La base de données de référentiel stocke les métadonnées des bases de données gérées par SnapManager.' 
+---
+= Configurer le référentiel SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez configurer le référentiel SnapManager dans l'instance de base de données du référentiel. La base de données de référentiel stocke les métadonnées des bases de données gérées par SnapManager.
+
+*Ce dont vous aurez besoin*
+
+* Vous devez avoir créé l'instance de base de données du référentiel.
+* Vous devez avoir créé l'utilisateur Oracle pour l'instance de base de données du référentiel avec les privilèges requis.
+* Vous devez avoir inclus les détails de l'instance de base de données du référentiel dans le `tnsnames.ora` fichier.
+
+
+*À propos de cette tâche*
+
+Vous pouvez configurer le référentiel SnapManager à partir de l'interface utilisateur SnapManager ou de l'interface de ligne de commande. Ces étapes montrent comment créer un référentiel à l'aide de l'interface utilisateur SnapManager. Vous pouvez également utiliser l'interface de ligne de commandes si vous préférez.
+
+Pour plus d'informations sur la création du référentiel à l'aide de l'interface de ligne de commande, reportez-vous au document _SnapManager for SAP Administration Guide for UNIX_.
+
+. Dans le volet gauche de l'interface utilisateur SnapManager, cliquez avec le bouton droit de la souris sur *référentiels*.
+. Sélectionnez *Créer un nouveau référentiel* et cliquez sur *Suivant*.
+. Dans la fenêtre *informations de configuration de la base de données de référentiel*, entrez les informations suivantes :
++
+|===
+| Dans ce champ... | Procédez comme ça... 
+
+
+ a| 
+*Nom d'utilisateur*
+ a| 
+Entrez le nom de l'utilisateur que vous avez créé pour l'instance de base de données du référentiel.
+
+
+
+ a| 
+*Mot de passe*
+ a| 
+Saisissez le mot de passe.
+
+
+
+ a| 
+*Hôte*
+ a| 
+Entrez l'adresse IP de l'hôte sur lequel l'instance de base de données de référentiel est créée.
+
+
+
+ a| 
+*Port*
+ a| 
+Entrez le port utilisé pour se connecter à l'instance de base de données du référentiel. Le port par défaut est 1521.
+
+
+
+ a| 
+*Nom du service*
+ a| 
+Entrez le nom utilisé par SnapManager pour se connecter à l'instance de base de données du référentiel. Selon les détails inclus dans le `tnsnames.ora` dossier, il peut s'agir du nom abrégé du service ou du nom complet du service qualifié.
+
+|===
+. Dans la fenêtre *Perform Repository Add Operation*, consultez le résumé de la configuration et cliquez sur *Add*.
++
+Si l'opération échoue, cliquez sur l'onglet *Détails de l'opération* pour voir ce qui a provoqué l'échec de l'opération. Les détails de l'erreur sont également saisis dans le journal des opérations situé dans /var/log/sssap.
+
+. Cliquez sur *Terminer*.
++
+Le référentiel est répertorié dans le volet de gauche sous l'arborescence *référentiels*. Si vous ne voyez pas le référentiel, cliquez avec le bouton droit de la souris sur *référentiels* et cliquez sur *Actualiser*.
+
+
+
+*Informations connexes*
+
+https://library.netapp.com/ecm/ecm_download_file/ECMP12481453["Guide d'administration SnapManager 3.4.1 pour SAP pour UNIX"^]

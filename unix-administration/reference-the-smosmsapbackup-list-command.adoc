@@ -1,0 +1,77 @@
+---
+permalink: unix-administration/reference-the-smosmsapbackup-list-command.html 
+sidebar: sidebar 
+keywords: run, backup, list, command, display, information, profile, information, status, retention, class, smsap 
+summary: 'Vous pouvez exécuter la commande backup list pour afficher des informations sur les sauvegardes d"un profil, y compris des informations sur la classe de rétention et l"état de protection.' 
+---
+= La commande smsap backup list
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez exécuter le `backup list` commande permettant d'afficher des informations sur les sauvegardes d'un profil, y compris des informations sur la classe de rétention et l'état de protection.
+
+
+
+== Syntaxe
+
+[listing, subs="+macros"]
+----
+pass:quotes[smsap backup list
+-profile _profile_name_
+-delimiter _character_
+[-data | -archivelogs | -all]]
+[-quiet | -verbose]]
+----
+
+
+== Paramètres
+
+* `*-profile _profile_name_*`
++
+Spécifie le profil pour lequel vous souhaitez répertorier les sauvegardes. Le profil contient l'identifiant de la base de données et d'autres informations sur la base de données.
+
+* `*-delimiter character*`
++
+Affiche chaque ligne sur une ligne distincte. Les attributs de la ligne sont séparés par le caractère spécifié.
+
+* `*-data*`
++
+Spécifie les fichiers de données.
+
+* `*-archivelogs*`
++
+Spécifie les fichiers journaux d'archive.
+
+* `*-quiet*`
++
+Affiche uniquement les messages d'erreur dans la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* `*-verbose*`
++
+Affiche les messages d'erreur, d'avertissement et d'information dans la console. Incluez le `-verbose` Pour afficher les ID de sauvegarde. ---
+
+
+
+
+
+== Exemple
+
+L'exemple suivant répertorie les sauvegardes pour le profil SALES1 :
+
+[listing]
+----
+smsap backup list -profile SALES1 -verbose
+Start Date          Status  Scope  Mode    Primary  Label      Retention   Protection
+------------------- ------- ------ ------- -------- -----      --------    ----------
+2007-08-10 14:31:27 SUCCESS FULL   ONLINE  EXISTS   backup1    DAILY       PROTECTED
+2007-08-10 14:12:31 SUCCESS FULL   ONLINE  EXISTS   backup2    HOURLY      NOT PROTECTED
+2007-08-10 10:52:06 SUCCESS FULL   ONLINE  EXISTS   backup3    HOURLY      PROTECTED
+2007-08-05 12:08:37 SUCCESS FULL   ONLINE  EXISTS   backup4    UNLIMITED   NOT PROTECTED
+2007-08-05 09:22:08 SUCCESS FULL   OFFLINE EXISTS   backup5    HOURLY      PROTECTED
+2007-08-04 22:03:09 SUCCESS FULL   ONLINE  EXISTS   backup6    UNLIMITED   NOT REQUESTED
+2007-07-30 18:31:05 SUCCESS FULL   OFFLINE EXISTS   backup7    HOURLY      PROTECTED
+----
+'''

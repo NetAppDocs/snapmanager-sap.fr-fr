@@ -1,0 +1,29 @@
+---
+permalink: windows/task-free-or-delete-retention-policy-exempt-backups.html 
+sidebar: sidebar 
+keywords: backup, retention, class, unlimited, delete, free, hourly, daily, weekly, monthly, policy, exempt backups 
+summary: 'Les sauvegardes dotées d"une classe de rétention illimitée ne peuvent pas être supprimées ni libérées directement. Pour supprimer ou libérer ces sauvegardes, vous devez d"abord attribuer une autre classe de rétention, par exemple toutes les heures, tous les jours, toutes les semaines ou tous les mois. Pour supprimer ou libérer une sauvegarde qui est exempte de la politique de rétention, vous devez d"abord mettre à jour la sauvegarde pour la rendre éligible à la suppression ou la libérer.' 
+---
+= Libérer ou supprimer des sauvegardes exonérées de règles de conservation
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Les sauvegardes dotées d'une classe de rétention « illimitée » ne peuvent pas être supprimées ni libérées directement. Pour supprimer ou libérer ces sauvegardes, vous devez d'abord attribuer une autre classe de rétention, par exemple toutes les heures, tous les jours, toutes les semaines ou tous les mois. Pour supprimer ou libérer une sauvegarde qui est exempte de la politique de rétention, vous devez d'abord mettre à jour la sauvegarde pour la rendre éligible à la suppression ou la libérer.
+
+.Étapes
+. Pour mettre à jour la sauvegarde afin qu'elle puisse être supprimée par la politique de conservation, entrez la commande suivante :
++
+`*smsap backup update -profile _profile_name_ {-label _label_ [data | -archivelogs] | -id _id_} -retain [-hourly | -daily | -weekly | -monthly]*`
+
+. Après avoir mis à jour la sauvegarde afin qu'elle puisse être supprimée, vous pouvez supprimer la sauvegarde ou les ressources de sauvegarde gratuites.
++
+** Pour supprimer la sauvegarde, entrez la commande suivante : +
+`*smsap backup delete -profile _profile_name_ {-label _label_ [data | -archivelogs] | -id _id_ | -all}*`
+** Pour libérer les ressources de sauvegarde, au lieu de supprimer la sauvegarde, entrez la commande suivante : +
+`*smsap backup free -profile _profile_name_ {-label _label_ [data | -archivelogs] | -id _id_ | -all} [-force] [ -dump] [-quiet | -verbose]*`
+
+
+

@@ -1,0 +1,36 @@
+---
+permalink: windows/concept-what-snapmanager-database-backups-are.html 
+sidebar: sidebar 
+keywords: snapmanager, enable, backup, task, assign, retention, class, database 
+summary: 'SnapManager vous permet d"effectuer différentes tâches de sauvegarde. Vous pouvez attribuer des classes de rétention pour spécifier la durée de conservation de la sauvegarde ; une fois cette limite atteinte, la sauvegarde est supprimée.' 
+---
+= Qu'est-ce que les sauvegardes de bases de données SnapManager
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager vous permet d'effectuer différentes tâches de sauvegarde. Vous pouvez attribuer des classes de rétention pour spécifier la durée de conservation de la sauvegarde ; une fois cette limite atteinte, la sauvegarde est supprimée.
+
+* Créer des sauvegardes sur le système de stockage primaire
+* Création de sauvegardes protégées sur les ressources de stockage secondaire par des scripts de post-traitement
+* Vérifiez que les sauvegardes ont bien été effectuées
+* Afficher la liste des sauvegardes
+* Planification des sauvegardes à l'aide de l'interface utilisateur graphique
+* Gérer le nombre de sauvegardes conservées
+* Libérer des ressources de sauvegarde
+* Monter et démonter les sauvegardes
+* Supprimer les sauvegardes
+
+
+SnapManager crée des sauvegardes à l'aide de l'une des classes de rétention suivantes :
+
+* Horaire
+* Tous les jours
+* Hebdomadaire
+* Tous les mois
+* Illimitée
+
+
+Si de nouveaux fichiers de données sont ajoutés à la base de données, vous devez créer une nouvelle sauvegarde immédiatement. En outre, si vous restaurez une sauvegarde effectuée avant l'ajout des nouveaux fichiers de données et que vous tentez de restaurer à un point donné après l'ajout des nouveaux fichiers de données, le processus de restauration automatique risque d'échouer. Consultez la documentation Oracle pour en savoir plus sur le processus de récupération des fichiers de données ajoutés après une sauvegarde.

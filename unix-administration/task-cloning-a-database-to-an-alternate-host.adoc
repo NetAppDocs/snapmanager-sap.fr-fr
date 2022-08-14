@@ -1,0 +1,31 @@
+---
+permalink: unix-administration/task-clone-a-database-to-an-alternate-host.html 
+sidebar: sidebar 
+keywords: clone, create, command, database, alternate, host, cloning 
+summary: Vous pouvez utiliser la commande clone create pour cloner une sauvegarde de base de données sur un autre hôte. 
+---
+= Cloner une base de données sur un autre hôte
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez utiliser le `clone create` commande permettant de cloner une sauvegarde de base de données sur un autre hôte.
+
+*Ce dont vous aurez besoin*
+
+* Créer un profil ou avoir un profil existant.
+* Créez une sauvegarde complète ou bénéficiez d'une sauvegarde de base de données existante.
+* Créez une spécification de clone ou possédez une spécification de clone existante.
+
+
+.Étape
+. Pour cloner une base de données vers un autre hôte, entrez la commande suivante :
++
+`*smsap clone create -backup-label _backup_label_name_ -newsid _new_sid_ -host _target_host_ -label _clone_label_ -comment _comment_text_ -profile _profile_name_ -clonespec _full_path_to_clonespecfile_*`
+
++
+Oracle ne vous permet pas d'exécuter deux bases de données avec le même SID simultanément sur le même hôte. Pour cette raison, vous devez fournir un nouveau SID pour chaque clone. Cependant, vous pouvez avoir une base de données sur un autre hôte avec le même SID.
+
+

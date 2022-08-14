@@ -1,0 +1,55 @@
+---
+permalink: unix-administration/task-define-the-database-home-with-the-oratab-file.html 
+sidebar: sidebar 
+keywords: snapmanager, oratab, file, operation, determine, oracle, database, home, directory, software, installation, defining, define 
+summary: 'SnapManager utilise le fichier oratab lors des opérations pour déterminer le répertoire de base de données Oracle. Une entrée pour votre base de données Oracle doit se trouver dans le fichier oratab pour que SnapManager fonctionne correctement. Le fichier oratab est créé lors de l"installation du logiciel Oracle.' 
+---
+= Définissez le domicile de la base de données à l'aide du fichier oratab
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager utilise le `oratab` Fichier lors des opérations pour déterminer le répertoire de base de données Oracle. Une entrée pour votre base de données Oracle doit se trouver dans le `oratab` Fichier pour que SnapManager fonctionne correctement. Le `oratab` Le fichier est créé lors de l'installation du logiciel Oracle.
+
+
+NOTE: Le répertoire de base Oracle est défini dans le `oratab` Fichier pour les systèmes SAP, comme pour les systèmes Oracle uniquement. Les systèmes SAP disposent également d'un répertoire de base de données home Directory, généralement `/oracle/SID/ _xxx_yy_,` où `xxx` représente la version de la base de données et `yy` est 32 ou 64.
+
+Le `oratab` le fichier se trouve à différents emplacements en fonction du système d'exploitation hôte, comme indiqué dans le tableau suivant :
+
+|===
+| Système d'exploitation hôte | Emplacement du fichier 
+
+
+ a| 
+Linux
+ a| 
+/etc/oratab
+
+
+
+ a| 
+Solaris
+ a| 
+/var/opt/oracle/oratab
+
+
+
+ a| 
+IBM AIX
+ a| 
+/etc/oratab
+
+|===
+L'échantillon `oratab` le fichier contient les informations suivantes :
+
+[listing]
+----
++ASM1:/u01/app/11.2.0/grid:N   # line added by Agent
+oelpro:/u01/app/11.2.0/oracle:N         # line added by Agent
+# SnapManager generated entry          (DO NOT REMOVE THIS LINE)
+smsapclone:/u01/app/11.2.0/oracle:N
+----
+
+NOTE: Une fois Oracle installé, vous devez vous assurer que `oratab` le fichier se trouve à l'emplacement spécifié dans le tableau précédent. Si le `oratab` le fichier ne se trouve pas au bon emplacement pour votre système d'exploitation. vous devez contacter le support technique pour obtenir de l'aide.

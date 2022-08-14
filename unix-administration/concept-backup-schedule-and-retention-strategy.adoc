@@ -1,0 +1,69 @@
+---
+permalink: unix-administration/concept-backup-schedule-and-retention-strategy.html 
+sidebar: sidebar 
+keywords: dba, ensure, backup, loss, data, disaster, regulatory, reason, retention, policy, database, schedule 
+summary: 'L"administrateur de base de données souhaite s"assurer que les sauvegardes sont disponibles en cas de perte de données, en cas d"incident et pour des raisons réglementaires. Cela nécessite une stratégie de conservation soigneusement pensée pour les diverses bases de données.' 
+---
+= Programme de sauvegarde et stratégie de conservation
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+L'administrateur de base de données souhaite s'assurer que les sauvegardes sont disponibles en cas de perte de données, en cas d'incident et pour des raisons réglementaires. Cela nécessite une stratégie de conservation soigneusement pensée pour les diverses bases de données.
+
+Pour la base de données de paie de production, l'administrateur de base de données respecte la stratégie de rétention TechCo suivante :
+
+[cols="1a,1a,1a,1a"]
+|===
+| Fréquence des sauvegardes | Durée de conservation | Durée de sauvegarde | Type de stockage 
+
+
+ a| 
+Une fois par jour
+ a| 
+10 jours
+ a| 
+7 h
+ a| 
+Principal (local)
+
+
+
+ a| 
+Une fois par jour
+ a| 
+10 jours
+ a| 
+7 h
+ a| 
+Secondaire (archivage)
+
+
+
+ a| 
+Une fois par semaine
+ a| 
+52 semaines
+ a| 
+Samedi 1 h
+ a| 
+Secondaire (archivage)
+
+|===
+* *Avantages de sauvegarde locale*
++
+La sauvegarde locale quotidienne assure la protection des bases de données, qui est instantanée. Elle utilise une bande passante réseau nulle, utilise un espace de stockage supplémentaire minimal et offre une restauration instantanée. Elle offre également des fonctionnalités de sauvegarde et de restauration très granulaires.
+
++
+Les dernières sauvegardes hebdomadaires de la base de données de paie étant conservées pendant au moins 52 semaines sur un site de stockage secondaire, il n'est donc plus nécessaire de conserver les sauvegardes quotidiennes pendant plus de 10 jours.
+
+* *Avantages de sauvegarde protégés*
++
+Des sauvegardes quotidiennes et hebdomadaires sur un système de stockage secondaire sur un site distant garantissent que si les données du site de stockage primaire sont endommagées, la base de données cible est toujours protégée et peut être restaurée à partir d'un système de stockage secondaire.
+
++
+Les sauvegardes quotidiennes sur le stockage secondaire sont effectuées pour protéger le système de stockage primaire contre l'endommagement. Comme les dernières sauvegardes hebdomadaires de la base de données de paie sont conservées pendant au moins 52 semaines, il n'est pas nécessaire de conserver les sauvegardes quotidiennes plus de 10 jours.
+
+

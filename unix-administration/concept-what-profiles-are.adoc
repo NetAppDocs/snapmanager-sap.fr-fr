@@ -1,0 +1,48 @@
+---
+permalink: unix-administration/concept-what-profiles-are.html 
+sidebar: sidebar 
+keywords: snapmanager, profile, store, information, database, database, credential, clone, backup, operation 
+summary: 'SnapManager utilise des profils pour stocker les informations nécessaires à des opérations sur une base de données donnée. Un profil contient les informations relatives à la base de données, y compris ses informations d"identification, ses sauvegardes et ses clones. En créant un profil, vous n"avez pas à spécifier les détails de la base de données chaque fois que vous effectuez une opération sur cette base de données.' 
+---
+= Quels sont les profils
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+SnapManager utilise des profils pour stocker les informations nécessaires à des opérations sur une base de données donnée. Un profil contient les informations relatives à la base de données, y compris ses informations d'identification, ses sauvegardes et ses clones. En créant un profil, vous n'avez pas à spécifier les détails de la base de données chaque fois que vous effectuez une opération sur cette base de données.
+
+Un profil ne peut référencer qu'une seule base de données. La même base de données peut être référencée par plusieurs profils. Les sauvegardes créées à l'aide d'un profil ne sont pas accessibles à partir d'un profil différent, même si les deux profils font référence à la même base de données.
+
+Les informations de profil sont stockées dans un référentiel. Le référentiel contient les informations de profil de la base de données et les informations relatives aux copies Snapshot qui servent de sauvegarde de base de données. Les copies Snapshot réelles sont stockées sur le système de stockage. Les noms des copies Snapshot sont stockés dans le référentiel contenant le profil de cette base de données. Lorsque vous effectuez une opération sur une base de données, vous devez sélectionner le profil dans le référentiel.
+
+La figure suivante illustre comment les référentiels peuvent contenir plusieurs profils, mais aussi que chaque profil ne peut définir qu'une seule base de données :
+
+image::../media/prnt_en_drw_smo_smsap_rep_prof.gif[prnt en drw smo sssap rep prof]
+
+Dans l'exemple précédent, Repository2 se trouve sur la base de données DB1 et Repository1 se trouve sur la base de données DB4.
+
+Chaque profil contient les informations d'identification de la base de données associée au profil. Les informations d'identification permettent à SnapManager de se connecter à la base de données et de l'utiliser. Les informations d'identification stockées incluent les paires de nom d'utilisateur et de mot de passe permettant d'accéder à l'hôte, au référentiel, à la base de données et aux informations de connexion requises si vous utilisez Oracle Recovery Manager (RMAN).
+
+Vous ne pouvez pas accéder à une sauvegarde créée à l'aide d'un profil à partir d'un autre profil, même si les deux profils sont associés à la même base de données. SnapManager place un verrou sur la base de données pour empêcher l'exécution simultanée de deux opérations incompatibles.
+
+*Profil pour la création de sauvegardes complètes et partielles*
+
+Vous pouvez créer des profils pour effectuer des sauvegardes complètes ou partielles.
+
+Les profils que vous spécifiez pour créer les sauvegardes complètes et partielles contiennent à la fois les fichiers de données et les fichiers journaux d'archivage. SnapManager ne permet pas à ces profils de séparer les sauvegardes des journaux d'archive des sauvegardes des fichiers de données. Les sauvegardes complètes et partielles sont conservées selon les politiques de conservation des sauvegardes polititque et protégées en fonction des règles de protection existantes. Vous pouvez planifier des sauvegardes complètes et partielles en fonction de l'heure et de la fréquence qui vous convient.
+
+*Profils pour la création de sauvegardes de fichiers de données uniquement et d'archives de sauvegardes de journaux uniquement*
+
+SnapManager (3.2 ou version ultérieure) vous permet de créer des profils qui prennent des sauvegardes des fichiers journaux d'archives séparément des fichiers de données. Après avoir utilisé le profil pour séparer les types de sauvegarde, vous pouvez créer soit des sauvegardes de fichiers de données uniquement, soit des sauvegardes de journaux uniquement de la base de données. Vous pouvez également créer une sauvegarde contenant à la fois les fichiers de données et les fichiers journaux d'archive.
+
+La stratégie de conservation s'applique à toutes les sauvegardes de la base de données lorsque les sauvegardes du journal d'archivage ne sont pas séparées. Après avoir séparé les sauvegardes du journal d'archivage, SnapManager vous permet de spécifier plusieurs durées de conservation et règles de protection pour les sauvegardes du journal d'archivage.
+
+*Politique de conservation*
+
+SnapManager détermine si une sauvegarde doit être conservée en tenant compte à la fois du nombre de rétention (par exemple, 15 sauvegardes) et de la durée de conservation (par exemple, 10 jours de sauvegardes quotidiennes). Une sauvegarde expire lorsque son âge dépasse la durée de rétention définie pour sa classe de rétention et que le nombre de sauvegardes dépasse le nombre de rétention. Par exemple, si le nombre de sauvegardes est de 15 (ce qui signifie que SnapManager a effectué 15 sauvegardes réussies) et que les exigences de durée sont définies pour 10 jours de sauvegardes quotidiennes, les cinq sauvegardes les plus anciennes, réussies et éligibles expirent.
+
+*Durée de conservation du journal d'archivage*
+
+Une fois les sauvegardes du journal d'archivage séparées, elles sont conservées en fonction de la durée de conservation du journal d'archivage. Les sauvegardes des journaux d'archivage réalisées avec des sauvegardes de fichiers de données sont toujours conservées avec ces sauvegardes de fichiers de données, quelle que soit la durée de conservation du journal d'archivage.

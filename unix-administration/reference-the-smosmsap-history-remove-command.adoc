@@ -1,0 +1,87 @@
+---
+permalink: unix-administration/reference-the-smosmsap-history-remove-command.html 
+sidebar: sidebar 
+keywords: command, enable, remove, history, snapmanager, operation, single, multiple, profile, repository, smsap 
+summary: 'Cette commande permet de supprimer l"historique des opérations SnapManager associées à un profil unique, à plusieurs profils ou à tous les profils sous un référentiel.' 
+---
+= La commande smsap history remove
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Cette commande permet de supprimer l'historique des opérations SnapManager associées à un profil unique, à plusieurs profils ou à tous les profils sous un référentiel.
+
+
+
+== Syntaxe
+
+[listing, subs="+macros"]
+----
+pass:quotes[smsap history remove
+-profile {-name _profile_name_ [_profile_name1, profile_name2_\] | -all
+-repository -login [-password _repo_password_\] -username _repo_username_
+-host _repo_host_
+-dbname _repo_dbname_
+-port _repo_port_}
+-operation {-operations operation_name [_operation_name_, _operation_name2_\] | -all}
+[-quiet | -verbose\]]
+----
+
+
+== Paramètres
+
+* `*-profile profile*`
++
+Spécifie le nom du profil. Ce nom peut comporter jusqu'à 30 caractères et doit être unique au sein de l'hôte.
+
+* `*-repository*`
++
+Les options suivantes -repository spécifient les détails de la base de données qui stocke le profil.
+
+* `*-dbname _repo_dbname_*`
++
+Indique le nom de la base de données qui stocke le profil. Utilisez le nom global ou le SID.
+
+* `*-host _repo_host_*`
++
+Indique le nom ou l'adresse IP de l'ordinateur hôte sur lequel s'exécute la base de données de référentiel.
+
+* `*-login*`
++
+Démarre les détails de connexion au référentiel.
+
+* `*-username _repo_username_*`
++
+Indique le nom d'utilisateur nécessaire pour accéder à la base de données qui stocke le référentiel.
+
+* `*-port _repo_port_*`
++
+Spécifie le numéro de port TCP utilisé pour accéder à la base de données qui stocke le référentiel.
+
+* `*-operation {-operations _operation_name_ [_operation_name1, operation_name2_] | -all*`
++
+Spécifie l'opération SnapManager pour laquelle vous configurez l'historique.
+
+* `*-quiet*`
++
+Affiche uniquement les messages d'erreur sur la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* `*-verbose*`
++
+Affiche des messages d'erreur, d'avertissement et d'information sur la console.
+
+
+
+'''
+
+
+== Exemple de commande
+
+[listing]
+----
+ smsap history purge -profile -name PROFILE1 -operation -operations backup
+ -verbose
+----
+'''

@@ -1,0 +1,95 @@
+---
+permalink: unix-administration/reference-the-smosmsapbackup-unmount-command.html 
+sidebar: sidebar 
+keywords: run, backup, unmount, command, smsap 
+summary: Vous pouvez exécuter la commande backup unmount pour démonter une sauvegarde. 
+---
+= La commande smsap backup unshunshunt
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous pouvez exécuter le `backup unmount` commande permettant de démonter une sauvegarde.
+
+
+
+== Syntaxe
+
+[listing, subs="+macros"]
+----
+pass:quotes[smsap backup unmount
+-profile _profile_name_
+[-label _label_ [-data | -archivelogs\] | [-id _id_\]
+[-force\]
+[-dump\][-quiet | -verbose\]]
+----
+
+
+== Paramètres
+
+* ``*-profile _profile_name_*``
++
+Indique le profil pour lequel vous souhaitez démonter une sauvegarde. Le profil contient l'identifiant de la base de données et d'autres informations sur la base de données.
+
+* ``*-id _id_*``
++
+Démonte la sauvegarde avec le GUID spécifié. Le GUID est généré par SnapManager lors de la création d'une sauvegarde. Vous pouvez utiliser la commande smsap backup list pour afficher le GUID pour chaque sauvegarde.
+
+* ``*-label _label_*``
++
+Démonte la sauvegarde avec l'étiquette spécifiée.
+
+* ``*-data*``
++
+Spécifie les fichiers de données.
+
+* ``*-archivelogs*``
++
+Spécifie les fichiers journaux d'archive.
+
+* ``*-dump*``
++
+Collecte les fichiers de vidage après une opération de démontage réussie ou ayant échoué.
+
+* ``*-force*``
++
+Démonte la sauvegarde, même s'il y a des problèmes lors de la libération des ressources associées à la sauvegarde. SnapManager tente de démonter la sauvegarde et de nettoyer les ressources associées. Le journal indique que l'opération de démontage a réussi, mais vous devrez peut-être nettoyer manuellement les ressources en cas d'erreurs dans le journal.
+
+* ``*-quiet*``
++
+Affiche uniquement les messages d'erreur dans la console. La valeur par défaut est d'afficher les messages d'erreur et d'avertissement.
+
+* ``*-verbose*``
++
+Affiche les messages d'erreur, d'avertissement et d'information dans la console.
+
+
+
+'''
+
+
+== Exemple
+
+Voici un exemple d'opération de démontage :
+
+[listing]
+----
+# smsap backup unmount -label test -profile SALES1 -verbose
+----
+[listing]
+----
+SMSAP-13046 [INFO ]: Operation GUID 8abc013111b909eb0111b90a02f50001 starting on Profile SALES1
+SMSAP-08028 [INFO ]: Beginning to disconnect connected mount(s)
+[/u/user1/mnt/_mnt_ssys1_logs_SMSAP_SALES1_hsdb1_F_C_1_8abc013111a450480111a45066210001,
+ /u/user1/mnt/_mnt_ssys1_data_SMSAP_SALES1_hsdb1_F_C_1_8abc013111a450480111a45066210001].
+SMSAP-08030 [INFO ]: Done disconnecting connected mount(s)
+[/u/user1/mnt/_mnt_ssys1_logs_SMSAP_SALES1_hsdb1_F_C_1_8abc013111a450480111a45066210001,
+ /u/user1//mnt/_mnt_ssys1_data_SMSAP_SALES1_hsdb1_F_C_1_8abc013111a450480111a45066210001].
+SMSAP-13037 [INFO ]: Successfully completed operation: Backup Unmount
+SMSAP-13048 [INFO ]: Operation Status: SUCCESS
+SMSAP-13049 [INFO ]: Elapsed Time: 0:00:33.715
+Operation Id [8abc013111b909eb0111b90a02f50001] succeeded.
+----
+'''

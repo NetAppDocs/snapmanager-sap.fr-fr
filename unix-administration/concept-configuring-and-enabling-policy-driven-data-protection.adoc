@@ -1,0 +1,17 @@
+---
+permalink: unix-administration/concept-configuring-and-enabling-policy-driven-data-protection.html 
+sidebar: sidebar 
+keywords: snapdrive, datafabric, manager, server, protect, backup, configure, configuring, policy-driven, policy, driven, data, protection 
+summary: Vous devez configurer SnapDrive et le serveur DataFabric Manager pour activer la protection des données sur le profil afin de protéger les sauvegardes sur les systèmes de stockage secondaires. Vous pouvez sélectionner les stratégies de protection dans la console de protection Manager pour spécifier comment les sauvegardes de base de données seront protégées. 
+---
+= Configuration et activation de la protection des données pilotée par des règles
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Vous devez configurer SnapDrive et le serveur DataFabric Manager pour activer la protection des données sur le profil afin de protéger les sauvegardes sur les systèmes de stockage secondaires. Vous pouvez sélectionner les règles de protection dans la console protection Manager pour spécifier comment les sauvegardes de bases de données seront protégées.
+
+
+NOTE: Vous devez vous assurer que OnCommand Unified Manager est installé sur un serveur distinct pour permettre la protection des données.

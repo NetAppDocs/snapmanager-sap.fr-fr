@@ -1,0 +1,32 @@
+---
+permalink: unix-administration/concept-details-of-the-target-database.html 
+sidebar: sidebar 
+keywords: example, integrate, database, protection, payroll, example, detail, target 
+summary: 'Cet exemple de protection intégrée des bases de données décrit la protection d"une base de données de paie. Les données suivantes sont utilisées dans l"exemple.' 
+---
+= Détails de la base de données cible
+:allow-uri-read: 
+:icons: font
+:imagesdir: ../media/
+
+
+[role="lead"]
+Cet exemple de protection intégrée des bases de données décrit la protection d'une base de données de paie. Les données suivantes sont utilisées dans l'exemple.
+
+L'administrateur de base de données (DBA) de TechCo, une société de 3000 personnes dont le siège social est à Atlanta, doit créer une sauvegarde cohérente de la base de données de paie de production, PAYDB. La stratégie de protection pour la sauvegarde sur le stockage primaire et secondaire exige que l'administrateur de base de données et l'administrateur du stockage travaillent ensemble pour sauvegarder la base de données Oracle, aussi bien localement sur un système de stockage primaire, qu'à distance, sur un système de stockage secondaire sur un site distant.
+
+* *Informations de profil*
++
+Lors de la création d'un profil dans SnapManager, vous avez besoin des données suivantes :
+
++
+** Nom de la base de données : P01
+** Nom d'hôte : prod01.sample.com
+** ID base de données : P01
+** Nom du profil : P01_BACKUP
+** Mode de connexion : authentification de la base de données
+** Schéma de nommage des snapshots : `_smsap_hostname_dbsid_smsapprofile_scope_mode_smid_` (qui correspond à « smsap_prod01.sample.com_p01_p01_backup_f_h_x")
+** Utilisateur du référentiel : <sid> rep, qui se traduit par p01rep.
+
+
+
