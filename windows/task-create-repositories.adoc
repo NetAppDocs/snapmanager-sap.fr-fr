@@ -15,7 +15,7 @@ SnapManager nécessite un référentiel sur un hôte pour héberger les données
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 Assurez-vous que les tâches suivantes sont effectuées :
 

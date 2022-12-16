@@ -15,7 +15,7 @@ Avant de pouvoir utiliser SnapManager pour mettre en miroir les copies Snapshot,
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 * Vous devez être un administrateur de cluster.
 * Pour la vérification des copies Snapshot sur le volume de destination, les Storage Virtual machines (SVM) source et de destination doivent disposer d'une LIF de gestion ainsi que d'une LIF de données.

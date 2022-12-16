@@ -15,7 +15,7 @@ L'instance de base de données de référentiel est une base de données Oracle 
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 Vous devez disposer d'une base de données Oracle et d'un compte utilisateur pour accéder à la base de données.
 

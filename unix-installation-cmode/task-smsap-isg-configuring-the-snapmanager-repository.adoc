@@ -15,7 +15,7 @@ Vous devez configurer le référentiel SnapManager dans l'instance de base de do
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 * Vous devez avoir créé l'instance de base de données du référentiel.
 * Vous devez avoir créé l'utilisateur Oracle pour l'instance de base de données du référentiel avec les privilèges requis.

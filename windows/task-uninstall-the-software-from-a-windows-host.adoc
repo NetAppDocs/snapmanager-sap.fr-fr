@@ -15,7 +15,7 @@ Vous pouvez désinstaller SnapManager du serveur hôte.
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 * Arrêtez le serveur hôte avant de désinstaller SnapManager.
 

@@ -15,7 +15,7 @@ Vous pouvez vérifier l'environnement pour vous assurer que SnapDrive et SnapMan
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 Téléchargez, installez et configurez les prérequis requis. Vérifiez que SnapManager est installé et que le serveur hôte est en cours d'exécution.
 

@@ -15,7 +15,7 @@ SnapManager (3.2 ou version ultérieure) pour SAP permet de mettre à jour le no
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 * Le répertoire personnel de l'utilisateur local doit connaître les mappages de profil à référentiel.
 * Les sessions de l'interface utilisateur graphique de SnapManager doivent être fermées.

@@ -15,7 +15,7 @@ Vous pouvez utiliser Java Web Start si SnapManager n'est pas installé sur l'hô
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 Vous devez vous assurer que les conditions suivantes sont remplies :
 

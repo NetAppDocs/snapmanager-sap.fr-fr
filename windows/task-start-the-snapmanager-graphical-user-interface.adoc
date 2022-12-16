@@ -15,7 +15,7 @@ Si SnapManager est installé sur l'hôte, démarrez l'interface utilisateur grap
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 * Assurez-vous que le serveur SnapManager est démarré.
 

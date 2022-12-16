@@ -15,7 +15,7 @@ Vous devez créer un profil pour votre base de données afin d'effectuer toute o
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 Vous devez vous assurer que les détails de la base de données cible sont inclus dans le `/etc/oratab` fichier.
 

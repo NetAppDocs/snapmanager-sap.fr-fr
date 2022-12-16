@@ -15,7 +15,7 @@ Vous pouvez effectuer une restauration sur un ou plusieurs hôtes de serveur Sna
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 Vous devez vous assurer que toutes les conditions préalables à l'exécution d'une restauration sont terminées.
 

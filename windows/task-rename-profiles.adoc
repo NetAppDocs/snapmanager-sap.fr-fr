@@ -15,7 +15,7 @@ SnapManager vous permet de renommer le profil lorsque vous mettez à jour le pro
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 * Vous devez vous assurer qu'aucune opération SnapManager n'est en cours d'exécution sur le profil lors du changement de nom du profil.
 

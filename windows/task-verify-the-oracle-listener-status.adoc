@@ -15,7 +15,7 @@ Vous pouvez vérifier l'état de l'écouteur Oracle à l'aide du `lsnrctl status
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 * Vous devez vous connecter à la base de données.
 

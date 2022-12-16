@@ -15,7 +15,7 @@ Avant de pouvoir utiliser SnapManager pour effectuer la réplication de sauvegar
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 * Vous devez être un administrateur de cluster.
 

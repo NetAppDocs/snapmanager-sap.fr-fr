@@ -15,7 +15,7 @@ Les outils SAP BR* qui contiennent des outils SAP pour l'administration de la ba
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 * Vous devez vous assurer que vous avez installé SAP BR* Tools.
 

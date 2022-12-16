@@ -15,7 +15,7 @@ Vous pouvez utiliser votre propre script tout en lançant une opération de sauv
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 * Installez les scripts du plug-in dans le bon emplacement d'installation de SnapManager.
 * Vérifiez que les plug-ins sont correctement installés à l'aide du `smsap plugin check` commande.

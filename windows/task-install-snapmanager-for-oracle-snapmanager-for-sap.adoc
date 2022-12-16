@@ -15,7 +15,7 @@ Vous pouvez installer SnapManager sur l'hôte qui possède une ou plusieurs base
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 * Vous devez avoir terminé les tâches de préinstallation requises.
 * Le dernier pack d'installation SnapManager doit être téléchargé.

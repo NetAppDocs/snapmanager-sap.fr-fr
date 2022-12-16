@@ -15,7 +15,7 @@ Vous devez installer SnapManager sur chaque hôte sur lequel la base de données
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 Vous devez avoir installé SnapDrive pour UNIX sur l'hôte de base de données et établi une connexion au système de stockage.
 

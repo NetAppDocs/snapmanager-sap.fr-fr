@@ -15,7 +15,7 @@ Vous pouvez effectuer une mise à niveau propagée sur un ou plusieurs hôtes de
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 Vous devez vous assurer que toutes les conditions préalables à la mise à niveau par roulement sont remplies.
 

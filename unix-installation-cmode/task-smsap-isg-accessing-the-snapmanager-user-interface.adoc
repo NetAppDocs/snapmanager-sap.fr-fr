@@ -15,7 +15,7 @@ Vous pouvez accéder à distance à l'interface utilisateur SnapManager en utili
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 * Vous devez vous assurer que SnapManager est en cours d'exécution.
 * Vous devez vous assurer que le système d'exploitation pris en charge et Java sont installés sur le système sur lequel vous souhaitez accéder à l'interface utilisateur SnapManager.

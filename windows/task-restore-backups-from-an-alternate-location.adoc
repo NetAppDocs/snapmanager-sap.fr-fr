@@ -15,7 +15,7 @@ Vous pouvez effectuer une restauration à partir d'un autre emplacement pour res
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 * Créez un fichier XML de spécification de restauration et spécifiez le type de méthode de restauration que vous souhaitez utiliser.
 

@@ -15,7 +15,7 @@ Vous pouvez utiliser le `clone create` commande permettant de cloner une sauvega
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 * Créer un profil ou avoir un profil existant.
 * Créez une sauvegarde complète ou bénéficiez d'une sauvegarde de base de données existante.

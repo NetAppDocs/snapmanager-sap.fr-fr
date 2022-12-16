@@ -262,7 +262,6 @@
   <block id="f66ac937ace8e2c37798d093be193581" category="list-text">Créer des clones compacts de sauvegardes sur le système de stockage primaire</block>
   <block id="e019cc619973f4400963b86f6dade854" category="summary">SnapManager (3.2 ou version ultérieure) pour SAP permet de mettre à jour le nom d'hôte de la base de données cible dans le profil SnapManager.</block>
   <block id="f9065d50a59ac684423c5d381c4d3326" category="doc">Mettez à jour le nom d'hôte de la base de données cible associé à un profil</block>
-  <block id="eed5ddc8f738970611f01ee16f2a17e5" category="section-title">Ce dont vous aurez besoin</block>
   <block id="f7e4e38e7b78f78e664201776dcbf759" category="list-text">Le répertoire personnel de l'utilisateur local doit connaître les mappages de profil à référentiel.</block>
   <block id="bddf809b81540c390a83df973c74bfa4" category="list-text">Les sessions de l'interface utilisateur graphique de SnapManager doivent être fermées.</block>
   <block id="afff92a1ba4f5546940a1256d77f6afe" category="paragraph">Vous pouvez mettre à jour le profil avec le nouveau nom d'hôte en utilisant uniquement l'interface de ligne de commande.</block>
@@ -8253,4 +8252,5 @@
   <block id="7e5a244ed934853124d9aebb1b86928e" category="sidebar">Installation et configuration pour UNIX pour clustered Data ONTAP</block>
   <block id="c03b7f290aff6f050d870f85741bbec1" category="sidebar">Installation et configuration pour UNIX en 7-mode</block>
   <block id="d23d52eb082db2b040f7a1483c79d790" category="sidebar">Administration pour UNIX</block>
+  <block id="d59db7846bd10b6d60d21543df9faa9e" category="section-title">Ce dont vous avez besoin</block>
 </blocks>

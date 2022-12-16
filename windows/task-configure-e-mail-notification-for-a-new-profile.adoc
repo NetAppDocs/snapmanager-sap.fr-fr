@@ -15,7 +15,7 @@ Lorsque vous créez un nouveau profil, vous pouvez configurer pour recevoir une 
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 * Vous devez configurer l'adresse e-mail à partir de laquelle les alertes sont envoyées.
 * Vous devez utiliser une liste séparée par des virgules pour plusieurs adresses électroniques.

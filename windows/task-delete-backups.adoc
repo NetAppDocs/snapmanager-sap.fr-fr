@@ -15,7 +15,7 @@ Vous devez supprimer les sauvegardes lorsque vous n'en avez plus besoin, ce qui 
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 * Vous devez vous assurer que la sauvegarde n'a pas été utilisée pour créer un clone.
 

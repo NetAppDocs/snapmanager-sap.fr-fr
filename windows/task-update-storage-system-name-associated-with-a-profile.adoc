@@ -15,7 +15,7 @@ SnapManager 3.3 ou version ultérieure permet de mettre à jour le nom d'hôte o
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 Vous devez vous assurer que :
 

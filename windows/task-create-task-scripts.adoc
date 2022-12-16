@@ -15,7 +15,7 @@ Vous pouvez créer les scripts de tâches de prétâche, de post-tâche et de st
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 Avant de commencer à créer le script, assurez-vous que :
 

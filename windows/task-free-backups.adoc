@@ -15,7 +15,7 @@ Vous pouvez libérer des sauvegardes, qui suppriment les copies Snapshot sans su
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 Pour qu'une sauvegarde puisse être déautorisée, vous devez vous assurer que :
 

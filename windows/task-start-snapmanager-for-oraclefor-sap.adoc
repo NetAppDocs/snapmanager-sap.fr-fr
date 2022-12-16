@@ -15,7 +15,7 @@ La section démarrage de SnapManager répertorie les tâches que vous effectuez 
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 Avant d'utiliser SnapManager, vous devez avoir effectué les actions suivantes :
 

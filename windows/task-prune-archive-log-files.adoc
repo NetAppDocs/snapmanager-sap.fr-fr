@@ -15,7 +15,7 @@ Vous pouvez élaguer les fichiers journaux d'archive à partir des emplacements 
 
 
 
-== Ce dont vous aurez besoin
+== Ce dont vous avez besoin
 
 * Les fichiers journaux d'archivage doivent être sauvegardés par l'opération de sauvegarde en cours.
 +
