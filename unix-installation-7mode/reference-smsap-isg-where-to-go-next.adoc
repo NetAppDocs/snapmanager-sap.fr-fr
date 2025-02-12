@@ -31,17 +31,9 @@ Décrit les procédures détaillées permettant d'effectuer différentes opérat
 
 NOTE: L'aide en ligne _est intégrée à l'interface utilisateur SnapManager et n'est pas disponible sur le site de support.
 
-* http://www.netapp.com/us/media/tr-3761.pdf["Rapport technique de NetApp 3761 : SnapManager pour Oracle : meilleures pratiques"^]
-+
-Décrit les meilleures pratiques SnapManager pour Oracle.
-
 * http://www.netapp.com/us/media/tr-3633.pdf["Rapport technique NetApp 3633 : meilleures pratiques pour les bases de données Oracle sur le stockage NetApp"^]
 +
 Décrit les meilleures pratiques pour configurer des bases de données Oracle sur un système de stockage NetApp.
-
-* http://www.netapp.com/us/media/tr-3442.pdf["Rapport technique NetApp 3442 : SAP avec Oracle sous UNIX et NFS et le stockage NetApp"^]
-+
-Décrit les meilleures pratiques relatives au déploiement d'un système de stockage NetApp pour prendre en charge les solutions SAP.
 
 
 

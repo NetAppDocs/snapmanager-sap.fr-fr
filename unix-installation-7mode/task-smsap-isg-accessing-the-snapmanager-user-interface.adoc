@@ -29,12 +29,9 @@ Pour plus d'informations sur le système d'exploitation pris en charge et Java, 
 
 +
 ** `_server_name_` Est le nom de l'hôte de la base de données cible sur lequel SnapManager est installé.
-
-
 +
 Vous pouvez également saisir l'adresse IP de l'hôte de la base de données cible.
 
-+
 ** `_port_number_` Est le port sur lequel SnapManager s'exécute.
 +
 La valeur par défaut est 27214.
